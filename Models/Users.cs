@@ -17,16 +17,14 @@ namespace Vtc_Freelancer.Models
         [Column(TypeName = "varchar(200)")]
         public string Country { get; set; }
         [Column(TypeName = "varchar(200)")]
-        public string Addres { get; set; }
+        public string Address { get; set; }
         [Column(TypeName = "varchar(200)")]
         public int UserLevel { get; set; }
         public DateTime RegisterDate { get; set; }
-        [Column(TypeName = "int")]
-        public bool IsSeller { get; set; }
+        public int IsSeller { get; set; }
         [Column(TypeName = "varchar(200)")]
         public string Avatar { get; set; }
-        [Column(TypeName = "int")]
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public Users() { }
 
     }
