@@ -11,8 +11,6 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.7" />
-    <PackageReference Include="Microsoft.AspNetCore.razor.design" Version="2.2.0" />
     <PackageReference Include="mysql.data" Version="8.0.18" />
     <PackageReference Include="mysql.data.entityframeworkcore" Version="8.0.18" />
   </ItemGroup>
