@@ -6,7 +6,7 @@ namespace Vtc_Freelancer.Models
     public class Offer
     {
         public int OfferId { get; set; }
-        [Column("varchar(200)")]
+        [Column(TypeName = "text")]
         public string Description { get; set; }
         public Double Amount { get; set; }
         public int Revisions { get; set; }

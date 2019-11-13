@@ -7,7 +7,7 @@ namespace Vtc_Freelancer.Models
     {
         public int SellerId { get; set; }
         public int SellerPoint { get; set; }
-        [Column(TypeName = "varchar(200)")]
+        [Column(TypeName = "text")]
         public string Description { get; set; }
         public int UserId {get;set;}
         [ForeignKey("UserId")]

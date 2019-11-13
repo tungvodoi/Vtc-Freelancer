@@ -3,23 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtc_Freelancer.Models
 {
-  public class Notification
-  {
-    [Column(TypeName = "int")]
-    public string NotificationId { get; set; }
+    public class Notification
+    {
+        public int NotificationId { get; set; }
+        public int NotificationDetailId { get; set; }
 
-    [Column(TypeName = "varchar(255)")]
-    public string Content { get; set; }
-    [Column(TypeName = "int")]
-    public int Status { get; set; }
-    [Column(TypeName = "int")]
-    public int UserId { get; set; }
+        [Column(TypeName = "text")]
+        public string Content { get; set; }
+        public int Status { get; set; }
+        public int UserId { get; set; }
 
-    public DateTime TimeSend { get; set; }
+        public DateTime TimeSend { get; set; }
+        [ForeignKey("NotificationDetailId")]
+        public virtual NotificationDetail NotificationDetail { get; set; }
+        public Notification() { }
 
-
-
-    public Notification() { }
-
-  }
+    }
 }

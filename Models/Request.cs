@@ -6,11 +6,13 @@ namespace Vtc_Freelancer.Models
     public class Request
     {
         public int RequestId { get; set; }
-
-        public string Delivered { get; set; }
+        public int Delivered { get; set; }
+        [Column(TypeName = "varchar(255)")]
         public string Category { get; set; }
+        [Column(TypeName = "varchar(255)")]
         public string SubCategory { get; set; }
         public double Budget { get; set; }
+        [Column(TypeName = "text")]
         public string Description { get; set; }
         public DateTime TimeCreate { get; set; }
         public int Status { get; set; }

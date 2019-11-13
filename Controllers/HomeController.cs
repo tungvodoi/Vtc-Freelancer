@@ -11,11 +11,14 @@ namespace Vtc_Freelancer.Controllers
 {
     public class HomeController : Controller
     {
+        private MyDbContext dbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MyDbContext dbContext)
         {
+            this.dbContext = dbContext;
             _logger = logger;
+            dbContext.Database.EnsureCreated();
         }
 
         public IActionResult Index()

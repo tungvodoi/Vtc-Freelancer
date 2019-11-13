@@ -3,24 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtc_Freelancer.Models
 {
-  public class Report
-  {
-    [Column(TypeName = "int")]
-    public int ReportId { get; set; }
-    [Column(TypeName = "varchar(40)")]
-    public string TittleReport { get; set; }
-    [Column(TypeName = "varchar(255)")]
-    public string ContentReport { get; set; }
-    [Column(TypeName = "int")]
-    public int ServiceId { get; set; }
-    [ForeignKey("ServiceId")]
-    [Column(TypeName = "int")]
-    public int UserId { get; set; }
-    [ForeignKey("UserId")]
-    public virtual Service Service { get; set; }
+    public class Report
+    {
+        public int ReportId { get; set; }
+        [Column(TypeName = "varchar(255)")]
+        public string TittleReport { get; set; }
+        [Column(TypeName = "text")]
+        public string ContentReport { get; set; }
+        public int ServiceId { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("ServiceId")]
+        public virtual Service Service { get; set; }
+        [ForeignKey("UserId")]
+        public virtual Users User { get; set; }
 
 
-    public Report() { }
+        public Report() { }
 
-  }
+    }
 }
