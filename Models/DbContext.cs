@@ -17,6 +17,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<Service> Service { get; set; }
         public DbSet<DeliveryTime> DeliveryTime { get; set; }
         public DbSet<Notification> Notification { get; set; }
+        public DbSet<NotificationDetail> NotificationDetail { get; set; }
         public DbSet<Package> Package { get; set; }
         public DbSet<Rating> Rating { get; set; }
         public DbSet<Report> Report { get; set; }
@@ -29,7 +30,7 @@ namespace Vtc_Freelancer.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=Hanhphuc1;database=vtc_freelancer");
+            optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -132,9 +133,16 @@ namespace Vtc_Freelancer.Models
             {
                 entity.HasKey(x => x.NotificationId);
                 entity.Property(x => x.Content);
-                entity.Property(x => x.Status);
                 entity.Property(x => x.TimeSend);
                 entity.Property(x => x.UserId);
+
+            });
+            modelBuilder.Entity<NotificationDetail>(entity =>
+            {
+                entity.HasKey(x => x.NotificationDetailId);
+                entity.Property(x => x.NotificationId);
+                entity.Property(x => x.UserId);
+                entity.Property(x => x.Status);
 
             });
             modelBuilder.Entity<Service>(entity =>

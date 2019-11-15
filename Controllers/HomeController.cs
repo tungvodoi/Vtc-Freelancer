@@ -18,12 +18,11 @@ namespace Vtc_Freelancer.Controllers
         {
             this.dbContext = dbContext;
             _logger = logger;
-            dbContext.Database.EnsureCreated();
         }
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/Register");
         }
 
         public IActionResult Privacy()

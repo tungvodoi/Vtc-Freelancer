@@ -26,7 +26,8 @@ namespace Vtc_Freelancer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MyDbContext, MyDbContext>();
-            services.AddScoped<User, User>();
+            services.AddScoped<HashPassword, HashPassword>();
+            services.AddScoped<UserService, UserService>();
             services.AddControllersWithViews();
         }
 
