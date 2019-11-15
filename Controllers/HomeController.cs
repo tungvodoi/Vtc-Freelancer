@@ -22,7 +22,7 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/Register");
+            return View();
         }
 
         public IActionResult Privacy()

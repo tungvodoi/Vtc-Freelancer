@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\goldk\\OneDrive\\Desktop\\Vtc-Freelancer-20191115T084540Z-001\\Vtc-Freelancer\\Vtc-Freelancer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\goldk\\OneDrive\\Desktop\\Vtc-Freelancer-20191115T084540Z-001\\Vtc-Freelancer\\Vtc-Freelancer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\goldk\\OneDrive\\Desktop\\Vtc-Freelancer-20191115T084540Z-001\\Vtc-Freelancer\\Vtc-Freelancer.csproj",
+        "projectName": "Vtc-Freelancer",
+        "projectPath": "C:\\Users\\goldk\\OneDrive\\Desktop\\Vtc-Freelancer-20191115T084540Z-001\\Vtc-Freelancer\\Vtc-Freelancer.csproj",
+        "packagesPath": "C:\\Users\\goldk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\goldk\\OneDrive\\Desktop\\Vtc-Freelancer-20191115T084540Z-001\\Vtc-Freelancer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\goldk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "mysql.data": {
+              "target": "Package",
+              "version": "[8.0.18, )"
+            },
+            "mysql.data.entityframeworkcore": {
+              "target": "Package",
+              "version": "[8.0.18, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
