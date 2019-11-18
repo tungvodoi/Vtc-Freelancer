@@ -12,7 +12,7 @@ using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
-    // [Authentication]
+    [Authentication]
     public class HomeController : Controller
     {
         private UserService userService;

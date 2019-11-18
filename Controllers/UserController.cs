@@ -8,14 +8,9 @@ using System;
 namespace Vtc_Freelancer.Controllers
 {
     public class UserController : Controller
-<<<<<<< HEAD
-    {   
-=======
     {
-        private MyDbContext dbContext;
->>>>>>> ed01f8ed3fc00a1f4d176edef35bcb54c30834f2
         private UserService userService;
-        public UserController(MyDbContext dbContext, UserService userService)
+        public UserController(UserService userService)
         {
             this.userService = userService;
         }

@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+    [Authentication]
     public class AdminController : Controller
     {
         private UserService userService;
@@ -30,7 +32,7 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/Admin/ServiceInactive")]
         public IActionResult ServiceInactive()
         {
-            
+
             return View();
         }
         [HttpGet("/Admin/Error")]

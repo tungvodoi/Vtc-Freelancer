@@ -6,90 +6,94 @@
 
     </div>
     <div class="content">
-        <form action="" method="post">
+        <form action="CreateServiceStep1" method="post">
             <label for="">Gig Title</label>
-            <Textarea maxlength="80"></Textarea>
+            <Textarea maxlength="80" name="title"></Textarea>
             <br>
-            <label for="">Category</label>
-            <select>
+            <label for="" >Category</label>
+            <select name="category">
                 <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
                 <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
             </select>
-            <select>
+            <select name="subcategory">
                 <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
                 <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
             </select>
             <br>
             <label for="">Tags</label>
-            <input type="text" />
+            <input type="text"  name ="tags"/>
             <br>
-            <input type="submit" value="save and continue">
+            <button>Save and continue</button>
         </form>
-        <form action="" method="post">
+        <form action="CreateServiceStep2" method="post">
             <h2>Scope & Pricing</h2>
             <hr>
             <table id="t01">
                 <tr>
                     <th></th>
-                    <th>Basic</th>
+                    <th>BASIC</th>
                     <th>STANDARD</th>
                     <th>PREMIUM</th>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
-                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
-                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" name="basicName" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" name="standardName" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" name="premiumName" placeholder="Name your package"></textarea></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50" name="basicDescribe" placeholder="Describe your details of your offering"></textarea>
                     </td>
-                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50" name="standardDescribe" placeholder="Describe your details of your offering"></textarea>
                     </td>
-                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50"  name="premiumDescribe"placeholder="Describe your details of your offering"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <select>
+                        <select name="basicDelivery">
                             @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select name="standardDelivery">
                             @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select name="premiumDelivery">
                             @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>Revisions</td>
-                    <td><select>
+                    <td><select name="basicRevisions">
                             @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
                                 <option value="-1">Unlimited</option>
                         </select></td>
-                    <td><select>
+                    <td><select name="standardRevisions">
                             @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
                                 <option value="-1">Unlimited</option>
                         </select></td>
-                    <td><select>
+                    <td><select name="premiumRevisions">
                             @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
                                 <option value="-1">Unlimited</option>
                         </select></td>
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td> <select>
+                    <td> <select name="basicPrice">
                             @for(var i = 5; i < 1000;i=i+5) { <option value="@i">@i$</option>}
                         </select></td>
-                    <td></td>
-                    <td></td>
+                    <td><select name="standardPrice">
+                            @for(var i = 5; i < 1000;i=i+5) { <option value="@i">@i$</option>}
+                        </select></td>
+                    <td><select name="premiumPrice">
+                            @for(var i = 5; i < 1000;i=i+5) { <option value="@i">@i$</option>}
+                        </select></td>
                 </tr>
             </table>
             <input type="submit" value="save and continue">
