@@ -179,7 +179,7 @@ namespace Vtc_Freelancer.Models
             modelBuilder.Entity<Report>(entity =>
            {
                entity.HasKey(x => x.ReportId);
-               entity.Property(x => x.TittleReport);
+               entity.Property(x => x.TitleReport);
                entity.Property(x => x.ContentReport);
                entity.Property(x => x.ServiceId);
                entity.Property(x => x.UserId);
