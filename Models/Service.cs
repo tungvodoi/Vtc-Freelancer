@@ -14,6 +14,7 @@ namespace Vtc_Freelancer.Models
         public string SubCategory { get; set; }
         [Column(TypeName = "text")]
         public string Description { get; set; }
+        public DateTime TimeCreateService { get; set; }
         public int Status { get; set; }
         public int SellerId { get; set; }
         [ForeignKey("SellerId")]

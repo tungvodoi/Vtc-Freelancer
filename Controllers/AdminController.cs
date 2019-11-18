@@ -22,6 +22,17 @@ namespace Vtc_Freelancer.Controllers
         {
             return View();
         }
+        [HttpGet("/Admin/ServiceActive")]
+        public IActionResult ServiceActive()
+        {
+            return View();
+        }
+        [HttpGet("/Admin/ServiceInactive")]
+        public IActionResult ServiceInactive()
+        {
+            
+            return View();
+        }
         [HttpGet("/Admin/Error")]
         public IActionResult Error()
         {
