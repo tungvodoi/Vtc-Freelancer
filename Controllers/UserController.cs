@@ -12,9 +12,7 @@ namespace Vtc_Freelancer.Controllers
         private UserService userService;
         public UserController(UserService userService)
         {
-            this.dbContext = dbContext;
             this.userService = userService;
-            dbContext.Database.EnsureCreated();
         }
         [HttpPost("/Register")]
         public IActionResult Register(string username, string email, string password)
@@ -34,7 +32,7 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult Login(string email, string password)
         {
-            user = new Users();
+            Users user = new Users();
             user = userService.Login(email, password);
             if (user == null)
             {

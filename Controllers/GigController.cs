@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+    // [Authentication]
     public class GigController : Controller
     {
-        private MyDbContext dbContext;
         private GigService gigService;
-        public GigController(MyDbContext dbContext, GigService gigService)
+        public GigController(GigService gigService)
         {
-            this.dbContext = dbContext;
             this.gigService = gigService;
         }
         [HttpGet("/CreateService")]
-        public CreateService()
+        public IActionResult CreateService()
         {
             return View();
         }

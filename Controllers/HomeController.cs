@@ -8,9 +8,11 @@ using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+    // [Authentication]
     public class HomeController : Controller
     {
         private UserService userService;
