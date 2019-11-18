@@ -17,7 +17,7 @@ namespace Vtc_Freelancer.Controllers
             this.gigService = gigService;
         }
         [HttpGet("/CreateService")]
-        public CreateService()
+        public IActionResult CreateService()
         {
             return View();
         }

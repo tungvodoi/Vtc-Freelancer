@@ -30,6 +30,7 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/Admin/ServiceInactive")]
         public IActionResult ServiceInactive()
         {
+            
             return View();
         }
         [HttpGet("/Admin/Error")]

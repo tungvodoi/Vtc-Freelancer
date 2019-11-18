@@ -9,8 +9,9 @@ namespace Vtc_Freelancer.Controllers
 {
     public class UserController : Controller
     {
+        private MyDbContext dbContext;
         private UserService userService;
-        public UserController(UserService userService)
+        public UserController(MyDbContext dbContext, UserService userService)
         {
             this.dbContext = dbContext;
             this.userService = userService;
@@ -34,7 +35,7 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult Login(string email, string password)
         {
-            user = new Users();
+            Users user = new Users();
             user = userService.Login(email, password);
             if (user == null)
             {

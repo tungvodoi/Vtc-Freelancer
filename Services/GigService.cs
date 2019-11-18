@@ -13,7 +13,10 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public CreateService()
+        public Service CreateService()
+        {
+            return null;
+        }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             Report report = new Report();
