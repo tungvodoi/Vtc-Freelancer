@@ -14,33 +14,33 @@ namespace Vtc_Freelancer.Services
             this.dbContext = dbContext;
         }
 
-        // public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
-        // {
-        //     Report report = new Report();
-        //     var user = dbContext.Users.FirstAsync(x => x.UserId == UserId);
-        //     var service = dbContext.Service.FirstAsync(x => x.ServiceId == ServiceId);
-        //     if (user != null && service != null)
-        //     {
-        //         report.TitleReport = titleReport;
-        //         report.ContentReport = contentReport;
-        //         report.ServiceId = ServiceId;
-        //         report.UserId = UserId;
-        //         try
-        //         {
-        //             dbContext.Add(report);
-        //             dbContext.SaveChanges();
-        //             return true;
-        //         }
-        //         catch (System.Exception ex)
-        //         {
-        //             Console.WriteLine(ex.Message);
-        //             return false;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         return false;
-        //     }
-        // }
+        public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
+        {
+            Report report = new Report();
+            var user = dbContext.Users.FirstAsync(x => x.UserId == UserId);
+            var service = dbContext.Service.FirstAsync(x => x.ServiceId == ServiceId);
+            if (user != null && service != null)
+            {
+                report.TitleReport = titleReport;
+                report.ContentReport = contentReport;
+                report.ServiceId = ServiceId;
+                report.UserId = UserId;
+                try
+                {
+                    dbContext.Add(report);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                catch (System.Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
