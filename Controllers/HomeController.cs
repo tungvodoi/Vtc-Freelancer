@@ -54,11 +54,15 @@ namespace Vtc_Freelancer.Controllers
       // var UserName = HttpContext.Session.GetString("UserName");
       // ViewBag.UserName = UserName;
       // Console.WriteLine(UserName);
-      int? userId = HttpContext.Session.GetInt32("UserId");
-      // Console.WriteLine(userId);
-      Users userads = userService.GetUsersByID(userId);
-      ViewBag.UserName = userads.UserName;
-      return View();
+      if (HttpContext.Session.GetInt32("UserId") != null)
+      {
+        int? userId = HttpContext.Session.GetInt32("UserId");
+        // Console.WriteLine(userId);
+        Users userads = userService.GetUsersByID(userId);
+        ViewBag.UserName = userads.UserName;
+        return View();
+      }
+      return Redirect("/Login");
     }
 
     public IActionResult Privacy()
@@ -74,10 +78,14 @@ namespace Vtc_Freelancer.Controllers
     {
       // HttpContext.Session.SetInt32("UserId", user.UserId);
       // HttpContext.Session.SetString("UserName", user.UserName);
-      var UserId = HttpContext.Session.GetInt32("UserId");
-      ViewBag.UserId = UserId;
-      var UserName = HttpContext.Session.GetString("UserName");
-      ViewBag.UserName = UserName;
+      int? userId = HttpContext.Session.GetInt32("UserId");
+      // Console.WriteLine(userId);
+      Users userads = userService.GetUsersByID(userId);
+      ViewBag.UserName = userads.UserName;
+      // var UserId = HttpContext.Session.GetString("UserName");
+      // ViewBag.UserId = UserId;
+      // var UserName = HttpContext.Session.GetString("UserName");
+      // ViewBag.UserName = UserName;
       return View();
     }
 
