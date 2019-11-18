@@ -6,15 +6,15 @@ using Vtc_Freelancer.Controllers;
 
 namespace Vtc_Freelancer.ActionFilter
 {
-    public class Authentication : ActionFilterAttribute
+  public class Authentication : ActionFilterAttribute
+  {
+    public override void OnActionExecuting(ActionExecutingContext context)
     {
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            if (context.HttpContext.Session.GetInt32("Id") == null)
-            {
-                var controller = (Controller)context.Controller;
-                context.Result = controller.Redirect("/Login");
-            }
-        }
+      if (context.HttpContext.Session.GetInt32("UserId") == null)
+      {
+        var controller = (Controller)context.Controller;
+        context.Result = controller.Redirect("/Login");
+      }
     }
+  }
 }
