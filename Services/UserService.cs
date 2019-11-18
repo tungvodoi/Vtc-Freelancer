@@ -24,7 +24,7 @@ namespace Vtc_Freelancer.Services
     }
     public bool Register(string username, string email, string password)
     {
-      var user = dbContext.Users.FirstOrDefault(x => x.UserName == username);
+      var user = dbContext.Users.FirstOrDefault(x => x.UserName == username || x.Email == email);
       if (user != null)
       {
         return false;
@@ -44,12 +44,10 @@ namespace Vtc_Freelancer.Services
         }
         catch (System.Exception ex)
         {
-          Console.WriteLine(ex.Message);
           return false;
         }
       }
     }
-    // public Users GetUsers()
     public Users Login(string email, string password)
     {
       var character = "@";
@@ -61,10 +59,8 @@ namespace Vtc_Freelancer.Services
         {
           if (user.Password == password)
           {
-            // System.Console.WriteLine(user.UserName);
             return user;
           }
-
         }
         return null;
       }
@@ -75,8 +71,6 @@ namespace Vtc_Freelancer.Services
         {
           if (user.Password == password)
           {
-
-            // dbContext.SaveChanges();
             return user;
           }
 
@@ -88,7 +82,7 @@ namespace Vtc_Freelancer.Services
     public bool EditProfile(int Id, string Email, string UserName)
     {
       Users user = new Users();
-      user = GetUserByUserId(Id);
+      user = GetUsersByID(Id);
       if (user != null)
       {
         user.UserName = UserName;
@@ -97,22 +91,7 @@ namespace Vtc_Freelancer.Services
         dbContext.SaveChanges();
         return true;
       }
-
       return false;
-    }
-    public Users GetUserByUserId(int Id)
-    {
-      Users users = new Users();
-      users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);
-      if (users != null)
-      {
-        return users;
-      }
-      else
-      {
-        return null;
-      }
-
     }
   }
 }

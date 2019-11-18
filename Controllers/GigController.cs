@@ -16,6 +16,11 @@ namespace Vtc_Freelancer.Controllers
             this.dbContext = dbContext;
             this.gigService = gigService;
         }
+        [HttpGet("/CreateService")]
+        public CreateService()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
