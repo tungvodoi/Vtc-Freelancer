@@ -31,20 +31,20 @@ namespace Vtc_Freelancer
       services.AddScoped<UserService, UserService>();
       services.AddControllersWithViews();
       services.AddSession(options =>
-{
-  // Set a short timeout for easy testing.
-  options.IdleTimeout = TimeSpan.FromHours(3);
-  options.Cookie.HttpOnly = true;
-  // Make the session cookie essential
-  options.Cookie.IsEssential = true;
-});
+          {
+            // Set a short timeout for easy testing.
+            options.IdleTimeout = TimeSpan.FromHours(3);
+            options.Cookie.HttpOnly = true;
+            // Make the session cookie essential
+            options.Cookie.IsEssential = true;
+          });
       services.Configure<CookiePolicyOptions>(options =>
             {
-        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-        options.CheckConsentNeeded = context => true;
+              // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+              options.CheckConsentNeeded = context => true;
               options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-      services.AddScoped<MyDbContext, MyDbContext>();
+
 
     }
 

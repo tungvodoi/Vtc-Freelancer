@@ -1,19 +1,7 @@
 ﻿var slideIndex = 1;
 showSlides(slideIndex);
 
-<<<<<<< HEAD
 // Write your JavaScript code.
-function Checkpass() {
-  var a = document.getElementById("p1").value;
-  var b = document.getElementById("p2").value;
-  if (a !== b) {
-    document.getElementById("error").innerHTML = "Invalid password";
-    document.getElementById("but").disabled = true;
-  } else {
-    document.getElementById("error").innerHTML = "Valid Password";
-    document.getElementById("but").disabled = false;
-  }
-=======
 function plusSlides(n) {
   showSlides((slideIndex += n));
 }
@@ -56,5 +44,15 @@ for (let i = 0; i < btn.length; i++) {
       content.style.display = "block";
     }
   });
->>>>>>> 38862b85b690a852c52e517d319c3af86f9311d7
+}
+function Checkpass() {
+  var a = document.getElementById("p1").value;
+  var b = document.getElementById("p2").value;
+  if (a !== b) {
+    document.getElementById("error").innerHTML = "Invalid password";
+    document.getElementById("but").disabled = true;
+  } else {
+    document.getElementById("error").innerHTML = "Valid Password";
+    document.getElementById("but").disabled = false;
+  }
 }
