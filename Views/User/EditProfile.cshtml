@@ -1,11 +1,11 @@
 @{
-ViewData["Title"] = "Login";
+ViewData["Title"] = "EditProfile";
 }
 
 <div class="text-center">
-    <form method="POST" action="/Login">
+    <form method="POST" action="/EditProfile">
         <h2>
-            Đăng nhập
+            Edit Profile
         </h2>
         <br>
         @if (@ViewBag.Noti == true)
@@ -13,6 +13,8 @@ ViewData["Title"] = "Login";
         <h5>Tài khoản không tồn tại</h5>
         <br>
         }
+        <label>User Id</label>
+        <input name="Id"/> @ViewBag.UserId
         <label>
             Email hoặc UserName
         </label>
@@ -21,12 +23,12 @@ ViewData["Title"] = "Login";
         <label>
             Email or UserName
         </label> -->
-        <input name="email" required />
+        <input name="Email" required />
         <br>
         <label>
-            Mật khẩu
+            UserName
         </label>
-        <input type="password" name="password" id="pass" required />
+        <input type="text" name="UserName" id="pass" required />
         <br>
         <!-- <label>
             Nhập lại mật khẩu
