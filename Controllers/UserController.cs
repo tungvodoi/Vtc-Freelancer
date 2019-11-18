@@ -8,7 +8,7 @@ using System;
 namespace Vtc_Freelancer.Controllers
 {
     public class UserController : Controller
-    {
+    {   
         private UserService userService;
         public UserController(UserService userService)
         {

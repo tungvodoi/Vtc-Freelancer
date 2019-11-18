@@ -13,11 +13,11 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public bool CreateService(string title, string category,string subcategory,int sellerID)
-        {
-            // Service service = new Service();
-            // service
-        }
+        // public bool CreateService(string title, string category,string subcategory,int sellerID)
+        // {
+        //     // Service service = new Service();
+        //     // service
+        // }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             Report report = new Report();
