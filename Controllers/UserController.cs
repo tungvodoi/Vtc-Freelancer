@@ -20,11 +20,6 @@ namespace Vtc_Freelancer.Controllers
       this.userService = userService;
       dbContext.Database.EnsureCreated();
     }
-    // public IActionResult Index()
-    // {
-    //   var userId = HttpContext.Session.GetInt32("UserId");
-    //   return View();
-    // }
     [HttpPost("/Register")]
     public IActionResult Register(string username, string email, string password)
     {
@@ -40,15 +35,10 @@ namespace Vtc_Freelancer.Controllers
       return View();
     }
     [HttpPost("/Login")]
-
     public IActionResult Login(string email, string password)
     {
       user = new Users();
       user = userService.Login(email, password);
-      // HttpContext.Session.SetString("UserName", user.UserName);
-      // Console.WriteLine("1");
-      // Console.WriteLine(user.UserId);
-      // Console.WriteLine(user.UserName);
       if (user == null)
       {
         return Redirect("/Login");

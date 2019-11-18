@@ -1,0 +1,128 @@
+<div>
+    <div class="header">
+
+    </div>
+    <div class="nav">
+
+    </div>
+    <div class="content">
+        <form action="" method="post">
+            <label for="">Gig Title</label>
+            <Textarea maxlength="80"></Textarea>
+            <br>
+            <label for="">Category</label>
+            <select>
+                <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
+                <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
+            </select>
+            <select>
+                <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
+                <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
+            </select>
+            <br>
+            <input type="text" />
+            <br>
+            <input type="submit" value="save and continue">
+        </form>
+        <form action="" method="post">
+            <h2>Scope & Pricing</h2>
+            <hr>
+            <table id="t01">
+                <tr>
+                    <th></th>
+                    <th>Basic</th>
+                    <th>STANDARD</th>
+                    <th>PREMIUM</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" placeholder="Name your package"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    </td>
+                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    </td>
+                    <td><textarea rows="4" cols="50" placeholder="Describe your details of your offering"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <select>
+                            @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Revisions</td>
+                    <td><select>
+                            @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
+                                <option value="-1">Unlimited</option>
+                        </select></td>
+                    <td><select>
+                            @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
+                                <option value="-1">Unlimited</option>
+                        </select></td>
+                    <td><select>
+                            @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
+                                <option value="-1">Unlimited</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td> <select>
+                            @for(var i = 5; i < 1000;i=i+5) { <option value="@i">@i$</option>}
+                        </select></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <input type="submit" value="save and continue">
+        </form>
+        <form action="" method="post">
+            <h2>Description</h2>
+            <hr>
+            <p>Briefly Describe Your Gig</p>
+            <br>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <br>
+            <h2>Frequently Asked Questions</h2>
+            <hr>
+            <p>Add Questions & Answers for Your Buyers.</p>
+            <br>
+            <input type="text" placeholder="Add a Question: i.e. Do you translate to English as well?" maxlength="150">
+            <br>
+            <textarea placeholder="Add an Answer: i.e. Yes, I also translate from English to Hebrew."
+                maxlength="300"></textarea>
+            <br>
+            <input type="submit" value="save and continue">
+        </form>
+        <form action="" method="post">
+            <h2>Build Your Gig Gallery</h2>
+            <p>Add memorable content to your gallery to set yourself apart from competitors.
+            </p>
+            <hr>
+            <p>Upload photos that describe or are related to your Gig.
+            </p>
+            <input type="file" name="myFile" multiple><br>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="footter">
+
+    </div>
+</div>
