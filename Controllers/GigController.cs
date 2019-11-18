@@ -16,17 +16,18 @@ namespace Vtc_Freelancer.Controllers
             this.dbContext = dbContext;
             this.gigService = gigService;
         }
-
+        [HttpPost]
         public IActionResult reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             if (gigService.reportGig(UserId, ServiceId, titleReport, contentReport))
             {
-                return View();
+                ViewBag.ReportStatus = true;
             }
             else
             {
-                return View();
+                ViewBag.ReportStatus = false;
             }
+            return View();
         }
     }
 }

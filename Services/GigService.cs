@@ -9,7 +9,6 @@ namespace Vtc_Freelancer.Services
     public class GigService
     {
         private MyDbContext dbContext;
-        private HashPassword hashPassword;
         public GigService(MyDbContext dbContext)
         {
             this.dbContext = dbContext;
