@@ -15,15 +15,18 @@ namespace Vtc_Freelancer.Controllers
   {
     // private MyDbContext dbContext;
     private UserService userService;
+    private AdminService adminService;
+    public static List<Category> category;
     private static Users user;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, UserService userService)
+    public HomeController(ILogger<HomeController> logger, UserService userService, AdminService adminService)
     {
       this.userService = userService;
+      this.adminService = adminService;
       _logger = logger;
     }
-    // public IActionResult Login(string email, string password)
+    // public IActionResult Login(Test test1)
     // {
     //   // if (test1.Username == "admin" && test1.Username1 == "admin")
     //   // {
@@ -54,6 +57,11 @@ namespace Vtc_Freelancer.Controllers
       // var UserName = HttpContext.Session.GetString("UserName");
       // ViewBag.UserName = UserName;
       // Console.WriteLine(UserName);
+      if (category != null)
+      {
+
+        ViewBag.ListCategory = category;
+      }
       if (HttpContext.Session.GetInt32("UserId") != null)
       {
         int? userId = HttpContext.Session.GetInt32("UserId");
@@ -62,7 +70,31 @@ namespace Vtc_Freelancer.Controllers
         ViewBag.UserName = userads.UserName;
         return View();
       }
-      return Redirect("/Login");
+      return View();
+    }
+    [HttpGet("/GetListCategoryByParentId")]
+    public IActionResult GetListCategoryByParentId()
+    {
+
+      return View();
+    }
+    [HttpPost("/GetListCategoryByParentId")]
+    public IActionResult GetListCategoryByParentId(string categoryName)
+    {
+
+      // var UserId = HttpContext.Session.GetInt32("UserId");
+      // ViewBag.UserId = UserId;
+
+      // var UserName = HttpContext.Session.GetString("UserName");
+      // ViewBag.UserName = UserName;
+      // Console.WriteLine(UserName);
+      category = adminService.GetListCategoryByParentId(categoryName);
+      ViewBag.ListCategory = category;
+      foreach (var item in ViewBag.ListCategory)
+      {
+        Console.WriteLine("haha " + item.CategoryName);
+      }
+      return Redirect("/");
     }
 
     public IActionResult Privacy()

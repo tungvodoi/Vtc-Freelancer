@@ -55,6 +55,7 @@ namespace Vtc_Freelancer.Models
         entity.HasKey(x => x.SellerId);
         entity.Property(x => x.SellerPoint);
         entity.Property(x => x.Description);
+        entity.Property(x => x.RegisterDateSeller);
         entity.Property(x => x.UserId);
       });
       modelBuilder.Entity<Languages>(entity =>

@@ -1,0 +1,29 @@
+@{
+ViewData["Title"] = "Create Category";
+}
+
+<div class="text-center">
+    <form method="POST" action="/CreateCategory">
+        <h2>
+          Create Category
+        </h2>
+        <br>
+        @if (@ViewBag.Noti == true)
+        {
+        <h5>Tài khoản không tồn tại</h5>
+        <br>
+        }
+      
+           Category Name
+        </label>
+        
+        <input name="CategoryName" required />
+       
+        <label> Sub Category</label>
+        <input name="SubCategory" />
+        
+        <button id="but" onclick="login()">Add</button>
+        <br>
+        <!-- <a href="/Register">Bạn chưa có tài khoản?</a> -->
+    </form>
+</div>

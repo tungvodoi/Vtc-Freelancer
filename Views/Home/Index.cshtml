@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
 ViewData["Title"] = "Home Page";
 }
 
@@ -35,7 +36,7 @@ ViewData["Title"] = "Home Page";
     <div class="right-top-nav">
       <ul class="nav-top">
         <li>
-          <a href="#" class="nav-link"><b>Become a Seller</b></a>
+          <a href="/User/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
         </li>
         <li>
           <a href="#" class="nav-link"><b>Messages</b></a>
@@ -174,6 +175,18 @@ ViewData["Title"] = "Home Page";
         <div class="footer-content">
           <button class="btn-footer-link" >Categories</button>
           <ul>
+            @if( ViewBag.ListCategory != null)
+            {
+            @foreach (var item in ViewBag.ListCategory)
+            {
+                 <li>@item.CategoryName</li>
+                
+            }
+             
+            }
+            else{
+              <li>1</li>
+            }
             <li class="li-footer-content">
               <a href="#">Graphics & Design</a>
             </li>

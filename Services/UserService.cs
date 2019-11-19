@@ -114,5 +114,29 @@ namespace Vtc_Freelancer.Services
       }
 
     }
+    public bool BecomeSeller(Users users)
+    {
+      try
+      {
+        Seller seller = new Seller();
+        seller.UserId = users.UserId;
+        seller.SellerPoint = 0;
+        seller.Description = "haha";
+        seller.RegisterDateSeller = DateTime.Now;
+        dbContext.Add(seller);
+        dbContext.SaveChanges();
+        return true;
+      }
+      catch (System.Exception e)
+      {
+        Console.WriteLine(e.Message);
+        return false;
+        throw;
+      }
+
+    }
+
+
+
   }
 }

@@ -1,0 +1,27 @@
+@{
+ViewData["Title"] = "Display Category";
+}
+
+<div class="text-center">
+    <form method="POST" action="/GetListCategoryByParentId">
+        <h2>
+         Get List Category
+        </h2>
+        <br>
+        @if (@ViewBag.Noti == true)
+        {
+      
+        <br>
+        }
+      
+           Category Name
+        </label>
+        
+        <input type="text" name="CategoryName" maxlength="50" required />
+       
+        
+        <button id="but" onclick="login()">Add</button>
+        <br>
+        <!-- <a href="/Register">Bạn chưa có tài khoản?</a> -->
+    </form>
+</div>

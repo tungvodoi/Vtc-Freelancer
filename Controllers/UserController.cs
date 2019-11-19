@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using System;
+using System.Linq;
+
 namespace Vtc_Freelancer.Controllers
 {
   public class UserController : Controller
@@ -83,5 +85,17 @@ namespace Vtc_Freelancer.Controllers
 
       return View();
     }
+    public IActionResult BecomeSeller(Seller seller)
+    {
+      int? userId = HttpContext.Session.GetInt32("UserId");
+      Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
+      if (userService.BecomeSeller(users))
+      {
+        return RedirectToAction("/");
+      }
+      return View();
+    }
+
+
   }
 }
