@@ -1,64 +1,89 @@
-using Microsoft.AspNetCore.Http;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
-using System;
-using System.Collections.Generic;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+  [Authentication]
   public class AdminController : Controller
   {
-    private MyDbContext dbContext;
-    private HashPassword hashPassword;
-    // private static Users user;
-    private AdminService adminService;
-    public AdminController(MyDbContext dbContext, HashPassword hashPassword, AdminService adminService)
+    private UserService userService;
+    private GigService gigService;
+    public AdminController(UserService userService, GigService gigService)
     {
-      this.dbContext = dbContext;
-      this.hashPassword = hashPassword;
-      this.adminService = adminService;
-      dbContext.Database.EnsureCreated();
+      this.userService = userService;
+      this.gigService = gigService;
     }
-    [HttpGet("/CreateCategory")]
-    public IActionResult CreateCategory()
-    {
-      return View();
-    }
-    [HttpPost("/CreateCategory")]
-    public IActionResult CreateCategory(string CategoryName, int ParentId, string SubCategory)
-    {
-      // bool add = 
-      if (adminService.CreateCategory(CategoryName, ParentId, SubCategory))
-      {
-        return Redirect("/");
-      }
-      return View();
-    }
-    public IActionResult EditCategory(Category category)
-    {
-      if (adminService.EditCategory(category))
-      {
-        return Redirect("/");
-      }
-      return View();
 
+    [HttpGet("/Admin/Dashboard")]
+    public IActionResult Dashboard()
+    {
+      return View();
     }
-    // [HttpGet("/GetListCategoryByParentId")]
-    // public IActionResult GetListCategoryByParentId()
-    // {
+    [HttpGet("/Admin/ServiceActive")]
+    public IActionResult ServiceActive()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/ServiceInactive")]
+    public IActionResult ServiceInactive()
+    {
 
-    //   return View();
-    // }
-    // [HttpPost("/GetListCategoryByParentId")]
-    // public IActionResult GetListCategoryByParentId(string CategoryName)
-    // {
-    //   List<Category> category = adminService.GetListCategoryByParentId(CategoryName);
-    //   ViewBag.ListCategory = category;
-    //   return RedirectToAction("Index", "Home", new { ListCategory = category });
-    // }
+      return View();
+    }
+    [HttpGet("/Admin/Error")]
+    public IActionResult Error()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/Blank")]
+    public IActionResult Blank()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/Buttons")]
+    public IActionResult Buttons()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/Cards")]
+    public IActionResult Cards()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/Charts")]
+    public IActionResult Charts()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/Tables")]
+    public IActionResult Tables()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/UtilitiesAnimation")]
+    public IActionResult UtilitiesAnimation()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/UtilitiesBorder")]
+    public IActionResult UtilitiesBorder()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/UtilitiesColor")]
+    public IActionResult UtilitiesColor()
+    {
+      return View();
+    }
+    [HttpGet("/Admin/UtilitiesOther")]
+    public IActionResult UtilitiesOther()
+    {
+      return View();
+    }
   }
-
 }

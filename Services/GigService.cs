@@ -9,12 +9,43 @@ namespace Vtc_Freelancer.Services
     public class GigService
     {
         private MyDbContext dbContext;
-        private HashPassword hashPassword;
         public GigService(MyDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
-
+        public int CreateServiceStepOne(string title, string category, string subcategory, string tags)
+        {
+            Service service = new Service();
+            try
+            {
+                service.Title = title;
+                service.Category = category;
+                service.SubCategory = subcategory;
+                service.TimeCreateService = System.DateTime.Now;
+                service.Status = -1;
+                service.SellerId = 1;
+                dbContext.Add(service);
+                dbContext.SaveChanges();
+                string[] ListTags = tags.Split(',');
+                foreach (var item in ListTags)
+                {
+                    if (item != "")
+                    {
+                        Tag tag = new Tag();
+                        tag.TagName = item;
+                        tag.ServiceId = service.ServiceId;
+                        dbContext.Add(tag);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return 0;
+            }
+            return service.ServiceId;
+        }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             Report report = new Report();
