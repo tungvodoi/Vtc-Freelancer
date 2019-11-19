@@ -14344,6 +14344,46 @@
   "RootNamespace": "Vtc_Freelancer",
   "Documents": [
     {
+      "FilePath": "Views\\Admin\\ServiceActive.cshtml",
+      "TargetPath": "Views\\Admin\\ServiceActive.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Gig\\CreateService.cshtml",
+      "TargetPath": "Views\\Gig\\CreateService.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Error.cshtml",
+      "TargetPath": "Views\\Admin\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\User\\EditProfile.cshtml",
+      "TargetPath": "Views\\User\\EditProfile.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\UtilitiesOther.cshtml",
+      "TargetPath": "Views\\Admin\\UtilitiesOther.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Tables.cshtml",
+      "TargetPath": "Views\\Admin\\Tables.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Cards.cshtml",
+      "TargetPath": "Views\\Admin\\Cards.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\UtilitiesColor.cshtml",
+      "TargetPath": "Views\\Admin\\UtilitiesColor.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -14364,8 +14404,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Admin\\UtilitiesAnimation.cshtml",
+      "TargetPath": "Views\\Admin\\UtilitiesAnimation.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Buttons.cshtml",
+      "TargetPath": "Views\\Admin\\Buttons.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14374,8 +14424,38 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Home\\login.cshtml",
+      "TargetPath": "Views\\Home\\login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Shared\\_AdminLayoutPage.cshtml",
+      "TargetPath": "Views\\Shared\\_AdminLayoutPage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\User\\Login.cshtml",
       "TargetPath": "Views\\User\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Blank.cshtml",
+      "TargetPath": "Views\\Admin\\Blank.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Shared\\_Dashboard.cshtml",
+      "TargetPath": "Views\\Shared\\_Dashboard.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Home\\EditProfile.cshtml",
+      "TargetPath": "Views\\Home\\EditProfile.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Shared\\_Logout.cshtml",
+      "TargetPath": "Views\\Shared\\_Logout.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14384,8 +14464,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Admin\\UtilitiesBorder.cshtml",
+      "TargetPath": "Views\\Admin\\UtilitiesBorder.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Home\\Seller.cshtml",
       "TargetPath": "Views\\Home\\Seller.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\ServiceInactive.cshtml",
+      "TargetPath": "Views\\Admin\\ServiceInactive.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Charts.cshtml",
+      "TargetPath": "Views\\Admin\\Charts.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Admin\\Dashboard.cshtml",
+      "TargetPath": "Views\\Admin\\Dashboard.cshtml",
       "FileKind": "mvc"
     }
   ],

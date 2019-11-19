@@ -15,7 +15,6 @@ namespace Vtc_Freelancer.Models
         public DbSet<Offer> Offer { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Service> Service { get; set; }
-        public DbSet<DeliveryTime> DeliveryTime { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationDetail> NotificationDetail { get; set; }
         public DbSet<Package> Package { get; set; }
@@ -26,11 +25,9 @@ namespace Vtc_Freelancer.Models
         public DbSet<ConversationDetail> ConversationDetail { get; set; }
         public DbSet<FAQ> FAQ { get; set; }
 
-        public DbSet<PackageOption> PackageOption { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=12345;database=vtc_freelancer");
+            optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +52,7 @@ namespace Vtc_Freelancer.Models
                 entity.HasKey(x => x.SellerId);
                 entity.Property(x => x.SellerPoint);
                 entity.Property(x => x.Description);
+                entity.Property(x => x.RegisterDateSeller);
                 entity.Property(x => x.UserId);
             });
             modelBuilder.Entity<Languages>(entity =>
@@ -152,6 +150,7 @@ namespace Vtc_Freelancer.Models
               entity.Property(x => x.Category);
               entity.Property(x => x.SubCategory);
               entity.Property(x => x.Description);
+              entity.Property(x => x.TimeCreateService);
               entity.Property(x => x.Status);
               entity.Property(x => x.SellerId);
 
@@ -163,6 +162,7 @@ namespace Vtc_Freelancer.Models
                entity.Property(x => x.Description);
                entity.Property(x => x.Price);
                entity.Property(x => x.NumberRevision);
+               entity.Property(x => x.DeliveryTime);
                entity.Property(x => x.ServiceId);
 
 
@@ -179,7 +179,7 @@ namespace Vtc_Freelancer.Models
             modelBuilder.Entity<Report>(entity =>
            {
                entity.HasKey(x => x.ReportId);
-               entity.Property(x => x.TittleReport);
+               entity.Property(x => x.TitleReport);
                entity.Property(x => x.ContentReport);
                entity.Property(x => x.ServiceId);
                entity.Property(x => x.UserId);
@@ -199,20 +199,6 @@ namespace Vtc_Freelancer.Models
                entity.Property(x => x.Question);
                entity.Property(x => x.Reply);
                entity.Property(x => x.ServiceId);
-
-
-           });
-            modelBuilder.Entity<PackageOption>(entity =>
-             {
-                 entity.HasKey(x => x.PackageId);
-                 entity.Property(x => x.OptionName);
-
-
-             });
-            modelBuilder.Entity<DeliveryTime>(entity =>
-           {
-               entity.HasKey(x => x.PackageId);
-               entity.Property(x => x.DeliveryTimes);
 
 
            });

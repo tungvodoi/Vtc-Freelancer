@@ -7,7 +7,7 @@ namespace Vtc_Freelancer.Models
     {
         public int ReportId { get; set; }
         [Column(TypeName = "varchar(255)")]
-        public string TittleReport { get; set; }
+        public string TitleReport { get; set; }
         [Column(TypeName = "text")]
         public string ContentReport { get; set; }
         public int ServiceId { get; set; }

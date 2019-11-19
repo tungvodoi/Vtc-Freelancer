@@ -13,6 +13,7 @@ namespace Vtc_Freelancer.Models
         public double Price { get; set; }
         public int NumberRevision { get; set; }
         public int ServiceId { get; set; }
+        public int DeliveryTime { get; set; }
         [ForeignKey("ServiceId")]
         public virtual Service Service { get; set; }
 
