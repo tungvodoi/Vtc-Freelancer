@@ -1,0 +1,28 @@
+@model Category;
+@{
+ViewData["Title"] = "Edit Category";
+}
+
+<div class="text-center">
+    <form method="POST" action="/EditCategory">
+        <h2>
+          Edit Category
+        </h2>
+        <br>
+        @if (@ViewBag.Noti == true)
+        {
+        <h5>Tài khoản không tồn tại</h5>
+        <br>
+        }
+      
+           Category Name
+        </label>
+        
+        <input name="CategoryName"  value = ""/>
+       
+        
+        <button id="but" onclick="login()">Update</button>
+        <br>
+        <!-- <a href="/Register">Bạn chưa có tài khoản?</a> -->
+    </form>
+</div>

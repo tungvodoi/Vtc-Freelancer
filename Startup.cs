@@ -29,6 +29,7 @@ namespace Vtc_Freelancer
       services.AddScoped<MyDbContext, MyDbContext>();
       services.AddScoped<HashPassword, HashPassword>();
       services.AddScoped<UserService, UserService>();
+      services.AddScoped<AdminService, AdminService>();
       services.AddScoped<GigService, GigService>();
       services.AddControllersWithViews();
       services.AddSession(options =>
