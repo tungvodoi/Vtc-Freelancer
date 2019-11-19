@@ -1,22 +1,32 @@
+using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
-using System;
+using System.Linq;
+
 namespace Vtc_Freelancer.Controllers
 {
     public class UserController : Controller
     {
         private MyDbContext dbContext;
+        private HashPassword hashPassword;
+        private static Users user;
         private UserService userService;
-        public UserController(MyDbContext dbContext, UserService userService)
+        public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService)
         {
             this.dbContext = dbContext;
+            this.hashPassword = hashPassword;
             this.userService = userService;
             dbContext.Database.EnsureCreated();
         }
+        // public IActionResult Index()
+        // {
+        //   var userId = HttpContext.Session.GetInt32("UserId");
+        //   return View();
+        // }
         [HttpPost("/Register")]
         public IActionResult Register(string username, string email, string password)
         {
@@ -35,25 +45,19 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult Login(string email, string password)
         {
-            Users user = new Users();
+            user = new Users();
             user = userService.Login(email, password);
+            // HttpContext.Session.SetString("UserName", user.UserName);
+            // Console.WriteLine("1");
+            // Console.WriteLine(user.UserId);
+            // Console.WriteLine(user.UserName);
             if (user == null)
             {
                 return Redirect("/Login");
             }
-            else
-            {
-                HttpContext.Session.SetInt32("UserId", user.UserId);
-                ViewBag.Notification = true;
-                if (user.Email == "admin@gmail.com")
-                {
-                    return Redirect("/Admin/Dashboard");
-                }
-                else
-                {
-                    return Redirect("/");
-                }
-            }
+            HttpContext.Session.SetInt32("UserId", user.UserId);
+            ViewBag.Notification = true;
+            return Redirect("/");
         }
         [HttpGet("/Login")]
         public IActionResult Login()
@@ -78,7 +82,20 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/EditProfile")]
         public IActionResult EditProfile()
         {
+
             return View();
         }
+        public IActionResult BecomeSeller(Seller seller)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
+            if (userService.BecomeSeller(users))
+            {
+                return RedirectToAction("/");
+            }
+            return View();
+        }
+
+
     }
 }

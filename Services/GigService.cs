@@ -13,9 +13,54 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public Service CreateService()
+        public int CreateServiceStepOne(string title, string category, string subcategory, string tags)
         {
-            return null;
+            Service service = new Service();
+            try
+            {
+                service.Title = title;
+                service.Category = category;
+                service.SubCategory = subcategory;
+                service.TimeCreateService = System.DateTime.Now;
+                service.Status = -1;
+                service.SellerId = 1;
+                dbContext.Add(service);
+                dbContext.SaveChanges();
+                string[] ListTags = tags.Split(',');
+                foreach (var item in ListTags)
+                {
+                    if (item != "")
+                    {
+                        Tag tag = new Tag();
+                        tag.TagName = item;
+                        tag.ServiceId = service.ServiceId;
+                        dbContext.Add(tag);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return 0;
+            }
+            return service.ServiceId;
+        }
+        public bool CreateServiceStepTwo(Package package, int? ServiceID)
+        {
+            try
+            {
+                Console.WriteLine(package.Name);
+                package.ServiceId = ServiceID;
+                dbContext.Add(package);
+                dbContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
         }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
@@ -36,7 +81,7 @@ namespace Vtc_Freelancer.Services
                 }
                 catch (System.Exception ex)
                 {
-                    Console.WriteLine("Error : " + ex.Message);
+                    Console.WriteLine(ex.Message);
                     return false;
                 }
             }
@@ -44,6 +89,12 @@ namespace Vtc_Freelancer.Services
             {
                 return false;
             }
+        }
+        public Service GetServiceByID(int? ID)
+        {
+            Service ser = new Service();
+            ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+            return ser;
         }
     }
 }

@@ -5,94 +5,83 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+    // [Authentication]
     public class AdminController : Controller
     {
         private UserService userService;
         private GigService gigService;
-        private AdminService adminService;
-        public AdminController(UserService userService, GigService gigService, AdminService adminService)
+        public AdminController(UserService userService, GigService gigService)
         {
             this.userService = userService;
             this.gigService = gigService;
-            this.adminService = adminService;
         }
 
+        [HttpGet("/Admin/Dashboard")]
         public IActionResult Dashboard()
         {
             return View();
         }
-
-        public IActionResult ActiveService()
+        [HttpGet("/Admin/ServiceActive")]
+        public IActionResult ServiceActive()
         {
-            ViewBag.ListServicesHadActive = adminService.GetListServicesHadActive();
             return View();
         }
-
-        public IActionResult InactiveService()
+        [HttpGet("/Admin/ServiceInactive")]
+        public IActionResult ServiceInactive()
         {
-            ViewBag.ListServicesInactive = adminService.GetListServicesInactive();
+
             return View();
         }
-
+        [HttpGet("/Admin/Error")]
         public IActionResult Error()
         {
             return View();
         }
-
+        [HttpGet("/Admin/Blank")]
         public IActionResult Blank()
         {
             return View();
         }
-        public IActionResult ManagerUsers(string Username)
+        [HttpGet("/Admin/Buttons")]
+        public IActionResult Buttons()
         {
-            ViewBag.ListUsers = adminService.GetListUsers(Username);
             return View();
         }
-
-        [HttpGet]
-        public IActionResult ChangeStatusUser(int UserId)
+        [HttpGet("/Admin/Cards")]
+        public IActionResult Cards()
         {
-            try
-            {
-                adminService.ChangeStatusUser(UserId);
-                return Redirect("/Admin/ManagerUsers");
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine("Error : " + ex.Message);
-                return Redirect("/Admin/ManagerUsers");
-                throw;
-            }
-
+            return View();
         }
+        [HttpGet("/Admin/Charts")]
         public IActionResult Charts()
         {
             return View();
         }
-
+        [HttpGet("/Admin/Tables")]
         public IActionResult Tables()
         {
             return View();
         }
-
+        [HttpGet("/Admin/UtilitiesAnimation")]
         public IActionResult UtilitiesAnimation()
         {
             return View();
         }
-
+        [HttpGet("/Admin/UtilitiesBorder")]
         public IActionResult UtilitiesBorder()
         {
             return View();
         }
-
+        [HttpGet("/Admin/UtilitiesColor")]
         public IActionResult UtilitiesColor()
         {
             return View();
         }
-
+        [HttpGet("/Admin/UtilitiesOther")]
         public IActionResult UtilitiesOther()
         {
             return View();

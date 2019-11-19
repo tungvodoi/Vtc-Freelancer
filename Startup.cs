@@ -29,13 +29,14 @@ namespace Vtc_Freelancer
       services.AddScoped<MyDbContext, MyDbContext>();
       services.AddScoped<HashPassword, HashPassword>();
       services.AddScoped<UserService, UserService>();
+      services.AddScoped<AdminService, AdminService>();
       services.AddScoped<GigService, GigService>();
       services.AddScoped<AdminService, AdminService>();
       services.AddControllersWithViews();
       services.AddSession(options =>
           {
             // Set a short timeout for easy testing.
-            options.IdleTimeout = TimeSpan.FromHours(3);
+            options.IdleTimeout = TimeSpan.FromMinutes(30);
             options.Cookie.HttpOnly = true;
             // Make the session cookie essential
             options.Cookie.IsEssential = true;

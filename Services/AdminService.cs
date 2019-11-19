@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
 
@@ -10,48 +11,78 @@ namespace Vtc_Freelancer.Services
     public class AdminService
     {
         private MyDbContext dbContext;
-        public AdminService(MyDbContext dbContext)
+        private HashPassword hashPassword;
+
+        public AdminService(MyDbContext dbContext, HashPassword hashPassword)
         {
             this.dbContext = dbContext;
+            this.hashPassword = hashPassword;
         }
-        public List<Service> GetListServicesHadActive()
+        public bool CreateCategory(string CategoryName, int ParenId, string SubCategoryName)
         {
-            List<Service> ListServiceHadActive = dbContext.Service.FromSql("select * from Service where status = 1 order by TimeCreateService desc").ToList();
-            return ListServiceHadActive;
-        }
+            Category ParentCategory = new Category();
+            Category SubCategory = new Category();
 
-        public List<Service> GetListServicesInactive()
-        {
-            List<Service> ListServiceInactive = dbContext.Service.FromSql("select * from Service where status = 0 order by TimeCreateService desc").ToList();
-            return ListServiceInactive;
-        }
-        public List<Users> GetListUsers(string Username)
-        {
-            List<Users> ListUsers = dbContext.Users.FromSql("select * from Users where Username like '%" + Username + "%'").ToList();
-            return ListUsers;
-        }
-        public bool ChangeStatusUser(int UserId)
-        {
-            try
+            var category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
+            if (category == null)
             {
-                Users user = dbContext.Users.FirstOrDefault(x => x.UserId == UserId);
-                if (user.Status == 1)
-                {
-                    user.Status = 0;
-                }
-                else
-                {
-                    user.Status = 1;
-                }
-                dbContext.Update(user);
+                ParentCategory.CategoryName = CategoryName;
+                dbContext.Add(ParentCategory);
+                dbContext.SaveChanges();
+
+                SubCategory.CategoryName = SubCategoryName;
+                var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
+                SubCategory.ParenId = category1.CategoryId;
+                dbContext.Add(SubCategory);
                 dbContext.SaveChanges();
                 return true;
             }
-            catch (System.Exception ex)
+            else
             {
-                Console.WriteLine("Error : " + ex.Message);
-                return false;
+                try
+                {
+
+                    // ParentCategory.CategoryName = CategoryName;
+                    var Category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
+                    if (category != null)
+                    {
+
+                        SubCategory.CategoryName = SubCategoryName;
+                        SubCategory.ParenId = Category.CategoryId;
+                        dbContext.Add(SubCategory);
+                        dbContext.SaveChanges();
+                    }
+
+                    return true;
+                }
+                catch (System.Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                    return false;
+
+                }
             }
+        }
+        public List<Category> GetListCategoryByParentId(string CategoryName)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql("SELECT * FROM Category WHERE CategoryName = {0}", CategoryName).ToList();
+
+            return listCategory;
+        }
+        public bool EditCategory(Category category)
+        {
+            var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
+            if (category != null)
+            {
+                category1.CategoryName = category.CategoryName;
+                dbContext.Update(category1);
+                dbContext.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }
