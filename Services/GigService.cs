@@ -36,7 +36,7 @@ namespace Vtc_Freelancer.Services
                 }
                 catch (System.Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Error : " + ex.Message);
                     return false;
                 }
             }

@@ -30,6 +30,7 @@ namespace Vtc_Freelancer
       services.AddScoped<HashPassword, HashPassword>();
       services.AddScoped<UserService, UserService>();
       services.AddScoped<GigService, GigService>();
+      services.AddScoped<AdminService, AdminService>();
       services.AddControllersWithViews();
       services.AddSession(options =>
           {
