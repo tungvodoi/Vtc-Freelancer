@@ -97,21 +97,7 @@ namespace Vtc_Freelancer.Services
         dbContext.SaveChanges();
         return true;
       }
-
       return false;
-    }
-    public Users GetUserByUserId(int Id)
-    {
-      Users users = new Users();
-      users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);
-      if (users != null)
-      {
-        return users;
-      }
-      else
-      {
-        return null;
-      }
 
     }
     public Seller BecomeSeller(Users users, Languages languages, Seller seller1, Category category, Skills skills)
@@ -215,6 +201,40 @@ namespace Vtc_Freelancer.Services
         skills.SkillLevel = skills1.SkillLevel;
         skills.SellerId = seller.SellerId;
         dbContext.Add(skills);
+        dbContext.SaveChanges();
+        return true;
+      }
+      catch (System.Exception e)
+      {
+        Console.WriteLine(e.Message);
+        return false;
+        throw;
+      }
+
+    }
+    public Users GetUserByUserId(int Id)
+    {
+      Users users = new Users();
+      users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);
+      if (users != null)
+      {
+        return users;
+      }
+      else
+      {
+        return null;
+      }
+    }
+    public bool BecomeSeller(Users users)
+    {
+      try
+      {
+        Seller seller = new Seller();
+        seller.UserId = users.UserId;
+        seller.SellerPoint = 0;
+        seller.Description = "haha";
+        seller.RegisterDateSeller = DateTime.Now;
+        dbContext.Add(seller);
         dbContext.SaveChanges();
         return true;
       }

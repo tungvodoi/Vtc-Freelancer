@@ -46,6 +46,22 @@ namespace Vtc_Freelancer.Services
             }
             return service.ServiceId;
         }
+        public bool CreateServiceStepTwo(Package package, int? ServiceID)
+        {
+            try
+            {
+                Console.WriteLine(package.Name);
+                package.ServiceId = ServiceID;
+                dbContext.Add(package);
+                dbContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
+        }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             Report report = new Report();
@@ -73,6 +89,12 @@ namespace Vtc_Freelancer.Services
             {
                 return false;
             }
+        }
+        public Service GetServiceByID(int? ID)
+        {
+            Service ser = new Service();
+            ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+            return ser;
         }
     }
 }

@@ -1,0 +1,83 @@
+@{
+ViewData["Title"] = "Admin - Manager Users";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Users</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex">
+      <h5 class="m-0 font-weight-bold text-primary d-sm-inline-block">List Users</h5>
+      <!-- Topbar Search -->
+      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/ManagerUsers">
+        <div class="input-group">
+          <input type="text" name="username" class="form-control border-1 small" placeholder="Search for username..."
+            aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>User name</th>
+              <th>Full name</th>
+              <th>Email</th>
+              <th>User level</th>
+              <th>Register date</th>
+              <th>Is seller</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(ViewBag.ListUsers != null)
+            {
+              @foreach(var item in ViewBag.ListUsers)
+              {
+                <tr>
+                  <td>@item.UserName</td>
+                  <td>@item.FullName</td>
+                  <td>@item.Email</td>
+                  <td>@item.UserLevel</td>
+                  <td>@item.RegisterDate</td>
+                  @if(item.IsSeller == 1)
+                  {
+                    <td>Yes</td>
+                  }else
+                  {
+                    <td>No</td>
+                  }
+                  @if(item.Status == 0)
+                  {
+                    <td>
+                      <a href="#" data-toggle="modal" data-target="#ChangeStatusModal" onclick="SetUserIdToModal(@item.UserId)">Active</a>
+                    </td>
+                  }else
+                  {
+                    <td>
+                      <a href="#" data-toggle="modal" data-target="#ChangeStatusModal" onclick="SetUserIdToModal(@item.UserId)">Block</a>
+                    </td>
+                  }
+                </tr>
+              }
+            }
+            <partial name="/Views/Shared/_ChangeStatusUser.cshtml" />
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->

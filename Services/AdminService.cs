@@ -44,7 +44,7 @@ namespace Vtc_Freelancer.Services
 
           // ParentCategory.CategoryName = CategoryName;
           var Category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
-          if (Category != null)
+          if (category != null)
           {
 
             SubCategory.CategoryName = SubCategoryName;

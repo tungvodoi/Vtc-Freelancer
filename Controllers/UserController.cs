@@ -1,10 +1,10 @@
+using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
-using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -19,17 +19,18 @@ namespace Vtc_Freelancer.Controllers
     private AdminService adminService;
     public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService, AdminService adminService)
     {
+
       this.dbContext = dbContext;
       this.hashPassword = hashPassword;
       this.userService = userService;
       this.adminService = adminService;
       dbContext.Database.EnsureCreated();
     }
-    // public IActionResult Index()
-    // {
-    //   var userId = HttpContext.Session.GetInt32("UserId");
-    //   return View();
-    // }
+    public IActionResult Index()
+    {
+      var userId = HttpContext.Session.GetInt32("UserId");
+      return View();
+    }
     [HttpPost("/Register")]
     public IActionResult Register(string username, string email, string password)
     {
@@ -39,6 +40,7 @@ namespace Vtc_Freelancer.Controllers
       }
       return Redirect("/Login");
     }
+
     [HttpGet("/Register")]
     public IActionResult Register()
     {
