@@ -61,6 +61,7 @@ namespace Vtc_Freelancer.Controllers
         return Redirect("/Login");
       }
       HttpContext.Session.SetInt32("UserId", user.UserId);
+      HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
       ViewBag.Notification = true;
       return Redirect("/");
     }
@@ -112,6 +113,7 @@ namespace Vtc_Freelancer.Controllers
 
         if (listcategory != null)
         {
+
           ViewBag.listcategory = listcategory;
 
           return Redirect("/Home/Index");
@@ -130,6 +132,10 @@ namespace Vtc_Freelancer.Controllers
 
       if (listcategory != null)
       {
+        List<Category> listSubCategory = new List<Category>();
+        listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+
+        ViewBag.subcategory = listSubCategory;
         ViewBag.listcategory = listcategory;
 
         return View("BecomeSeller");

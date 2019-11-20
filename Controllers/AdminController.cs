@@ -6,17 +6,20 @@ using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using Vtc_Freelancer.ActionFilter;
+using System.Linq;
 
 namespace Vtc_Freelancer.Controllers
 {
   // [Authentication]
   public class AdminController : Controller
   {
+    private MyDbContext dbContext;
     private UserService userService;
     private GigService gigService;
     private AdminService adminService;
-    public AdminController(UserService userService, GigService gigService, AdminService adminService)
+    public AdminController(UserService userService, GigService gigService, AdminService adminService, MyDbContext dbContext)
     {
+      this.dbContext = dbContext;
       this.userService = userService;
       this.gigService = gigService;
       this.adminService = adminService;
@@ -114,13 +117,25 @@ namespace Vtc_Freelancer.Controllers
 
       if (listcategory != null)
       {
+        List<Category> listSubCategory = new List<Category>();
+        listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+
         ViewBag.listcategory = listcategory;
-        Console.WriteLine(4535456);
+        ViewBag.subcategory = listSubCategory;
         return Redirect("/BecomeSeller");
       }
       return View("Index");
     }
 
+    public IActionResult GetListSubCategoryByCategoryParentId(string categoryName)
+    {
+
+      Category category = dbContext.Category.FirstOrDefault(u => u.CategoryName == categoryName);
+      List<Category> listcategory = new List<Category>();
+
+      listcategory = adminService.GetListSubCategoryByCategoryParentId(category.CategoryId);
+      return new JsonResult(listcategory);
+    }
   }
 
 }

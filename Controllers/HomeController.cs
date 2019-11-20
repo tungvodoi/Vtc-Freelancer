@@ -34,21 +34,20 @@ namespace Vtc_Freelancer.Controllers
         int? userId = HttpContext.Session.GetInt32("UserId");
         Users userads = userService.GetUsersByID(userId);
         ViewBag.UserName = userads.UserName;
+        ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
 
-        List<Category> listcategory = new List<Category>();
-        listcategory = adminService.GetListCategoryBy();
+      }
 
-        if (listcategory != null)
-        {
-          ViewBag.listcategory = listcategory;
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
 
-          return View();
-        }
-
+      if (listcategory != null)
+      {
+        ViewBag.listcategory = listcategory;
 
         return View();
       }
-      return Redirect("/Login");
+      return View();
     }
     public IActionResult Logout()
     {

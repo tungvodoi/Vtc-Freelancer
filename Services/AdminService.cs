@@ -74,7 +74,17 @@ namespace Vtc_Freelancer.Services
     public List<Category> GetListCategoryBy()
     {
       List<Category> listCategory = new List<Category>();
-      listCategory = dbContext.Category.FromSql("SELECT * FROM Category").ToList();
+      listCategory = dbContext.Category.FromSql("SELECT * FROM Category where parenId = 0").ToList();
+      foreach (var item in listCategory)
+      {
+        Console.WriteLine(item.CategoryName);
+      }
+      return listCategory;
+    }
+    public List<Category> GetListSubCategoryByCategoryParentId(int id)
+    {
+      List<Category> listCategory = new List<Category>();
+      listCategory = dbContext.Category.FromSql($"SELECT * FROM Category where parenId = {id}").ToList();
       foreach (var item in listCategory)
       {
         Console.WriteLine(item.CategoryName);
