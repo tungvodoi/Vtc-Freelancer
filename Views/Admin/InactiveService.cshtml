@@ -1,0 +1,55 @@
+@{
+ViewData["Title"] = "Admin - Inactive Service";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ServiceId</th>
+              <th>SellerId</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>SubCategory</th>
+              <th>Description</th>
+              <th>Time Created</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(ViewBag.ListServicesInactive != null)
+            {
+              @foreach( var item in ViewBag.ListServicesInactive)
+              {
+                <tr>
+                  <td>@item.ServiceId</td>
+                  <td>@item.SellerId</td>
+                  <td>@item.Title</td>
+                  <td>@item.Category</td>
+                  <td>@item.SubCategory</td>
+                  <td>@item.Description</td>
+                  <td>@item.TimeCreateService.ToShortDateString()</td>
+                  @if(item.Status == 1){<td>Đã kích hoạt</td>}else{<td>Chưa kích hoạt</td>}
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
