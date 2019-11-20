@@ -44,7 +44,7 @@ namespace Vtc_Freelancer.Services
 
           // ParentCategory.CategoryName = CategoryName;
           var Category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
-          if (category != null)
+          if (Category != null)
           {
 
             SubCategory.CategoryName = SubCategoryName;
@@ -71,6 +71,17 @@ namespace Vtc_Freelancer.Services
 
       return listCategory;
     }
+    public List<Category> GetListCategoryBy()
+    {
+      List<Category> listCategory = new List<Category>();
+      listCategory = dbContext.Category.FromSql("SELECT * FROM Category").ToList();
+      foreach (var item in listCategory)
+      {
+        Console.WriteLine(item.CategoryName);
+      }
+      return listCategory;
+    }
+
     public bool EditCategory(Category category)
     {
       var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtc_Freelancer.Models
@@ -10,6 +11,8 @@ namespace Vtc_Freelancer.Models
     [Column(TypeName = "text")]
     public string Description { get; set; }
     public DateTime RegisterDateSeller { get; set; }
+    public List<SellerCategory> SellerCategorys { get; set; }
+
     public int UserId { get; set; }
     [ForeignKey("UserId")]
     public virtual Users User { get; set; }

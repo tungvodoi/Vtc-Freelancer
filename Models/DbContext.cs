@@ -27,7 +27,7 @@ namespace Vtc_Freelancer.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
+      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=0124578;database=vtc_freelancer");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,7 +66,7 @@ namespace Vtc_Freelancer.Models
       {
         entity.HasKey(x => x.SkillId);
         entity.Property(x => x.SkillName);
-        entity.Property(x => x.Level);
+        entity.Property(x => x.SkillLevel);
         entity.Property(x => x.SellerId);
       });
       modelBuilder.Entity<Category>(entity =>
@@ -77,8 +77,8 @@ namespace Vtc_Freelancer.Models
       });
       modelBuilder.Entity<SellerCategory>(entity =>
       {
-        entity.HasKey(x => x.SellerCategoryId);
-        entity.Property(x => x.SellerId);
+        entity.HasKey(x => new { x.SellerId, x.CategoryId });
+
       });
       modelBuilder.Entity<Request>(entity =>
       {

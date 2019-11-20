@@ -5,18 +5,21 @@ using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using Vtc_Freelancer.ActionFilter;
+using System.Collections.Generic;
 
 namespace Vtc_Freelancer.Controllers
 {
-  [Authentication]
+  // [Authentication]
   public class AdminController : Controller
   {
     private UserService userService;
     private GigService gigService;
-    public AdminController(UserService userService, GigService gigService)
+    private AdminService adminService;
+    public AdminController(UserService userService, GigService gigService, AdminService adminService)
     {
       this.userService = userService;
       this.gigService = gigService;
+      this.adminService = adminService;
     }
 
     [HttpGet("/Admin/Dashboard")]
@@ -85,5 +88,39 @@ namespace Vtc_Freelancer.Controllers
     {
       return View();
     }
+    [HttpPost("/CreateCategory")]
+    public IActionResult CreateCategory(string CategoryName, int ParenId, string SubCategoryName)
+    {
+      bool category = adminService.CreateCategory(CategoryName, ParenId, SubCategoryName);
+      if (category)
+      {
+
+        return View();
+
+      }
+      return Redirect("/");
+
+
+    }
+    [HttpGet("/CreateCategory")]
+    public IActionResult CreateCategory()
+    {
+      return View();
+    }
+    public IActionResult GetListCategory()
+    {
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
+
+      if (listcategory != null)
+      {
+        ViewBag.listcategory = listcategory;
+        Console.WriteLine(4535456);
+        return Redirect("/BecomeSeller");
+      }
+      return View("Index");
+    }
+
+
   }
 }

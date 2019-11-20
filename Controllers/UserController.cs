@@ -6,6 +6,7 @@ using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -15,11 +16,13 @@ namespace Vtc_Freelancer.Controllers
     private HashPassword hashPassword;
     private static Users user;
     private UserService userService;
-    public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService)
+    private AdminService adminService;
+    public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService, AdminService adminService)
     {
       this.dbContext = dbContext;
       this.hashPassword = hashPassword;
       this.userService = userService;
+      this.adminService = adminService;
       dbContext.Database.EnsureCreated();
     }
     // public IActionResult Index()
@@ -85,15 +88,52 @@ namespace Vtc_Freelancer.Controllers
 
       return View();
     }
-    public IActionResult BecomeSeller(Seller seller)
+    [HttpPost("/BecomeSeller")]
+    public IActionResult BecomeSeller(Seller seller1, Languages languages, Category category, Skills skills)
     {
+      Console.WriteLine(77777777777);
+      Console.WriteLine(category.CategoryName);
       int? userId = HttpContext.Session.GetInt32("UserId");
       Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
-      if (userService.BecomeSeller(users))
+      var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
+
+      Console.WriteLine(languages.Level);
+      var seller = userService.BecomeSeller(users, languages, seller1, category1, skills);
+
+      if (seller != null)
       {
-        return RedirectToAction("/");
+        seller = dbContext.Seller.FirstOrDefault(seller => seller.SellerId == seller1.SellerId);
+
+        // HttpContext.Session.SetInt32("SellerId", seller.SellerId);
+        List<Category> listcategory = new List<Category>();
+        listcategory = adminService.GetListCategoryBy();
+
+        if (listcategory != null)
+        {
+          ViewBag.listcategory = listcategory;
+
+          return Redirect("/Home/Index");
+        }
+
+
+        return View("/Home/Index");
       }
       return View();
+    }
+    [HttpGet("/BecomeSeller")]
+    public IActionResult BecomeSeller()
+    {
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
+
+      if (listcategory != null)
+      {
+        ViewBag.listcategory = listcategory;
+
+        return View("BecomeSeller");
+      }
+      return View();
+
     }
 
 
