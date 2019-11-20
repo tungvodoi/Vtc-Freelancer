@@ -68,7 +68,17 @@ namespace Vtc_Freelancer.Controllers
     [HttpGet("/Login")]
     public IActionResult Login()
     {
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
+
+      if (listcategory != null)
+      {
+        ViewBag.listcategory = listcategory;
+
+        return View();
+      }
       return View();
+
     }
     public IActionResult Logout()
     {
