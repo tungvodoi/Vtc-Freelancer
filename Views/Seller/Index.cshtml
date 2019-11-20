@@ -1,30 +1,119 @@
 @{
 ViewData["Title"] = "Seller Dashboard";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
 }
 
 <html lang="en">
 
 <body>
-    <div class="header container">
-        <div class="left-top-nav">
-            <div class="logo">
-                <a href="#">VTC Freelancer</a>
+  
+    <div class="content-seller">
+        <div class="body-content container">
+            <div class="content left-content">
+                <div class="container-profile">
+                    <div class="profile-wrapper">
+                        <label class="lable-profile">
+                            <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                        </label>
+                        <br>
+                        <br>
+                        <p class="username">Username</p>
+                        <br>
+
+                    </div>
+                    <ul class="ul-profile bderbtm">
+                        <li class="li-profil">
+                            <a href="#">
+                                <h3>Response Rate</h3>
+                            </a>
+                        </li>
+                        <li class="li-profil">
+                            <a href="#">
+                                <h3>Delivered on Time</h3>
+                            </a>
+                        </li>
+                        <li class="li-profil">
+                            <a href="#">
+                                <h3>Order Completion</h3>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="ul-profile">
+                        <li class="li-profil">
+                            <a href="#">
+                                <h3>Earned in November</h3>
+                            </a>
+                        </li>
+                        <li class="li-profil">
+                            <a href="#">
+                                <h3>Response Time</h3>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="nav-top">
-                <li>
-                    <a href="#" class="nav-link"><b>Dashboard</b></a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link"><b>Messages</b></a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link"><b>Orders</b></a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link"><b>Gigs</b></a>
-                </li>
-                <li></li>
-            </ul>
+            <div class="right-content">
+                <div class="update-bussiness"><b>
+                        <h2>Upgrade Your Business</h2>
+                    </b>
+                    <div class="content slide-upgrade">
+                        <div class="slide-section slide-upgrade">
+                            <div class="slide-container container">
+                                <div class="left-content">
+                                    <div class="smail-content">
+                                        <div class="logo">
+
+                                            <div class="icon-slide-uprage icon1"></div>
+
+                                            <div class="icon-slide-uprage icon2"></div>
+                                            <div class="icon-slide-uprage icon3"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="right-content">
+                                    <div class="slideshow-container">
+
+                                        <div class="mySlides fade">
+                                            <h1>Communicate With Your Customers</h1>
+                                            <br>
+                                            <div>Good communication is a key factor for creating successful
+                                                collaborations. Reply quickly to all your customers’
+                                                inquiries, provide information and proactively update on your progress
+                                                throughout the entire order process.</div>
+                                        </div>
+
+                                        <div class="mySlides fade">
+
+                                            <h1>Take Courses On VTC Freelancer Today</h1>
+                                            <br>
+                                            <div>Put your professional career in full force with courses on Learn
+                                                from VTC Freelancer. Gain new skills, earn a badge on your
+                                                profile, and keep those sales rolling in.</div>
+                                        </div>
+
+                                        <div class="mySlides fade">
+
+                                            <h1>Business Software for Freelancers</h1>
+                                            <br>
+                                            <div>AND CO helps you with everything from invoicing, payment to time
+                                                and task tracking. Use code “VTC15” for 15% off your
+                                                first year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div style="text-align:center">
+                                <span class="dot" onclick="currentSlide(1)"></span>
+                                <span class="dot" onclick="currentSlide(2)"></span>
+                                <span class="dot" onclick="currentSlide(3)"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

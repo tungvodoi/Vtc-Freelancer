@@ -1,16 +1,38 @@
-<div>
-    <div class="header">
+@{
+ViewData["Title"] = "Create your Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
 
+
+<div>
+    <div class="top-content-create-service">
+        <ul class="nav-top">
+            <li>
+                <a href="#" class="nav-link nav-link-seller"><b>Dashboard</b></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-seller"><b>Messages</b></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-seller"><b>Orders</b></a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-seller"><b>Gigs</b></a>
+            </li>
+            <li>
+
+            </li>
+        </ul>
     </div>
     <div class="nav">
 
     </div>
-    <div class="content">
+    <div class="content-crt-src content">
         <form action="CreateServiceStep1" method="post">
             <label for="">Gig Title</label>
             <Textarea maxlength="80" name="title"></Textarea>
             <br>
-            <label for="" >Category</label>
+            <label for="">Category</label>
             <select name="category">
                 <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
                 <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
@@ -21,7 +43,7 @@
             </select>
             <br>
             <label for="">Tags</label>
-            <input type="text"  name ="tags"/>
+            <input type="text" name="tags" />
             <br>
             <button>Save and continue</button>
         </form>
@@ -37,23 +59,27 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><textarea rows="4" cols="50" name="basicName" placeholder="Name your package"></textarea></td>
-                    <td><textarea rows="4" cols="50" name="standardName" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" name="Name" placeholder="Name your package"></textarea></td>
+                    <td><textarea rows="4" cols="50" name="standardName" placeholder="Name your package"></textarea>
+                    </td>
                     <td><textarea rows="4" cols="50" name="premiumName" placeholder="Name your package"></textarea></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><textarea rows="4" cols="50" name="basicDescribe" placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50" name="Description"
+                            placeholder="Describe your details of your offering"></textarea>
                     </td>
-                    <td><textarea rows="4" cols="50" name="standardDescribe" placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50" name="standardDescribe"
+                            placeholder="Describe your details of your offering"></textarea>
                     </td>
-                    <td><textarea rows="4" cols="50"  name="premiumDescribe"placeholder="Describe your details of your offering"></textarea>
+                    <td><textarea rows="4" cols="50" name="premiumDescribe"
+                            placeholder="Describe your details of your offering"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <select name="basicDelivery">
+                        <select name="DeliveryTime">
                             @for(var i = 1; i < 30; i++) { <option value="@i">@i Day Delivery</option>}
                         </select>
                     </td>
@@ -70,7 +96,7 @@
                 </tr>
                 <tr>
                     <td>Revisions</td>
-                    <td><select name="basicRevisions">
+                    <td><select name="NumberRevision">
                             @for(var i = 1; i < 10; i++) { <option value="@i">@i</option>}
                                 <option value="-1">Unlimited</option>
                         </select></td>
@@ -85,7 +111,7 @@
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td> <select name="basicPrice">
+                    <td> <select name="Price">
                             @for(var i = 5; i < 1000;i=i+5) { <option value="@i">@i$</option>}
                         </select></td>
                     <td><select name="standardPrice">

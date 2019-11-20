@@ -8,7 +8,7 @@ using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
-  [Authentication]
+  // [Authentication]
   public class AdminController : Controller
   {
     private UserService userService;

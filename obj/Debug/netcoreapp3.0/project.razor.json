@@ -14469,6 +14469,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Shared\\_SellerLayout.cshtml",
+      "TargetPath": "Views\\Shared\\_SellerLayout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Admin\\Blank.cshtml",
       "TargetPath": "Views\\Admin\\Blank.cshtml",
       "FileKind": "mvc"
