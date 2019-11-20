@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
-using System;
 using System.Linq;
 
 namespace Vtc_Freelancer.Controllers
