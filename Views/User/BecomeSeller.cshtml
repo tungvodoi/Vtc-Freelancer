@@ -44,13 +44,15 @@ ViewData["Title"] = "Become Seller";
         <label>
            Category Name
         </label>
-        <select name="CategoryName" id="parentCategory">
+      
           @if(ViewBag.listcategory!= null)
           {
+               <select name="CategoryName">
             @foreach (var item in  ViewBag.listcategory)
              {
                <option name = "@item.CategoryName">@item.CategoryName </option>
              }
+                   </select>
           }
         </select>
         <br>

@@ -159,6 +159,7 @@ namespace Vtc_Freelancer.Models
      {
        entity.HasKey(x => x.PackageId);
        entity.Property(x => x.Name);
+       entity.Property(x => x.Title);
        entity.Property(x => x.Description);
        entity.Property(x => x.Price);
        entity.Property(x => x.NumberRevision);
@@ -181,6 +182,8 @@ namespace Vtc_Freelancer.Models
        entity.HasKey(x => x.ReportId);
        entity.Property(x => x.TitleReport);
        entity.Property(x => x.ContentReport);
+       entity.Property(x => x.TimeCreateReport);
+       entity.Property(x => x.Status);
        entity.Property(x => x.ServiceId);
        entity.Property(x => x.UserId);
 

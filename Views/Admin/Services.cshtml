@@ -1,0 +1,71 @@
+@{
+ViewData["Title"] = "Admin - Active Service";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex">
+      <h4 class="m-0 font-weight-bold text-primary">List Service</h4>
+      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/Services">
+        <div class="input-group">
+          <input type="text" name="Search" class="form-control border-1 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Seller name</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>SubCategory</th>
+              <th>Description</th>
+              <th>Time create service</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(ViewBag.ListServices != null)
+            {
+              int i = 0;
+              @foreach(var item in ViewBag.ListServices)
+              {
+                i++;
+                <tr>
+                  <td>@i</td>
+                  <td>@item.Seller.User.UserName</td>
+                  <td>@item.Title</td>
+                  <td>@item.Category</td>
+                  <td>@item.SubCategory</td>
+                  <td>@item.Description</td>
+                  <td>@item.TimeCreateService.ToString("dd/MM/yyyy")</td>
+                  @if(item.Status == 1)
+                  {
+                    <td>Active</td>
+                  }else
+                  {
+                    <td>Not Active</td>
+                  }
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->

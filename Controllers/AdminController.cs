@@ -31,35 +31,66 @@ namespace Vtc_Freelancer.Controllers
       return View();
     }
     [HttpGet("/Admin/ServiceActive")]
-    public IActionResult ServiceActive()
-    {
-      return View();
-    }
-    [HttpGet("/Admin/ServiceInactive")]
-    public IActionResult ServiceInactive()
-    {
 
+    [HttpGet("/Admin/Services")]
+
+    public IActionResult Services(string Search)
+    {
+      ViewBag.ListServices = adminService.GetListServices(Search);
       return View();
     }
     [HttpGet("/Admin/Error")]
+
     public IActionResult Error()
     {
       return View();
     }
-    [HttpGet("/Admin/Blank")]
-    public IActionResult Blank()
+    [HttpGet("/Admin/ManagerReports")]
+
+    public IActionResult ManagerReports(string Search)
     {
+      ViewBag.ListReport = adminService.GetListReport(Search);
       return View();
     }
-    [HttpGet("/Admin/Buttons")]
-    public IActionResult Buttons()
+    [HttpGet("/Admin/ChangeStatusReport")]
+    public IActionResult ChangeStatusReport(int ReportId)
     {
+      try
+      {
+        adminService.ChangeStatusReport(ReportId);
+        return Redirect("/Admin/ManagerReports");
+      }
+      catch (System.Exception ex)
+      {
+        Console.WriteLine("Error : " + ex.Message);
+        return Redirect("/Admin/ManagerUsers");
+        throw;
+      }
+
+    }
+    [HttpGet("/Admin/ManagerUsers")]
+    public IActionResult ManagerUsers(string Search)
+    {
+      ViewBag.ListUsers = adminService.GetListUsers(Search);
       return View();
     }
-    [HttpGet("/Admin/Cards")]
-    public IActionResult Cards()
+
+    [HttpGet("/Admin/ChangeStatusUser")]
+
+    public IActionResult ChangeStatusUser(int UserId)
     {
-      return View();
+      try
+      {
+        adminService.ChangeStatusUser(UserId);
+        return Redirect("/Admin/ManagerUsers");
+      }
+      catch (System.Exception ex)
+      {
+        Console.WriteLine("Error : " + ex.Message);
+        return Redirect("/Admin/ManagerUsers");
+        throw;
+      }
+
     }
     [HttpGet("/Admin/Charts")]
     public IActionResult Charts()
@@ -105,6 +136,23 @@ namespace Vtc_Freelancer.Controllers
 
 
     }
+    // [HttpGet("/CreateCategory")]
+    // public IActionResult CreateCategory()
+    // {
+    //   return View();
+    // }
+    // public IActionResult GetListCategory()
+    // {
+    //   List<Category> listcategory = new List<Category>();
+    //   listcategory = adminService.GetListCategoryBy();
+
+    //   if (listcategory != null)
+    //   {
+    //     ViewBag.listcategory = listcategory;
+    //     return Redirect("/BecomeSeller");
+    //   }
+    //   return View("Index");
+    // }
     [HttpGet("/CreateCategory")]
     public IActionResult CreateCategory()
     {
@@ -137,5 +185,4 @@ namespace Vtc_Freelancer.Controllers
       return new JsonResult(listcategory);
     }
   }
-
 }

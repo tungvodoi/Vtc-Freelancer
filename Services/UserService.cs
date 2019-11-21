@@ -246,11 +246,9 @@ namespace Vtc_Freelancer.Services
       }
 
     }
-    public Users GetUserByUserNameOrEmail(string email)
-    {
-      Users users = new Users();
 
-      return users;
-    }
+
+
+
   }
 }

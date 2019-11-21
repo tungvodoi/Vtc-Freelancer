@@ -10,7 +10,7 @@ namespace Vtc_Freelancer.Models
         public string Question { get; set; }
         [Column(TypeName = "text")]
         public string Reply { get; set; }
-        public int ServiceId { get; set; }
+        public int? ServiceId { get; set; }
         [ForeignKey("ServiceId")]
         public virtual Service Service { get; set; }
 
