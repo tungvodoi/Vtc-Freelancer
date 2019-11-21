@@ -14,10 +14,12 @@ namespace Vtc_Freelancer.Controllers
     {
         private UserService userService;
         private GigService gigService;
-        public AdminController(UserService userService, GigService gigService)
+        private AdminService adminService;
+        public AdminController(UserService userService, GigService gigService, AdminService adminService)
         {
             this.userService = userService;
             this.gigService = gigService;
+            this.adminService = adminService;
         }
 
         [HttpGet("/Admin/Dashboard")]
@@ -25,36 +27,67 @@ namespace Vtc_Freelancer.Controllers
         {
             return View();
         }
-        [HttpGet("/Admin/ServiceActive")]
-        public IActionResult ServiceActive()
-        {
-            return View();
-        }
-        [HttpGet("/Admin/ServiceInactive")]
-        public IActionResult ServiceInactive()
-        {
 
+        [HttpGet("/Admin/Services")]
+
+        public IActionResult Services(string Search)
+        {
+            ViewBag.ListServices = adminService.GetListServices(Search);
             return View();
         }
         [HttpGet("/Admin/Error")]
+
         public IActionResult Error()
         {
             return View();
         }
-        [HttpGet("/Admin/Blank")]
-        public IActionResult Blank()
+        [HttpGet("/Admin/ManagerReports")]
+
+        public IActionResult ManagerReports(string Search)
         {
+            ViewBag.ListReport = adminService.GetListReport(Search);
             return View();
         }
-        [HttpGet("/Admin/Buttons")]
-        public IActionResult Buttons()
+        [HttpGet("/Admin/ChangeStatusReport")]
+
+        public IActionResult ChangeStatusReport(int ReportId)
         {
+            try
+            {
+                adminService.ChangeStatusReport(ReportId);
+                return Redirect("/Admin/ManagerReports");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return Redirect("/Admin/ManagerUsers");
+                throw;
+            }
+
+        }
+        [HttpGet("/Admin/ManagerUsers")]
+        public IActionResult ManagerUsers(string Search)
+        {
+            ViewBag.ListUsers = adminService.GetListUsers(Search);
             return View();
         }
-        [HttpGet("/Admin/Cards")]
-        public IActionResult Cards()
+
+        [HttpGet("/Admin/ChangeStatusUser")]
+
+        public IActionResult ChangeStatusUser(int UserId)
         {
-            return View();
+            try
+            {
+                adminService.ChangeStatusUser(UserId);
+                return Redirect("/Admin/ManagerUsers");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return Redirect("/Admin/ManagerUsers");
+                throw;
+            }
+
         }
         [HttpGet("/Admin/Charts")]
         public IActionResult Charts()
@@ -62,26 +95,31 @@ namespace Vtc_Freelancer.Controllers
             return View();
         }
         [HttpGet("/Admin/Tables")]
+
         public IActionResult Tables()
         {
             return View();
         }
         [HttpGet("/Admin/UtilitiesAnimation")]
+
         public IActionResult UtilitiesAnimation()
         {
             return View();
         }
         [HttpGet("/Admin/UtilitiesBorder")]
+
         public IActionResult UtilitiesBorder()
         {
             return View();
         }
         [HttpGet("/Admin/UtilitiesColor")]
+
         public IActionResult UtilitiesColor()
         {
             return View();
         }
         [HttpGet("/Admin/UtilitiesOther")]
+
         public IActionResult UtilitiesOther()
         {
             return View();

@@ -47,17 +47,20 @@ namespace Vtc_Freelancer.Controllers
         {
             user = new Users();
             user = userService.Login(email, password);
-            // HttpContext.Session.SetString("UserName", user.UserName);
-            // Console.WriteLine("1");
-            // Console.WriteLine(user.UserId);
-            // Console.WriteLine(user.UserName);
             if (user == null)
             {
                 return Redirect("/Login");
             }
             HttpContext.Session.SetInt32("UserId", user.UserId);
             ViewBag.Notification = true;
-            return Redirect("/");
+            if (user.UserLevel == 1)
+            {
+                return Redirect("/Admin/Dashboard");
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
         [HttpGet("/Login")]
         public IActionResult Login()
