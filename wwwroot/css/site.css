@@ -8,14 +8,16 @@
 }
 @font-face {
   font-family: proximanova;
-  src: url('~/fonts/proxima-nova-bold.eot');
-  src: local("ProximaNova-Light"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix) format("embedded-opentype");
+  src: url("~/fonts/proxima-nova-bold.eot");
+  src: local("ProximaNova-Light"),
+    url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix)
+      format("embedded-opentype");
   font-weight: 300;
-  font-style: normal
+  font-style: normal;
 }
 * {
   box-sizing: border-box;
-  font-family: proximanova,helvetica neue,Helvetica,Arial,sans-serif;
+  font-family: proximanova, helvetica neue, Helvetica, Arial, sans-serif;
   text-decoration: none;
   color: #7a7d85;
   margin: 0;
@@ -86,11 +88,11 @@ ul {
   /* margin-right: -25px; */
 }
 
-.nav-top>li {
+.nav-top > li {
   padding: 0 24px 0 0;
 }
 
-.logo>a {
+.logo > a {
   font-size: 2rem;
   font-weight: 900;
   font-family: "Cabin Sketch", cursive;
@@ -249,7 +251,8 @@ ul {
   align-items: center;
 }
 
-.slick-prev.fa-angle-right, .slick-prev.fa-angle-left {
+.slick-prev.fa-angle-right,
+.slick-prev.fa-angle-left {
   background: none;
   border: none;
   outline: none;
@@ -302,14 +305,15 @@ ul {
   line-height: 20px;
   font-weight: 400;
   word-wrap: break-word;
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.slider__gig-star .fa-star, .slider__gig-star .gig__star-number {
+.slider__gig-star .fa-star,
+.slider__gig-star .gig__star-number {
   color: #ffbf00;
 }
 
@@ -332,7 +336,8 @@ ul {
   align-items: center;
 }
 
-.gig-fav .fa-bars, .gig-fav .fa-heart {
+.gig-fav .fa-bars,
+.gig-fav .fa-heart {
   color: #c6c6c6;
 }
 
@@ -365,7 +370,7 @@ ul {
   padding-bottom: 2rem;
 }
 
-.footer-content>ul {
+.footer-content > ul {
   margin-top: 1rem;
 }
 
@@ -377,7 +382,7 @@ ul {
 }
 
 .mySlides {
-  display: none
+  display: none;
 }
 
 img {
@@ -394,7 +399,8 @@ img {
 
 /* Next & previous buttons */
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -418,7 +424,8 @@ img {
 
 /* On hover, add a black background color with a little bit see-through */
 
-.prev:hover, .next:hover {
+.prev:hover,
+.next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -457,7 +464,8 @@ img {
   transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.active,
+.dot:hover {
   background-color: #717171;
 }
 
@@ -476,19 +484,19 @@ img {
 
 @-webkit-keyframes fade {
   from {
-    opacity: .4
+    opacity: 0.4;
   }
   to {
-    opacity: 1
+    opacity: 1;
   }
 }
 
 @keyframes fade {
   from {
-    opacity: .4
+    opacity: 0.4;
   }
   to {
-    opacity: 1
+    opacity: 1;
   }
 }
 
@@ -502,8 +510,10 @@ img {
 /* On smaller screens, decrease text size */
 
 @media only screen and (max-width: 300px) {
-  .prev, .next, .text {
-    font-size: 11px
+  .prev,
+  .next,
+  .text {
+    font-size: 11px;
   }
 }
 
@@ -658,6 +668,128 @@ h3 {
   background-image: url(https://npm-assets.fiverrcdn.com/assets/@fiverr/seller_dashboard_perseus/12.50d6c76.svg);
 }
 
+/*Css Login bootstrap*/
+
+/* sign in FORM */
+#logreg-forms {
+  width: 412px;
+  margin: 10vh auto;
+  background-color: #f3f3f3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#logreg-forms form {
+  width: 100%;
+  max-width: 410px;
+  padding: 15px;
+  margin: auto;
+}
+#logreg-forms .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+#logreg-forms .form-control:focus {
+  z-index: 2;
+}
+#logreg-forms .form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#logreg-forms .form-signin input[type="password"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#logreg-forms .social-login {
+  width: 390px;
+  margin: 0 auto;
+  margin-bottom: 14px;
+}
+#logreg-forms .social-btn {
+  font-weight: 100;
+  color: white;
+  width: 190px;
+  font-size: 0.9rem;
+}
+
+#logreg-forms a {
+  display: block;
+  padding-top: 10px;
+  color: lightseagreen;
+}
+
+#logreg-form .lines {
+  width: 200px;
+  border: 1px solid red;
+}
+
+#logreg-forms button[type="submit"] {
+  margin-top: 10px;
+}
+
+#logreg-forms .facebook-btn {
+  background-color: #3c589c;
+}
+
+#logreg-forms .google-btn {
+  background-color: #df4b3b;
+}
+
+#logreg-forms .form-reset,
+#logreg-forms .form-signup {
+  display: none;
+}
+
+#logreg-forms .form-signup .social-btn {
+  width: 210px;
+}
+
+#logreg-forms .form-signup input {
+  margin-bottom: 2px;
+}
+
+.form-signup .social-login {
+  width: 210px !important;
+  margin: 0 auto;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 500px) {
+  #logreg-forms {
+    width: 300px;
+  }
+
+  #logreg-forms .social-login {
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  #logreg-forms .social-btn {
+    font-size: 1.3rem;
+    font-weight: 100;
+    color: white;
+    width: 200px;
+    height: 56px;
+  }
+  #logreg-forms .social-btn:nth-child(1) {
+    margin-bottom: 5px;
+  }
+  #logreg-forms .social-btn span {
+    display: none;
+  }
+  #logreg-forms .facebook-btn:after {
+    content: "Facebook";
+  }
+
+  #logreg-forms .google-btn:after {
+    content: "Google+";
+  }
+}
 .arrowSlide {
   position: absolute;
   z-index: 1;
@@ -672,5 +804,5 @@ h3 {
 }
 
 .arrowSlide-right {
-  right: 0
+  right: 0;
 }

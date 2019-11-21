@@ -44,24 +44,18 @@ ViewData["Title"] = "Become Seller";
         <label>
            Category Name
         </label>
-<<<<<<< HEAD
       
-=======
-        <select name="CategoryName" id="parentCategory">
->>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
-          @if(ViewBag.listcategory!= null)
+          @if(ViewBag.listcategory != null)
           {
-               <select name="CategoryName">
+               <select name="CategoryName" id="parentCategory">
             @foreach (var item in  ViewBag.listcategory)
              {
                <option name = "@item.CategoryName">@item.CategoryName </option>
              }
-                   </select>
+                  </select>
           }
-<<<<<<< HEAD
-  
-=======
-        </select>
+        
+        <br>
         <label>
            Sub Category
         </label>
@@ -75,7 +69,6 @@ ViewData["Title"] = "Become Seller";
              }
           }
        </div>
->>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
         <br>
         <label>
            Skill
@@ -89,7 +82,7 @@ ViewData["Title"] = "Become Seller";
        
        
         <br>
-        <button id="but" onclick="login()">Tiếp tục</button>
+        <button id="but" onclick="login()">Continue</button>
         <br>
        
     </form>
