@@ -36,37 +36,13 @@ namespace Vtc_Freelancer.Controllers
     {
       if (userService.Register(username, email, password))
       {
-        ViewBag.Noti = true;
+        ViewBag.Noti = "Register Successfully :)";
       }
       return Redirect("/Login");
     }
 
     [HttpGet("/Register")]
     public IActionResult Register()
-    {
-      return View();
-    }
-    [HttpPost("/Login")]
-
-    public IActionResult Login(string email, string password)
-    {
-      user = new Users();
-      user = userService.Login(email, password);
-      // HttpContext.Session.SetString("UserName", user.UserName);
-      // Console.WriteLine("1");
-      // Console.WriteLine(user.UserId);
-      // Console.WriteLine(user.UserName);
-      if (user == null)
-      {
-        return Redirect("/Login");
-      }
-      HttpContext.Session.SetInt32("UserId", user.UserId);
-      HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
-      ViewBag.Notification = true;
-      return Redirect("/");
-    }
-    [HttpGet("/Login")]
-    public IActionResult Login()
     {
       List<Category> listcategory = new List<Category>();
       listcategory = adminService.GetListCategoryBy();
@@ -78,26 +54,59 @@ namespace Vtc_Freelancer.Controllers
         return View();
       }
       return View();
+    }
+    [HttpPost("/Login")]
 
-    }
-    public IActionResult Logout()
+    public IActionResult Login(string email, string password)
     {
-      HttpContext.Session.Clear();
-      return Redirect("/");
-    }
-    [HttpPost("/EditProfile")]
-    public IActionResult EditProfile(int Id, string UserName, string Email)
-    {
-      bool Edit = userService.EditProfile(Id, UserName, Email);
-      if (Edit == true)
+      user = new Users();
+      user = userService.Login(email, password);
+      if (user != null)
       {
+
+
+        HttpContext.Session.SetString("UserName", user.UserName);
+      }
+      // Console.WriteLine("1");
+      // Console.WriteLine(user.UserId);
+      // Console.WriteLine(user.UserName);
+      if (user == null)
+      {
+        return Redirect("/Login");
+      }
+      HttpContext.Session.SetInt32("UserId", user.UserId);
+      HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
+      ViewBag.Notification = true;
+      if (user.Status == 0)
+      {
+        ViewBag.Error = "Account locked";
+        if (user.UserLevel == 1)
+        {
+          return Redirect("/Admin/Dashboard");
+        }
         return Redirect("/");
       }
-      return View();
+      return Redirect("/Login");
     }
-    [HttpGet("/EditProfile")]
-    public IActionResult EditProfile()
+    [HttpGet("/Login")]
+    public IActionResult Login()
     {
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
+      var userId = HttpContext.Session.GetInt32("UserId");
+      Users user = userService.GetUsersByID(userId);
+      if (userId != null)
+      {
+
+        if (user.Status == 1)
+        {
+          ViewBag.Error = "Account locked";
+        }
+      }
+      else
+      {
+        ViewBag.Error = "Account Not Exist :(";
+      }
 
       return View();
     }
@@ -153,6 +162,7 @@ namespace Vtc_Freelancer.Controllers
       return View();
 
     }
+
 
 
   }

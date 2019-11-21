@@ -24,11 +24,14 @@ namespace Vtc_Freelancer.Models
     public DbSet<Conversation> Conversation { get; set; }
     public DbSet<ConversationDetail> ConversationDetail { get; set; }
     public DbSet<FAQ> FAQ { get; set; }
-    public DbSet<ImageService> ImageService { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+<<<<<<< HEAD
       optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
+=======
+      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=0124578;database=vtc_freelancer");
+>>>>>>> f98029eb4bc8bed3e2e8b5cdc0ae2a95bef7a465
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

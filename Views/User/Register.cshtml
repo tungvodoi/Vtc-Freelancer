@@ -8,10 +8,9 @@ ViewData["Title"] = "Register";
             Đăng ký tài khoản
         </h2>
         <br>
-        @if (ViewBag.Register == false)
-        {
-        <h3 style="color:red" id="error"> @ViewBag.error</h3>
-        }
+       
+        <h3 style="color:Green" id="error"> @ViewBag.error</h3>
+       
         <label>
             Tài khoản
         </label>
@@ -30,7 +29,7 @@ ViewData["Title"] = "Register";
         <label>
             Nhập lại mật khẩu
         </label>
-        <input type="password" name="password2" id="p2" onkeyup="checkpass()" required />
+        <input type="password" name="password2" id="p2" onkeyup="Checkpass()" required />
         <br>
        
         <br>
