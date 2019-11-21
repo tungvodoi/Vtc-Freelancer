@@ -9,14 +9,63 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" href="CreateService.css">
 </head>
 
 <body>
+
+    <div class="wrapper-all" id="wrapper-all"></div>
+    <div class="menu-content-hiden" id="hidden-div">
+        <div class="wrapper-content-menu-hiden">
+            <nav class="site-sidebars">
+                <div class="profile-wrapper">
+                    <label class="lable-profile">
+                        <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                    </label>
+                    <br>
+                    <p class="username">Username</p>
+                    <br>
+                </div>
+                <ul class="ul-sidebars">
+                    <li class="li-sidebars">Home</li>
+                    <li class="li-sidebars">Inbox</li>
+                    <li class="li-sidebars">Dashboard</li>
+                    <li class="li-sidebars">Saved</li>
+                    <li class="li-sidebars">Browse Categories</li>
+
+                    <br>
+                    <div class="content-sidebars-wrapper">
+                        <li class="li-sidebars"><b>Buying</b></li>
+                        <hr>
+                        <li class="li-sidebars">Manage Requests</li>
+                        <li class="li-sidebars">Post a Request</li>
+                        <br>
+                        <li class="li-sidebars"><b>Selling</b></li>
+
+                        <hr>
+                        <li class="li-sidebars">Manage Sales</li>
+                        <li class="li-sidebars">Revenues</li>
+                        <br>
+                        <li class="li-sidebars"><b>General</b></li>
+                        <hr>
+                        <li class="li-sidebars">Setting</li>
+                        <li class="li-sidebars">Logout</li>
+                    </div>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
     <div class="header container">
         <div class="left-top-nav nav-seller">
             <div class="logo">
-                <a href="#">VTC Freelancer</a>
+                <div class="wrapper-logo">
+                    <i id="icon-menu" class="fa fa-bars"></i>
+                    <div class="logo">
+                        <a href="#">VTC Freelancer</a>
+                    </div>
+                </div>
             </div>
             <ul class="nav-top">
                 <li>
@@ -36,6 +85,16 @@
                 </li>
             </ul>
         </div>
+
+        <a href="">
+            <div class="prf-div">
+                <p style="color: #1dbf73;font-weight: bold;">Switch Buying</p>
+
+                <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
+
+            </div>
+        </a>
+
     </div>
     @RenderBody()
     <div class="footer">
@@ -66,7 +125,7 @@
 
                 <div class="footer-content">
                     <button class="btn-footer-link">About</button>
-                    <ul>
+                    <ul class="ul-footer-link">
                         <li class="li-footer-content"><a href="#">Careers</a></li>
                         <li class="li-footer-content">
                             <a href="#">Press & News</a>
@@ -93,7 +152,7 @@
                 <div class="footer-content">
                     <button class="btn-footer-link">Support</button>
 
-                    <ul>
+                    <ul class="ul-footer-link">
                         <li class="li-footer-content">
                             <a href="#">Help & Support</a>
                         </li>
@@ -111,7 +170,7 @@
 
                 <div class="footer-content">
                     <button class="btn-footer-link">Community</button>
-                    <ul>
+                    <ul class="ul-footer-link">
                         <li class="li-footer-content">
                             <a href="#">Events</a>
                         </li>
@@ -138,7 +197,7 @@
 
                 <div class="footer-content">
                     <button class="btn-footer-link">More From Fiverr</button>
-                    <ul>
+                    <ul class="ul-footer-link">
                         <li class="li-footer-content">
                             <a href="#">Fiverr Pro</a>
                         </li>
@@ -180,7 +239,21 @@
             </div>
         </div>
     </div>
-
+    <script>
+        var dmm = document.getElementById('icon-menu');
+        dmm.addEventListener('click', () => {
+            var loz = document.getElementById('hidden-div');
+            loz.classList.toggle('animate');
+            var all = document.getElementById('wrapper-all');
+            all.classList.toggle('animate');
+        })
+        var body = document.getElementById('wrapper-all');
+        body.addEventListener('click', () => {
+            var div = document.getElementById('hidden-div');
+            div.classList.remove('animate');
+            body.classList.remove('animate')
+        })
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/slide.js" asp-append-version="true"></script>

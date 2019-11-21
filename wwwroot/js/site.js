@@ -56,3 +56,18 @@ function Checkpass() {
     document.getElementById("but").disabled = false;
   }
 }
+
+// var dmm = document.getElementById("icon-menu");
+// dmm.addEventListener("click", () => {
+//   var loz = document.getElementById("hidden-div");
+//   loz.classList.toggle("animate");
+//   var all = document.getElementById("wrapper-all");
+//   all.classList.toggle("animate");
+// });
+// var body = document.getElementById("wrapper-all");
+// body.addEventListener("click", () => {
+//   var div = document.getElementById("hidden-div");
+//   div.classList.remove("animate");
+//   body.classList.remove("animate");
+//   console.log(123);
+// });

@@ -1,41 +1,25 @@
-﻿
-@{
+﻿@{
 ViewData["Title"] = "Home Page";
 }
+
 <body>
-	<div class="header container">
-		<div class="left-top-nav">
-			<div class="logo">
-				<a href="#">VTC Freelancer</a>
-			</div>
-			<form action="" method="post">
-				<input type="text" name="" id="input-search-service" placeholder="Find Services" />
-				<button id="btn-search-service">Search</button>
-			</form>
-		</div>
-		<div class="right-top-nav">
-			<ul class="nav-top">
-				<li>
-					<a href="#" class="nav-link"><b>Become a Seller</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Messages</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Saved</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Orders</b></a>
-				</li>
-				<li></li>
-			</ul>
-		</div>
-	</div>
+	
 	<div class="nav-categories">
 		<ul class="ul-categories container">
 			<li class="li-categories">
 				<a href="" class="categories-link">Graphics & Design</a>
 				<ul class="ul-package">
+
+					@if(ViewBag.listcategory != null)
+					{
+						@foreach (var item in ViewBag.listcategory)
+				    	{
+						<li class="li-package">
+							<a href="" class="a-package">item.CategoryName</a>
+						</li>
+						}
+					}
+
 					<li class="li-package">
 						<a href="" class="a-package">Logo Design</a>
 					</li>
@@ -145,13 +129,13 @@ ViewData["Title"] = "Home Page";
 					<a href="">See All <i class="fa fa-chevron-right"></i></a>
 				</div>
 				<div class="box-row__slider">
-					
+
 					<div class="slider__gig">
 						<a href="" class="slide-gig-js">
 							<button>a</button>
 							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
 							<img src="~/images/product2.png" alt="" class="slider__gig-image">
-							
+
 						</a>
 						<div class="gig__content">
 							<div class="slider__gig-seller">
@@ -351,6 +335,7 @@ ViewData["Title"] = "Home Page";
 			</section>
 		</div>
 	</div>
-	
+
+
 
 </body>
