@@ -111,7 +111,7 @@ namespace Vtc_Freelancer.Services
         seller.RegisterDateSeller = DateTime.Now;
         dbContext.Add(seller);
         dbContext.SaveChanges();
-        bool userlevel = UpdateIsSeller(users);
+        bool userlevel = UpdateUserLevel(users);
         Console.WriteLine(category.CategoryId);
         bool lang = AddLanguage(seller, languages);
         bool skill = AddSkills(seller, skills);
@@ -183,10 +183,10 @@ namespace Vtc_Freelancer.Services
         throw;
       }
     }
-    public bool UpdateIsSeller(Users users)
+    public bool UpdateUserLevel(Users users)
     {
       // Users users1 =  new Users();
-      users.IsSeller = 1;
+      users.UserLevel = 1;
       dbContext.Update(users);
       dbContext.SaveChanges();
       return true;

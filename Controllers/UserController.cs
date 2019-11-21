@@ -108,35 +108,6 @@ namespace Vtc_Freelancer.Controllers
         ViewBag.Error = "Account Not Exist :(";
       }
 
-
-      if (listcategory != null)
-      {
-        ViewBag.listcategory = listcategory;
-
-        return View();
-      }
-      return View();
-
-    }
-    public IActionResult Logout()
-    {
-      HttpContext.Session.Clear();
-      return Redirect("/");
-    }
-    [HttpPost("/EditProfile")]
-    public IActionResult EditProfile(int Id, string UserName, string Email)
-    {
-      bool Edit = userService.EditProfile(Id, UserName, Email);
-      if (Edit == true)
-      {
-        return Redirect("/");
-      }
-      return View();
-    }
-    [HttpGet("/EditProfile")]
-    public IActionResult EditProfile()
-    {
-
       return View();
     }
     [HttpPost("/BecomeSeller")]
@@ -191,6 +162,7 @@ namespace Vtc_Freelancer.Controllers
       return View();
 
     }
+
 
 
   }

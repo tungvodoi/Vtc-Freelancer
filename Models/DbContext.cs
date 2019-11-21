@@ -205,6 +205,12 @@ namespace Vtc_Freelancer.Models
 
 
      });
+      modelBuilder.Entity<ImageService>(entity =>
+     {
+       entity.HasKey(x => x.ImageServiceID);
+       entity.Property(x => x.Image);
+       entity.Property(x => x.ServiceId);
+     });
     }
   }
 }

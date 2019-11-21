@@ -53,6 +53,7 @@ namespace Vtc_Freelancer.Controllers
       return View();
     }
     [HttpGet("/Admin/ChangeStatusReport")]
+
     public IActionResult ChangeStatusReport(int ReportId)
     {
       try
@@ -136,23 +137,6 @@ namespace Vtc_Freelancer.Controllers
 
 
     }
-    // [HttpGet("/CreateCategory")]
-    // public IActionResult CreateCategory()
-    // {
-    //   return View();
-    // }
-    // public IActionResult GetListCategory()
-    // {
-    //   List<Category> listcategory = new List<Category>();
-    //   listcategory = adminService.GetListCategoryBy();
-
-    //   if (listcategory != null)
-    //   {
-    //     ViewBag.listcategory = listcategory;
-    //     return Redirect("/BecomeSeller");
-    //   }
-    //   return View("Index");
-    // }
     [HttpGet("/CreateCategory")]
     public IActionResult CreateCategory()
     {
@@ -185,4 +169,7 @@ namespace Vtc_Freelancer.Controllers
       return new JsonResult(listcategory);
     }
   }
+
+
 }
+
