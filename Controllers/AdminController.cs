@@ -115,7 +115,6 @@ namespace Vtc_Freelancer.Controllers
       if (listcategory != null)
       {
         ViewBag.listcategory = listcategory;
-        Console.WriteLine(4535456);
         return Redirect("/BecomeSeller");
       }
       return View("Index");
