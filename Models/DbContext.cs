@@ -66,7 +66,7 @@ namespace Vtc_Freelancer.Models
             {
                 entity.HasKey(x => x.SkillId);
                 entity.Property(x => x.SkillName);
-                entity.Property(x => x.Level);
+                entity.Property(x => x.SkillLevel);
                 entity.Property(x => x.SellerId);
             });
             modelBuilder.Entity<Category>(entity =>
@@ -77,8 +77,8 @@ namespace Vtc_Freelancer.Models
             });
             modelBuilder.Entity<SellerCategory>(entity =>
             {
-                entity.HasKey(x => x.SellerCategoryId);
-                entity.Property(x => x.SellerId);
+                entity.HasKey(x => new { x.SellerId, x.CategoryId });
+
             });
             modelBuilder.Entity<Request>(entity =>
             {
@@ -181,6 +181,8 @@ namespace Vtc_Freelancer.Models
                entity.HasKey(x => x.ReportId);
                entity.Property(x => x.TitleReport);
                entity.Property(x => x.ContentReport);
+               entity.Property(x => x.TimeCreateReport);
+               entity.Property(x => x.Status);
                entity.Property(x => x.ServiceId);
                entity.Property(x => x.UserId);
 

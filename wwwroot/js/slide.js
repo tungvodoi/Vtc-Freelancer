@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.box-row__slider').slick({
+    $(".box-row__slider").slick({
         infinite: true,
         slidesToShow: 5,
         slidesToScroll: 5,
@@ -40,4 +40,25 @@ $(document).ready(function () {
     $('.arrowSlide').click((e) => {
         e.preventDefault();
     })
+    $("#parentCategory").change(function () {
+        $('#subCategory').html('');
+        $.ajax({
+            type: "POST",
+            data: {
+                categoryName: this.value
+            },
+            url: "/admin/GetListSubCategoryByCategoryParentId",
+            success: function (result) {
+                $('#subCategory').stop().animate({ "opacity": "0" }, 0, function () {
+                    // After first animation finished
+                    $(this).html(
+                        result.map((res) => {
+                            // return `<option name=${res.categoryName}>${res.categoryName}</option>`
+                            return `<input type="checkbox" name="${res.CategoryId}" value="${res.categoryName}">${res.categoryName}<br>`
+                        })
+                    ).animate({ opacity: 1 });
+                });
+            }
+        });
+    });
 });

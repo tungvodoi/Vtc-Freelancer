@@ -1,4 +1,3 @@
-﻿
 @{
 ViewData["Title"] = "Home Page";
 }
@@ -15,9 +14,22 @@ ViewData["Title"] = "Home Page";
 		</div>
 		<div class="right-top-nav">
 			<ul class="nav-top">
-				<li>
-					<a href="#" class="nav-link"><b>Become a Seller</b></a>
+			@if(ViewBag.UserName!= null)
+			{	
+				@if(ViewBag.IsSeller == 0)
+				{
+					<li>
+					<a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
 				</li>
+				}
+			else{
+				
+					<li>
+					<a href="#" class="nav-link"><b>Change Seller</b></a>
+				</li>
+			
+				}
+			}
 				<li>
 					<a href="#" class="nav-link"><b>Messages</b></a>
 				</li>
@@ -27,7 +39,7 @@ ViewData["Title"] = "Home Page";
 				<li>
 					<a href="#" class="nav-link"><b>Orders</b></a>
 				</li>
-				<li></li>
+				<li><a href="/Login" class="nav-link"><b>Login</b></a></li>
 			</ul>
 		</div>
 	</div>
@@ -92,7 +104,10 @@ ViewData["Title"] = "Home Page";
 			<section class="header-slider">
 				<div class="post-request">
 					<div class="inside-post-request">
-						<b>Hi , @ViewBag.UserName </b> <br /><br />
+					@if(@ViewBag.UserName!= null)
+					{
+							<b>Hi , @ViewBag.UserName </b> <br /><br />
+					}
 						<p>Get offer from sellers for your project</p>
 						<br /><br />
 						<input type="button" value="Post a request" />
@@ -524,6 +539,6 @@ ViewData["Title"] = "Home Page";
 			</section>
 		</div>
 	</div>
-	
+
 
 </body>

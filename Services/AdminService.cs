@@ -64,6 +64,76 @@ namespace Vtc_Freelancer.Services
                 }
             }
         }
+        public List<Service> GetListServices(string Search)
+        {
+            List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username 
+            from Service s inner join seller se on s.sellerid = se.sellerid inner join users u on se.userid = u.userid 
+            where s.Title like '%" + Search + "%' or s.Category like '%" + Search + "%' or s.SubCategory like '%" + Search + "%' or s.Description like '%" + Search + "%' or u.Username like '%" + Search + "%' order by TimeCreateService desc").ToList();
+            foreach (var item in ListServices)
+            {
+                item.Seller = dbContext.Seller.FirstOrDefault(x => x.SellerId == item.SellerId);
+                item.Seller.User = dbContext.Users.FirstOrDefault(x => x.UserId == item.Seller.UserId);
+            }
+            return ListServices;
+        }
+        public List<Report> GetListReport(string Search)
+        {
+            List<Report> ListReport = dbContext.Report.FromSql(@"select re.reportId, re.TitleReport, re.ContentReport, re.TimeCreateReport, re.Status, re.ServiceId, re.UserId, u.Username, s.Title 
+            from report re inner join users u on re.userid = u.userid inner join service s on re.serviceid = s.serviceid where u.Username like '%" + Search + "%' or s.Title like '%" + Search + "%' or re.TitleReport like '%" + Search + "%' order by TimeCreateReport desc").ToList();
+            foreach (var item in ListReport)
+            {
+                item.Service = dbContext.Service.FirstOrDefault(x => x.ServiceId == item.ServiceId);
+                item.User = dbContext.Users.FirstOrDefault(x => x.UserId == item.UserId);
+            }
+            return ListReport;
+        }
+        public List<Users> GetListUsers(string Search)
+        {
+            List<Users> ListUsers = dbContext.Users.FromSql("select * from Users where Username like '%" + Search + "%' or Email like '%" + Search + "%'").ToList();
+            return ListUsers;
+        }
+        public bool ChangeStatusUser(int UserId)
+        {
+            try
+            {
+                Users user = dbContext.Users.FirstOrDefault(x => x.UserId == UserId);
+                if (user.Status == 1)
+                {
+                    user.Status = 0;
+                }
+                else
+                {
+                    user.Status = 1;
+                }
+                dbContext.Update(user);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+        }
+        public bool ChangeStatusReport(int ReportId)
+        {
+            try
+            {
+                Report report = dbContext.Report.FirstOrDefault(x => x.ReportId == ReportId);
+                if (report.Status == 0)
+                {
+                    report.Status = 1;
+                }
+                dbContext.Update(report);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+        }
         public List<Category> GetListCategoryByParentId(string CategoryName)
         {
             List<Category> listCategory = new List<Category>();
@@ -71,6 +141,27 @@ namespace Vtc_Freelancer.Services
 
             return listCategory;
         }
+        public List<Category> GetListCategoryBy()
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql("SELECT * FROM Category where parenId = 0").ToList();
+            foreach (var item in listCategory)
+            {
+                Console.WriteLine(item.CategoryName);
+            }
+            return listCategory;
+        }
+        public List<Category> GetListSubCategoryByCategoryParentId(int id)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql($"SELECT * FROM Category where parenId = {id}").ToList();
+            foreach (var item in listCategory)
+            {
+                Console.WriteLine(item.CategoryName);
+            }
+            return listCategory;
+        }
+
         public bool EditCategory(Category category)
         {
             var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);

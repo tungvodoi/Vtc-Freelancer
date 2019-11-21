@@ -1,4 +1,4 @@
-<div class="modal fade" id="ChangeStatusUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="ChangeStatusReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -8,10 +8,11 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Change" below if you are ready change status user.</div>
+            <div class="modal-body">Select "Block service" or "Block account" below if you are want handle report.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="" id="idUser-js">Change</a>
+                <a class="btn btn-primary text-light" attr="" id="idReportBlService-js" onclick="BlService()">Block service</a>
+                <a class="btn btn-primary text-light" attr="" id="idReportBlAccount-js" onclick="BlAccount()">Block account</a>
             </div>
         </div>
     </div>
