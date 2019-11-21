@@ -54,26 +54,6 @@ namespace Vtc_Freelancer.Controllers
         }
         [HttpGet("/Admin/ChangeStatusReport")]
 
-<<<<<<< HEAD
-    }
-    [HttpGet("/CreateCategory")]
-    public IActionResult CreateCategory()
-    {
-      return View();
-    }
-    public IActionResult GetListCategory()
-    {
-      List<Category> listcategory = new List<Category>();
-      listcategory = adminService.GetListCategoryBy();
-
-      if (listcategory != null)
-      {
-        ViewBag.listcategory = listcategory;
-        return Redirect("/BecomeSeller");
-      }
-      return View("Index");
-    }
-=======
         public IActionResult ChangeStatusReport(int ReportId)
         {
             try
@@ -97,7 +77,6 @@ namespace Vtc_Freelancer.Controllers
         }
 
         [HttpGet("/Admin/ChangeStatusUser")]
->>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
 
         public IActionResult ChangeStatusUser(int UserId)
         {
