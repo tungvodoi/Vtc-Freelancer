@@ -12,7 +12,7 @@ using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
-    // [Authentication]
+    [Authentication]
     public class HomeController : Controller
     {
         private UserService userService;
@@ -29,26 +29,25 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult Index()
         {
 
-            // if (HttpContext.Session.GetInt32("UserId") != null)
-            // {
-            // int? userId = HttpContext.Session.GetInt32("UserId");
-            // Users userads = userService.GetUsersByID(userId);
-            // ViewBag.UserName = userads.UserName;
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                int? userId = HttpContext.Session.GetInt32("UserId");
+                Users userads = userService.GetUsersByID(userId);
+                ViewBag.UserName = userads.UserName;
+                ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+
+            }
 
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
 
-            // if (listcategory != null)
-            // {
-            ViewBag.listcategory = listcategory;
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
 
+                return View();
+            }
             return View();
-            // }
-
-
-            // return View();
-            // }
-            // return Redirect("/Login");
         }
         public IActionResult Logout()
         {

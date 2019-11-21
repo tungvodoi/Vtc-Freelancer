@@ -10,6 +10,8 @@ namespace Vtc_Freelancer.Models
         public string TitleReport { get; set; }
         [Column(TypeName = "text")]
         public string ContentReport { get; set; }
+        public DateTime TimeCreateReport { get; set; }
+        public int Status { get; set; }
         public int ServiceId { get; set; }
         public int UserId { get; set; }
         [ForeignKey("ServiceId")]

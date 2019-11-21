@@ -181,6 +181,8 @@ namespace Vtc_Freelancer.Models
                entity.HasKey(x => x.ReportId);
                entity.Property(x => x.TitleReport);
                entity.Property(x => x.ContentReport);
+               entity.Property(x => x.TimeCreateReport);
+               entity.Property(x => x.Status);
                entity.Property(x => x.ServiceId);
                entity.Property(x => x.UserId);
 

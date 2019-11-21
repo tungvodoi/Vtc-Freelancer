@@ -1,17 +1,15 @@
 @{
-ViewData["Title"] = "Admin - Manager Users";
+ViewData["Title"] = "Admin - Blank";
 Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex">
-      <h4 class="m-0 font-weight-bold text-primary d-sm-inline-block">List Users</h4>
+      <h4 class="m-0 font-weight-bold text-primary d-sm-inline-block">List Report</h4>
       <!-- Topbar Search -->
-      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/ManagerUsers">
+      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/ManagerReports">
         <div class="input-group">
           <input type="text" name="Search" class="form-control border-1 small" placeholder="Search for..."
             aria-label="Search" aria-describedby="basic-addon2">
@@ -29,51 +27,41 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
           <thead>
             <tr>
               <th>#</th>
-              <th>Username</th>
-              <th>Full name</th>
-              <th>Email</th>
-              <th>User level</th>
-              <th>Register date</th>
-              <th>Is seller</th>
+              <th>Username report</th>
+              <th>Title service</th>
+              <th>Title report</th>
+              <th>Time create report</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            @if(ViewBag.ListUsers != null)
+            @if(ViewBag.ListReport != null)
             {
               int i = 0;
-              @foreach(var item in ViewBag.ListUsers)
+              @foreach(var item in ViewBag.ListReport)
               {
                 i++;
                 <tr>
                   <td>@i</td>
-                  <td>@item.UserName</td>
-                  <td>@item.FullName</td>
-                  <td>@item.Email</td>
-                  <td>@item.UserLevel</td>
-                  <td>@item.RegisterDate.ToString("dd/MM/yyyy")</td>
-                  @if(item.IsSeller == 1)
-                  {
-                    <td>Yes</td>
-                  }else
-                  {
-                    <td>No</td>
-                  }
+                  <td>@item.User.UserName</td>
+                  <td>@item.Service.Title</td>
+                  <td>@item.TitleReport</td>
+                  <td>@item.TimeCreateReport.ToString("dd/MM/yyyy")</td>
                   @if(item.Status == 0)
                   {
                     <td>
-                      <a href="#" data-toggle="modal" data-target="#ChangeStatusUserModal" onclick="SetUserIdToModal(@item.UserId)">Active</a>
+                      <a href="#" data-toggle="modal" data-target="#ChangeStatusReportModal" onclick="SetReportIdToModal(@item.ReportId)">Waiting</a>
                     </td>
                   }else
                   {
                     <td>
-                      <a href="#" data-toggle="modal" data-target="#ChangeStatusUserModal" onclick="SetUserIdToModal(@item.UserId)">Block</a>
+                      Processed
                     </td>
                   }
                 </tr>
               }
             }
-            <partial name="/Views/Shared/_ChangeStatusUser.cshtml" />
+            <partial name="/Views/Shared/_ChangeStatusReport.cshtml" />
           </tbody>
         </table>
       </div>
