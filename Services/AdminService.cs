@@ -64,26 +64,6 @@ namespace Vtc_Freelancer.Services
                 }
             }
         }
-        public List<Category> GetListCategoryByParentId(string CategoryName)
-        {
-            List<Category> listCategory = new List<Category>();
-            listCategory = dbContext.Category.FromSql("SELECT * FROM Category WHERE CategoryName = {0}", CategoryName).ToList();
-
-            return listCategory;
-        }
-        public bool EditCategory(Category category)
-        {
-            var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
-            if (category != null)
-            {
-                category1.CategoryName = category.CategoryName;
-                dbContext.Update(category1);
-                dbContext.SaveChanges();
-                return true;
-            }
-
-            return false;
-        }
         public List<Service> GetListServices(string Search)
         {
             List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username 
@@ -153,6 +133,47 @@ namespace Vtc_Freelancer.Services
                 Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
+        }
+        public List<Category> GetListCategoryByParentId(string CategoryName)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql("SELECT * FROM Category WHERE CategoryName = {0}", CategoryName).ToList();
+
+            return listCategory;
+        }
+        public List<Category> GetListCategoryBy()
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql("SELECT * FROM Category where parenId = 0").ToList();
+            foreach (var item in listCategory)
+            {
+                Console.WriteLine(item.CategoryName);
+            }
+            return listCategory;
+        }
+        public List<Category> GetListSubCategoryByCategoryParentId(int id)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.FromSql($"SELECT * FROM Category where parenId = {id}").ToList();
+            foreach (var item in listCategory)
+            {
+                Console.WriteLine(item.CategoryName);
+            }
+            return listCategory;
+        }
+
+        public bool EditCategory(Category category)
+        {
+            var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
+            if (category != null)
+            {
+                category1.CategoryName = category.CategoryName;
+                dbContext.Update(category1);
+                dbContext.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }
