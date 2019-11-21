@@ -86,7 +86,48 @@ namespace Vtc_Freelancer.Services
             }
 
         }
+<<<<<<< HEAD
         public bool EditProfile(int Id, string Email, string UserName)
+=======
+        return null;
+      }
+
+    }
+    public bool EditProfile(int Id, string Email, string UserName)
+    {
+      Users user = new Users();
+      user = GetUserByUserId(Id);
+      if (user != null)
+      {
+        user.UserName = UserName;
+        user.Email = Email;
+        dbContext.Update(user);
+        dbContext.SaveChanges();
+        return true;
+      }
+      return false;
+
+    }
+    public Seller BecomeSeller(Users users, Languages languages, Seller seller1, Category category, Skills skills)
+    {
+      try
+      {
+        Seller seller = new Seller();
+        seller.UserId = users.UserId;
+        seller.SellerPoint = 0;
+        seller.Description = seller1.Description;
+        seller.RegisterDateSeller = DateTime.Now;
+        dbContext.Add(seller);
+        dbContext.SaveChanges();
+        bool userlevel = UpdateIsSeller(users);
+        Console.WriteLine(category.CategoryId);
+        bool lang = AddLanguage(seller, languages);
+        bool skill = AddSkills(seller, skills);
+        Console.WriteLine(skills.SkillName);
+        bool addcateseller = AddSellerCategory(seller, category);
+        Console.WriteLine(category.CategoryId);
+        if (lang)
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
         {
             Users user = new Users();
             user = GetUserByUserId(Id);
@@ -163,6 +204,7 @@ namespace Vtc_Freelancer.Services
             }
 
 
+<<<<<<< HEAD
         }
         public bool AddSellerCategory(Seller seller, Category category)
         {
@@ -191,6 +233,36 @@ namespace Vtc_Freelancer.Services
             dbContext.Update(users);
             dbContext.SaveChanges();
             return true;
+=======
+    }
+    public bool AddSellerCategory(Seller seller, Category category)
+    {
+      try
+      {
+        SellerCategory sellerCategory = new SellerCategory();
+        sellerCategory.SellerId = seller.SellerId;
+        sellerCategory.CategoryId = category.CategoryId;
+        Console.WriteLine(sellerCategory.SellerId);
+        Console.WriteLine(sellerCategory.CategoryId);
+        dbContext.Add(sellerCategory);
+        dbContext.SaveChanges();
+        return true;
+      }
+      catch (System.Exception e)
+      {
+        Console.WriteLine(e.Message);
+        return false;
+        throw;
+      }
+    }
+    public bool UpdateIsSeller(Users users)
+    {
+      // Users users1 =  new Users();
+      users.IsSeller = 1;
+      dbContext.Update(users);
+      dbContext.SaveChanges();
+      return true;
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
 
         }
         public bool AddSkills(Seller seller, Skills skills1)

@@ -59,3 +59,7 @@ function SetUserIdToModal(userId) {
     "idUser-js"
   ).href = `/Admin/ChangeStatusUser?UserId=${userId}`;
 }
+function SetReportIdToModal(reportId) {
+  document.getElementById("idReportBlService-js").attributes = reportId;
+  document.getElementById("idReportBlAccount-js").attributes = reportId;
+}

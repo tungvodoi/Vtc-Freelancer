@@ -11,12 +11,14 @@ ViewData["Title"] = "Become Seller";
         @if (@ViewBag.Noti == true)
         {
         
-        <br>
+        <!-- <br> -->
         }
         <label>
          Description
         </label>
-        <input name="Description" required />
+        <br>
+        <!-- <input name="Description" required /> -->
+        <textarea rows="5" cols="20" name = "Description" placeholder="Enter Description"></textarea>
         <br>
         <label>
            Language
@@ -42,7 +44,11 @@ ViewData["Title"] = "Become Seller";
         <label>
            Category Name
         </label>
+<<<<<<< HEAD
       
+=======
+        <select name="CategoryName" id="parentCategory">
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
           @if(ViewBag.listcategory!= null)
           {
                <select name="CategoryName">
@@ -52,7 +58,24 @@ ViewData["Title"] = "Become Seller";
              }
                    </select>
           }
+<<<<<<< HEAD
   
+=======
+        </select>
+        <label>
+           Sub Category
+        </label>
+       <div id="subCategory">
+         @if(ViewBag.subcategory!= null)
+          {
+            @foreach (var item in  ViewBag.subcategory)
+             {
+                <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
+              
+             }
+          }
+       </div>
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
         <br>
         <label>
            Skill

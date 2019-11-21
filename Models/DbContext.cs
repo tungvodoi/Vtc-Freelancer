@@ -27,7 +27,11 @@ namespace Vtc_Freelancer.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+<<<<<<< HEAD
             optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=2412;database=vtc_freelancer");
+=======
+            optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -159,7 +163,10 @@ namespace Vtc_Freelancer.Models
            {
                entity.HasKey(x => x.PackageId);
                entity.Property(x => x.Name);
+<<<<<<< HEAD
                entity.Property(x => x.Title);
+=======
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
                entity.Property(x => x.Description);
                entity.Property(x => x.Price);
                entity.Property(x => x.NumberRevision);
@@ -182,6 +189,11 @@ namespace Vtc_Freelancer.Models
                entity.HasKey(x => x.ReportId);
                entity.Property(x => x.TitleReport);
                entity.Property(x => x.ContentReport);
+<<<<<<< HEAD
+=======
+               entity.Property(x => x.TimeCreateReport);
+               entity.Property(x => x.Status);
+>>>>>>> 026ccc362f408826f3f07bebcedb67273635512a
                entity.Property(x => x.ServiceId);
                entity.Property(x => x.UserId);
 
