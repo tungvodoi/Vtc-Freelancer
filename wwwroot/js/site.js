@@ -58,16 +58,14 @@ function Checkpass() {
     document.getElementById("but").disabled = false;
   }
 }
-function encodeImagetoBase64(element) {
-  var file = element.files[0];
-
-  var reader = new FileReader();
-
-  reader.onloadend = function() {
-    $(".link").attr("href", reader.result);
-
-    $(".link").text(reader.result);
-  };
-
-  reader.readAsDataURL(file);
-}
+window.addEventListener("file", function() {
+  document
+    .querySelector('input[type="file"]')
+    .addEventListener("change", function() {
+      if (this.files && this.files[0]) {
+        var img = document.querySelector("img"); // $('img')[0]
+        img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+        img.onload = imageIsLoaded;
+      }
+    });
+});

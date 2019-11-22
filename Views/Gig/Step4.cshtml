@@ -1,12 +1,49 @@
-<form action="CreateServiceStep4" method="post">
-  <h2>Build Your Gig Gallery</h2>
-  <p>Add memorable content to your gallery to set yourself apart from competitors.
-  </p>
-  <hr>
-  <p>Upload photos that describe or are related to your Gig.
-  </p>
-  <input type="file" name="image" class="link" onchange="encodeImagetoBase64(this)">
-  <input type="file" name="image1" class="link" onchange="encodeImagetoBase64(this)">
-  <input type="file" name="image2" class="link" onchange="encodeImagetoBase64(this)">
-  <input type="submit">
-</form>
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="nav-step">
+    <nav>
+        <ul class="ul-step">
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">✔</div>
+                <div class="li-content">Overview ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">✔</div>
+                <div class="li-content">Pricing ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">✔</div>
+                <div class="li-content">Description ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">4</div>
+                <div class="li-content">Publish</div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<div class="content-crt-src content">
+    <div class="container-step1">
+        <form action="" method="post" class="form-step4">
+
+            <h2>Build Your Gig Gallery</h2>
+            <br>
+            <p>Add memorable content to your gallery to set yourself apart from competitors.
+            </p>
+            <hr>
+            <br>
+            <p>Upload photos that describe or are related to your Gig.
+            </p>
+            <br>
+            <input type='file' />
+            <br><img id="myImg" src="#" alt="your image" height="400px" width="400px">
+            <input class="btn-continue" type="submit">
+        </form>
+    </div>
+</div>

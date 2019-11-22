@@ -119,13 +119,6 @@ namespace Vtc_Freelancer.Controllers
       }
       return Redirect("/CreateService/Step3");
     }
-    [HttpPost("/CreateService/CreateServiceStep4")]
-    public IActionResult CreateServiceStep4(string image, string image1, string image2)
-    {
-      int? ServiceId = HttpContext.Session.GetInt32("serviceId");
-      Console.WriteLine(image);
-      return Redirect("/CreateService/Step4");
-    }
     [HttpPost]
     public IActionResult reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
     {

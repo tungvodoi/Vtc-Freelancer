@@ -1,19 +1,55 @@
-<form action="CreateServiceStep3" method="post">
-  <h2>Description</h2>
-  <hr>
-  <p>Briefly Describe Your Gig</p>
-  <br>
-  <textarea cols="30" rows="10" name="serviceDescription"></textarea>
-  <br>
-  <h2>Frequently Asked Questions</h2>
-  <hr>
-  <p>Add Questions & Answers for Your Buyers.</p>
-  <br>
-  <input type="text" name="question" placeholder="Add a Question: i.e. Do you translate to English as well?"
-    maxlength="150">
-  <br>
-  <textarea name="reply" placeholder="Add an Answer: i.e. Yes, I also translate from English to Hebrew."
-    maxlength="300"></textarea>
-  <br>
-  <input type="submit" value="save and continue">
-</form>
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="nav-step">
+    <nav>
+        <ul class="ul-step">
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">✔</div>
+                <div class="li-content">Overview ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">✔</div>
+                <div class="li-content">Pricing ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">3</div>
+                <div class="li-content">Description ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step">4</div>
+                <div class="li-content">Publish</div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="content-crt-src content">
+    <div class="container-step1">
+        <form action="CreateServiceStep3" method="post" class="form-step3">
+            <br>
+            <h2>Description</h2>
+            <hr>
+            <br>
+            <p>Briefly Describe Your Gig</p>
+            <br>
+            <textarea class="text-description" cols="30" rows="10" name="serviceDescription"></textarea>
+            <br>
+            <h2>Frequently Asked Questions</h2>
+            <hr>
+            <br>
+            <p>Add Questions & Answers for Your Buyers.</p>
+            <br>
+            <input type="text" name="question" placeholder="Add a Question: i.e. Do you translate to English as well?"
+                maxlength="150">
+            <br>
+            <textarea name="reply" placeholder="Add an Answer: i.e. Yes, I also translate from English to Hebrew."
+                maxlength="300"></textarea>
+            <br>
+            <button type="submit" class="btn-continue">save and continue</button>
+
+        </form>
+    </div>
+</div>
