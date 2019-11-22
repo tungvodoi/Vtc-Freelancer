@@ -63,6 +63,10 @@ namespace Vtc_Freelancer.Controllers
             HttpContext.Session.SetInt32("UserId", user.UserId);
             HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
             ViewBag.Notification = true;
+            if (user.Status == 1)
+            {
+                return Redirect("/Admin/Dashboard");
+            }
             return Redirect("/");
         }
         [HttpGet("/Login")]
@@ -154,6 +158,25 @@ namespace Vtc_Freelancer.Controllers
 
         }
 
+        // Create a request
 
+        [HttpGet("/manager_request")]
+        public IActionResult CreateRequest()
+        {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+
+            if (listcategory != null)
+            {
+                List<Category> listSubCategory = new List<Category>();
+                listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+
+                ViewBag.subcategory = listSubCategory;
+                ViewBag.listcategory = listcategory;
+
+                return View("Request");
+            }
+            return View();
+        }
     }
 }

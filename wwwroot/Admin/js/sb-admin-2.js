@@ -60,6 +60,10 @@ function SetUserIdToModal(userId) {
   ).href = `/Admin/ChangeStatusUser?UserId=${userId}`;
 }
 function SetReportIdToModal(reportId) {
-  document.getElementById("idReportBlService-js").attributes = reportId;
-  document.getElementById("idReportBlAccount-js").attributes = reportId;
+  document.getElementById(
+    "idReportService-js"
+  ).href = `/Admin/HandleService?ReportId=${reportId}`;
+  document.getElementById(
+    "idReportSeller-js"
+  ).href = `/Admin/HandleSeller?ReportId=${reportId}`;
 }

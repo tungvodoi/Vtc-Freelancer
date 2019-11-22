@@ -13,7 +13,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<SellerCategory> SellerCategory { get; set; }
         public DbSet<Request> Request { get; set; }
         public DbSet<Offer> Offer { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Orders> Orders { get; set; }
         public DbSet<Service> Service { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationDetail> NotificationDetail { get; set; }
@@ -27,7 +27,7 @@ namespace Vtc_Freelancer.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
+            optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=Hanhphuc1;database=vtc_freelancer");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -103,7 +103,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.RequestId);
                 entity.Property(x => x.ServiceId);
             });
-            modelBuilder.Entity<Order>(entity =>
+            modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(x => x.OrderId);
                 entity.Property(x => x.WorkStatus);

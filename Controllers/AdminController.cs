@@ -30,35 +30,41 @@ namespace Vtc_Freelancer.Controllers
         {
             return View();
         }
-        [HttpGet("/Admin/ServiceActive")]
 
-        [HttpGet("/Admin/Services")]
-
-        public IActionResult Services(string Search)
+        [HttpGet("/Admin/ManagerServices")]
+        public IActionResult ManagerServices(string Search)
         {
             ViewBag.ListServices = adminService.GetListServices(Search);
             return View();
         }
-        [HttpGet("/Admin/Error")]
 
-        public IActionResult Error()
+        [HttpGet("/Admin/ManagerOrders")]
+        public IActionResult ManagerOrders(string Search)
         {
+            ViewBag.ListOrders = adminService.GetListOrders(Search);
             return View();
         }
-        [HttpGet("/Admin/ManagerReports")]
 
+        [HttpGet("/Admin/ManagerRequests")]
+        public IActionResult ManagerRequests(string Search)
+        {
+            ViewBag.ListRequests = adminService.GetListRequests(Search);
+            return View();
+        }
+
+        [HttpGet("/Admin/ManagerReports")]
         public IActionResult ManagerReports(string Search)
         {
             ViewBag.ListReport = adminService.GetListReport(Search);
             return View();
         }
-        [HttpGet("/Admin/ChangeStatusReport")]
 
-        public IActionResult ChangeStatusReport(int ReportId)
+        [HttpGet("/Admin/HandleService")]
+        public IActionResult HandleService(int ReportId)
         {
             try
             {
-                adminService.ChangeStatusReport(ReportId);
+                adminService.HandleService(ReportId);
                 return Redirect("/Admin/ManagerReports");
             }
             catch (System.Exception ex)
@@ -69,6 +75,24 @@ namespace Vtc_Freelancer.Controllers
             }
 
         }
+
+        [HttpGet("/Admin/HandleSeller")]
+        public IActionResult HandleSeller(int ReportId)
+        {
+            try
+            {
+                adminService.HandleSeller(ReportId);
+                return Redirect("/Admin/ManagerReports");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return Redirect("/Admin/ManagerUsers");
+                throw;
+            }
+
+        }
+
         [HttpGet("/Admin/ManagerUsers")]
         public IActionResult ManagerUsers(string Search)
         {

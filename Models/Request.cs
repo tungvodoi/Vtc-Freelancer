@@ -6,7 +6,7 @@ namespace Vtc_Freelancer.Models
     public class Request
     {
         public int RequestId { get; set; }
-        public int Delivered { get; set; }
+        public string Delivered { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string Category { get; set; }
         [Column(TypeName = "varchar(255)")]
