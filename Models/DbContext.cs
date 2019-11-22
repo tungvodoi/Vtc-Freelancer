@@ -17,6 +17,7 @@ namespace Vtc_Freelancer.Models
     public DbSet<Service> Service { get; set; }
     public DbSet<Notification> Notification { get; set; }
     public DbSet<NotificationDetail> NotificationDetail { get; set; }
+    public DbSet<ImageService> ImageService { get; set; }
     public DbSet<Package> Package { get; set; }
     public DbSet<Rating> Rating { get; set; }
     public DbSet<Report> Report { get; set; }
@@ -27,7 +28,7 @@ namespace Vtc_Freelancer.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=2412;database=vtc_freelancer");
+      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=0124578;database=vtc_freelancer");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,7 +53,7 @@ namespace Vtc_Freelancer.Models
         entity.HasKey(x => x.SellerId);
         entity.Property(x => x.SellerPoint);
         entity.Property(x => x.Description);
-        entity.Property(x => x.RegisterDateSeller); 
+        entity.Property(x => x.RegisterDateSeller);
         entity.Property(x => x.UserId);
       });
       modelBuilder.Entity<Languages>(entity =>
