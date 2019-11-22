@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
