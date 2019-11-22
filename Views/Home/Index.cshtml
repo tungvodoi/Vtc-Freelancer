@@ -1,8 +1,10 @@
-@{
+﻿@{
 ViewData["Title"] = "Home Page";
 }
+
 <body>
-	<div class="header container">
+
+	<!-- <div class="header container">
 		<div class="left-top-nav">
 			<div class="logo">
 				<a href="#">VTC Freelancer</a>
@@ -18,16 +20,16 @@ ViewData["Title"] = "Home Page";
 			{	
 				@if(ViewBag.IsSeller == 0)
 				{
+					
 					<li>
 					<a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
 				</li>
 				}
 			else{
-				
-					<li>
-					<a href="/Seller/Index" class="nav-link"><b>Change Seller</b></a>
-				</li>
 			
+					<li>
+					<a href="/Seller/Index" class="nav-link"><b>Switch Seller</b></a>
+				</li>
 				}
 			}
 				<li>
@@ -39,15 +41,31 @@ ViewData["Title"] = "Home Page";
 				<li>
 					<a href="#" class="nav-link"><b>Orders</b></a>
 				</li>
+				@if(ViewBag.UserName == null)
+				{
 				<li><a href="/Login" class="nav-link"><b>Login</b></a></li>
+					<li><a href="/Login" class="nav-link"><b>Join</b></a></li>
+				}
+					
 			</ul>
 		</div>
-	</div>
+	</div> -->
 	<div class="nav-categories">
 		<ul class="ul-categories container">
 			<li class="li-categories">
 				<a href="" class="categories-link">Graphics & Design</a>
 				<ul class="ul-package">
+
+					@if(ViewBag.listcategory != null)
+					{
+						@foreach (var item in ViewBag.listcategory)
+				    	{
+						<li class="li-package">
+							<a href="" class="a-package">item.CategoryName</a>
+						</li>
+						}
+					}
+
 					<li class="li-package">
 						<a href="" class="a-package">Logo Design</a>
 					</li>
@@ -160,7 +178,7 @@ ViewData["Title"] = "Home Page";
 					<a href="">See All <i class="fa fa-chevron-right"></i></a>
 				</div>
 				<div class="box-row__slider">
-					
+
 					<div class="slider__gig">
 						<a href="" class="slide-gig-js">
 							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">

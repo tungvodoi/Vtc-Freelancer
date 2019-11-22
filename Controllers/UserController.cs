@@ -63,8 +63,6 @@ namespace Vtc_Freelancer.Controllers
       user = userService.Login(email, password);
       if (user != null)
       {
-
-
         HttpContext.Session.SetString("UserName", user.UserName);
       }
       // Console.WriteLine("1");
@@ -97,7 +95,6 @@ namespace Vtc_Freelancer.Controllers
       Users user = userService.GetUsersByID(userId);
       if (userId != null)
       {
-
         if (user.Status == 1)
         {
           ViewBag.Error = "Account locked";
@@ -107,7 +104,6 @@ namespace Vtc_Freelancer.Controllers
       {
         ViewBag.Error = "Account Not Exist :(";
       }
-
       return View();
     }
     [HttpPost("/BecomeSeller")]
@@ -121,25 +117,15 @@ namespace Vtc_Freelancer.Controllers
 
       Console.WriteLine(languages.Level);
       var seller = userService.BecomeSeller(users, languages, seller1, category1, skills);
-
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
       if (seller != null)
       {
         seller = dbContext.Seller.FirstOrDefault(seller => seller.SellerId == seller1.SellerId);
+        // Set Session lan 2
+        HttpContext.Session.SetInt32("IsSeller", users.IsSeller);
 
-        // HttpContext.Session.SetInt32("SellerId", seller.SellerId);
-        List<Category> listcategory = new List<Category>();
-        listcategory = adminService.GetListCategoryBy();
-
-        if (listcategory != null)
-        {
-
-          ViewBag.listcategory = listcategory;
-
-          return Redirect("/Home/Index");
-        }
-
-
-        return View("/Home/Index");
+        return Redirect("/Home/Index");
       }
       return View();
     }
@@ -157,7 +143,7 @@ namespace Vtc_Freelancer.Controllers
         ViewBag.subcategory = listSubCategory;
         ViewBag.listcategory = listcategory;
 
-        return View("BecomeSeller");
+        return View();
       }
       return View();
 

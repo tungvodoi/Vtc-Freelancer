@@ -27,7 +27,7 @@ namespace Vtc_Freelancer.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
+      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=2412;database=vtc_freelancer");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,7 +52,7 @@ namespace Vtc_Freelancer.Models
         entity.HasKey(x => x.SellerId);
         entity.Property(x => x.SellerPoint);
         entity.Property(x => x.Description);
-        entity.Property(x => x.RegisterDateSeller);
+        entity.Property(x => x.RegisterDateSeller); 
         entity.Property(x => x.UserId);
       });
       modelBuilder.Entity<Languages>(entity =>
@@ -110,7 +110,7 @@ namespace Vtc_Freelancer.Models
         entity.Property(x => x.Quantity);
         entity.Property(x => x.OrderTime);
         entity.Property(x => x.UserId);
-        entity.Property(x => x.ServiceId);
+        entity.Property(x => x.PackageId);
       });
       modelBuilder.Entity<Conversation>(entity =>
       {

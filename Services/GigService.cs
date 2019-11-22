@@ -65,13 +65,13 @@ namespace Vtc_Freelancer.Services
             try
             {
                 Service ser = new Service();
-                ser = dbContext.Service.FirstOrDefault(ser => ser.ServiceId == 4);
+                ser = dbContext.Service.FirstOrDefault(ser => ser.ServiceId == serviceID);
                 ser.Description = descripton;
                 dbContext.SaveChanges();
                 FAQ faq = new FAQ();
                 faq.Question = question;
                 faq.Reply = reply;
-                faq.ServiceId = 4;
+                faq.ServiceId = serviceID;
                 dbContext.Add(faq);
                 dbContext.SaveChanges();
             }
@@ -134,9 +134,11 @@ namespace Vtc_Freelancer.Services
         }
         public Service GetServiceByID(int? ID)
         {
-            Service ser = new Service();
-            ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
-            return ser;
+            return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+        }
+        public Package GetPackageByID(int ID)
+        {
+            return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
         }
     }
 }
