@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -64,15 +65,37 @@ namespace Vtc_Freelancer.Services
             try
             {
                 Service ser = new Service();
-                ser = dbContext.Service.FirstOrDefault(ser => ser.ServiceId == 4);
+                ser = dbContext.Service.FirstOrDefault(ser => ser.ServiceId == serviceID);
                 ser.Description = descripton;
                 dbContext.SaveChanges();
                 FAQ faq = new FAQ();
                 faq.Question = question;
                 faq.Reply = reply;
-                faq.ServiceId = 4;
+                faq.ServiceId = serviceID;
                 dbContext.Add(faq);
                 dbContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
+        }
+        public bool CreateServiceStepFour(int? serviceID, List<string> urlImages)
+        {
+            try
+            {
+                foreach (var stringImage in urlImages)
+                {
+                    Console.WriteLine(stringImage.Length);
+                    ImageService imageService = new ImageService();
+                    imageService.ServiceId = serviceID;
+                    imageService.Image = stringImage;
+                    dbContext.Add(imageService);
+                    dbContext.SaveChanges();
+                }
+
             }
             catch (System.Exception ex)
             {
@@ -111,9 +134,11 @@ namespace Vtc_Freelancer.Services
         }
         public Service GetServiceByID(int? ID)
         {
-            Service ser = new Service();
-            ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
-            return ser;
+            return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+        }
+        public Package GetPackageByID(int ID)
+        {
+            return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
         }
     }
 }

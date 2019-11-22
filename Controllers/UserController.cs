@@ -13,12 +13,15 @@ namespace Vtc_Freelancer.Controllers
   public class UserController : Controller
   {
     private MyDbContext dbContext;
+    private HashPassword hashPassword;
+    private static Users user;
     private UserService userService;
     private AdminService adminService;
-    public UserController(MyDbContext dbContext, UserService userService, AdminService adminService)
+    public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService, AdminService adminService)
     {
 
       this.dbContext = dbContext;
+      this.hashPassword = hashPassword;
       this.userService = userService;
       this.adminService = adminService;
       dbContext.Database.EnsureCreated();
@@ -56,7 +59,7 @@ namespace Vtc_Freelancer.Controllers
 
     public IActionResult Login(string email, string password)
     {
-      Users user = new Users();
+      user = new Users();
       user = userService.Login(email, password);
       if (user != null)
       {
@@ -106,6 +109,8 @@ namespace Vtc_Freelancer.Controllers
     [HttpPost("/BecomeSeller")]
     public IActionResult BecomeSeller(Seller seller1, Languages languages, Category category, Skills skills)
     {
+      Console.WriteLine(77777777777);
+      Console.WriteLine(category.CategoryName);
       int? userId = HttpContext.Session.GetInt32("UserId");
       Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
       var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);

@@ -10,11 +10,11 @@ namespace Vtc_Freelancer.Models
         public int Quantity { get; set; }
         public DateTime OrderTime { get; set; }
         public int UserId { get; set; }
-        public int ServiceId { get; set; }
+        public int PackageId { get; set; }
         [ForeignKey("UserId")]
         public virtual Users Users { get; set; }
-        [ForeignKey("ServiceId")]
-        public virtual Service Service { get; set; }
+        [ForeignKey("PackageId")]
+        public virtual Package Package { get; set; }
         public Order() { }
     }
 }
