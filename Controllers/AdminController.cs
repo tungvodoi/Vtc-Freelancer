@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
-using Vtc_Freelancer.ActionFilter;
 using System.Linq;
 
 namespace Vtc_Freelancer.Controllers

@@ -1,7 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.Models;
 
 namespace Vtc_Freelancer.Services
@@ -17,10 +15,7 @@ namespace Vtc_Freelancer.Services
     }
     public Users GetUsersByID(int? ID)
     {
-      System.Console.WriteLine(ID);
-      Users user = new Users();
-      user = dbContext.Users.FirstOrDefault(u => u.UserId == ID);
-      return user;
+      return dbContext.Users.FirstOrDefault(u => u.UserId == ID);
     }
     public bool Register(string username, string email, string password)
     {
@@ -57,29 +52,18 @@ namespace Vtc_Freelancer.Services
       if (email.Contains(character))
       {
         user = dbContext.Users.FirstOrDefault(u => u.Email == email);
-        if (user != null)
+        if (user != null && user.Password == password)
         {
-          if (user.Password == password)
-          {
-            // System.Console.WriteLine(user.UserName);
-            return user;
-          }
-
+          return user;
         }
         return null;
       }
       else
       {
         user = dbContext.Users.FirstOrDefault(u => u.UserName == email);
-        if (user != null)
+        if (user != null && user.Password == password)
         {
-          if (user.Password == password)
-          {
-
-            // dbContext.SaveChanges();
-            return user;
-          }
-
+          return user;
         }
         return null;
       }
@@ -112,33 +96,23 @@ namespace Vtc_Freelancer.Services
         dbContext.Add(seller);
         dbContext.SaveChanges();
         bool userlevel = UpdateUserLevel(users);
-        Console.WriteLine(category.CategoryId);
         bool lang = AddLanguage(seller, languages);
         bool skill = AddSkills(seller, skills);
-        Console.WriteLine(skills.SkillName);
         bool addcateseller = AddSellerCategory(seller, category);
-        Console.WriteLine(category.CategoryId);
         if (lang)
         {
           if (addcateseller)
           {
             return seller;
           }
-
-          Console.WriteLine("kkkkkkkk");
-
         }
-        return null;
-
-
       }
       catch (System.Exception e)
       {
         Console.WriteLine(e.Message);
         return null;
-        throw;
       }
-
+      return null;
     }
     public bool AddLanguage(Seller seller, Languages languages1)
     {
@@ -158,10 +132,7 @@ namespace Vtc_Freelancer.Services
       {
         Console.WriteLine(e.Message);
         return false;
-        throw;
       }
-
-
     }
     public bool AddSellerCategory(Seller seller, Category category)
     {
@@ -180,12 +151,10 @@ namespace Vtc_Freelancer.Services
       {
         Console.WriteLine(e.Message);
         return false;
-        throw;
       }
     }
     public bool UpdateUserLevel(Users users)
     {
-      // Users users1 =  new Users();
       users.UserLevel = 1;
       dbContext.Update(users);
       dbContext.SaveChanges();
@@ -208,22 +177,12 @@ namespace Vtc_Freelancer.Services
       {
         Console.WriteLine(e.Message);
         return false;
-        throw;
       }
 
     }
     public Users GetUserByUserId(int Id)
     {
-      Users users = new Users();
-      users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);
-      if (users != null)
-      {
-        return users;
-      }
-      else
-      {
-        return null;
-      }
+      return dbContext.Users.FirstOrDefault(u => u.UserId == Id);
     }
     public bool BecomeSeller(Users users)
     {
@@ -246,9 +205,7 @@ namespace Vtc_Freelancer.Services
       }
 
     }
-
-
-
-
+    public Seller GetSellerByUserID(int? UserID)
+    { return dbContext.Seller.FirstOrDefault(s => s.UserId == UserID); }
   }
 }
