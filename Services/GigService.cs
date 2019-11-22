@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -73,6 +74,28 @@ namespace Vtc_Freelancer.Services
                 faq.ServiceId = 4;
                 dbContext.Add(faq);
                 dbContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
+        }
+        public bool CreateServiceStepFour(int? serviceID, List<string> urlImages)
+        {
+            try
+            {
+                foreach (var stringImage in urlImages)
+                {
+                    Console.WriteLine(stringImage.Length);
+                    ImageService imageService = new ImageService();
+                    imageService.ServiceId = serviceID;
+                    imageService.Image = stringImage;
+                    dbContext.Add(imageService);
+                    dbContext.SaveChanges();
+                }
+
             }
             catch (System.Exception ex)
             {
