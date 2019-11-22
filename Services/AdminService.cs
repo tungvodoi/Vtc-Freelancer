@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
 
@@ -41,8 +39,6 @@ namespace Vtc_Freelancer.Services
             {
                 try
                 {
-
-                    // ParentCategory.CategoryName = CategoryName;
                     var Category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
                     if (category != null)
                     {
