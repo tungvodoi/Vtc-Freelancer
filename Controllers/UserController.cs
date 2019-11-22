@@ -121,25 +121,24 @@ namespace Vtc_Freelancer.Controllers
 
       Console.WriteLine(languages.Level);
       var seller = userService.BecomeSeller(users, languages, seller1, category1, skills);
+      List<Category> listcategory = new List<Category>();
+      listcategory = adminService.GetListCategoryBy();
+
+      if (listcategory != null)
+      {
+
+        ViewBag.listcategory = listcategory;
+
+        return Redirect("/Home/Index");
+      }
 
       if (seller != null)
       {
         seller = dbContext.Seller.FirstOrDefault(seller => seller.SellerId == seller1.SellerId);
+        // Set Session lan 2
+        HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
 
-        // HttpContext.Session.SetInt32("SellerId", seller.SellerId);
-        List<Category> listcategory = new List<Category>();
-        listcategory = adminService.GetListCategoryBy();
-
-        if (listcategory != null)
-        {
-
-          ViewBag.listcategory = listcategory;
-
-          return Redirect("/Home/Index");
-        }
-
-
-        return View("/Home/Index");
+        return View("/User/Login");
       }
       return View();
     }
