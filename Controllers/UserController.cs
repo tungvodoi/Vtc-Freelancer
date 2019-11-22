@@ -80,7 +80,7 @@ namespace Vtc_Freelancer.Controllers
       if (user.Status == 0)
       {
         ViewBag.Error = "Account locked";
-        if (user.UserLevel == 1)
+        if (user.UserLevel == 5)
         {
           return Redirect("/Admin/Dashboard");
         }
