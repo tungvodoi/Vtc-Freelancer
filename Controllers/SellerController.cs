@@ -23,6 +23,5 @@ namespace Vtc_Freelancer.Controllers
       ViewBag.UserName = HttpContext.Session.GetString("UserName");
       return View();
     }
-
   }
 }

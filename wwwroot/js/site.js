@@ -35,7 +35,7 @@ function showSlides(n) {
   dots[slideIndex - 1].className += " active";
 }
 
-const btn = document.getElementsByClassName("btn-footer-link");
+let btn = document.getElementsByClassName("btn-footer-link");
 for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener("click", function() {
     var content = this.nextElementSibling;

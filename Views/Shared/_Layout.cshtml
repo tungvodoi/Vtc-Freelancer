@@ -63,7 +63,7 @@
 				<div class="wrapper-logo">
 					<i id="icon-menu" class="fa fa-bars"></i>
 					<div class="logo">
-						<a href="#">VTC Freelancer</a>
+						<a href="/">VTC Freelancer</a>
 					</div>
 				</div>
 				<form action="" method="post">
@@ -97,7 +97,7 @@
 						<a href="/Login" class="nav-link"><b>Login</b></a>
 					</li>
 					<li>
-						<a href="/Login" class="nav-link"><b>Join</b></a>
+						<a href="/Register" class="nav-link"><b>Join</b></a>
 					</li>
 					}
 					@if(ViewBag.UserName != null)
@@ -359,20 +359,6 @@
 			div.classList.remove('animate');
 			body.classList.remove('animate')
 		})
-
-
-		const btn = document.getElementsByClassName("btn-footer-link");
-		for (let i = 0; i < btn.length; i++) {
-			btn[i].addEventListener("click", function () {
-				var content = this.nextElementSibling;
-				if (content.style.display === "block") {
-					content.style.display = "none";
-				} else {
-					content.style.display = "block";
-				}
-			});
-		}
-
 	</script>
 	<!-- <script></script> -->
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -52,19 +52,19 @@ namespace Vtc_Freelancer.Controllers
         }
 
 
-        // [HttpPost("/CreateService/CreateServiceStep1")]
-        // public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tags)
-        // {
-        //   int? userID = HttpContext.Session.GetInt32("UserId");
-        //   int SellerID = userService.GetSellerByUserID(userID).SellerId;
-        //   int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tags, SellerID);
-        //   if (ServiceId == 0)
-        //   {
-        //     return Redirect("/CreateService/Step1");
-        //   }
-        //   HttpContext.Session.SetInt32("serviceId", ServiceId);
-        //   return Redirect("/CreateService/Step2");
-        // }
+        [HttpPost("/CreateService/CreateServiceStep1")]
+        public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tags)
+        {
+            int? userID = HttpContext.Session.GetInt32("UserId");
+            int SellerID = userService.GetSellerByUserID(userID).SellerId;
+            int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tags, SellerID);
+            if (ServiceId == 0)
+            {
+                return Redirect("/CreateService/Step1");
+            }
+            HttpContext.Session.SetInt32("serviceId", ServiceId);
+            return Redirect("/CreateService/Step2");
+        }
 
         [HttpPost("/CreateService/CreateServiceStep2")]
         public IActionResult CreateServiceStep2(string basicTitle, string standardTitle, string premiumTitle, string basicDescription, string standardDescription, string premiumDescription, int basicDelivery, int standardDelivery, int premiumDelivery, int basicRevision, int standardRevision, int premiumRevision, double basicPrice, double standardPrice, double premiumPrice)
@@ -146,5 +146,18 @@ namespace Vtc_Freelancer.Controllers
             // seolo = 
             return View();
         }
+        // [HttpPost("/CreateService/CreateServiceStep3")]
+        // public IActionResult CreateServiceStep3(string serviceDescription, string question, string reply)
+        // {
+        //     int? ServiceId = HttpContext.Session.GetInt32("serviceId");
+        //     bool check = gigService.CreateServiceStepThree(ServiceId, serviceDescription, question, reply);
+        //     if (check)
+        //     {
+        //         return Redirect("/CreateService/Step4");
+        //     }
+        //     return Redirect("/CreateService/Step3");
+        // }
+        // [HttpPost]
+
     }
 }
