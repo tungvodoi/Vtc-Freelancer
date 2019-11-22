@@ -11,6 +11,7 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
 	<link rel="stylesheet" type="text/css" href="~/css/Seller.css">
+		<link rel="stylesheet" type="text/css" href="~/css/serviceDetail.css">
 </head>
 
 <body>
@@ -99,6 +100,73 @@
 				</ul>
 			</div>
 		</div>
+		<div class="nav-categories">
+		<ul class="ul-categories container">
+			<li class="li-categories">
+				<a href="" class="categories-link">Graphics & Design</a>
+				<ul class="ul-package">
+
+					@if(ViewBag.listcategory != null)
+					{
+						@foreach (var item in ViewBag.listcategory)
+				    	{
+						<li class="li-package">
+							<a href="" class="a-package">item.CategoryName</a>
+						</li>
+						}
+					}
+
+					<li class="li-package">
+						<a href="" class="a-package">Logo Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Brand Style Guides</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Game Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Graphics for Streamers </a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Business Cards & Stationery</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Illustration</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Brochure Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Poster Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Flyer Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Book & Album Covers</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Storyboards </a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Web & Mobile Design</a>
+					</li>
+					<li class="li-package">
+						<a href="" class="a-package">Social Media Design</a>
+					</li>
+				</ul>
+			</li>
+			<li class="li-categories">
+				<a href="" class="categories-link">Programming & Tech</a>
+				<ul class="ul-package">
+					<li class="li-package"><a class="a-package" href="">a</a></li>
+					<li class="li-package"><a class="a-package" href="">a</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
 		@RenderBody()
 		<div class="footer">
 			<div class="container">

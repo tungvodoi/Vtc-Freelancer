@@ -132,5 +132,16 @@ namespace Vtc_Freelancer.Controllers
             }
             return View();
         }
+
+
+        [HttpGet("/Gig/ServiceDetail")]
+        public IActionResult ServiceDetail(int id)
+        {
+            ViewBag.id = id;
+            Service service = new Service();
+            service = gigService.GetServiceByID(id);
+            ViewBag.service = service;
+            return View();
+        }
     }
 }
