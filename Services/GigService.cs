@@ -111,8 +111,9 @@ namespace Vtc_Freelancer.Services
         }
         public Service GetServiceByID(int? ID)
         {
-            Service ser = new Service();
-            ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+            // Service ser = new Service();
+            // ser = dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+            Service ser = dbContext.Service.Include(x => x.Seller).ThenInclude(x => x.User).FirstOrDefault(x => x.ServiceId == ID);
             return ser;
         }
     }

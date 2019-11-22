@@ -141,6 +141,9 @@ namespace Vtc_Freelancer.Controllers
             Service service = new Service();
             service = gigService.GetServiceByID(id);
             ViewBag.service = service;
+            // ViewBag.SellerNameByServiceId = gigService.GetUsersByServiceID(id);
+            Users seolo = new Users();
+            // seolo = 
             return View();
         }
     }
