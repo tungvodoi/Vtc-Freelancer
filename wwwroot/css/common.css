@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    color: #7a7d85;
+    margin: 0;
+    padding: 0;
+  }
+  @font-face {
+    font-family: proximanova;
+    src: url('~/fonts/proxima-nova-bold.eot');
+    src: local("ProximaNova-Light"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix) format("embedded-opentype");
+    font-weight: 300;
+    font-style: normal
+  }
+  * {
+    box-sizing: border-box;
+    font-family: proximanova,helvetica neue,Helvetica,Arial,sans-serif;
+    text-decoration: none;
+    color: #7a7d85;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* @font-face {
+    font-family: proximanova;
+    src: url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot);
+    src: local("ProximaNova-Light"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix) format("embedded-opentype"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-2040c50882cb27743f6c293468392e16.woff2) format("woff2"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-636b04b837e435afbe74065671f80be1.woff) format("woff");
+    font-weight: 300;
+    font-style: normal
+  }
+  
+  @font-face {
+    font-family: proximanova;
+    src: url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-regular-47dd31aad893b3063a9c827a6b192789.eot);
+    src: local("ProximaNova-Regular"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-regular-47dd31aad893b3063a9c827a6b192789.eot?#iefix) format("embedded-opentype"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-regular-b09cea43222751c4928756103496f0d3.woff2) format("woff2"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-regular-f9d6b69118fb92ed0ce6ed6e19bf9657.woff) format("woff");
+    font-weight: 400;
+    font-style: normal
+  }
+  
+  @font-face {
+    font-family: proximanova;
+    src: url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-semibold-b46318562f2654f3eec87a5032ac79b0.eot);
+    src: local("ProximaNova-Semibold"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-semibold-b46318562f2654f3eec87a5032ac79b0.eot?#iefix) format("embedded-opentype"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-semibold-4bc9726b824a941488c8a360bae66ed3.woff2) format("woff2"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-semibold-70442a1a2183d795d68f821845e39db6.woff) format("woff");
+    font-weight: 600;
+    font-style: normal
+  }
+  
+  @font-face {
+    font-family: proximanova;
+    src: url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-bold-0892897dc0ab70e40e9dd3257a7470e8.eot);
+    src: local("ProximaNova-Bold"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-bold-0892897dc0ab70e40e9dd3257a7470e8.eot?#iefix) format("embedded-opentype"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-bold-13843069d4fbe2b5ee978919b786db7e.woff2) format("woff2"),url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-bold-873f688be6c748a89dd3e07300c2a448.woff) format("woff");
+    font-weight: 700;
+    font-style: normal
+  } */
+  
+  a {
+    outline: none;
+  }
+  
+  ul {
+    padding-inline-start: 0px;
+    list-style: none;
+    list-style-image: none;
+  }
+  
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1400px;
+  }

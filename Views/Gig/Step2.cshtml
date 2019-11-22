@@ -1,0 +1,113 @@
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="nav-step">
+  <nav>
+    <ul class="ul-step">
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">✔</div>
+        <div class="li-content">Overview ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">2</div>
+        <div class="li-content">Pricing ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step">3</div>
+        <div class="li-content">Description ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step">4</div>
+        <div class="li-content">Publish</div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="content-crt-src content">
+  <div class="container-step1">
+    <form action="CreateServiceStep2" method="post" class="form-step2">
+      <h2>Scope & Pricing</h2>
+      <hr>
+      <table class="table-step2">
+        <tr>
+          <th></th>
+          <th>BASIC</th>
+          <th>STANDARD</th>
+          <th>PREMIUM</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td><textarea rows="4" cols="50" name="basicTitle" placeholder="Name your package"></textarea></td>
+          <td><textarea rows="4" cols="50" name="standardTitle" placeholder="Name your package"></textarea>
+          </td>
+          <td><textarea rows="4" cols="50" name="premiumTitle" placeholder="Name your package"></textarea></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><textarea rows="4" cols="50" name="basicDescription"
+              placeholder="Describe your details of your offering"></textarea>
+          </td>
+          <td><textarea rows="4" cols="50" name="standardDescription"
+              placeholder="Describe your details of your offering"></textarea>
+          </td>
+          <td><textarea rows="4" cols="50" name="premiumDescription"
+              placeholder="Describe your details of your offering"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <select name="basicDelivery">
+              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              </option>}
+            </select>
+          </td>
+          <td>
+            <select name="standardDelivery">
+              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              </option>}
+            </select>
+          </td>
+          <td>
+            <select name="premiumDelivery">
+              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              </option>}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Revisions</td>
+          <td><select name="basicRevision">
+              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              <option value="-1">Unlimited</option>
+            </select></td>
+          <td><select name="standardRevision">
+              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              <option value="-1">Unlimited</option>
+            </select></td>
+          <td><select name="premiumRevision">
+              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              <option value="-1">Unlimited</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td> <select name="basicPrice">
+              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+            </select></td>
+          <td><select name="standardPrice">
+              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+            </select></td>
+          <td><select name="premiumPrice">
+              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+            </select></td>
+        </tr>
+      </table>
+      <br>
+      <input class="btn-continue" type="submit" value="save and continue">
+    </form>
+  </div>
+</div>

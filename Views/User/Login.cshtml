@@ -1,30 +1,30 @@
 @{
 ViewData["Title"] = "Login";
+Layout = "~/Views/Shared/_Login.cshtml";
 }
 
-<div class="text-center">
-    <form method="POST" action="/Login">
-        <h2>
-            Đăng nhập
-        </h2>
-        <br>
-        @if (@ViewBag.Noti == true)
-        {
-        <h5>Tài khoản không tồn tại</h5>
-        <br>
-        }
-        <label>
-            Email hoặc UserName
-        </label>
-        <input name="email" required />
-        <br>
-        <label>
-            Mật khẩu
-        </label>
-        <input type="password" name="password" id="pass" required />
-        <br>
-        <button id="but" onclick="login()">Đăng Nhập</button>
-        <br>
-        <a href="/Register">Bạn chưa có tài khoản?</a>
-    </form>
-</div>
+    <div id="logreg-forms">
+        <form class="form-signin" method="POST" action="/Login">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to VTC Freelancer</h1>
+            <br />
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fa fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fa fa-google-plus-g"></i> Sign in with Google+</span> </button>
+            </div>
+            <p style="text-align:center"> OR  </p>
+            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName" required="" autofocus="">
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
+            
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+            <a href="#" id="forgot_pswd">Forgot password?</a>
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i class="fa fa-user-plus"></i> Sign up New Account</button></a>
+            </form>
+
+          
+            <br>
+            
+    </div>
+   
+</html>

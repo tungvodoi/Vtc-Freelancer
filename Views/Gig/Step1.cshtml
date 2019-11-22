@@ -1,0 +1,61 @@
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="nav-step">
+    <nav>
+        <ul class="ul-step">
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">⦿</div>
+                <div class="li-content">Overview ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step">2</div>
+                <div class="li-content">Pricing ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step">3</div>
+                <div class="li-content">Description ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step">4</div>
+                <div class="li-content">Publish</div>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="content-crt-src content">
+    <div class="container-step1">
+        <form action="CreateServiceStep1" method="post" class="form-step1">
+            <div class="flex">
+                <div class="left-content-step1"><label for="">Gig Title</label></div>
+                <div class="right-content-step1">
+                    <Textarea placeholder="I will do something I'm really good at" maxlength="80"
+                        name="title"></Textarea>
+                </div>
+            </div>
+            <br>
+            <div class="flex">
+                <div class="left-content-step1"><label for="">Category</label></div>
+                <div class="right-content-step1"><select name="category">
+                        <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
+                        <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
+                    </select>
+                    <select name="subcategory">
+                        <option value="GRAPHICS & DESIGN">GRAPHICS & DESIGN</option>
+                        <option value="PROGRAMMING & TECH">PROGRAMMING & TECH</option>
+                    </select></div>
+
+            </div>
+            <br>
+            <div class="flex">
+                <div class="left-content-step1"><label for="">Tags</label></div>
+                <div class="right-content-step1"><input type="text" name="tags" id="search-tag" /></div>
+
+            </div>
+            <br>
+            <button class="btn-continue">Save and continue</button>
+        </form>
+    </div>
+</div>
