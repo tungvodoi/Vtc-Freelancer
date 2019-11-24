@@ -919,3 +919,25 @@ h3 {
 .arrowSlide-right {
   right: 0;
 }
+
+.wrapper-become-seller {
+  max-width: 800px;
+  margin: 2rem auto 2rem auto;
+}
+
+.text-sel {
+  padding: 1rem;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+}
+
+.btn-continue {
+  border: none;
+  font-size: 18px;
+  height: 50px;
+  background-color: #1dbf73;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  font-weight: bold;

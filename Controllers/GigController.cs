@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -11,10 +14,12 @@ namespace Vtc_Freelancer.Controllers
     // [Authentication]
     public class GigController : Controller
     {
+        private readonly IHostingEnvironment _environment;
         private GigService gigService;
         private UserService userService;
-        public GigController(GigService gigService, UserService userService)
+        public GigController(GigService gigService, UserService userService, IHostingEnvironment IHostingEnvironment)
         {
+            _environment = IHostingEnvironment;
             this.gigService = gigService;
             this.userService = userService;
         }
@@ -119,6 +124,60 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/CreateService/Step3");
         }
+        [HttpPost("/CreateService/Step4")]
+        public IActionResult Step4(string name)
+        {
+            Console.WriteLine("tung dep trai");
+            List<string> urlImages = new List<string>();
+            var newFileName = string.Empty;
+
+            if (HttpContext.Request.Form.Files != null)
+            {
+                var fileName = string.Empty;
+                string PathDB = string.Empty;
+
+                var files = HttpContext.Request.Form.Files;
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        //Getting FileName
+                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        //Assigning Unique Filename (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        //Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // concating  FileName + FileExtension
+                        newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path.
+                        fileName = Path.Combine(_environment.WebRootPath, "Images/Gigs") + $@"\{newFileName}";
+
+                        // if you want to store path of folder in database
+                        PathDB = "Images/Gigs" + newFileName;
+                        urlImages.Add(PathDB);
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
+                    }
+                }
+            }
+            int? ServiceId = HttpContext.Session.GetInt32("serviceId");
+            bool check = gigService.CreateServiceStepFour(ServiceId, urlImages);
+
+            if (check)
+            {
+                return Redirect("/");
+            }
+            return Redirect("/CreateService/Step4");
+        }
         [HttpPost]
         public IActionResult reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
@@ -132,32 +191,5 @@ namespace Vtc_Freelancer.Controllers
             }
             return View();
         }
-
-
-        [HttpGet("/Gig/ServiceDetail")]
-        public IActionResult ServiceDetail(int id)
-        {
-            ViewBag.id = id;
-            Service service = new Service();
-            service = gigService.GetServiceByID(id);
-            ViewBag.service = service;
-            // ViewBag.SellerNameByServiceId = gigService.GetUsersByServiceID(id);
-            Users seolo = new Users();
-            // seolo = 
-            return View();
-        }
-        // [HttpPost("/CreateService/CreateServiceStep3")]
-        // public IActionResult CreateServiceStep3(string serviceDescription, string question, string reply)
-        // {
-        //     int? ServiceId = HttpContext.Session.GetInt32("serviceId");
-        //     bool check = gigService.CreateServiceStepThree(ServiceId, serviceDescription, question, reply);
-        //     if (check)
-        //     {
-        //         return Redirect("/CreateService/Step4");
-        //     }
-        //     return Redirect("/CreateService/Step3");
-        // }
-        // [HttpPost]
-
     }
 }
