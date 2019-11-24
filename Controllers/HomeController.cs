@@ -25,6 +25,8 @@ namespace Vtc_Freelancer.Controllers
 
     public IActionResult Index()
     {
+      List<Service> services = adminService.GetListServices("");
+      ViewBag.listServices = services;
       List<Category> listcategory = new List<Category>();
       listcategory = adminService.GetListCategoryBy();
       if (HttpContext.Session.GetInt32("UserId") != null)
