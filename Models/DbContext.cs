@@ -28,11 +28,7 @@ namespace Vtc_Freelancer.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-<<<<<<< HEAD
       optionsBuilder.UseMySQL("server=localhost;uid=admin;pwd=123456;database=vtc_freelancer");
-=======
-      optionsBuilder.UseMySQL("server=localhost;uid=root;pwd=0124578;database=vtc_freelancer");
->>>>>>> ad5ee73b744163ed2fdeeb7bbe6ea935a6d5233b
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
