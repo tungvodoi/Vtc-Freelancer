@@ -923,6 +923,7 @@ h3 {
 .wrapper-become-seller {
   max-width: 800px;
   margin: 2rem auto 2rem auto;
+  padding: 1px;
 }
 
 .text-sel {
@@ -941,3 +942,12 @@ h3 {
   color: white;
   padding: 10px;
   font-weight: bold;
+}
+
+.form-become-seller {
+  margin: 1rem;
+}
+
+.contain-username {
+  /* justify-content: flex-start !important; */
+}

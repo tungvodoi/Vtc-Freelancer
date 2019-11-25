@@ -90,8 +90,8 @@ namespace Vtc_Freelancer.Services
                 {
                     Console.WriteLine(stringImage.Length);
                     ImageService imageService = new ImageService();
-                    imageService.ServiceId = serviceID;
                     imageService.Image = stringImage;
+                    imageService.ServiceId = serviceID;
                     dbContext.Add(imageService);
                     dbContext.SaveChanges();
                 }
@@ -140,5 +140,24 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
         }
+        public List<Service> GetListService()
+        {
+            List<Service> listSerVice = dbContext.Service.ToList();
+            foreach (var item in listSerVice)
+            {
+                item.Seller = dbContext.Seller.FirstOrDefault(s => s.SellerId == item.SellerId);
+                //   item.Seller.User = dbContext.Users.FirstOrDefault(s => s.);
+            }
+            return listSerVice;
+        }
+
+        public Users GetUserByServiceId(int? serviceId)
+        {
+            Service service = dbContext.Service.FirstOrDefault(x => x.ServiceId == serviceId);
+            Seller seller = dbContext.Seller.FirstOrDefault(x => x.SellerId == service.SellerId);
+            Users users = dbContext.Users.FirstOrDefault(x => x.UserId == seller.UserId);
+            return users;
+        }
+
     }
 }

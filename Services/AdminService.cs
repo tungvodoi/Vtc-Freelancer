@@ -63,7 +63,7 @@ namespace Vtc_Freelancer.Services
         public List<Service> GetListServices(string Search)
         {
             List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username 
-            from Service s inner join seller se on s.sellerid = se.sellerid inner join users u on se.userid = u.userid 
+            from Service s inner join seller se on s.sellerid = se.sellerid inner join users u on se.userid = u.userid
             where s.Title like '%" + Search + "%' or s.Category like '%" + Search + "%' or s.SubCategory like '%" + Search + "%' or s.Description like '%" + Search + "%' or u.Username like '%" + Search + "%' order by TimeCreateService desc").ToList();
             foreach (var item in ListServices)
             {
