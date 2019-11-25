@@ -1,8 +1,5 @@
-﻿﻿using System;
+﻿﻿
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
@@ -12,7 +9,7 @@ using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
-    [Authentication]
+    // [Authentication]
     public class HomeController : Controller
     {
         private UserService userService;
@@ -28,18 +25,19 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult Index()
         {
-
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
                 int? userId = HttpContext.Session.GetInt32("UserId");
                 Users userads = userService.GetUsersByID(userId);
                 ViewBag.UserName = userads.UserName;
+                //Lay Session lan 2
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+                // HttpContext.Session.Remove("IsSeller");
+                ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
 
             }
-
-            List<Category> listcategory = new List<Category>();
-            listcategory = adminService.GetListCategoryBy();
 
             if (listcategory != null)
             {
@@ -49,7 +47,6 @@ namespace Vtc_Freelancer.Controllers
             }
             return View();
         }
-        [HttpGet("/Logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

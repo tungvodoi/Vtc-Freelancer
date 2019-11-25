@@ -14,6 +14,7 @@ setInterval(() => {
   plusSlides(a);
   a += 1;
 }, 2000);
+
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -45,6 +46,7 @@ for (let i = 0; i < btn.length; i++) {
     }
   });
 }
+
 function Checkpass() {
   var a = document.getElementById("p1").value;
   var b = document.getElementById("p2").value;
@@ -56,3 +58,14 @@ function Checkpass() {
     document.getElementById("but").disabled = false;
   }
 }
+window.addEventListener("file", function() {
+  document
+    .querySelector('input[type="file"]')
+    .addEventListener("change", function() {
+      if (this.files && this.files[0]) {
+        var img = document.querySelector("img"); // $('img')[0]
+        img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+        img.onload = imageIsLoaded;
+      }
+    });
+});

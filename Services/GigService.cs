@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -13,7 +12,7 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public int CreateServiceStepOne(string title, string category, string subcategory, string tags)
+        public int CreateServiceStepOne(string title, string category, string subcategory, string tags, int sellerId)
         {
             Service service = new Service();
             try
@@ -22,8 +21,8 @@ namespace Vtc_Freelancer.Services
                 service.Category = category;
                 service.SubCategory = subcategory;
                 service.TimeCreateService = System.DateTime.Now;
-                service.Status = -1;
-                service.SellerId = 1;
+                service.Status = 1;
+                service.SellerId = sellerId;
                 dbContext.Add(service);
                 dbContext.SaveChanges();
                 string[] ListTags = tags.Split(',');
@@ -46,13 +45,33 @@ namespace Vtc_Freelancer.Services
             }
             return service.ServiceId;
         }
-        public bool CreateServiceStepTwo(Package package, int? ServiceID)
+        public bool CreateServiceStepTwo(Package package)
         {
             try
             {
-                Console.WriteLine(package.Name);
-                package.ServiceId = ServiceID;
                 dbContext.Add(package);
+                dbContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
+        }
+        public bool CreateServiceStepThree(int? serviceID, string descripton, string question, string reply)
+        {
+            try
+            {
+                Service ser = new Service();
+                ser = dbContext.Service.FirstOrDefault(ser => ser.ServiceId == 4);
+                ser.Description = descripton;
+                dbContext.SaveChanges();
+                FAQ faq = new FAQ();
+                faq.Question = question;
+                faq.Reply = reply;
+                faq.ServiceId = 4;
+                dbContext.Add(faq);
                 dbContext.SaveChanges();
             }
             catch (System.Exception ex)

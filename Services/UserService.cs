@@ -1,7 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.Models;
 
 namespace Vtc_Freelancer.Services
@@ -212,6 +210,7 @@ namespace Vtc_Freelancer.Services
       }
 
     }
+
     public Users GetUserByUserId(int Id)
     {
       Users users = new Users();
@@ -244,11 +243,6 @@ namespace Vtc_Freelancer.Services
         return false;
         throw;
       }
-
     }
-
-
-
-
   }
 }

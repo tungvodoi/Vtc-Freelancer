@@ -8,6 +8,9 @@ namespace Vtc_Freelancer.Models
         public int PackageId { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
+
+        [Column(TypeName = "text")]
+        public string Title { get; set; }
         [Column(TypeName = "text")]
         public string Description { get; set; }
         public double Price { get; set; }

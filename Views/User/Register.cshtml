@@ -1,41 +1,47 @@
 @{
+
 ViewData["Title"] = "Register";
+Layout = "~/Views/Shared/_Login.cshtml";
 }
 
-<div class="text-center">
-    <form method="POST" action="/Register">
+<div class="" id="logreg-forms">
+    <form method="POST" action="/Register" class="form-register">
         <h2>
-            Đăng ký tài khoản
+            Register your Account
         </h2>
         <br>
-        @if (ViewBag.Register == false)
-        {
-        <h3 style="color:red" id="error"> @ViewBag.error</h3>
-        }
+
+        <h3 style="color:Green" id="error"> @ViewBag.error</h3>
+        <br>
+        <br>
         <label>
-            Tài khoản
+            Username
         </label>
-        <input type="text" name="username" required />
+        <input type="text" name="username" placeholder="Username..." required />
+        <br>
         <br>
         <label>
             Email
         </label>
-        <input type="email" name="email" required />
+        <input type="email" name="email" placeholder="Email..." required />
+        <br>
         <br>
         <label>
-            Mật khẩu
+            Password
         </label>
-        <input type="password" name="password" id="p1" required />
+        <input type="password" name="password" id="p1" placeholder="Password..." required />
+        <br>
         <br>
         <label>
-            Nhập lại mật khẩu
+            Re-Enter Password
         </label>
-        <input type="password" name="password2" id="p2" onkeyup="checkpass()" required />
+        <input type="password" name="password2" id="p2" onkeyup="Checkpass()" placeholder="Re-Enter Password"
+            required />
         <br>
-       
+
         <br>
-        <button id="but">Đăng ký</button>
+        <button id="but" class="btn-success">Sign up</button>
         <br>
-        <a href="/Login">Bạn đã có tài khoản?</a>
+        <a href="/Login">Alreaddy have Account?</a>
     </form>
 </div>
