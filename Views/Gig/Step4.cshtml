@@ -1,3 +1,5 @@
+
+
 @{
 ViewData["Title"] = "Create new Service";
 Layout = "~/Views/Shared/_SellerLayout.cshtml";
@@ -30,8 +32,7 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
 
 <div class="content-crt-src content">
     <div class="container-step1">
-        <form action="" method="post" class="form-step4">
-
+<form method="post" enctype="multipart/form-data" action="Step4" class="form-step4">
             <h2>Build Your Gig Gallery</h2>
             <br>
             <p>Add memorable content to your gallery to set yourself apart from competitors.
@@ -41,9 +42,37 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
             <p>Upload photos that describe or are related to your Gig.
             </p>
             <br>
-            <input type='file' />
-            <br><img id="myImg" src="#" alt="your image" height="400px" width="400px">
+           <input type="file" name="files" class="file" multiple />
+  <br>
+  <img class="myImg" src="#" alt="your image" height="400px" width="400px">
+    <br>
+  <input type="file" name="files" class="file" multiple />
+  <br>
+  <img class="myImg" src="#" alt="your image" height="400px" width="400px">
+    <br>
+  <input type="file" name="files" class="file" multiple />
+  <br>
+  <img class="myImg" src="#" alt="your image" height="400px" width="400px">
             <input class="btn-continue" type="submit">
         </form>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+  let base64 = [];
+  
+  document.querySelectorAll('.file').forEach((ip, index) => {
+    ip.addEventListener('change', function () {
+      console.log(this);
+      console.log(index);
+      if (this.files && this.files[0]) {
+        var img = document.querySelectorAll('.myImg')[index]; // $('img')[0]
+        img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+        // img.onload = imageIsLoaded;
+       
+      }
+    });
+  })
+
+
+</script>

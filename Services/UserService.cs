@@ -73,11 +73,8 @@ namespace Vtc_Freelancer.Services
         {
           if (user.Password == password)
           {
-
-            // dbContext.SaveChanges();
             return user;
           }
-
         }
         return null;
       }
@@ -110,21 +107,15 @@ namespace Vtc_Freelancer.Services
         dbContext.Add(seller);
         dbContext.SaveChanges();
         bool userlevel = UpdateIsSeller(users);
-        Console.WriteLine(category.CategoryId);
         bool lang = AddLanguage(seller, languages);
         bool skill = AddSkills(seller, skills);
-        Console.WriteLine(skills.SkillName);
         bool addcateseller = AddSellerCategory(seller, category);
-        Console.WriteLine(category.CategoryId);
         if (lang)
         {
           if (addcateseller)
           {
             return seller;
           }
-
-          Console.WriteLine("kkkkkkkk");
-
         }
         return null;
 
@@ -134,7 +125,6 @@ namespace Vtc_Freelancer.Services
       {
         Console.WriteLine(e.Message);
         return null;
-        throw;
       }
 
     }
@@ -243,6 +233,10 @@ namespace Vtc_Freelancer.Services
         return false;
         throw;
       }
+    }
+    public Seller GetSellerByUserID(int? userID)
+    {
+      return dbContext.Seller.FirstOrDefault(s => s.UserId == userID);
     }
   }
 }

@@ -78,7 +78,7 @@ namespace Vtc_Freelancer.Services
         public List<Request> GetListRequests(string Search)
         {
             List<Request> ListRequests = dbContext.Request.Include(x => x.Users).Where(x => EF.Functions.Like(x.Users.UserName, $"%{Search}%")
-             || EF.Functions.Like(x.Delivered, $"%{Search}%") || EF.Functions.Like(x.Category, $"%{Search}%")
+             || EF.Functions.Like(x.DeliveredTime, $"%{Search}%") || EF.Functions.Like(x.Category, $"%{Search}%")
              || EF.Functions.Like(x.SubCategory, $"%{Search}%") || EF.Functions.Like(x.Description, $"%{Search}%"))
             .OrderByDescending(x => x.TimeCreate).ToList();
             return ListRequests;
@@ -100,6 +100,7 @@ namespace Vtc_Freelancer.Services
             List<Users> ListUsers = dbContext.Users.Where(x => EF.Functions.Like(x.UserName, $"%{Search}%") && x.Email != "admin@gmail.com").ToList();
             return ListUsers;
         }
+
         public bool ChangeStatusUser(int UserId)
         {
             try

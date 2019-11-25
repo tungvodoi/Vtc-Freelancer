@@ -36,13 +36,11 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
-
             }
 
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-
                 return View();
             }
             return View();
