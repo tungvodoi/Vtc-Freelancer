@@ -132,13 +132,5 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
         }
-        public Service GetServiceByID(int? ID)
-        {
-            return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
-        }
-        public Package GetPackageByID(int ID)
-        {
-            return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
-        }
     }
 }

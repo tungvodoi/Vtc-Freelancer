@@ -109,13 +109,9 @@ namespace Vtc_Freelancer.Controllers
     [HttpPost("/BecomeSeller")]
     public IActionResult BecomeSeller(Seller seller1, Languages languages, Category category, Skills skills)
     {
-      Console.WriteLine(77777777777);
-      Console.WriteLine(category.CategoryName);
       int? userId = HttpContext.Session.GetInt32("UserId");
       Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
       var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
-
-      Console.WriteLine(languages.Level);
       var seller = userService.BecomeSeller(users, languages, seller1, category1, skills);
       List<Category> listcategory = new List<Category>();
       listcategory = adminService.GetListCategoryBy();
