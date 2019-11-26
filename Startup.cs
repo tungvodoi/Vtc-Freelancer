@@ -32,6 +32,7 @@ namespace Vtc_Freelancer
             services.AddScoped<AdminService, AdminService>();
             services.AddScoped<GigService, GigService>();
             services.AddScoped<RequestService, RequestService>();
+            services.AddScoped<OrderService, OrderService>();
             services.AddControllersWithViews();
             services.AddSession(options =>
                 {

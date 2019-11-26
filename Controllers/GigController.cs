@@ -133,7 +133,7 @@ namespace Vtc_Freelancer.Controllers
 
             if (HttpContext.Request.Form.Files != null)
             {
-                var fileName = string.Empty;
+                 var fileName = string.Empty;
                 string PathDB = string.Empty;
 
                 var files = HttpContext.Request.Form.Files;

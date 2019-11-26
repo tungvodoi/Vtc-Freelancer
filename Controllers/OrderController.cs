@@ -14,21 +14,20 @@ namespace Vtc_Freelancer.Controllers
   {
     private UserService userService;
     private OrderService orderService;
-    private GigService gigService;
-    public OrderController(UserService userService, OrderService orderService, GigService gigService)
+    public OrderController(UserService userService, OrderService orderService)
     {
       this.userService = userService;
       this.orderService = orderService;
-      this.gigService = gigService;
     }
-    [HttpGet("/customize/order")]
+    [HttpGet("/Customize/Order")]
     public IActionResult Order()
     {
-      Package pac = gigService.GetPackageByID(2);
+      Package pac = orderService.GetPackageByID(1);
       if (pac != null)
       {
-        pac.Service = gigService.GetServiceByID(pac.ServiceId);
+        pac.Service = orderService.GetServiceByID(pac.ServiceId);
       }
+      Console.WriteLine(pac.Name);
       return View(pac);
     }
 

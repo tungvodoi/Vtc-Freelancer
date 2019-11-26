@@ -22,7 +22,7 @@ namespace Vtc_Freelancer.Services
         service.Category = category;
         service.SubCategory = subcategory;
         service.TimeCreateService = System.DateTime.Now;
-        service.Status = 1;
+        service.Status = 0;
         service.SellerId = sellerId;
         dbContext.Add(service);
         dbContext.SaveChanges();
@@ -88,7 +88,10 @@ namespace Vtc_Freelancer.Services
       {
         foreach (var stringImage in urlImages)
         {
-          Console.WriteLine(stringImage.Length);
+          Service ser = new Service();
+          ser = dbContext.Service.FirstOrDefault(s => s.ServiceId == serviceID);
+          ser.Status = 1;
+          dbContext.SaveChanges();
           ImageService imageService = new ImageService();
           imageService.Image = stringImage;
           imageService.ServiceId = serviceID;

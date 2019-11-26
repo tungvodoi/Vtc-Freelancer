@@ -2,10 +2,16 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Vtc_Freelancer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Vtc_Freelancer</title>
 
+<<<<<<< HEAD
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
+=======
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -15,283 +21,284 @@
 	<!-- Linh css request -->
 	
 	<link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
+>>>>>>> a8cae980c5e3779b4b54bb34b2ca129ace39ab53
 </head>
 
 <body>
-	<div class="wrapper-all" id="wrapper-all"></div>
-	<div class="menu-content-hiden" id="hidden-div">
-		<div class="wrapper-content-menu-hiden">
-			<nav class="site-sidebars">
-				<div class="profile-wrapper">
-					<label class="lable-profile">
+    <div class="wrapper-all" id="wrapper-all"></div>
+    <div class="menu-content-hiden" id="hidden-div">
+        <div class="wrapper-content-menu-hiden">
+            <nav class="site-sidebars">
+                <div class="profile-wrapper">
+                    <label class="lable-profile">
 						<img class="img-profile" src="~/images/product1.jpeg" alt="">
 					</label>
-					<br>
-					<p class="username">Username</p>
-					<br>
-				</div>
-				<ul class="ul-sidebars">
-					<li class="li-sidebars">Home</li>
-					<li class="li-sidebars">Inbox</li>
-					<li class="li-sidebars">Dashboard</li>
-					<li class="li-sidebars">Saved</li>
-					<li class="li-sidebars">Browse Categories</li>
+                    <br>
+                    <p class="username">Username</p>
+                    <br>
+                </div>
+                <ul class="ul-sidebars">
+                    <li class="li-sidebars">Home</li>
+                    <li class="li-sidebars">Inbox</li>
+                    <li class="li-sidebars">Dashboard</li>
+                    <li class="li-sidebars">Saved</li>
+                    <li class="li-sidebars">Browse Categories</li>
 
-					<br>
-					<div class="content-sidebars-wrapper">
-						<li class="li-sidebars"><b>Buying</b></li>
-						<hr>
-						<li class="li-sidebars">Manage Requests</li>
-						<li class="li-sidebars">Post a Request</li>
-						<br>
-						<li class="li-sidebars"><b>Selling</b></li>
+                    <br>
+                    <div class="content-sidebars-wrapper">
+                        <li class="li-sidebars"><b>Buying</b></li>
+                        <hr>
+                        <li class="li-sidebars">Manage Requests</li>
+                        <li class="li-sidebars">Post a Request</li>
+                        <br>
+                        <li class="li-sidebars"><b>Selling</b></li>
 
-						<hr>
-						<li class="li-sidebars">Manage Sales</li>
-						<li class="li-sidebars">Revenues</li>
-						<br>
-						<li class="li-sidebars"><b>General</b></li>
-						<hr>
-						<li class="li-sidebars">Setting</li>
-						<li class="li-sidebars">Logout</li>
-					</div>
+                        <hr>
+                        <li class="li-sidebars">Manage Sales</li>
+                        <li class="li-sidebars">Revenues</li>
+                        <br>
+                        <li class="li-sidebars"><b>General</b></li>
+                        <hr>
+                        <li class="li-sidebars">Setting</li>
+                        <li class="li-sidebars">Logout</li>
+                    </div>
 
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<div>
-		<div class="header container">
-			<div class="left-top-nav">
-				<div class="wrapper-logo">
-					<i id="icon-menu" class="fa fa-bars"></i>
-					<div class="logo">
-						<a href="#">VTC Freelancer</a>
-					</div>
-				</div>
-				<form action="" method="post">
-					<input type="text" name="" id="input-search-service" placeholder="Find Services" />
-					<button id="btn-search-service">Search</button>
-				</form>
-				<br>
-			</div>
-			<!-- <<<<<<< HEAD -->
-			<div class="right-top-nav">
-				<ul class="nav-top">
-					@if(ViewBag.IsSeller == 0)
-					{
-							<li>
-						<a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-					</li>
-					}
-				
-					<li>
-						<a href="#" class="nav-link"><b>Messages</b></a>
-					</li>
-					<li>
-						<a href="#" class="nav-link"><b>Saved</b></a>
-					</li>
-					<li>
-						<a href="#" class="nav-link"><b>Orders</b></a>
-					</li>
-				@if(ViewBag.UserName == null)
-				{
-						<li>
-						<a href="/Login" class="nav-link"><b>Login</b></a>
-					</li><li>
-						<a href="/Login" class="nav-link"><b>Join</b></a>
-					</li>
-				}
-					@if(ViewBag.UserName != null)
-					{
-						@if(ViewBag.IsSeller == 1)
-						{
-					<li>
-						<a href="/Seller/Index">
-							<div class="prf-div">
-								<h4 style="color: #1dbf73;">Switch to Selling</h4>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div>
+        <div class="header container">
+            <div class="left-top-nav">
+                <div class="wrapper-logo">
+                    <i id="icon-menu" class="fa fa-bars"></i>
+                    <div class="logo">
+                        <a href="#">VTC Freelancer</a>
+                    </div>
+                </div>
+                <form action="" method="post">
+                    <input type="text" name="" id="input-search-service" placeholder="Find Services" />
+                    <button id="btn-search-service">Search</button>
+                </form>
+                <br>
+            </div>
+            <!-- <<<<<<< HEAD -->
+            <div class="right-top-nav">
+                <ul class="nav-top">
+                    @if(ViewBag.IsSeller == 0) {
+                    <li>
+                        <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
+                    </li>
+                    }
 
-								<img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
+                    <li>
+                        <a href="#" class="nav-link"><b>Messages</b></a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link"><b>Saved</b></a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link"><b>Orders</b></a>
+                    </li>
+                    @if(ViewBag.UserName == null) {
+                    <li>
+                        <a href="/Login" class="nav-link"><b>Login</b></a>
+                    </li>
+                    <li>
+                        <a href="/Login" class="nav-link"><b>Join</b></a>
+                    </li>
+                    } @if(ViewBag.UserName != null) { @if(ViewBag.IsSeller == 1) {
+                    <li>
+                        <a href="/Seller/Index">
+                            <div class="prf-div">
+                                <h4 style="color: #1dbf73;">Switch to Selling</h4>
 
-							</div>
-						</a>
-					</li>
-						}
-					}
-				</ul>
-			</div>
-		</div>
-		@RenderBody()
-		<div class="footer">
-			<div class="container">
+                                <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
 
-				<div class="footer-content-wrapper">
-					<div class="footer-content">
-						<button class="btn-footer-link">Categories</button>
-						<ul class="ul-footer-link">
-						@if(ViewBag.listcategory!= null)
-						{
-							@foreach(var item in ViewBag.listcategory )
-							{
-								<li class="li-footer-content">
-								<a href="#">@item.CategoryName</a>
-							</li>
-							}
-						}
-						</ul>
-					</div>
+                            </div>
+                        </a>
+                    </li>
+                    } }
+                </ul>
+            </div>
+        </div>
+        @RenderBody()
+        <div class="footer">
+            <div class="container">
 
-					<div class="footer-content">
-						<button class="btn-footer-link">About</button>
-						<ul class="ul-footer-link">
-							<li class="li-footer-content"><a href="#">Careers</a></li>
-							<li class="li-footer-content">
-								<a href="#">Press & News</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Partnerships</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Privacy Policy</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Terms of Service</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Intellectual Property</a>
-							</li>
-							<li class="li-footer-content"><a href="">Claims</a></li>
-							<li class="li-footer-content">
-								<a href="">Investor Relations</a>
-							</li>
-						</ul>
-					</div>
+                <div class="footer-content-wrapper">
+                    <div class="footer-content">
+                        <button class="btn-footer-link">Categories</button>
+                        <ul class="ul-footer-link">
+                            @if(ViewBag.listcategory!= null) { @foreach(var item in ViewBag.listcategory ) {
+                            <li class="li-footer-content">
+                                <a href="#">@item.CategoryName</a>
+                            </li>
+                            } }
+                        </ul>
+                    </div>
 
-					<div class="footer-content">
-						<button class="btn-footer-link">Support</button>
+                    <div class="footer-content">
+                        <button class="btn-footer-link">About</button>
+                        <ul class="ul-footer-link">
+                            <li class="li-footer-content"><a href="#">Careers</a></li>
+                            <li class="li-footer-content">
+                                <a href="#">Press & News</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Partnerships</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Privacy Policy</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Terms of Service</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Intellectual Property</a>
+                            </li>
+                            <li class="li-footer-content"><a href="">Claims</a></li>
+                            <li class="li-footer-content">
+                                <a href="">Investor Relations</a>
+                            </li>
+                        </ul>
+                    </div>
 
-						<ul class="ul-footer-link">
-							<li class="li-footer-content">
-								<a href="#">Help & Support</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="#">Trust & Safety</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Selling on Fiverr</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Buying on Fiverr</a>
-							</li>
-						</ul>
-					</div>
+                    <div class="footer-content">
+                        <button class="btn-footer-link">Support</button>
 
-					<div class="footer-content">
-						<button class="btn-footer-link">Community</button>
-						<ul class="ul-footer-link">
-							<li class="li-footer-content">
-								<a href="#">Events</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="#">Blog</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Forum</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Podcast</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Affiliates</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Invite a Friend</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Become a Seller</a>
-							</li>
-						</ul>
-					</div>
+                        <ul class="ul-footer-link">
+                            <li class="li-footer-content">
+                                <a href="#">Help & Support</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="#">Trust & Safety</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Selling on Fiverr</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Buying on Fiverr</a>
+                            </li>
+                        </ul>
+                    </div>
 
-					<div class="footer-content">
-						<button class="btn-footer-link">More From Fiverr</button>
-						<ul class="ul-footer-link">
-							<li class="li-footer-content">
-								<a href="#">Fiverr Pro</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="#">Fiverr Studios</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Get Inspired</a>
-							</li>
-							<li class="li-footer-content">
-								<a href="">ClearVoice</a>
-								<br />
-								<small>Content Marketing</small>
-							</li>
-							<li class="li-footer-content">
-								<a href="#">AND CO</a><br />
-								<small>Invoice Software</small>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Learn</a><br />
-								<small>Online Courses</small>
-							</li>
-							<li class="li-footer-content">
-								<a href="">Fiverr Elevate</a><br />
-								<small>Exclusive Benefits</small>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="smail-content">
-					<div class="hiden-btn">
+                    <div class="footer-content">
+                        <button class="btn-footer-link">Community</button>
+                        <ul class="ul-footer-link">
+                            <li class="li-footer-content">
+                                <a href="#">Events</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="#">Blog</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Forum</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Podcast</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Affiliates</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Invite a Friend</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Become a Seller</a>
+                            </li>
+                        </ul>
+                    </div>
 
-					</div>
-					<div class="logo">
-						<a href="#">VTC Freelancer</a>
-					</div>
-					<div class="privacy">
-						<a href="">Privacy Policy</a>|
-						<a href="">Terms of Service
+                    <div class="footer-content">
+                        <button class="btn-footer-link">More From Fiverr</button>
+                        <ul class="ul-footer-link">
+                            <li class="li-footer-content">
+                                <a href="#">Fiverr Pro</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="#">Fiverr Studios</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Get Inspired</a>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">ClearVoice</a>
+                                <br />
+                                <small>Content Marketing</small>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="#">AND CO</a><br />
+                                <small>Invoice Software</small>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Learn</a><br />
+                                <small>Online Courses</small>
+                            </li>
+                            <li class="li-footer-content">
+                                <a href="">Fiverr Elevate</a><br />
+                                <small>Exclusive Benefits</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="smail-content">
+                    <div class="hiden-btn">
+
+                    </div>
+                    <div class="logo">
+                        <a href="#">VTC Freelancer</a>
+                    </div>
+                    <div class="privacy">
+                        <a href="">Privacy Policy</a>|
+                        <a href="">Terms of Service
 							<br />
 							<span><small>© VTC Freelancer International Ltd. 2019</small></span></a>
-					</div>
-				</div>
-				<!-- <hr /> -->
-				<div class="footer-icon">
-					<ul>
-						<li class="li-footer-icon"><a href=""></a></li>
-						<li class="li-footer-icon"><a href=""></a></li>
-						<li class="li-footer-icon"><a href=""></a></li>
-						<li class="li-footer-icon"><a href=""></a></li>
-						<li class="li-footer-icon"><a href=""></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script>
-		var dmm = document.getElementById('icon-menu');
-		dmm.addEventListener('click', () => {
-			var loz = document.getElementById('hidden-div');
-			loz.classList.toggle('animate');
-			var all = document.getElementById('wrapper-all');
-			all.classList.toggle('animate');
-		})
-		var body = document.getElementById('wrapper-all');
-		body.addEventListener('click', () => {
-			var div = document.getElementById('hidden-div');
-			div.classList.remove('animate');
-			body.classList.remove('animate')
-		})
-	</script>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="~/js/slide.js" asp-append-version="true"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+                    </div>
+                </div>
+                <!-- <hr /> -->
+                <div class="footer-icon">
+                    <ul>
+                        <li class="li-footer-icon">
+                            <a href=""></a>
+                        </li>
+                        <li class="li-footer-icon">
+                            <a href=""></a>
+                        </li>
+                        <li class="li-footer-icon">
+                            <a href=""></a>
+                        </li>
+                        <li class="li-footer-icon">
+                            <a href=""></a>
+                        </li>
+                        <li class="li-footer-icon">
+                            <a href=""></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var dmm = document.getElementById('icon-menu');
+        dmm.addEventListener('click', () => {
+            var loz = document.getElementById('hidden-div');
+            loz.classList.toggle('animate');
+            var all = document.getElementById('wrapper-all');
+            all.classList.toggle('animate');
+        })
+        var body = document.getElementById('wrapper-all');
+        body.addEventListener('click', () => {
+            var div = document.getElementById('hidden-div');
+            div.classList.remove('animate');
+            body.classList.remove('animate')
+        })
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/slide.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>
