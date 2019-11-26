@@ -43,11 +43,10 @@ namespace Vtc_Freelancer.Controllers
         }
 
         [HttpPost("/manager_request")]
-        public IActionResult CreateRequest(string inputRequest, Category category, Skills skill)
+        public IActionResult CreateRequest(string inputRequest, Category category, string deliveredTime, double budget)
         {
             var categoryName = dbContext.Category.FirstOrDefault(x => x.CategoryName == category.CategoryName);
-
-            if (requestService.CreateRequest(inputRequest, category, skill))
+            if (requestService.CreateRequest(inputRequest, category, deliveredTime, budget))
             {
                 return Redirect("/");
             }
