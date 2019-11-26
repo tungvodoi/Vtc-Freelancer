@@ -2,46 +2,63 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   text-decoration: none;
-  color: #7a7d85;
   margin: 0;
   padding: 0;
 }
 
 .container-request {
-  width: 700px;
+  width: 988px;
   margin: auto;
-  border: 1px solid #7a7d85;
 }
 
-.content-request {
+.container-request2 {
+  border: 1px solid #c5c7ce;
+  border-radius: 3px;
+  width: 652px;
+  padding: 0 40px;
+}
+
+.content {
   padding: 20px 30px;
 }
 
-.content-request form label {
-  padding: 15px 0px;
+.content form label {
+  color: #303030;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 20px 0;
 }
 
 .title-request h1 {
+  font-size: 40px;
   font-weight: 300;
+  margin-bottom: 30px;
 }
 
 .input-description textarea {
   height: 90px;
   width: 524px;
+  padding: 6px 7px 7px;
+  margin: 0;
+  resize: none;
+  border-radius: 3px;
+  box-sizing: border-box;
 }
 
-.input-description :before {
+.input-description ::before {
   content: "";
   background: transparent
-    url(//assetsv2.fiverrcdn.com/assets/v2_globals/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
+    url(~/images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
     no-repeat 0 0;
   background-size: 210px 35px;
   width: 35px;
   height: 35px;
   position: absolute;
   z-index: 1;
-  top: 164px;
-  left: 300px;
+  top: -2px;
+  left: 0;
   display: block;
 }
 
@@ -62,7 +79,6 @@ hr {
   letter-spacing: 0;
   color: #777;
   white-space: nowrap;
-  text-transform: uppercase;
   border: 1px #ccc solid;
   padding: 9px 20px 8px;
   cursor: pointer;
@@ -72,7 +88,37 @@ hr {
   border-radius: 3px;
 }
 
-form button {
-  margin-top: 30px;
+.category {
+  font-size: 14px;
+  overflow: hidden;
+  width: 252px;
+  padding: 7px 30px 7px 10px;
+  margin: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.input-budget input {
+  font-size: 14px;
+  padding: 8px 8px 8px 25px;
+  width: 252px;
+  box-sizing: border-box;
+  margin: 0;
+  resize: none;
+  border-radius: 3px;
+}
+
+.confirm {
+  margin: 30px 0px;
+  padding: 9px 30px;
+  background: #1dbf73;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 3px;
   margin-left: auto;
+  display: flex;
+  justify-content: end;
 }
