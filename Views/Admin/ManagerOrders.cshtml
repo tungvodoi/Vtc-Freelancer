@@ -1,0 +1,72 @@
+@{
+ViewData["Title"] = "Admin - Order";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<div class="container-fluid">
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex">
+      <h4 class="m-0 font-weight-bold text-primary d-sm-inline-block">List Report</h4>
+      <!-- Topbar Search -->
+      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/ManagerOrders">
+        <div class="input-group">
+          <input type="text" name="Search" class="form-control border-1 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered mr-auto" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="d-inline-block text-truncate" style="width: 50px">#</th>
+              <th class="d-inline-block text-truncate" style="width: 237px">Username</th>
+              <th class="d-inline-block text-truncate" style="width: 306px">Title service</th>
+              <th class="d-inline-block text-truncate" style="width: 266px">Time create</th>
+              <th class="d-inline-block text-truncate" style="width: 175px">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(ViewBag.ListOrders != null)
+            {
+              int i = 0;
+              @foreach(var item in ViewBag.ListOrders)
+              {
+                i++;
+                <tr>
+                  <td class="d-inline-block text-truncate" style="width: 50px;">@i</td>
+                  <td class="d-inline-block text-truncate" style="width: 237px;">@item.User.UserName</td>
+                  <td class="d-inline-block text-truncate" style="width: 306px;">@item.Service.Title</td>
+                  <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderTime.ToString("dd/MM/yyyy")</td>
+                  @if(item.WorkStatus == 0)
+                  {
+                    <td class="d-inline-block text-truncate" style="width: 175px;">Doing</td>
+                  }else
+                  {
+                    <td class="d-inline-block text-truncate" style="width: 175px;">Done</td>
+                  }
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+        <ul class="pagination pagination-sm justify-content-end">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->

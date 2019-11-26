@@ -10,7 +10,9 @@
 @font-face {
   font-family: proximanova;
   src: url("~/fonts/proxima-nova-bold.eot");
-  src: local("ProximaNova-Light"), url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix) format("embedded-opentype");
+  src: local("ProximaNova-Light"),
+    url(//assetsv2.fiverrcdn.com/assets/fonts/proxima_nova/proxima-nova-light-ca544cb81a4d6e5aed2ba1d0a208bb61.eot?#iefix)
+      format("embedded-opentype");
   font-weight: 300;
   font-style: normal;
 }
@@ -89,11 +91,11 @@ ul {
   /* margin-right: -25px; */
 }
 
-.nav-top>li {
+.nav-top > li {
   padding: 0 24px 0 0;
 }
 
-.logo>a {
+.logo > a {
   font-size: 1.5rem;
   font-weight: 900;
   font-family: "Cabin Sketch", cursive;
@@ -231,7 +233,7 @@ ul {
   width: 20%;
 }
 
-.header-slider .post-request input {
+.header-slider .post-request button {
   width: 100%;
   height: 34px;
   border-radius: 4px;
@@ -241,6 +243,7 @@ ul {
   font-weight: 700;
   background-color: #40aeb8;
   color: white;
+  cursor: pointer;
 }
 
 .header-slider .slide-section {
@@ -252,7 +255,8 @@ ul {
   align-items: center;
 }
 
-.slick-prev.fa-angle-right, .slick-prev.fa-angle-left {
+.slick-prev.fa-angle-right,
+.slick-prev.fa-angle-left {
   background: none;
   border: none;
   outline: none;
@@ -307,7 +311,7 @@ ul {
   left: -30px;
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .arrowSlide-right {
@@ -362,7 +366,8 @@ ul {
   overflow: hidden;
 }
 
-.slider__gig-star .fa-star, .slider__gig-star .gig__star-number {
+.slider__gig-star .fa-star,
+.slider__gig-star .gig__star-number {
   color: #ffbf00;
 }
 
@@ -385,7 +390,8 @@ ul {
   align-items: center;
 }
 
-.gig-fav .fa-bars, .gig-fav .fa-heart {
+.gig-fav .fa-bars,
+.gig-fav .fa-heart {
   color: #c6c6c6;
 }
 
@@ -420,7 +426,7 @@ ul {
   padding-bottom: 2rem;
 }
 
-.footer-content>ul {
+.footer-content > ul {
   margin-top: 1rem;
 }
 
@@ -450,7 +456,8 @@ img {
 
 /* Next & previous buttons */
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -474,7 +481,8 @@ img {
 
 /* On hover, add a black background color with a little bit see-through */
 
-.prev:hover, .next:hover {
+.prev:hover,
+.next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -513,7 +521,8 @@ img {
   transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.active,
+.dot:hover {
   background-color: #717171;
 }
 
@@ -558,7 +567,9 @@ img {
 /* On smaller screens, decrease text size */
 
 @media only screen and (max-width: 300px) {
-  .prev, .next, .text {
+  .prev,
+  .next,
+  .text {
     font-size: 11px;
   }
 }
@@ -572,7 +583,8 @@ img {
   .ul-footer-link {
     display: block !important;
   }
-  .menu-content-hiden, .wrapper-all {
+  .menu-content-hiden,
+  .wrapper-all {
     display: none;
     transform: translateX(-9999px);
     transition: all;
@@ -580,16 +592,18 @@ img {
 }
 
 @media only screen and (max-width: 900px) {
-  .menu-content-hiden, .wrapper-all {
+  .menu-content-hiden,
+  .wrapper-all {
     display: block;
   }
-  .logo>a {
+  .logo > a {
     margin-right: 0;
   }
   .prf-div {
     display: none !important;
   }
-  .left-content, .right-content {
+  .left-content,
+  .right-content {
     width: 100% !important;
   }
   .body-content {
@@ -738,9 +752,9 @@ h3 {
   display: flex;
 }
 
-.slide-section {
-  /* padding: 2rem; */
-}
+/* .slide-section {
+  padding: 2rem;
+} */
 
 .icon-slide-uprage {
   margin: 0rem 0px 2rem 0px;
@@ -904,7 +918,8 @@ h3 {
   background-color: #df4b3b;
 }
 
-#logreg-forms .form-reset, #logreg-forms .form-signup {
+#logreg-forms .form-reset,
+#logreg-forms .form-signup {
   display: none;
 }
 
@@ -951,4 +966,21 @@ h3 {
   #logreg-forms .google-btn:after {
     content: "Google+";
   }
+}
+
+.arrowSlide {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.arrowSlide-right {
+  right: 0;
 }

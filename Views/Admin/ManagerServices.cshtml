@@ -1,0 +1,78 @@
+@{
+ViewData["Title"] = "Admin - Active Service";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex">
+      <h4 class="m-0 font-weight-bold text-primary">List Service</h4>
+      <form class="d-none d-sm-inline-block form-inline ml-auto mr-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/Admin/ManagerServices">
+        <div class="input-group">
+          <input type="text" name="Search" class="form-control border-1 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="d-inline-block text-truncate" style="width: 38px;">#</th>
+              <th class="d-inline-block text-truncate" style="width: 73px;">Seller</th>
+              <th class="d-inline-block text-truncate" style="width: 130px;">Title</th>
+              <th class="d-inline-block text-truncate" style="width: 113px;">Category</th>
+              <th class="d-inline-block text-truncate" style="width: 127px;">Subcategory</th>
+              <th class="d-inline-block text-truncate" style="width: 328px;">Description</th>
+              <th class="d-inline-block text-truncate" style="width: 113px;">Time create</th>
+              <th class="d-inline-block text-truncate" style="width: 107px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(ViewBag.ListServices != null)
+            {
+              int i = 0;
+              @foreach(var item in ViewBag.ListServices)
+              {
+                i++;
+                <tr>
+                  <td class="d-inline-block text-truncate" style="width: 38px;">@i</td>
+                  <td class="d-inline-block text-truncate" style="width: 73px;">@item.Seller.User.UserName</td>
+                  <td class="d-inline-block text-truncate" style="width: 130px;">@item.Title</td>
+                  <td class="d-inline-block text-truncate" style="width: 113px;">@item.Category</td>
+                  <td class="d-inline-block text-truncate" style="width: 127px;">@item.SubCategory</td>
+                  <td class="d-inline-block text-truncate" style="width: 328px;">@item.Description</td>
+                  <td class="d-inline-block text-truncate" style="width: 113px;">@item.TimeCreateService.ToString("dd/MM/yyyy")</td>
+                  @if(item.Status == 0)
+                  {
+                    <td class="d-inline-block text-truncate" style="width: 107px;">Active</td>
+                  }else
+                  {
+                    <td class="d-inline-block text-truncate" style="width: 107px;">Deactivate</td>
+                  }
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+        <ul class="pagination pagination-sm justify-content-end">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->

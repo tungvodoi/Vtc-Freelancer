@@ -12,6 +12,7 @@ namespace Vtc_Freelancer.Services
     {
       this.dbContext = dbContext;
     }
+
     public Package GetPackageByID(int ID)
     {
       return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
@@ -20,6 +21,5 @@ namespace Vtc_Freelancer.Services
     {
       return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
     }
-
   }
 }
