@@ -17,6 +17,7 @@ namespace Vtc_Freelancer.Models
     public DbSet<Service> Service { get; set; }
     public DbSet<Notification> Notification { get; set; }
     public DbSet<NotificationDetail> NotificationDetail { get; set; }
+    public DbSet<ImageService> ImageService { get; set; }
     public DbSet<Package> Package { get; set; }
     public DbSet<Rating> Rating { get; set; }
     public DbSet<Report> Report { get; set; }

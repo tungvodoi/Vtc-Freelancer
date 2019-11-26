@@ -6,7 +6,7 @@ using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.ActionFilter;
-
+using System;
 namespace Vtc_Freelancer.Controllers
 {
   // [Authentication]
@@ -25,6 +25,14 @@ namespace Vtc_Freelancer.Controllers
 
     public IActionResult Index()
     {
+
+      List<Service> services = new List<Service>();
+      services = adminService.GetListServices("");
+      foreach (var item in services)
+      {
+        item.ListImage = adminService.GetListImageService(item.ServiceId);
+      }
+
       List<Category> listcategory = new List<Category>();
       listcategory = adminService.GetListCategoryBy();
       if (HttpContext.Session.GetInt32("UserId") != null)
@@ -42,8 +50,10 @@ namespace Vtc_Freelancer.Controllers
       if (listcategory != null)
       {
         ViewBag.listcategory = listcategory;
+
+        return View(services);
       }
-      return View();
+      return View(services);
     }
     public IActionResult Logout()
     {

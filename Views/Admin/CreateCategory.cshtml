@@ -1,29 +1,37 @@
 @{
 ViewData["Title"] = "/Create Category";
 }
+@{
+ViewData["Title"] = "Admin - Manager Users";
+Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
 
-<div class="text-center">
-    <form method="POST" action="/CreateCategory">
-        <h2>
-          Create Category
-        </h2>
-        <br>
-        @if (@ViewBag.Noti == true)
-        {
-        <h5>Tài khoản không tồn tại</h5>
-        <br>
-        }
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex">
+      <h4 class="m-0 font-weight-bold text-primary d-sm-inline-block">Create Category</h4>
+      <!-- Topbar Search -->
       
-           Category Name
-        </label>
-        
-        <input name="CategoryName" required />
-       
-        <label> Sub Category</label>
-        <input name="SubCategoryName" />
-        
-        <button id="but" onclick="login()">Add</button>
-        <br>
-        <!-- <a href="/Register">Bạn chưa có tài khoản?</a> -->
-    </form>
+    </div>
+    <div class="card-body">
+      <form method = "POST" action = "/Admin/CreateCategory">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Category Name</label>
+    <input type="text" class="form-control" name = "CategoryName" placeholder="Enter Category">
+  
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">SubCategory Name</label>
+    <input type="text" name ="SubCategoryName" class="form-control" placeholder="Enter SubCategory">
+  </div>
+  
+  <button class="btn btn-primary">Submit</button>
+</form>
+    </div>
+  </div>
+
 </div>
+<!-- /.container-fluid -->

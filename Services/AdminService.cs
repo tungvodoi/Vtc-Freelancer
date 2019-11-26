@@ -62,8 +62,10 @@ namespace Vtc_Freelancer.Services
     }
     public List<Service> GetListServices(string Search)
     {
-      List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username 
-            from Service s inner join seller se on s.sellerid = se.sellerid inner join users u on se.userid = u.userid 
+      List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username
+            from Service s inner
+            join seller se on s.sellerid = se.sellerid inner
+            join users u on se.userid = u.userid
             where s.Title like '%" + Search + "%' or s.Category like '%" + Search + "%' or s.SubCategory like '%" + Search + "%' or s.Description like '%" + Search + "%' or u.Username like '%" + Search + "%' order by TimeCreateService desc").ToList();
       foreach (var item in ListServices)
       {
@@ -71,6 +73,19 @@ namespace Vtc_Freelancer.Services
         item.Seller.User = dbContext.Users.FirstOrDefault(x => x.UserId == item.Seller.UserId);
       }
       return ListServices;
+    }
+    public List<ImageService> GetListImageService(int idService)
+    {
+      List<ImageService> ListImageService = dbContext.ImageService.Where(x => x.ServiceId == idService).ToList();
+
+      return ListImageService;
+    }
+    public ImageService GetImageServiceById(int idService)
+    {
+      // ImageService imageServices = dbContext.ImageService.FromSql(@"SELECT * FROM imageservice where ServiceId = " + idService);
+      ImageService imageServices = dbContext.ImageService.FirstOrDefault(x => x.ServiceId == idService);
+      Console.WriteLine(imageServices.ImageServiceID);
+      return imageServices;
     }
     public List<Report> GetListReport(string Search)
     {
