@@ -345,7 +345,7 @@ ul {
 }
 
 .slide-gig-css:hover .arrowSlide-right {
-  right: 0;
+  right: 10px;
 }
 
 .slider__gig-image {
@@ -997,34 +997,10 @@ h3 {
   }
 }
 
-.arrowSlide {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #fff;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-
-.arrowSlide-right {
-  right: 0;
-}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd
-
 .wrapper-become-seller {
   max-width: 800px;
   margin: 2rem auto 2rem auto;
-<<<<<<< HEAD
-=======
   padding: 1px;
->>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd
 }
 
 .text-sel {
@@ -1044,16 +1020,7 @@ h3 {
   padding: 10px;
   font-weight: bold;
 }
-<<<<<<< HEAD
-=======
 
 .form-become-seller {
   margin: 1rem;
 }
-
-.contain-username {
-  /* justify-content: flex-start !important; */
-}
-=======
->>>>>>> c841e9a5b8b9ed8309f34c1c972b7bf3e469fff0
->>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd

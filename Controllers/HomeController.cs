@@ -26,6 +26,12 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            List<Service> services = new List<Service>();
+            services = adminService.GetListServices("");
+            foreach (var item in services)
+            {
+                item.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
                 int? userId = HttpContext.Session.GetInt32("UserId");
@@ -40,9 +46,9 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View();
+                return View(services);
             }
-            return View();
+            return View(services);
         }
         public IActionResult EditProfile()
         {
