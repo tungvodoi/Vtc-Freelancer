@@ -106,6 +106,7 @@ hr {
   box-sizing: border-box;
   margin: 0;
   resize: none;
+  border: 1px solid;
   border-radius: 3px;
 }
 
@@ -121,4 +122,11 @@ hr {
   margin-left: auto;
   display: flex;
   justify-content: end;
+}
+
+.sel {
+  background: #1dbf73 !important;
+  border-color: #168a53 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
 }

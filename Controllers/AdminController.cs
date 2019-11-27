@@ -145,7 +145,7 @@ namespace Vtc_Freelancer.Controllers
         {
             return View();
         }
-        [HttpPost("/CreateCategory")]
+        [HttpPost("/Admin/CreateCategory")]
         public IActionResult CreateCategory(string CategoryName, int ParenId, string SubCategoryName)
         {
             bool category = adminService.CreateCategory(CategoryName, ParenId, SubCategoryName);
@@ -159,7 +159,7 @@ namespace Vtc_Freelancer.Controllers
 
 
         }
-        [HttpGet("/CreateCategory")]
+        [HttpGet("/Admin/CreateCategory")]
         public IActionResult CreateCategory()
         {
             return View();

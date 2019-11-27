@@ -58,3 +58,12 @@ function Checkpass() {
     document.getElementById("but").disabled = false;
   }
 }
+
+function getdeliveredTime(e) {
+  e.preventDefault();
+  var tablinks = document.getElementsByClassName("deliveredTime");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" sel", "");
+  }
+  e.target.classList.add("sel");
+}

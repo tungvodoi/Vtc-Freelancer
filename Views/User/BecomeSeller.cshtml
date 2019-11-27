@@ -2,88 +2,95 @@
 @{
 ViewData["Title"] = "Become Seller";
 }
-<div class="text-center">
-    <form method="POST" action="/BecomeSeller">
-        <h2>
-           Become Seller
-        </h2>
-        <br>
-        @if (@ViewBag.Noti == true)
-        {
-        
-        <!-- <br> -->
-        }
-        <label>
+
+<div class="wrapper-become-seller">
+   <form method="POST" action="/BecomeSeller">
+      <h2>
+         Become Seller
+      </h2>
+      <br>
+      @if (@ViewBag.Noti == true)
+      {
+
+      <!-- <br> -->
+      }
+      <label>
          Description
-        </label>
-        <br>
-        <!-- <input name="Description" required /> -->
-        <textarea rows="5" cols="20" name = "Description" placeholder="Enter Description"></textarea>
-        <br>
-        <label>
-           Language
-        </label>
-        <select name="Language">
-           <option name="Vietnam">Vietnam</option>
-           <option name="Japan">Japan</option>
-           <option name="China">China</option>
-           <option name="Korea">Korea</option>
-        </select>
-         <br>
-         <label>
-           Level Language
-        </label>
-       
-        <select name="Level">
-           <option value = "0">Unspecified</option>
-           <option value = "1">Basic</option>
-           <option value = "2">Conversational</option>
-           <option value = "3">Fluent</option>
-           <option value = "4">Native/Bilingual</option>
-        </select>
-        <label>
-           Category Name
-        </label>
-      
-          @if(ViewBag.listcategory != null)
-          {
-            <select name="CategoryName" id="parentCategory">
-            @foreach (var item in  ViewBag.listcategory)
-             {
-               <option name = "@item.CategoryName">@item.CategoryName </option>
-             }
-            </select>
-          }
-        
-        <br>
-        <label>
-           Sub Category
-        </label>
-       <div id="subCategory">
+      </label>
+      <br>
+      <!-- <input name="Description" required /> -->
+      <textarea class="text-sel" rows="5" cols="20" name="Description" placeholder="Enter Description"></textarea>
+      <br>
+      <br>
+      <label>
+         Language
+      </label>
+      <select name="Language">
+         <option name="Vietnam">Vietnam</option>
+         <option name="Japan">Japan</option>
+         <option name="China">China</option>
+         <option name="Korea">Korea</option>
+      </select>
+      <br>
+      <br>
+      <label>
+         Level Language
+      </label>
+
+      <select name="Level">
+         <option value="0">Unspecified</option>
+         <option value="1">Basic</option>
+         <option value="2">Conversational</option>
+         <option value="3">Fluent</option>
+         <option value="4">Native/Bilingual</option>
+      </select>
+      <br>
+      <br>
+      <label>
+         Category Name
+      </label>
+      <br>
+      @if(ViewBag.listcategory != null)
+      {
+      <select name="CategoryName" id="parentCategory">
+         @foreach (var item in ViewBag.listcategory)
+         {
+         <option name="@item.CategoryName">@item.CategoryName </option>
+         }
+      </select>
+      }
+
+      <br>
+      <br>
+      <label>
+         Sub Category
+      </label>
+      <div id="subCategory">
          @if(ViewBag.subcategory!= null)
-          {
-            @foreach (var item in  ViewBag.subcategory)
-             {
-                <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
-              
-             }
-          }
-       </div>
-        <br>
-        <label>
-           Skill
-        </label>
-        <input name = "SkillName" />
-        <select name = "Level">
-           <option value = "0">Beginner</option>
-            <option value = "1">Intermediate</option>
-             <option value = "2">Expert</option>
-        </select>
-       
-       
-        <br>
-        <button id="but" onclick="login()">Continue</button>
-        <br>
-       
-    </form>
+         {
+         @foreach (var item in ViewBag.subcategory)
+         {
+         <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
+
+         }
+         }
+      </div>
+      <br>
+      <label>
+         Skill
+      </label>
+      <input name="SkillName" />
+      <select name="Level">
+         <option value="0">Beginner</option>
+         <option value="1">Intermediate</option>
+         <option value="2">Expert</option>
+      </select>
+
+
+      <br>
+      <br>
+      <button class="btn-continue" id="but" onclick="login()">Continue</button>
+      <br>
+
+   </form>
 </div>
