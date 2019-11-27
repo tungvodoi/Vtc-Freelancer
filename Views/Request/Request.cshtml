@@ -26,21 +26,21 @@ ViewData["Title"] = "Request a Service";
                         <div class="select-category">
                             <select name="category" class="category">
                                 <option>Select...</option>
-                                @if(ViewBag.subcategory != null)
+                                @if(ViewBag.listcategory != null)
                                 {
                                     @foreach (var item in ViewBag.listcategory)
                                     {
-                                        <option name="@item.CategoryName">@item.CategoryName</option>
+                                        <option value="@item.CategoryName">@item.CategoryName</option>
                                     }
                                 }
                             </select>
                             <select name="Subcategory" class="category">
                                 <option>Select subcategory</option>
-                                @if( ViewBag.listcategory != null)
+                                @if( ViewBag.subcategory != null)
                                 {
-                                    @foreach (var item in  ViewBag.listcategory)
+                                    @foreach (var item in  ViewBag.subcategory)
                                     {
-                                        <option name="@item.CategoryName">@item.CategoryName</option>
+                                        <option value="@item.CategoryName">@item.CategoryName</option>
                                     }
                                 }
                             </select>
@@ -50,10 +50,11 @@ ViewData["Title"] = "Request a Service";
                     <div class="step3">
                         <label for="">Once you place your order, when would you like your service delivered?</label>
                         <div class="select-time">
-                            <a href="#" value="1">24 Hours</a>
-                            <a href="#" value="3">3 Days</a>
-                            <a href="#" value="7">7 Days</a>
-                            <a href="#">Other</a>
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="1">24 Hours</a>
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="3">3 Days</a>
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="7">7 Days</a>
+                            <a href="">Other</a>
+                            <!-- <input type="text" name="inputOther" placeholder="1-30 days" value class="js-other-value"> -->
                         </div>
                     </div>
                     <hr>

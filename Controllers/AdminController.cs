@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using System.Linq;
@@ -145,25 +145,6 @@ namespace Vtc_Freelancer.Controllers
         {
             return View();
         }
-        [HttpPost("/CreateCategory")]
-        public IActionResult CreateCategory(string CategoryName, int ParenId, string SubCategoryName)
-        {
-            bool category = adminService.CreateCategory(CategoryName, ParenId, SubCategoryName);
-            if (category)
-            {
-
-                return View();
-
-            }
-            return Redirect("/");
-
-
-        }
-        [HttpGet("/CreateCategory")]
-        public IActionResult CreateCategory()
-        {
-            return View();
-        }
         public IActionResult GetListCategory()
         {
             List<Category> listcategory = new List<Category>();
@@ -181,6 +162,42 @@ namespace Vtc_Freelancer.Controllers
             return View("Index");
         }
 
+        [HttpPost("/Admin/CreateCategory")]
+        public IActionResult CreateCategory(string CategoryName, int ParenId, string SubCategoryName)
+        {
+            bool category = adminService.CreateCategory(CategoryName, ParenId, SubCategoryName);
+            if (category)
+            {
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                ViewBag.listcategory = listcategory;
+                List<Category> listSubCategory = new List<Category>();
+                listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+                ViewBag.subcategory = listSubCategory;
+                return View();
+
+            }
+            return Redirect("/");
+        }
+        [HttpGet("/Admin/CreateCategory")]
+        public IActionResult CreateCategory()
+        {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+
+            if (listcategory != null)
+            {
+                List<Category> listSubCategory = new List<Category>();
+                listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+
+                ViewBag.subcategory = listSubCategory;
+                ViewBag.listcategory = listcategory;
+
+                return View();
+            }
+            return View();
+        }
+
         public IActionResult GetListSubCategoryByCategoryParentId(string categoryName)
         {
 
@@ -190,6 +207,29 @@ namespace Vtc_Freelancer.Controllers
             listcategory = adminService.GetListSubCategoryByCategoryParentId(category.CategoryId);
             return new JsonResult(listcategory);
         }
+        [HttpGet("/Admin/EditCategory")]
+        public IActionResult EditCategory(string name)
+        {
+            ViewBag.CategoryNameEdit = name;
+            HttpContext.Session.SetString("CategoryName", name);
+            return View();
+        }
+        [HttpPost("/Admin/EditCategory")]
+
+        public IActionResult EditCategory(Category category)
+        {
+            var name = HttpContext.Session.GetString("CategoryName");
+            Console.WriteLine(12313213);
+            Console.WriteLine(name);
+            if (adminService.EditCategory(category, name))
+            {
+                return Redirect("/Admin/CreateCategory");
+            }
+            return View();
+        }
     }
+
+
+
 }
 
