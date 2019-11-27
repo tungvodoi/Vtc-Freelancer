@@ -1,134 +1,24 @@
-﻿@{
+﻿@model IEnumerable<Vtc_Freelancer.Models.Service>;
+
+@{
 ViewData["Title"] = "Home Page";
 }
 
 <body>
 
-	<!-- <div class="header container">
-		<div class="left-top-nav">
-			<div class="logo">
-				<a href="#">VTC Freelancer</a>
-			</div>
-			<form action="" method="post">
-				<input type="text" name="" id="input-search-service" placeholder="Find Services" />
-				<button id="btn-search-service">Search</button>
-			</form>
-		</div>
-		<div class="right-top-nav">
-			<ul class="nav-top">
-			@if(ViewBag.UserName!= null)
-			{	
-				@if(ViewBag.IsSeller == 0)
-				{
-					
-					<li>
-					<a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-				</li>
-				}
-			else{
-			
-					<li>
-					<a href="/Seller/Index" class="nav-link"><b>Switch Seller</b></a>
-				</li>
-				}
-			}
-				<li>
-					<a href="#" class="nav-link"><b>Messages</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Saved</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Orders</b></a>
-				</li>
-				@if(ViewBag.UserName == null)
-				{
-				<li><a href="/Login" class="nav-link"><b>Login</b></a></li>
-					<li><a href="/Login" class="nav-link"><b>Join</b></a></li>
-				}
-					
-			</ul>
-		</div>
-	</div> -->
-	<div class="nav-categories">
-		<ul class="ul-categories container">
-			<li class="li-categories">
-				<a href="" class="categories-link">Graphics & Design</a>
-				<ul class="ul-package">
-
-					@if(ViewBag.listcategory != null)
-					{
-						@foreach (var item in ViewBag.listcategory)
-				    	{
-						<li class="li-package">
-							<a href="" class="a-package">item.CategoryName</a>
-						</li>
-						}
-					}
-
-					<li class="li-package">
-						<a href="" class="a-package">Logo Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brand Style Guides</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Game Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Graphics for Streamers </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Business Cards & Stationery</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Illustration</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brochure Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Poster Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Flyer Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Book & Album Covers</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Storyboards </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Web & Mobile Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Social Media Design</a>
-					</li>
-				</ul>
-			</li>
-			<li class="li-categories">
-				<a href="" class="categories-link">Programming & Tech</a>
-				<ul class="ul-package">
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-
 	<div class="content">
-		<div class="container">
+		<div class="container-inner">
 			<section class="header-slider">
 				<div class="post-request">
 					<div class="inside-post-request">
-					@if(@ViewBag.UserName!= null)
-					{
-							<b>Hi , @ViewBag.UserName </b> <br /><br />
-					}
+						@if(@ViewBag.UserName!= null)
+						{
+						<b>Hi , @ViewBag.UserName</b><br /><br />
+						}
 						<p>Get offer from sellers for your project</p>
 						<br /><br />
-						<input type="button" value="Post a request" />
+						<button type="button" onclick="window.location.href = '/manager_request'">Post a
+							request</button>
 					</div>
 				</div>
 				<div class="slide-section">
@@ -171,13 +61,54 @@ ViewData["Title"] = "Home Page";
 		</div>
 	</div>
 	<div class="product">
-		<div class="container">
+		<div class="container-inner">
 			<section class="box-row">
 				<div class="box-row__header">
 					<h2>Recently viewed & more</h2>
 					<a href="">See All <i class="fa fa-chevron-right"></i></a>
 				</div>
 				<div class="box-row__slider">
+			@if(@Model != null){
+				@foreach (var service in Model)
+				{
+					<div class="slider__gig">
+						<a href="" class="slide-gig-css slide-gig-js">
+							@foreach (var imageService in service.ListImage)
+							{
+							<img src="~/@imageService.Image" alt="" class="slider__gig-image">
+							}
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>@service.Title</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					}
+				}
 
 					@if(ViewBag.listServices != null){
 						@foreach(var item in ViewBag.listServices){
@@ -428,8 +359,302 @@ ViewData["Title"] = "Home Page";
 					</div>
 					
 			</section>
+			<section class="box-row">
+				<div class="box-row__header">
+					<h2>Recently viewed & more</h2>
+					<a href="">See All <i class="fa fa-chevron-right"></i></a>
+				</div>
+				<div class="box-row__slider">
+			@if(@Model != null){
+				@foreach (var service in Model)
+				{
+					<div class="slider__gig">
+						<a href="" class="slide-gig-css slide-gig-js">
+							@foreach (var imageService in service.ListImage)
+							{
+							<img src="~/@imageService.Image" alt="" class="slider__gig-image">
+							}
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>@service.Title</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					}
+				}
+
+					@if(ViewBag.listServices != null){
+						@foreach(var item in ViewBag.listServices){
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>@item.Title</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+						}
+					}
+
+
+
+
+					
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+					<div class="slider__gig">
+						<a href="" class="slide-gig-js">
+							<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
+							<img src="~/images/product2.png" alt="" class="slider__gig-image">
+						</a>
+						<div class="gig__content">
+							<div class="slider__gig-seller">
+								<span class="gig__seller-avatar">
+									<img src="~/images/avatar-user1.png" alt="">
+								</span>
+								<div class="gig__seller-info">
+									<a href="">najam_iqbal</a>
+								</div>
+							</div>
+							<a href="" class="slider__gig-title">
+								<h3>I will develop android app or iphone app</h3>
+							</a>
+							<div class="slider__gig-star">
+								<i class="fa fa-star"></i>
+								<span class="gig__star-number">5.0</span>
+								<span class="gig__star-user-star">(100)</span>
+							</div>
+						</div>
+						<div class="slider__gig-footer">
+							<div class="gig-fav">
+								<i class="fa fa-bars"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="gig-price">
+								<small>Starting At</small>
+								$25
+							</div>
+						</div>
+					</div>
+			</section>
 		</div>
 	</div>
-
-
 </body>

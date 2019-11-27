@@ -12,6 +12,14 @@ namespace Vtc_Freelancer.Services
     {
       this.dbContext = dbContext;
     }
-    
+
+    public Package GetPackageByID(int ID)
+    {
+      return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
+    }
+    public Service GetServiceByID(int? ID)
+    {
+      return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
+    }
   }
 }

@@ -8,6 +8,11 @@ Layout = "~/Views/Shared/_Login.cshtml";
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to VTC Freelancer</h1>
             <br />
             <div class="social-login">
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+<button onclick="logout()">Logout</button>
                 <button class="btn facebook-btn social-btn" type="button"><span><i class="fa fa-facebook-f"></i> Sign in with Facebook</span> </button>
                 <button class="btn google-btn social-btn" type="button"><span><i class="fa fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
@@ -28,5 +33,58 @@ Layout = "~/Views/Shared/_Login.cshtml";
             <br>
             
     </div>
+  
+       
+
+<script>
+function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+      testAPI();  
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this webpage.';
+    }
+  }
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '802573856856059',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v5.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
    
-</html>
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+     statusChangeCallback(response);
+  });
+}
+function logout() {
+  FB.logout(function(response) {
+  console.log(response);
+});
+}
+
+  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    
+    FB.api('/me','GET',{"fields":"id,name,email,first_name,last_name"}, function(response) {
+      console.log(response);
+    });
+  }
+
+</script>
+ 

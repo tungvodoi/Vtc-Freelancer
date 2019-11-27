@@ -1,55 +1,55 @@
 .nav-step {
-    border: 1px solid #e5e5e5;
+  border: 1px solid #e5e5e5;
 }
 
 .li-step {
-    margin: 1rem;
-    font-weight: bold;
-    width: 21px;
-    height: 21px;
-    background-color: #7a7d85;
-    color: white;
-    border-radius: 50%;
-    font-size: 14px;
-    text-align: center;
-    padding: 2px;
+  margin: 1rem;
+  font-weight: bold;
+  width: 21px;
+  height: 21px;
+  background-color: #7a7d85;
+  color: white;
+  border-radius: 50%;
+  font-size: 14px;
+  text-align: center;
+  padding: 2px;
 }
 
 .ul-step {
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
 }
 
 .wrapper-li-step {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .content-crt-src {
-    max-width: 800px;
-    margin: 3rem auto 2rem auto;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
+  max-width: 800px;
+  margin: 3rem auto 2rem auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
 }
 
 .container-step1 {
-    margin: 1rem;
+  margin: 1rem;
 }
 
 .flex {
-    display: flex;
-    margin: 2rem 0px 2rem 0px;
+  display: flex;
+  margin: 2rem 0px 2rem 0px;
 }
 
 .left-content-step1 {
-    width: 20%;
-    text-align: end;
-    margin-right: 1rem;
+  width: 20%;
+  text-align: end;
+  margin-right: 1rem;
 }
 
 .right-content-step1 {
-    width: 80%;
+  width: 80%;
 }
 
 /* 
@@ -57,97 +57,97 @@ Textarea, {
     width: 100%;
 } */
 
-.form-step1 Textarea {
-    width: 100%;
-    font-size: 40px;
-    line-height: 45px;
-    letter-spacing: 1px;
-    border-radius: 3px;
-    height: 9rem;
+.form-step1 textarea {
+  width: 100%;
+  font-size: 40px;
+  line-height: 45px;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  height: 9rem;
 }
 
 .form-step1 input {
-    height: 34px;
-    border-radius: 3px;
-    border: 1px solid;
+  height: 34px;
+  border-radius: 3px;
+  border: 1px solid;
 }
 
 #search-tag {
-    width: 100%;
+  width: 100%;
 }
 
 .btn-continue {
-    border: none;
-    font-size: 18px;
-    height: 50px;
-    background-color: #1dbf73;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    font-weight: bold;
+  border: none;
+  font-size: 18px;
+  height: 50px;
+  background-color: #1dbf73;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
 }
 
 .table-step2 th {
-    width: 200px;
+  width: 200px;
 }
 
 .table-step2 td textarea {
-    width: 200px;
-    overflow: hidden;
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    border: none;
-    color: #0e0e0f;
-    border-radius: 0;
-    padding: 5px 25px 5px 5px;
+  width: 200px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  border: none;
+  color: #0e0e0f;
+  border-radius: 0;
+  padding: 5px 25px 5px 5px;
 }
 
 .table-step2 {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .table-step2 td {
-    position: relative;
-    padding: 20px 15px;
-    height: 55px;
-    border-top: none;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    font-weight: 400;
-    box-sizing: border-box;
+  position: relative;
+  padding: 20px 15px;
+  height: 55px;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  font-weight: 400;
+  box-sizing: border-box;
 }
 
 .form-step3 textarea {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 4px;
-    margin: 1rem 0rem 1rem 0rem;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0rem 1rem 0rem;
 }
 
 .form-step3 {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .form-step3 .text-description {
-    padding: 1rem;
-    border-radius: 4px;
-    height: 300px;
+  padding: 1rem;
+  border-radius: 4px;
+  height: 300px;
 }
 
 .form-step3 input {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 50%;
-    height: 34px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 50%;
+  height: 34px;
 }
 
-.form-step4{
+/* .form-step4{
     
-}
+} */
