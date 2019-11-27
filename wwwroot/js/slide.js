@@ -3,6 +3,7 @@ $(document).ready(function () {
         infinite: true,
         slidesToShow: 5,
         slidesToScroll: 5,
+        centerPadding: '60px',
         prevArrow: `<button type="button" class="slick-prev fa fa-angle-left"></button>`,
         nextArrow: `<button type="button" class="slick-prev fa fa-angle-right"></button>`, responsive: [
             {

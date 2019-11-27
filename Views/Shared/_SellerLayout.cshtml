@@ -64,7 +64,7 @@
                 <div class="wrapper-logo">
                     <i id="icon-menu" class="fa fa-bars"></i>
                     <div class="logo">
-                        <a href="#">VTC Freelancer</a>
+                        <a href="/">VTC Freelancer</a>
                     </div>
                 </div>
             </div>
@@ -103,12 +103,15 @@
                 <div class="footer-content">
                     <button class="btn-footer-link">Categories</button>
                     <ul>
-                        <li class="li-footer-content">
-                            <a href="#">Graphics & Design</a>
-                        </li>
-                        <li class="li-footer-content">
-                            <a href="#">Programming & Tech</a>
-                        </li>
+                      	@if(ViewBag.listcategory!= null)
+						{
+							@foreach(var item in ViewBag.listcategory )
+							{
+								<li class="li-footer-content">
+								<a href="#">@item.CategoryName</a>
+							</li>
+							}
+						}
                     </ul>
                 </div>
 

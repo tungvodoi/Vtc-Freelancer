@@ -69,11 +69,18 @@ ul {
 }
 
 .container {
+  padding: 0 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+}
+
+.container-inner {
   padding-left: 15px;
   padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1400px;
+  max-width: 1240px;
 }
 
 .header {
@@ -166,6 +173,7 @@ ul {
   padding: 10px 0;
   display: inline-block;
   margin-right: 2rem;
+  border-bottom: 3px solid #ffffff;
 }
 
 .categories-link:hover {
@@ -261,6 +269,16 @@ ul {
   border: none;
   outline: none;
   font-size: 65px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.slick-prev.fa-angle-left {
+  left: -40px;
+}
+
+.slick-prev.fa-angle-right {
+  right: -40px;
 }
 
 .slider__gig {
@@ -268,6 +286,7 @@ ul {
   border: 1px solid #e5e5e5;
   outline: none;
   overflow: hidden;
+  height: 294px;
 }
 
 .slider__gig:hover .gig__content .slider__gig-title h3 {
@@ -292,6 +311,7 @@ ul {
 
 .slick-list.draggable {
   height: 100%;
+  margin: 0 -10px;
 }
 
 .slick-track {
@@ -359,7 +379,7 @@ ul {
   line-height: 20px;
   font-weight: 400;
   word-wrap: break-word;
-  transition: 0.15s ease-in-out;
+  transition: 0.2s ease-in-out;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -395,10 +415,19 @@ ul {
   color: #c6c6c6;
 }
 
+.box-row {
+  margin-bottom: 35px;
+}
+
 .box-row__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
+}
+
+.box-row__header h2 {
+  color: #0e0e0f;
 }
 
 .footer {
@@ -984,10 +1013,18 @@ h3 {
 .arrowSlide-right {
   right: 0;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd
 
 .wrapper-become-seller {
   max-width: 800px;
   margin: 2rem auto 2rem auto;
+<<<<<<< HEAD
+=======
+  padding: 1px;
+>>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd
 }
 
 .text-sel {
@@ -1007,3 +1044,16 @@ h3 {
   padding: 10px;
   font-weight: bold;
 }
+<<<<<<< HEAD
+=======
+
+.form-become-seller {
+  margin: 1rem;
+}
+
+.contain-username {
+  /* justify-content: flex-start !important; */
+}
+=======
+>>>>>>> c841e9a5b8b9ed8309f34c1c972b7bf3e469fff0
+>>>>>>> 21e77f55851195a23dac96070889b6b9c0fe91dd

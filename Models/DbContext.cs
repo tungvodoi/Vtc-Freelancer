@@ -13,7 +13,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<SellerCategory> SellerCategory { get; set; }
         public DbSet<Request> Request { get; set; }
         public DbSet<Offer> Offer { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Orders> Order { get; set; }
         public DbSet<Service> Service { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationDetail> NotificationDetail { get; set; }

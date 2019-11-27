@@ -1,5 +1,4 @@
-﻿﻿
-using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
@@ -7,6 +6,8 @@ using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.ActionFilter;
 using System;
+
+
 namespace Vtc_Freelancer.Controllers
 {
     // [Authentication]
@@ -43,11 +44,6 @@ namespace Vtc_Freelancer.Controllers
             }
             return View();
         }
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return Redirect("/");
-        }
         public IActionResult EditProfile()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
@@ -55,6 +51,11 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.UserName = userads.UserName;
             return View();
         }
+        [HttpGet("/Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/");
+        }
     }
 }
-
