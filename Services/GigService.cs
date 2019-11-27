@@ -84,6 +84,7 @@ namespace Vtc_Freelancer.Services
         }
         public bool CreateServiceStepFour(int? serviceID, List<string> urlImages)
         {
+
             try
             {
                 foreach (var stringImage in urlImages)
@@ -158,6 +159,11 @@ namespace Vtc_Freelancer.Services
             Users users = dbContext.Users.FirstOrDefault(x => x.UserId == seller.UserId);
             return users;
         }
-
+        public List<ImageService> GetListImagesByServiceId(int? serviceId)
+        {
+            List<ImageService> Images = new List<ImageService>();
+            Images = dbContext.ImageService.FromSql("select * from ImageService where ImageService.serviceid =" + serviceId).ToList();
+            return Images;
+        }
     }
 }

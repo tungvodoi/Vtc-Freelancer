@@ -155,10 +155,10 @@ namespace Vtc_Freelancer.Controllers
                         newFileName = myUniqueFileName + FileExtension;
 
                         // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "Images/Gigs") + $@"\{newFileName}";
+                        fileName = Path.Combine(_environment.WebRootPath, "Images/Gigs/") + $@"\{newFileName}";
 
                         // if you want to store path of folder in database
-                        PathDB = "Images/Gigs" + newFileName;
+                        PathDB = "Images/Gigs/" + newFileName;
                         urlImages.Add(PathDB);
 
                         using (FileStream fs = System.IO.File.Create(fileName))
@@ -203,9 +203,16 @@ namespace Vtc_Freelancer.Controllers
             {
                 Service service = new Service();
                 service = gigService.GetServiceByID(serviceId);
-                ViewBag.serviceDetail = serviceId;
+                if (service == null)
+                {
+                    return Redirect("/");
+                }
+                ViewBag.serviceDetail = service;
                 Users users = new Users();
                 users = gigService.GetUserByServiceId(serviceId);
+                List<ImageService> images = new List<ImageService>();
+                images = gigService.GetListImagesByServiceId(serviceId);
+                ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
                 return View();
 

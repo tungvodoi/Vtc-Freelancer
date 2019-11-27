@@ -58,3 +58,20 @@ function Checkpass() {
     document.getElementById("but").disabled = false;
   }
 }
+
+function openCity(cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(cityName).style.display = "block";
+}
+
+function Onscroll() {
+  console.log("dcmmm");
+  var price = document.getElementById("price-detail");
+  if ((price.scrollTop() = 200)) {
+    console.log(price.scrollTop() + "px");
+  }
+}
