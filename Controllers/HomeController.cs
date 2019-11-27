@@ -44,6 +44,7 @@ namespace Vtc_Freelancer.Controllers
       }
       return View();
     }
+    [HttpGet("/Logout")]
     public IActionResult Logout()
     {
       HttpContext.Session.Clear();

@@ -57,10 +57,6 @@ namespace Vtc_Freelancer.Controllers
     {
       Users user = new Users();
       user = userService.Login(email, password);
-      if (user != null)
-      {
-        HttpContext.Session.SetString("UserName", user.UserName);
-      }
       if (user == null)
       {
         ViewBag.Error = "Wrong Username/Email";
@@ -69,13 +65,10 @@ namespace Vtc_Freelancer.Controllers
       }
       else
       {
-        if (user.UserLevel == 1)
-        {
-          HttpContext.Session.SetString("UserName", user.UserName);
-          HttpContext.Session.SetInt32("UserId", user.UserId);
-          HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
-          ViewBag.Notification = true;
-        }
+        HttpContext.Session.SetString("UserName", user.UserName);
+        HttpContext.Session.SetInt32("UserId", user.UserId);
+        HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
+        ViewBag.Notification = true;
         if (user.Status == 0)
         {
           ViewBag.Error = "Account locked";
