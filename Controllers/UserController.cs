@@ -13,15 +13,12 @@ namespace Vtc_Freelancer.Controllers
   public class UserController : Controller
   {
     private MyDbContext dbContext;
-    private HashPassword hashPassword;
-    private static Users user;
     private UserService userService;
     private AdminService adminService;
-    public UserController(MyDbContext dbContext, HashPassword hashPassword, UserService userService, AdminService adminService)
+    public UserController(MyDbContext dbContext, UserService userService, AdminService adminService)
     {
 
       this.dbContext = dbContext;
-      this.hashPassword = hashPassword;
       this.userService = userService;
       this.adminService = adminService;
       dbContext.Database.EnsureCreated();
@@ -40,13 +37,11 @@ namespace Vtc_Freelancer.Controllers
       }
       return Redirect("/Login");
     }
-
     [HttpGet("/Register")]
     public IActionResult Register()
     {
       List<Category> listcategory = new List<Category>();
       listcategory = adminService.GetListCategoryBy();
-
       if (listcategory != null)
       {
         ViewBag.listcategory = listcategory;
@@ -55,34 +50,32 @@ namespace Vtc_Freelancer.Controllers
       }
       return View();
     }
+
     [HttpPost("/Login")]
 
     public IActionResult Login(string email, string password)
     {
-      user = new Users();
+      Users user = new Users();
       user = userService.Login(email, password);
-      if (user != null)
-      {
-        HttpContext.Session.SetString("UserName", user.UserName);
-      }
-      // Console.WriteLine("1");
-      // Console.WriteLine(user.UserId);
-      // Console.WriteLine(user.UserName);
       if (user == null)
       {
         return Redirect("/Login");
       }
-      HttpContext.Session.SetInt32("UserId", user.UserId);
-      HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
-      ViewBag.Notification = true;
-      if (user.Status == 0)
+      else
       {
-        ViewBag.Error = "Account locked";
-        if (user.UserLevel == 1)
+        HttpContext.Session.SetString("UserName", user.UserName);
+        HttpContext.Session.SetInt32("UserId", user.UserId);
+        HttpContext.Session.SetInt32("IsSeller", user.IsSeller);
+        ViewBag.Notification = true;
+        if (user.Status == 0)
         {
-          return Redirect("/Admin/Dashboard");
+          ViewBag.Error = "Account locked";
+          if (user.UserLevel == 1)
+          {
+            return Redirect("/Admin/Dashboard");
+          }
+          return Redirect("/");
         }
-        return Redirect("/");
       }
       return Redirect("/Login");
     }
@@ -129,6 +122,7 @@ namespace Vtc_Freelancer.Controllers
       }
       return View();
     }
+
     [HttpGet("/BecomeSeller")]
     public IActionResult BecomeSeller()
     {
@@ -142,14 +136,8 @@ namespace Vtc_Freelancer.Controllers
 
         ViewBag.subcategory = listSubCategory;
         ViewBag.listcategory = listcategory;
-
-        return View();
       }
       return View();
-
     }
-
-
-
   }
 }

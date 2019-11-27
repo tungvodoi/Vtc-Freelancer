@@ -10,27 +10,24 @@ using System.Collections.Generic;
 
 namespace Vtc_Freelancer.Controllers
 {
-  public class OrderController : Controller
-  {
-    private UserService userService;
-    private OrderService orderService;
-    private GigService gigService;
-    public OrderController(UserService userService, OrderService orderService, GigService gigService)
+    public class OrderController : Controller
     {
-      this.userService = userService;
-      this.orderService = orderService;
-      this.gigService = gigService;
+        private UserService userService;
+        private OrderService orderService;
+        public OrderController(UserService userService, OrderService orderService)
+        {
+            this.userService = userService;
+            this.orderService = orderService;
+        }
+        [HttpGet("/Customize/Order")]
+        public IActionResult Order()
+        {
+            Package pac = orderService.GetPackageByID(1);
+            if (pac != null)
+            {
+                pac.Service = orderService.GetServiceByID(pac.ServiceId);
+            }
+            return View(pac);
+        }
     }
-    [HttpGet("/customize/order")]
-    public IActionResult Order()
-    {
-      Package pac = gigService.GetPackageByID(2);
-      if (pac != null)
-      {
-        pac.Service = gigService.GetServiceByID(pac.ServiceId);
-      }
-      return View(pac);
-    }
-
-  }
 }

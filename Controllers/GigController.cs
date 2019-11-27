@@ -133,7 +133,7 @@ namespace Vtc_Freelancer.Controllers
 
             if (HttpContext.Request.Form.Files != null)
             {
-                var fileName = string.Empty;
+                 var fileName = string.Empty;
                 string PathDB = string.Empty;
 
                 var files = HttpContext.Request.Form.Files;
@@ -190,6 +190,33 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.ReportStatus = false;
             }
             return View();
+        }
+
+        [HttpGet("Gig/ServiceDetail")]
+        public IActionResult ServiceDetail(int? serviceId)
+        {
+            if (serviceId == null)
+            {
+                return Redirect("/");
+            }
+            else
+            {
+                Service service = new Service();
+                service = gigService.GetServiceByID(serviceId);
+                if (service == null)
+                {
+                    return Redirect("/");
+                }
+                ViewBag.serviceDetail = service;
+                Users users = new Users();
+                users = gigService.GetUserByServiceId(serviceId);
+                List<ImageService> images = new List<ImageService>();
+                images = gigService.GetListImagesByServiceId(serviceId);
+                ViewBag.ImageService = images;
+                ViewBag.serviceDetailUser = users;
+                return View();
+
+            }
         }
     }
 }

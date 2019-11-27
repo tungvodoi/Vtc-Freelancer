@@ -1,0 +1,177 @@
+@{
+ViewData["Title"] = "Create your Service";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="bars-service-detail container">
+    <div class="bars-item"><a href="#"><i class="fa fa-flag"></i></a>
+    </div>
+    <div class="bars-item"><a href="#"><i class="fa fa-share"></i></a><small>Share</small></div>
+</div>
+<div class="flex container">
+    <div class="left-detail-content">
+        <div class="wrapper-serive-detail">
+            <!-- Đồng chí nào làm back-end Select data của service ở đây -->
+            <h1 class="back-content">
+                @ViewBag.serviceDetail.Title
+            </h1>
+
+            <br>
+            <a href="">
+                <div class="contain-username">
+                    <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
+                    <b class="back-content">
+                        @ViewBag.serviceDetailUser.UserName
+                    </b>
+                    <a href="">Số sao(Số người rate)</a>
+                </div>
+            </a>
+        </div>
+        <div class="slideshow-container">
+
+            @foreach(var item in @ViewBag.ImageService){
+            <div class="mySlides fade">
+                <img src="~/@item.Image" style="max-width:80%;">
+            </div>
+            }
+        </div>
+        <br>
+        <br>
+        <h2 class="about-gig back-content">About This Gig</h2>
+        <br>
+        <p>@ViewBag.serviceDetail.Description</p>
+        <br><br>
+        <h2 class="back-content">About Seller</h2>
+        <br>
+        <div class="about-seller">
+            <div class="avatar-seller">
+                <img class="about-seller-avatar" src="/images/product1.jpeg" alt="" width="100px" height="100px">
+            </div>
+            <div class="contact-with-seller">
+                <b>@ViewBag.serviceDetailUser.UserName</b>
+                <p>So' sao</p>
+                <button class="btn-contact-me">Contact me</button>
+            </div>
+        </div>
+        <div class="wrapper-table-compare">
+            <h2 class="black-content">Compare Package</h2>
+            <table>
+                <tbody>
+                    <tr class="tr-package">
+                        <th class="th-package">Package</th>
+                        <td class="td-package">
+                            <p class="price">Premium Price</p>
+
+                            <b class="type">Premium</b>
+                            <br>
+                            <b class="title">1 cai cu? lon` gi day</b>
+                        </td>
+                        <td class="td-package">
+                            <p class="price">Standard Price</p>
+                            <b class="type">Standard</b>
+                            <br>
+                            <b class="title">1 cai cu? lon` gi day</b>
+                        </td>
+                        <td class="td-package">
+                            <p class="price">Basic Price</p>
+
+                            <b class="type">Basic</b>
+                            <br>
+                            <b class="title">1 cai cu? lon` gi day</b>
+                        </td>
+                    </tr>
+                    <tr class="description tr-package">
+                        <th class="th-package"></th>
+                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
+                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
+                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
+                    </tr>
+                    <tr class="tr-package">
+                        <th class="th-package">Revisions</th>
+                        <td class="td-package">4</td>
+                        <td class="td-package">4</td>
+                        <td class="td-package">4</td>
+                    </tr>
+                    <tr class="tr-package">
+                        <th class="th-package">Delevery Time</th>
+                        <td class="td-package">delevery time</td>
+                        <td class="td-package">delevery time</td>
+                        <td class="td-package">delevery time</td>
+                    </tr>
+                    <tr class="tr-package">
+                        <th class="th-package">Total</th>
+                        <td class="total-price">
+                            <p>$100</p>
+                            <button class="btn-continue btn-prc-detail">Select</button>
+                        </td>
+                        <td class="total-price">
+                            <p>$100</p>
+                            <button class="btn-continue btn-prc-detail">Select</button>
+                        </td>
+                        <td class="total-price">
+                            <p>$100</p>
+                            <button class="btn-continue btn-prc-detail">Select</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="right-detail-content">
+        <div class="wrapper-price-detail" id="price-detail" onscroll="Onscroll()">
+
+            <div class="w3-bar w3-black">
+                <button class="w3-bar-item w3-button" onclick="openCity('London')">Premium</button>
+                <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Standard</button>
+                <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Basic</button>
+            </div>
+
+            <div id="London" class="w3-container city">
+                <div class="content-price">
+
+                    <h2 class="back-content">Premium Price</h2>
+                    <br>
+                    <p class="price-detail-content">Thach dep trai</p>
+                    <br>
+                    <div class="Delivery"><i class="fa fa-history"></i>
+                        <p>Days Delivery</p>
+                    </div>
+                    <br>
+                    <button class="btn-continue btn-prc-detail">Continue</button>
+                </div>
+            </div>
+
+            <div id="Paris" class="w3-container city" style="display:none">
+                <div class="content-price">
+
+                    <h2 class="back-content">Standard Price</h2>
+                    <br>
+                    <p class="price-detail-content">Thach dep trai vl</p>
+                    <br>
+                    <div class="Delivery"><i class="fa fa-history"></i>
+                        <p>Days Delivery</p>
+                    </div>
+                    <br>
+                    <button class="btn-continue btn-prc-detail">Continue</button>
+                </div>
+            </div>
+
+            <div id="Tokyo" class="w3-container city" style="display:none">
+                <div class="content-price">
+
+                    <h2 class="back-content">Basic Price</h2>
+                    <br>
+                    <p class="price-detail-content">Thach dep trai vcl</p>
+                    <br>
+                    <div class="Delivery"><i class="fa fa-history"></i>
+                        <p>Days Delivery</p>
+                    </div>
+                    <br>
+                    <button class="btn-continue btn-prc-detail">Continue</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -28,14 +28,13 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Full name</th>
-              <th>Email</th>
-              <th>User level</th>
-              <th>Register date</th>
-              <th>Is seller</th>
-              <th>Status</th>
+              <th class="d-inline-block text-truncate" style="width: 44px;">#</th>
+              <th class="d-inline-block text-truncate" style="width: 200px;">Username</th>
+              <th class="d-inline-block text-truncate" style="width: 300px;">Email</th>
+              <th class="d-inline-block text-truncate" style="width: 100px;">User level</th>
+              <th class="d-inline-block text-truncate" style="width: 170px;">Register date</th>
+              <th class="d-inline-block text-truncate" style="width: 100px;">Is seller</th>
+              <th class="d-inline-block text-truncate" style="width: 100px;">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -46,27 +45,26 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
               {
                 i++;
                 <tr>
-                  <td>@i</td>
-                  <td>@item.UserName</td>
-                  <td>@item.FullName</td>
-                  <td>@item.Email</td>
-                  <td>@item.UserLevel</td>
-                  <td>@item.RegisterDate.ToString("dd/MM/yyyy")</td>
+                  <td class="d-inline-block text-truncate" style="width: 44px;">@i</td>
+                  <td class="d-inline-block text-truncate" style="width: 200px;">@item.UserName</td>
+                  <td class="d-inline-block text-truncate" style="width: 300px;">@item.Email</td>
+                  <td class="d-inline-block text-truncate" style="width: 100px;">@item.UserLevel</td>
+                  <td class="d-inline-block text-truncate" style="width: 170px;">@item.RegisterDate.ToString("dd/MM/yyyy")</td>
                   @if(item.IsSeller == 1)
                   {
-                    <td>Yes</td>
+                    <td class="d-inline-block text-truncate" style="width: 100px;">Yes</td>
                   }else
                   {
-                    <td>No</td>
+                    <td class="d-inline-block text-truncate" style="width: 100px;">No</td>
                   }
                   @if(item.Status == 0)
                   {
-                    <td>
+                    <td class="d-inline-block text-truncate" style="width: 100px;">
                       <a href="#" data-toggle="modal" data-target="#ChangeStatusUserModal" onclick="SetUserIdToModal(@item.UserId)">Active</a>
                     </td>
                   }else
                   {
-                    <td>
+                    <td class="d-inline-block text-truncate" style="width: 100px;">
                       <a href="#" data-toggle="modal" data-target="#ChangeStatusUserModal" onclick="SetUserIdToModal(@item.UserId)">Block</a>
                     </td>
                   }
@@ -76,6 +74,13 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
             <partial name="/Views/Shared/_ChangeStatusUser.cshtml" />
           </tbody>
         </table>
+          <ul class="pagination pagination-sm justify-content-end">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
       </div>
     </div>
   </div>

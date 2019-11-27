@@ -1,13 +1,84 @@
 @model Package;
-
-@Model.Name;
-@Model.Title;
-@Model.Description;
-@Model.Price;
-@Model.NumberRevision;
-@Model.DeliveryTime;
-@Model.Service.Title;
-@Model.Service.Category;
-@Model.Service.SubCategory;
-@Model.Service.Description;
-@Model.Service.TimeCreateService;
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+<div class="container">
+  <div class="col-10">
+    <section>
+      <h3><span>Customize Your Package</span></h3>
+      <div class="summary">
+        <div>
+          <div><a><span></span><img></a>
+            <div>
+              <p>
+                <a>
+                  @Model.Service.Title
+                </a>
+              </p>
+              <span>
+                <!-- <Img></Img> -->
+              </span>
+              <a>
+                <span>
+                </span>
+              </a>
+            </div>
+        </div>
+        <div class="pricing"><label class="quantity"><span>Qty</span><select>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <br>
+            </select></label><span><b>@Model.Price $</b></span></div>
+      </div>
+      <div>
+        <h6>@Model.Title</h6>
+        <p>@Model.Description</p>
+        <section>
+          <ul>
+            <li><span>@Model.DeliveryTime Days Delivery</span></li>
+            <li><span>@Model.NumberRevision Revision</span></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </div>
+  <div class="col-2">
+    <div>
+      <h6><span>Summary</span></h6>
+      <div><span>Subtotal</span><span>@Model.Price $</span></div>
+      <div>
+        <div>
+          <div><span>Service Fee</span><span></i></span></div><span>@(Model.Price * 5 / 100) $</span>
+        </div>
+      </div>
+      <div><span>Total</span><span>@(Model.Price + (@Model.Price * 5/100)) $</span></div>
+      <div><span>Delivery Time</span><span>
+          <span>@Model.DeliveryTime Days</span></span></div>
+      <div>
+        <div><button type="button">Order
+            Now</button>
+          <div class="cta-comment">You won't be charged yet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

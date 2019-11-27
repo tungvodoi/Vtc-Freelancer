@@ -6,131 +6,19 @@ ViewData["Title"] = "Home Page";
 
 <body>
 
-	<!-- <div class="header container">
-		<div class="left-top-nav">
-			<div class="logo">
-				<a href="#">VTC Freelancer</a>
-			</div>
-			<form action="" method="post">
-				<input type="text" name="" id="input-search-service" placeholder="Find Services" />
-				<button id="btn-search-service">Search</button>
-			</form>
-		</div>
-		<div class="right-top-nav">
-			<ul class="nav-top">
-			@if(ViewBag.UserName!= null)
-			{	
-				@if(ViewBag.IsSeller == 0)
-				{
-					
-					<li>
-					<a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-				</li>
-				}
-			else{
-			
-					<li>
-					<a href="/Seller/Index" class="nav-link"><b>Switch Seller</b></a>
-				</li>
-				}
-			}
-				<li>
-					<a href="#" class="nav-link"><b>Messages</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Saved</b></a>
-				</li>
-				<li>
-					<a href="#" class="nav-link"><b>Orders</b></a>
-				</li>
-				@if(ViewBag.UserName == null)
-				{
-				<li><a href="/Login" class="nav-link"><b>Login</b></a></li>
-					<li><a href="/Login" class="nav-link"><b>Join</b></a></li>
-				}
-					
-			</ul>
-		</div>
-	</div> -->
-	<div class="nav-categories">
-		<ul class="ul-categories container">
-			<li class="li-categories">
-				<a href="" class="categories-link">Graphics & Design</a>
-				<ul class="ul-package">
-
-					@if(ViewBag.listcategory != null)
-					{
-						@foreach (var item in ViewBag.listcategory)
-				    	{
-						<li class="li-package">
-							<a href="" class="a-package">item.CategoryName</a>
-						</li>
-						}
-					}
-
-					<li class="li-package">
-						<a href="" class="a-package">Logo Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brand Style Guides</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Game Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Graphics for Streamers </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Business Cards & Stationery</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Illustration</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brochure Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Poster Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Flyer Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Book & Album Covers</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Storyboards </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Web & Mobile Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Social Media Design</a>
-					</li>
-				</ul>
-			</li>
-			<li class="li-categories">
-				<a href="" class="categories-link">Programming & Tech</a>
-				<ul class="ul-package">
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-
 	<div class="content">
 		<div class="container-inner">
 			<section class="header-slider">
 				<div class="post-request">
 					<div class="inside-post-request">
-					@if(@ViewBag.UserName!= null)
-					{
-							<b>Hi , @ViewBag.UserName </b> <br /><br />
-					}
+						@if(@ViewBag.UserName!= null)
+						{
+						<b>Hi , @ViewBag.UserName</b><br /><br />
+						}
 						<p>Get offer from sellers for your project</p>
 						<br /><br />
-						<input type="button" value="Post a request" />
+						<button type="button" onclick="window.location.href = '/manager_request'">Post a
+							request</button>
 					</div>
 				</div>
 				<div class="slide-section">
@@ -766,10 +654,7 @@ ViewData["Title"] = "Home Page";
 							</div>
 						</div>
 					</div>
-					
 			</section>
 		</div>
 	</div>
-
-
 </body>

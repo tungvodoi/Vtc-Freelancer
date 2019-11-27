@@ -1,0 +1,184 @@
+.wrapper-serive-detail {
+  margin: 2rem 0px 2rem 0px;
+}
+
+/* .wrapper-serive-detail h1 {
+  color: black;
+} */
+
+.back-content {
+  color: black;
+}
+
+.contain-username {
+  display: flex;
+  /* color: black !important; */
+  align-items: center;
+  /* font-weight: 600; */
+}
+
+.bars-service-detail {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d5d4d2;
+}
+
+.bars-item {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  border: 1px solid #d5d4d2;
+}
+
+.body-service-detail {}
+
+.flex {
+  display: flex;
+  /* align-items: center; */
+}
+
+.left-detail-content {
+  width: 70%;
+}
+
+.right-detail-content {
+  width: 30%;
+}
+
+.w3-bar-item {
+  padding: 16px;
+  float: left;
+  width: 33%;
+  border: none;
+  display: block;
+  outline: 0;
+  color: black;
+  background-color: white;
+  border: 1px solid #d5d4d2;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.w3-bar-item:hover {
+  background-color: #1dbf73;
+  color: white;
+}
+
+.wrapper-price-detail {
+  /* padding: 1.5rem; */
+  margin-top: 3rem;
+  position: sticky;
+  background-color: white;
+  top: 3rem;
+  /* bottom: ; */
+  /* z-index: 1; */
+  max-width: 100%;
+  max-height: 500px;
+  height: 400px;
+  border: 1px solid #d5d4d2;
+}
+
+.w3-bar {
+  display: flex;
+}
+
+.w3-button {
+  flex: 1 1;
+}
+
+.bars-service-detail {
+  position: sticky;
+  background-color: white;
+  z-index: 5;
+  top: 0px;
+}
+
+.w3-container {
+  padding: 1.5rem;
+}
+
+.price-detail-content {
+  margin: 1.5rem;
+}
+
+.Delivery {
+  display: flex;
+  align-items: center;
+}
+
+.fa-history {
+  margin: 5px;
+}
+
+.btn-prc-detail {
+  width: 100% !important;
+}
+
+/* 
+.about-seller
+{
+  
+} */
+
+.about-seller-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+.about-seller {
+  display: flex;
+  align-items: center;
+}
+
+.btn-contact-me {
+  background-color: white;
+  border: 1px solid #d5d4d2;
+  border-radius: 4px;
+  padding: 5px 10px 5px 10px;
+}
+
+.td-package {
+  padding: 10px;
+}
+
+.wrapper-table-compare {
+  padding: 2rem;
+}
+
+.wrapper-table-compare table {
+  margin: 2rem;
+  width: 80%;
+  font-size: 14px;
+  line-height: 21px;
+  border: 1px solid #efeff0;
+}
+
+.wrapper-table-compare tr th {
+  color: #777;
+  font-weight: 400;
+  text-align: left;
+  padding: 12px 16px;
+  vertical-align: text-top;
+}
+
+.tr-package {}
+
+.td-package {
+  width: 50px;
+  padding-top: 24px;
+  position: relative;
+  vertical-align: text-top;
+  text-align: left;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.total-price {
+  padding-top: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: center;
+  padding-bottom: 10px;
+}
