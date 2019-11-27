@@ -39,17 +39,16 @@ namespace Vtc_Freelancer.Services
       {
         try
         {
-          var Category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == CategoryName);
           if (category != null)
           {
 
             SubCategory.CategoryName = SubCategoryName;
-            SubCategory.ParenId = Category.CategoryId;
+            SubCategory.ParenId = category.CategoryId;
             dbContext.Add(SubCategory);
             dbContext.SaveChanges();
+            return true;
           }
-
-          return true;
+          return false;
         }
         catch (System.Exception e)
         {
@@ -141,10 +140,6 @@ namespace Vtc_Freelancer.Services
     {
       List<Category> listCategory = new List<Category>();
       listCategory = dbContext.Category.FromSql("SELECT * FROM Category where parenId = 0").ToList();
-      foreach (var item in listCategory)
-      {
-        Console.WriteLine(item.CategoryName);
-      }
       return listCategory;
     }
     public List<Category> GetListSubCategoryByCategoryParentId(int id)
@@ -158,18 +153,28 @@ namespace Vtc_Freelancer.Services
       return listCategory;
     }
 
-    public bool EditCategory(Category category)
+    public bool EditCategory(Category category, string name)
     {
-      var category1 = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == category.CategoryName);
-      if (category != null)
+      var category1 = GetCategoryByCategoryName(name);
+      Console.WriteLine(444444444);
+      Console.WriteLine(category1.CategoryName);
+      if (category1 != null)
       {
         category1.CategoryName = category.CategoryName;
         dbContext.Update(category1);
         dbContext.SaveChanges();
+        Console.WriteLine(8888888888888);
         return true;
       }
 
       return false;
+    }
+    public Category GetCategoryByCategoryName(string name)
+    {
+      Category category = new Category();
+      category = dbContext.Category.FirstOrDefault(cat => cat.CategoryName == name);
+      return category;
+
     }
   }
 }

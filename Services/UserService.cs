@@ -59,7 +59,6 @@ namespace Vtc_Freelancer.Services
         {
           if (user.Password == password)
           {
-            // System.Console.WriteLine(user.UserName);
             return user;
           }
 
@@ -80,7 +79,7 @@ namespace Vtc_Freelancer.Services
       }
 
     }
-    public bool EditProfile(int Id, string Email, string UserName)
+    public bool EditProfile(int Id, string Email, string UserName, string FullName, string country, string address)
     {
       Users user = new Users();
       user = GetUserByUserId(Id);
@@ -88,6 +87,9 @@ namespace Vtc_Freelancer.Services
       {
         user.UserName = UserName;
         user.Email = Email;
+        user.FullName = FullName;
+        user.Country = country;
+        user.Address = address;
         dbContext.Update(user);
         dbContext.SaveChanges();
         return true;
@@ -158,8 +160,7 @@ namespace Vtc_Freelancer.Services
         SellerCategory sellerCategory = new SellerCategory();
         sellerCategory.SellerId = seller.SellerId;
         sellerCategory.CategoryId = category.CategoryId;
-        Console.WriteLine(sellerCategory.SellerId);
-        Console.WriteLine(sellerCategory.CategoryId);
+
         dbContext.Add(sellerCategory);
         dbContext.SaveChanges();
         return true;

@@ -37,7 +37,7 @@ function showSlides(n) {
 
 const btn = document.getElementsByClassName("btn-footer-link");
 for (let i = 0; i < btn.length; i++) {
-  btn[i].addEventListener("click", function() {
+  btn[i].addEventListener("click", function () {
     var content = this.nextElementSibling;
     if (content.style.display === "block") {
       content.style.display = "none";

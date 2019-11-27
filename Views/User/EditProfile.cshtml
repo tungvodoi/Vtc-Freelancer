@@ -13,20 +13,24 @@ ViewData["Title"] = "EditProfile";
         <h5>Tài khoản không tồn tại</h5>
         <br>
         }
-        <label>User Id</label>
-        <input name="Id"/> @ViewBag.UserId
+        <label>User Name</label>
+        <input name="UserName" placeholder="@ViewBag.UserName" /> 
         <label>
-            Email hoặc UserName
+            Email
         </label>
-        <input name="Email" required />
+        <input name="Email" required placeholder="@ViewBag.Email" />
         <br>
         <label>
-            UserName
+            Full Name
         </label>
-        <input type="text" name="UserName" id="pass" required />
+        <input type="text" name="FullName" required placeholder=" @ViewBag.FullName"/>
         <br>
+        <label>
+           Address
+        </label>
+        <input type="text" name="Address"  required placeholder=" @ViewBag.Address" />
         <button id="but" onclick="login()">Đăng Nhập</button>
         <br>
-        <a href="/Register">Bạn chưa có tài khoản?</a>
+       
     </form>
 </div>

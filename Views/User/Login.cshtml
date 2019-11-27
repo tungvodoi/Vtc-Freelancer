@@ -13,8 +13,10 @@ Layout = "~/Views/Shared/_Login.cshtml";
             </div>
             <p style="text-align:center"> OR  </p>
             <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName" required="" autofocus="">
+            <p style="color:red">@ViewBag.Error</p>
             <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
-            
+            <p style="color:red">@ViewBag.Error1</p>
+            <p style="color:red">@ViewBag.Accountlocked </p>
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
             <a href="#" id="forgot_pswd">Forgot password?</a>
             <hr>
