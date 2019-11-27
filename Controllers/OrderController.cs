@@ -27,9 +27,7 @@ namespace Vtc_Freelancer.Controllers
       {
         pac.Service = orderService.GetServiceByID(pac.ServiceId);
       }
-      Console.WriteLine(pac.Name);
       return View(pac);
     }
-
   }
 }
