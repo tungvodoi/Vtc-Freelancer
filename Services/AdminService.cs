@@ -62,20 +62,32 @@ namespace Vtc_Freelancer.Services
         }
         public List<Service> GetListServices(string Search)
         {
-            List<Service> ListServices = dbContext.Service.FromSql(@"select s.ServiceId, s.Title, s.Category, s.SubCategory, s.Description, s.TimeCreateService, s.Status, s.SellerId, u.Username 
-            from Service s inner join seller se on s.sellerid = se.sellerid inner join users u on se.userid = u.userid
-            where s.Title like '%" + Search + "%' or s.Category like '%" + Search + "%' or s.SubCategory like '%" + Search + "%' or s.Description like '%" + Search + "%' or u.Username like '%" + Search + "%' order by TimeCreateService desc").ToList();
-            foreach (var item in ListServices)
-            {
-                item.Seller = dbContext.Seller.FirstOrDefault(x => x.SellerId == item.SellerId);
-                item.Seller.User = dbContext.Users.FirstOrDefault(x => x.UserId == item.Seller.UserId);
-            }
+            List<Service> ListServices = dbContext.Service.Include(x => x.Seller).ThenInclude(x => x.User)
+            .Where(x => EF.Functions.Like(x.Seller.User.UserName, $"%{Search}%") || EF.Functions.Like(x.Title, $"%{Search}%")
+             || EF.Functions.Like(x.Category, $"%{Search}%") || EF.Functions.Like(x.SubCategory, $"%{Search}%") || EF.Functions.Like(x.Description, $"%{Search}%"))
+            .OrderByDescending(x => x.TimeCreateService).ToList();
             return ListServices;
+        }
+        public List<Orders> GetListOrders(string Search)
+        {
+            List<Orders> ListOrders = dbContext.Order.Include(x => x.Users).Include(x => x.Service)
+            .Where(x => EF.Functions.Like(x.Users.UserName, $"%{Search}%") || EF.Functions.Like(x.Service.Title, $"%{Search}%"))
+            .OrderByDescending(x => x.OrderTime).ToList();
+            return ListOrders;
+        }
+        public List<Request> GetListRequests(string Search)
+        {
+            List<Request> ListRequests = dbContext.Request.Include(x => x.Users).Where(x => EF.Functions.Like(x.Users.UserName, $"%{Search}%")
+             || EF.Functions.Like(x.DeliveredTime, $"%{Search}%") || EF.Functions.Like(x.Category, $"%{Search}%")
+             || EF.Functions.Like(x.SubCategory, $"%{Search}%") || EF.Functions.Like(x.Description, $"%{Search}%"))
+            .OrderByDescending(x => x.TimeCreate).ToList();
+            return ListRequests;
         }
         public List<Report> GetListReport(string Search)
         {
-            List<Report> ListReport = dbContext.Report.FromSql(@"select re.reportId, re.TitleReport, re.ContentReport, re.TimeCreateReport, re.Status, re.ServiceId, re.UserId, u.Username, s.Title 
-            from report re inner join users u on re.userid = u.userid inner join service s on re.serviceid = s.serviceid where u.Username like '%" + Search + "%' or s.Title like '%" + Search + "%' or re.TitleReport like '%" + Search + "%' order by TimeCreateReport desc").ToList();
+            List<Report> ListReport = dbContext.Report.Include(x => x.Service).Include(x => x.User)
+            .Where(x => EF.Functions.Like(x.User.UserName, $"%{Search}%") || EF.Functions.Like(x.Service.Title, $"%{Search}%") || EF.Functions.Like(x.TitleReport, $"%{Search}%"))
+            .OrderByDescending(x => x.TimeCreateReport).ToList();
             foreach (var item in ListReport)
             {
                 item.Service = dbContext.Service.FirstOrDefault(x => x.ServiceId == item.ServiceId);
@@ -85,15 +97,16 @@ namespace Vtc_Freelancer.Services
         }
         public List<Users> GetListUsers(string Search)
         {
-            List<Users> ListUsers = dbContext.Users.FromSql("select * from Users where Username like '%" + Search + "%' or Email like '%" + Search + "%'").ToList();
+            List<Users> ListUsers = dbContext.Users.Where(x => EF.Functions.Like(x.UserName, $"%{Search}%") && x.Email != "admin@gmail.com").ToList();
             return ListUsers;
         }
+
         public bool ChangeStatusUser(int UserId)
         {
             try
             {
                 Users user = dbContext.Users.FirstOrDefault(x => x.UserId == UserId);
-                if (user.Status == 1)
+                if (user.Status != 0)
                 {
                     user.Status = 0;
                 }
@@ -102,6 +115,52 @@ namespace Vtc_Freelancer.Services
                     user.Status = 1;
                 }
                 dbContext.Update(user);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+        }
+        public bool HandleService(int ReportId)
+        {
+            try
+            {
+                Report report = dbContext.Report.Include(x => x.Service).FirstOrDefault(x => x.ReportId == ReportId);
+                if (report.Status != 1)
+                {
+                    report.Status = 1;
+                }
+                if (report.Service.Status != 1)
+                {
+                    report.Service.Status = 1;
+                }
+                dbContext.Update(report);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+        }
+        public bool HandleSeller(int ReportId)
+        {
+            try
+            {
+                Report report = dbContext.Report.Include(x => x.Service).ThenInclude(x => x.Seller).ThenInclude(x => x.User).FirstOrDefault(x => x.ReportId == ReportId);
+                if (report.Status != 1)
+                {
+                    report.Status = 1;
+                }
+                if (report.User.Status != 1)
+                {
+                    report.User.Status = 1;
+                }
+                dbContext.Update(report);
                 dbContext.SaveChanges();
                 return true;
             }
@@ -134,27 +193,18 @@ namespace Vtc_Freelancer.Services
         {
             List<Category> listCategory = new List<Category>();
             listCategory = dbContext.Category.FromSql("SELECT * FROM Category WHERE CategoryName = {0}", CategoryName).ToList();
-
             return listCategory;
         }
         public List<Category> GetListCategoryBy()
         {
             List<Category> listCategory = new List<Category>();
-            listCategory = dbContext.Category.FromSql("SELECT * FROM Category where parenId = 0").ToList();
-            foreach (var item in listCategory)
-            {
-                Console.WriteLine(item.CategoryName);
-            }
+            listCategory = dbContext.Category.Where(c => c.ParenId == 0).ToList();
             return listCategory;
         }
         public List<Category> GetListSubCategoryByCategoryParentId(int id)
         {
             List<Category> listCategory = new List<Category>();
             listCategory = dbContext.Category.FromSql($"SELECT * FROM Category where parenId = {id}").ToList();
-            foreach (var item in listCategory)
-            {
-                Console.WriteLine(item.CategoryName);
-            }
             return listCategory;
         }
 

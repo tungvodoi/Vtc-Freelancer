@@ -13,10 +13,11 @@ namespace Vtc_Freelancer.Models
         public DbSet<SellerCategory> SellerCategory { get; set; }
         public DbSet<Request> Request { get; set; }
         public DbSet<Offer> Offer { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Orders> Order { get; set; }
         public DbSet<Service> Service { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationDetail> NotificationDetail { get; set; }
+        public DbSet<ImageService> ImageService { get; set; }
         public DbSet<Package> Package { get; set; }
         public DbSet<Rating> Rating { get; set; }
         public DbSet<Report> Report { get; set; }
@@ -24,7 +25,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<Conversation> Conversation { get; set; }
         public DbSet<ConversationDetail> ConversationDetail { get; set; }
         public DbSet<FAQ> FAQ { get; set; }
-        public DbSet<ImageService> ImageService { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=127.0.0.1;uid=admin;pwd=123456;database=vtc_freelancer");
@@ -83,7 +84,7 @@ namespace Vtc_Freelancer.Models
             modelBuilder.Entity<Request>(entity =>
             {
                 entity.HasKey(x => x.RequestId);
-                entity.Property(x => x.Delivered);
+                entity.Property(x => x.DeliveredTime);
                 entity.Property(x => x.Category);
                 entity.Property(x => x.SubCategory);
                 entity.Property(x => x.Budget);
@@ -103,14 +104,14 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.RequestId);
                 entity.Property(x => x.ServiceId);
             });
-            modelBuilder.Entity<Order>(entity =>
+            modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(x => x.OrderId);
                 entity.Property(x => x.WorkStatus);
                 entity.Property(x => x.Quantity);
                 entity.Property(x => x.OrderTime);
                 entity.Property(x => x.UserId);
-                entity.Property(x => x.PackageId);
+                entity.Property(x => x.ServiceId);
             });
             modelBuilder.Entity<Conversation>(entity =>
             {
