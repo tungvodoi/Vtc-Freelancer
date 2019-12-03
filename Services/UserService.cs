@@ -157,8 +157,7 @@ namespace Vtc_Freelancer.Services
                 SellerCategory sellerCategory = new SellerCategory();
                 sellerCategory.SellerId = seller.SellerId;
                 sellerCategory.CategoryId = category.CategoryId;
-                Console.WriteLine(sellerCategory.SellerId);
-                Console.WriteLine(sellerCategory.CategoryId);
+
                 dbContext.Add(sellerCategory);
                 dbContext.SaveChanges();
                 return true;

@@ -16,16 +16,22 @@ namespace Vtc_Freelancer.Controllers
         private UserService userService;
         private AdminService adminService;
         private readonly ILogger<HomeController> _logger;
-        public HomeController(UserService userService, AdminService adminService)
+        public HomeController(UserService userService, AdminService adminService, ILogger<HomeController> logger)
         {
+            this._logger = logger;
             this.userService = userService;
             this.adminService = adminService;
         }
-
         public IActionResult Index()
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            List<Service> services = new List<Service>();
+            services = adminService.GetListServices("");
+            foreach (var item in services)
+            {
+                item.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
                 int? userId = HttpContext.Session.GetInt32("UserId");
@@ -40,14 +46,9 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View();
+                return View(services);
             }
-            return View();
-        }
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return Redirect("/");
+            return View(services);
         }
         public IActionResult EditProfile()
         {
@@ -55,6 +56,12 @@ namespace Vtc_Freelancer.Controllers
             Users userads = userService.GetUsersByID(userId);
             ViewBag.UserName = userads.UserName;
             return View();
+        }
+        [HttpGet("/Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/");
         }
     }
 }

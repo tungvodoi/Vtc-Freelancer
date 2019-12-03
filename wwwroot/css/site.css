@@ -343,7 +343,7 @@ ul {
 }
 
 .slide-gig-css:hover .arrowSlide-right {
-  right: 0;
+  right: 10px;
 }
 
 .slider__gig-image {
@@ -1029,8 +1029,3 @@ h3 {
 .form-become-seller {
   margin: 1rem;
 }
-
-/* .contain-username {
-  /* justify-content: flex-start !important; */
-
-/* } */

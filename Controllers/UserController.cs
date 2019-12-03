@@ -59,7 +59,9 @@ namespace Vtc_Freelancer.Controllers
       user = userService.Login(email, password);
       if (user == null)
       {
-        return Redirect("/Login");
+        ViewBag.Error = "Wrong Username/Email";
+        ViewBag.Error1 = "Wrong Password";
+        return View("Login");
       }
       else
       {
@@ -77,7 +79,8 @@ namespace Vtc_Freelancer.Controllers
           return Redirect("/");
         }
       }
-      return Redirect("/Login");
+      ViewBag.Accountlocked = "Account locked";
+      return View("Login");
     }
     [HttpGet("/Login")]
     public IActionResult Login()
@@ -90,19 +93,20 @@ namespace Vtc_Freelancer.Controllers
       {
         if (user.Status == 1)
         {
-          ViewBag.Error = "Account locked";
+          // ViewBag.Accountlocked = "Account locked";
         }
       }
       else
       {
-        ViewBag.Error = "Account Not Exist :(";
+        // ViewBag.Error = "Wrong Username/email";
+        // ViewBag.Error1 = "Wrong Passwowrd";
       }
       return View();
     }
     [HttpPost("/BecomeSeller")]
     public IActionResult BecomeSeller(Seller seller1, Languages languages, Category category, Skills skills)
     {
-      Console.WriteLine(77777777777);
+
       Console.WriteLine(category.CategoryName);
       int? userId = HttpContext.Session.GetInt32("UserId");
       Users users = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
@@ -139,5 +143,26 @@ namespace Vtc_Freelancer.Controllers
       }
       return View();
     }
+    [HttpGet("/EditProfile")]
+    public IActionResult EditProfile()
+    {
+      var userId = HttpContext.Session.GetInt32("UserId");
+      var user = userService.GetUsersByID(userId);
+      if (user != null)
+      {
+        ViewBag.UserId = userId;
+        ViewBag.UserName = user.UserName;
+        ViewBag.Email = user.Email;
+        ViewBag.FullName = user.FullName;
+        ViewBag.Country = user.Country;
+        ViewBag.Address = user.Address;
+
+      }
+      return View();
+
+    }
+
+
+
   }
 }
