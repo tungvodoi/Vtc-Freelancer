@@ -1,0 +1,137 @@
+@model Package;
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_Order.cshtml";
+}
+<div class="nav-step step-order container">
+    <nav>
+        <ul class="ul-step">
+            <li class="wrapper-li-step">
+                <div class="wrapper-logo">
+                    <i id="icon-menu" class="fa fa-bars"></i>
+                    <div class="logo">
+                        <a href="#">VTC Freelancer</a>
+                    </div>
+                </div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">1</div>
+                <div class="li-content">Order Detail ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step" style="background-color: #1dbf73;">2</div>
+                <div class="li-content">Confirm & Pay ></div>
+            </li>
+            <li class="wrapper-li-step">
+                <div class="li-step">3</div>
+                <div class="li-content">Submit Requirements </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="payment-detail container-inner">
+    <div class="right-content info-card-detail">
+        <div class="cash-option">
+            <div>
+
+            </div>
+        </div>
+        <nav class="cards">
+            <h3 class="back-content">
+                Creadit & Debit Cards
+            </h3>
+            <ul class="ul-cards">
+                <li class="li-cards"><img class="card-options" src="~/Images/payment_visa.png" alt="visa"></li>
+                <li class="li-cards"><img class="card-options" src="~/Images/mastercard.jpg" alt="master-card"></li>
+                <li class="li-cards"><img class="card-options" src="~/Images/discover-payment.png" alt="discover">
+                </li>
+                <li class="li-cards"><img class="card-options" src="~/Images/jcb.jpg" alt="jcb"></li>
+            </ul>
+        </nav>
+        <div class="cash-info">
+            <div class="card-datail">
+                <label for="" class="card-number" id="number-card">
+                    <span>Card Number</span>
+                    <br>
+                    <input class="input-card-detail" type="number" style="width: 100%;">
+                </label>
+                <label for="" class="card-date">
+                    <span>Expiration Date</span>
+                    <br>
+                    <input type="datetime" placeholder="MM/YY" class="input-card-detail">
+                    <span class="error-date"></span>
+                </label>
+                <label for="" class="card-number">
+                    <span>Security Code</span>
+                    <br>
+                    <input type="number" class="input-card-detail">
+                </label>
+            </div>
+
+            <div class="card-datail bottom-detail-content">
+                <label for="" class="card-number bottom-input-card">
+                    <span>First Name</span>
+                    <br>
+                    <input class="input-card-detail input-detail" type="text" width="100%">
+                </label>
+
+                <label for="" class="card-number  bottom-input-card">
+                    <span>Last Name</span>
+                    <br>
+                    <input type="text" class="input-card-detail input-detail" width="100%">
+                </label>
+            </div>
+            <br>
+            <br>
+            <div class="check-point">
+                <input type="checkbox"><span>Save as default</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="left-content ">
+
+
+
+        <div class="wrapper-order-content">
+            <div class="summary">
+                <div class="gig-summary">
+                    <img src="/images/product1.jpeg" alt="" width="100px" style="margin: 0rem 1rem 0rem 1rem;">
+                    <div>
+                        @Model.Title
+                    </div>
+                </div>
+            </div>
+            <h2 class="back-content">Summary</h2>
+            <br>
+            <div><span>Subtotal</span><span class="float-right" id="basic-price">@Model.Price $</span></div>
+            <br>
+            <div>
+                <div>
+                    <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 5 / 100)
+                            $</span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price *
+                    5/100))
+                    $</span>
+            </div>
+            <br>
+
+            <div><span>Delivery Time</span><span>
+                    <span class="float-right">@Model.DeliveryTime Days</span></span></div>
+            <div>
+                <br>
+                <div>
+                    <button type="button" class="btn-continue btn-prc-detail">Confirm & Pay</button>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
