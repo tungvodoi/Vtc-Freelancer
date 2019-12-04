@@ -8,13 +8,11 @@ Layout = "~/Views/Shared/_Login.cshtml";
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to VTC Freelancer</h1>
             <br />
             <div class="social-login">
-<fb:login-button 
-  scope="public_profile,email"
-  onlogin="checkLoginState();">
-</fb:login-button>
-<button onclick="logout()">Logout</button>
-                <button class="btn facebook-btn social-btn" type="button"><span><i class="fa fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                <button class="btn google-btn social-btn" type="button"><span><i class="fa fa-google-plus-g"></i> Sign in with Google+</span> </button>
+              <fb:login-button 
+                scope="public_profile,email"
+                onlogin="checkLoginState();">
+              </fb:login-button>
+              <!-- <button onclick="logout()">Logout</button> -->
             </div>
             <p style="text-align:center"> OR  </p>
             <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName" required="" autofocus="">
