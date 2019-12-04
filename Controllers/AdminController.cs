@@ -219,8 +219,6 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult EditCategory(Category category)
         {
             var name = HttpContext.Session.GetString("CategoryName");
-            Console.WriteLine(12313213);
-            Console.WriteLine(name);
             if (adminService.EditCategory(category, name))
             {
                 return Redirect("/Admin/CreateCategory");

@@ -89,6 +89,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.SubCategory);
                 entity.Property(x => x.Budget);
                 entity.Property(x => x.Description);
+                entity.Property(x => x.LinkFile);
                 entity.Property(x => x.TimeCreate);
                 entity.Property(x => x.Status);
                 entity.Property(x => x.UserId);

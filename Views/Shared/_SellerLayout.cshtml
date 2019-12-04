@@ -23,7 +23,14 @@
             <nav class="site-sidebars">
                 <div class="profile-wrapper">
                     <label class="lable-profile">
-                        <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                        @if(ViewBag.userAvatar != null)
+                        {
+                        <img class="img-profile" id="img-prf" src="~/@ViewBag.userAvatar" alt="avatar">
+                        }
+                        else
+                        {
+                        <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                        }
                     </label>
                     <br>
                     <p class="username">Username</p>
@@ -72,7 +79,7 @@
             <ul class="nav-top">
 
                 <li>
-                    <a href="#" class="nav-link nav-link-seller"><b>Dashboard</b></a>
+                    <a href="/Seller" class="nav-link nav-link-seller"><b>Dashboard</b></a>
                 </li>
                 <li>
                     <a href="#" class="nav-link nav-link-seller"><b>Messages</b></a>
@@ -86,14 +93,22 @@
             </ul>
         </div>
 
-        <a href="/Home/Index">
+        <a href="/">
             <div class="prf-div">
                 <p style="color: #1dbf73;font-weight: bold;">Switch Buying</p>
-
-                <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
-
+                @if(ViewBag.userAvatar == null)
+                {
+                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                }
+                else
+                {
+                <img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar">
+                }
             </div>
         </a>
+        <li>
+            <a href="/Logout" class="nav-link"><b>Logout</b></a>
+        </li>
 
     </div>
     @RenderBody()
@@ -103,10 +118,11 @@
             <div class="footer-content-wrapper">
                 <div class="footer-content">
                     <button class="btn-footer-link">Categories</button>
-                    <ul class="ul-footer-link">
+                    <ul>
                         @if(ViewBag.listcategory!= null)
                         {
-                        @foreach(var item in ViewBag.listcategory ) {
+                        @foreach(var item in ViewBag.listcategory )
+                        {
                         <li class="li-footer-content">
                             <a href="#">@item.CategoryName</a>
                         </li>

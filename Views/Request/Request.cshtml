@@ -8,15 +8,15 @@ ViewData["Title"] = "Request a Service";
                 <h1>What Service Are You Looking For?</h1>
             </div>
             <div class="container-request2">
-                <form method="POST" action="">
+                <form method="POST" action="/manager_request" enctype="multipart/form-data">
                     <div class="step1">
                         <label for="inputRequest">Describe the service you're looking to purchase -
                             please be as
                             detailed as possible:</label>
                         <div class="input-description">
-                            <textarea name="inputRequest" placeholder="I'm looking for..." maxlength="2500"></textarea>
+                            <textarea name="inputRequest" placeholder="I'm looking for..." maxlength="2500" required></textarea>
                             <div class="UpLoadFileRequest">
-                                <input type="file" class="uploadifive-input">
+                                <input type="file" name="files" class="uploadifive-input" multiple>
                             </div>
                         </div>
                     </div>
@@ -24,37 +24,39 @@ ViewData["Title"] = "Request a Service";
                     <div class="step2">
                         <label for="">Choose a category:</label>
                         <div class="select-category">
-                            <select name="category" class="category">
-                                <option>Select...</option>
-                                @if(ViewBag.listcategory != null)
-                                {
-                                    @foreach (var item in ViewBag.listcategory)
+                            <div>
+                                <select name="category" class="category">
+                                    <option>Select...</option>
+                                    @if(ViewBag.listcategory != null)
                                     {
-                                        <option value="@item.CategoryName">@item.CategoryName</option>
+                                        @foreach (var item in ViewBag.listcategory)
+                                        {
+                                            <option value="@item.CategoryName">@item.CategoryName</option>
+                                        }
                                     }
-                                }
-                            </select>
-                            <select name="Subcategory" class="category">
-                                <option>Select subcategory</option>
-                                @if( ViewBag.subcategory != null)
-                                {
-                                    @foreach (var item in  ViewBag.subcategory)
+                                </select>
+                                <select name="SubCategory" class="category">
+                                    <option>Select subcategory</option>
+                                    @if( ViewBag.subcategory != null)
                                     {
-                                        <option value="@item.CategoryName">@item.CategoryName</option>
+                                        @foreach (var item in  ViewBag.subcategory)
+                                        {
+                                            <option value="@item.CategoryName">@item.CategoryName</option>
+                                        }
                                     }
-                                }
-                            </select>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <div class="step3">
                         <label for="">Once you place your order, when would you like your service delivered?</label>
                         <div class="select-time">
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="1">24 Hours</a>
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="3">3 Days</a>
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event)" name="7">7 Days</a>
-                            <a href="">Other</a>
-                            <!-- <input type="text" name="inputOther" placeholder="1-30 days" value class="js-other-value"> -->
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 1)">24 Hours</a>
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 3)">3 Days</a>
+                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 7)">7 Days</a>
+                            <a href="" class="deliveredTime" onclick="InputOther(event)">Other</a>
+                            <input type="number" name="inputDeliveredTime" placeholder="1-30 days" value id="js-other-value" required>
                         </div>
                     </div>
                     <hr>
@@ -62,10 +64,10 @@ ViewData["Title"] = "Request a Service";
                         <label for="">What is your budget for this service?</label>
                         <div class="input-budget">
                             <small class="js-currency-symbol">$</small>
-                            <input type="text" name="inputBudget" placeholder="Enter Budget">
+                            <input type="number" class="budget-display" name="inputBudget" placeholder="Enter Budget" required>
                         </div>
                     </div>
-                    <input type="submit" class="confirm" value="Post">
+                    <input type="submit" class="submit" value="Post">
                 </form>
             </div>
         </div>

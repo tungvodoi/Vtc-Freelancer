@@ -59,6 +59,7 @@ namespace Vtc_Freelancer.Controllers
             }
             ViewBag.sellerprofile = seller;
             ViewBag.userProfile = users;
+            ViewBag.userAvatar = users.Avatar;
             ViewBag.listServiceProfile = services;
 
             return View(services);
