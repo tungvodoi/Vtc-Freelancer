@@ -59,14 +59,18 @@ function Checkpass() {
   }
 }
 
-function getdeliveredTime(e) {
+function getdeliveredTime(e, time) {
   e.preventDefault();
   var tablinks = document.getElementsByClassName("deliveredTime");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" sel", "");
+    tablinks[i].className = tablinks[i].className.replace(" other", "");
   }
   e.target.classList.add("sel");
+  document.getElementById("js-other-value").style.display = "none";
+  document.getElementById("js-other-value").value = time;
 }
+
 function openCity(cityName) {
   var i;
   var x = document.getElementsByClassName("city");
@@ -82,4 +86,15 @@ function Onscroll() {
   if ((price.scrollTop() = 200)) {
     console.log(price.scrollTop() + "px");
   }
+}
+
+function InputOther(e) {
+  e.preventDefault();
+  var tablinks = document.getElementsByClassName("deliveredTime");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" sel", "");
+  }
+  e.target.classList.add("other");
+  document.getElementById("js-other-value").style.display = "inline-block";
+  document.getElementById("js-other-value").value = "";
 }

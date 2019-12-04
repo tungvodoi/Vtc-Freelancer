@@ -44,12 +44,12 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
                 i++;
                 <tr>
                   <td class="d-inline-block text-truncate" style="width: 44px;">@i</td>
-                  <td class="d-inline-block text-truncate" style="width: 179px;">@item.User.UserName</td>
-                  <td class="d-inline-block text-truncate" style="width: 170px;">@item.Delivered</td>
+                  <td class="d-inline-block text-truncate" style="width: 179px;">@item.Users.UserName</td>
+                  <td class="d-inline-block text-truncate" style="width: 170px;">@item.DeliveredTime</td>
                   <td class="d-inline-block text-truncate" style="width: 166px;">@item.Category</td>
                   <td class="d-inline-block text-truncate" style="width: 142px;">@item.Budget</td>
                   <td class="d-inline-block text-truncate" style="width: 201px;">@item.TimeCreate.ToString("dd/MM/yyyy")</td>
-                  @if(item.Status == 0)
+                  @if(item.Status == 1)
                   {
                     <td class="d-inline-block text-truncate" style="width: 132px;">Doing</td>
                   }else

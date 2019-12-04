@@ -14,9 +14,11 @@ namespace Vtc_Freelancer.Models
         public double Budget { get; set; }
         [Column(TypeName = "text")]
         public string Description { get; set; }
+        [Column(TypeName = "text")]
+        public string LinkFile { get; set; }
         public DateTime TimeCreate { get; set; }
         public int Status { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual Users Users { get; set; }
         public Request() { }

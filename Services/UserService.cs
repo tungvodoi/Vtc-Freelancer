@@ -131,7 +131,6 @@ namespace Vtc_Freelancer.Services
         {
             try
             {
-
                 Languages languages = new Languages();
                 languages.SellerId = seller.SellerId;
                 languages.Language = languages1.Language;

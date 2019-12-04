@@ -12,23 +12,27 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public bool CreateRequest(string inputRequest, Category category, string deliveredTime, double budget)
+        public bool CreateRequest(int? UserId, string inputRequest, string category, string SubCategory, string inputDeliveredTime, double inputBudget, string urlFile)
         {
             try
             {
                 Request req = new Request();
                 req.Description = inputRequest;
-                req.DeliveredTime = deliveredTime;
-                req.Budget = budget;
-                req.Category = category.CategoryName;
-                req.SubCategory = category.CategoryName;
+                req.DeliveredTime = inputDeliveredTime;
+                req.Budget = inputBudget;
+                req.Category = category;
+                req.SubCategory = SubCategory;
+                req.LinkFile = urlFile;
+                req.TimeCreate = DateTime.Now;
+                req.Status = 1;
+                req.UserId = UserId;
                 dbContext.Add(req);
                 dbContext.SaveChanges();
                 return true;
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
         }
