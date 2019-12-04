@@ -73,7 +73,7 @@
 						@foreach (var service in Model)
 						{
 						<div class="slider__gig">
-							<a href="" class="slide-gig-css slide-gig-js">
+							<a href="/Gig/ServiceDetail?serviceId=@service.ServiceId" class="slide-gig-css slide-gig-js">
 								@foreach (var imageService in service.ListImage)
 								{
 								<img src="~/@imageService.Image" alt="" class="slider__gig-image">
@@ -110,50 +110,6 @@
 						</div>
 						}
 						}
-
-						@if(ViewBag.listServices != null)
-						{
-						@foreach(var item in ViewBag.listServices){
-						<div class="slider__gig">
-							<a href="" class="slide-gig-js">
-								<img src="~/images/product1.jpeg" alt="" class="slider__gig-image">
-								<img src="~/images/product2.png" alt="" class="slider__gig-image">
-							</a>
-							<div class="gig__content">
-								<div class="slider__gig-seller">
-									<span class="gig__seller-avatar">
-										<img src="~/images/avatar-user1.png" alt="">
-									</span>
-									<div class="gig__seller-info">
-										<a href="">najam_iqbal</a>
-									</div>
-								</div>
-								<a href="" class="slider__gig-title">
-									<h3>@item.Title</h3>
-								</a>
-								<div class="slider__gig-star">
-									<i class="fa fa-star"></i>
-									<span class="gig__star-number">5.0</span>
-									<span class="gig__star-user-star">(100)</span>
-								</div>
-							</div>
-							<div class="slider__gig-footer">
-								<div class="gig-fav">
-									<i class="fa fa-bars"></i>
-									<i class="fa fa-heart"></i>
-								</div>
-								<div class="gig-price">
-									<small>Starting At</small>
-									$25
-								</div>
-							</div>
-						</div>
-						}
-						}
-
-
-
-
 
 						<div class="slider__gig">
 							<a href="" class="slide-gig-js">
@@ -374,7 +330,7 @@
 							<a href="" class="slide-gig-css slide-gig-js">
 								@foreach (var imageService in service.ListImage)
 								{
-								<img src="~/@imageService.Image" alt="" class="slider__gig-image">
+							    	<img src="~/@imageService.Image" alt="" class="slider__gig-image">
 								}
 							</a>
 							<div class="gig__content">

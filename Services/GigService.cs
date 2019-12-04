@@ -167,7 +167,13 @@ namespace Vtc_Freelancer.Services
         }
         public List<Service> GetServicesBySellerId(int sellerId)
         {
-            List<Service> services = dbContext.Service.Where(x => x.SellerId == sellerId).ToList();
+            List<Service> services = dbContext.Service.Include(x => x.Seller).ThenInclude(x => x.User)
+            .Where(x => x.SellerId == sellerId)
+            .OrderByDescending(x => x.TimeCreateService).ToList();
+            // foreach (var item in services)
+            // {
+            //     item.Status
+            // }
             return services;
         }
     }

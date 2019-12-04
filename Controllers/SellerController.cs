@@ -15,11 +15,13 @@ namespace Vtc_Freelancer.Controllers
     {
         private UserService userService;
         private GigService gigService;
+        private AdminService adminService;
         private readonly ILogger<HomeController> _logger;
 
-        public SellerController(ILogger<HomeController> logger, UserService userService, GigService gigService)
+        public SellerController(ILogger<HomeController> logger, UserService userService, GigService gigService, AdminService adminService)
         {
             this.userService = userService;
+            this.adminService = adminService;
             this.gigService = gigService;
             _logger = logger;
         }
@@ -43,7 +45,7 @@ namespace Vtc_Freelancer.Controllers
             {
                 return Redirect("/");
             }
-
+            ViewBag.UserLoged = HttpContext.Session.GetString("UserName");
             Seller seller = userService.GetSellerByUserID(users.UserId);
             List<Service> services = new List<Service>();
             services = gigService.GetServicesBySellerId(seller.SellerId);
@@ -51,9 +53,15 @@ namespace Vtc_Freelancer.Controllers
             {
                 return Redirect("/");
             }
+            foreach (var item in services)
+            {
+                item.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
+            ViewBag.sellerprofile = seller;
             ViewBag.userProfile = users;
             ViewBag.listServiceProfile = services;
-            return View();
+
+            return View(services);
         }
     }
 }

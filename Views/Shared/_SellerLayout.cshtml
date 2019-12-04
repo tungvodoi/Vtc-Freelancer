@@ -10,7 +10,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
-        <link rel="stylesheet" type="text/css" href="~/css/step.css">
+    <link rel="stylesheet" type="text/css" href="~/css/step.css">
     <link rel="stylesheet" href="CreateService.css">
     <link rel="stylesheet" href="~/css/profile.css">
 </head>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <ul class="nav-top">
-                
+
                 <li>
                     <a href="#" class="nav-link nav-link-seller"><b>Dashboard</b></a>
                 </li>
@@ -103,16 +103,18 @@
             <div class="footer-content-wrapper">
                 <div class="footer-content">
                     <button class="btn-footer-link">Categories</button>
-                    <ul>
-                      	@if(ViewBag.listcategory!= null)
-						{
-							@foreach(var item in ViewBag.listcategory )
-							{
-								<li class="li-footer-content">
-								<a href="#">@item.CategoryName</a>
-							</li>
-							}
-						}
+                    <ul class="ul-footer-link">
+                        @if(ViewBag.listcategory!= null)
+                        {
+                        @foreach(var item in ViewBag.listcategory ) {
+                        <li class="li-footer-content">
+                            <a href="#">@item.CategoryName</a>
+                        </li>
+                        }
+                        }
+                        <li class="li-footer-content">
+                            <a href="#">dcmm</a>
+                        </li>
                     </ul>
                 </div>
 

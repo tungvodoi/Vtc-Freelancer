@@ -59,3 +59,65 @@
     max-height: auto !important;
     border: 1px solid #d5d4d2;
 }
+
+.tab {
+    overflow: hidden;
+}
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    background-color: transparent;
+}
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    color: #1dbf73;
+}
+
+/* Create an active/current tablink class */
+
+.tab button.active {
+    border-bottom: 2px solid #1dbf73;
+    background-color: transparent;
+}
+
+/* Style the tab content */
+
+.list-gigs {
+    display: none;
+    padding: 1rem;
+    border: none;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.tab-gig {
+    font-weight: 700;
+    color: black;
+}
+
+.right-profile {
+    margin-left: 10%;
+}
+
+@media only screen and (max-width: 900px) {
+    .right-profile {
+        margin-left: 0px;
+    }
+}
+
+.list-gigs1 {
+    display: flex;
+    padding: 1rem;
+    border: none;
+    flex-wrap: wrap;
+    padding: 0;
+}

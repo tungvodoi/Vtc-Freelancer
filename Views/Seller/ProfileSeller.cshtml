@@ -1,16 +1,29 @@
 @{
 ViewData["Title"] = "EditProfile";
+@if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
+{
 Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+else{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 }
 
 <div class="container body-content">
+    <!-- @foreach(var item in ViewBag.listServiceProfile)
+    {
+      <p>@item.ListImage</p>
+    } -->
     <div class="left-content ">
         <div class="content-wrapper content">
             <div class="container-profile">
                 <div class="profile-wrapper">
                     <label class="change-profile">
-
+                        @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
+                        {
                         <input type="file" class="hiden" accept="image/png,image/jpeg">
+                        }
                         @if(ViewBag.userProfile.Avatar == null)
                         {
                         <img class="img-profile-menu" src="~/Images/avatardefault.png" alt="avatar">
@@ -40,16 +53,204 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
         <div class="description-user content content-wrapper">
             <div class="content-detail-user">
                 <span class="ft-left"><b>Description</b></span>
+                @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
+                {
                 <a href="#" class="ft-right">Edit Description</a>
+                }
+
                 <br>
             </div>
             <div class="content-detail-user">
-                ĐỊT Con mẹ thằng nào k làm desciption thì bố mày thêm vào kiểu loz gì đây
+                <p>
+                    @ViewBag.sellerprofile.Description
+                </p>
             </div>
         </div>
     </div>
-    <div class="right-content ">
+    <div class="right-content right-profile">
+        @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
+        <div class="content-wrapper content">
+            <div class="tab">
+                <button class="tab-gig back-content" onclick="OpenGigs(event, 'Active-Gig')">Active-Gigs</button>
+                <button class="tab-gig back-content" onclick="OpenGigs(event, 'Drafts')">Drafts</button>
+            </div>
+            <div id="Active-Gig" class="list-gigs">
+                @if(@ViewBag.listServiceProfile != null)
+                {
+                @foreach (var service in ViewBag.listServiceProfile)
+                {
+                @if(service.Status == 2)
+                {
+                <div class="slider__gig">
+                    <a href="" class="slide-gig-css slide-gig-js">
+                        @if(service.ListImage != null)
+                        {
+                        @foreach (var imageService in service.ListImage)
+                        {
+                        <img src="~/@imageService.Image" alt="" class="slider__gig-image">
+                        }
+                        }
+                    </a>
+                    <div class="gig__content">
+                        <div class="slider__gig-seller">
+                            <span class="gig__seller-avatar">
+                                <img src="~/images/avatar-user1.png" alt="">
+                            </span>
+                            <div class="gig__seller-info">
+                                <a href="">@service.Seller.User.UserName</a>
+                            </div>
+                        </div>
+                        <a href="" class="slider__gig-title">
+                            <h3>@service.Title</h3>
+                        </a>
+                        <div class="slider__gig-star">
+                            <i class="fa fa-star"></i>
+                            <span class="gig__star-number">5.0</span>
+                            <span class="gig__star-user-star">(100)</span>
+                        </div>
+                    </div>
+                    <div class="slider__gig-footer">
+                        <div class="gig-fav">
+                            <i class="fa fa-bars"></i>
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="gig-price">
+                            <small>Starting At</small>
+                            $25
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+                }
+            </div>
+            @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
+            <div id="Drafts" class="list-gigs" style="flex-wrap:wrap;padding:0;">
+                @if(@ViewBag.listServiceProfile != null)
+                {
+                @foreach (var service in ViewBag.listServiceProfile)
+                {
+                @if(service.Status == 1)
+                {
+                <div class="slider__gig">
+                    <a href="" class="slide-gig-css slide-gig-js">
+                        @if(service.ListImage != null)
+                        {
 
+                        @foreach (var imageService in service.ListImage)
+                        {
+                        <img src="~/@imageService.Image" alt="" class="slider__gig-image" width="230">
+                        }
+                        }
+                    </a>
+                    <div class="gig__content">
+                        <div class="slider__gig-seller">
+                            <span class="gig__seller-avatar">
+                                <img src="~/images/avatar-user1.png" alt="">
+                            </span>
+                            <div class="gig__seller-info">
+                                <a href="">@service.Seller.User.UserName</a>
+                            </div>
+                        </div>
+                        <a href="" class="slider__gig-title">
+                            <h3>@service.Title</h3>
+                        </a>
+                        <div class="slider__gig-star">
+                            <i class="fa fa-star"></i>
+                            <span class="gig__star-number">5.0</span>
+                            <span class="gig__star-user-star">(100)</span>
+                        </div>
+                    </div>
+                    <div class="slider__gig-footer">
+                        <div class="gig-fav">
+                            <i class="fa fa-bars"></i>
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="gig-price">
+                            <small>Starting At</small>
+                            $25
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+                }
+            </div>
+            }
+
+        </div>
+        }
+        else
+        {
+        <div class="list-gigs1">
+            @if(@ViewBag.listServiceProfile != null)
+            {
+            @foreach (var service in ViewBag.listServiceProfile)
+            {
+            @if(service.Status == 1)
+            {
+            <div class="slider__gig">
+                <a href="" class="slide-gig-css slide-gig-js">
+                    @if(service.ListImage != null)
+                    {
+                    @foreach (var imageService in service.ListImage)
+                    {
+                    <img src="~/@imageService.Image" alt="" class="slider__gig-image">
+                    }
+                    }
+                </a>
+                <div class="gig__content">
+                    <div class="slider__gig-seller">
+                        <span class="gig__seller-avatar">
+                            <img src="~/images/avatar-user1.png" alt="">
+                        </span>
+                        <div class="gig__seller-info">
+                            <a href="">@service.Seller.User.UserName</a>
+                        </div>
+                    </div>
+                    <a href="" class="slider__gig-title">
+                        <h3>@service.Title</h3>
+                    </a>
+                    <div class="slider__gig-star">
+                        <i class="fa fa-star"></i>
+                        <span class="gig__star-number">5.0</span>
+                        <span class="gig__star-user-star">(100)</span>
+                    </div>
+                </div>
+                <div class="slider__gig-footer">
+                    <div class="gig-fav">
+                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-heart"></i>
+                    </div>
+                    <div class="gig-price">
+                        <small>Starting At</small>
+                        $25
+                    </div>
+                </div>
+            </div>
+            }
+            }
+            }
+        </div>
+        }
     </div>
 
 </div>
+
+@if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
+<script>
+    function OpenGigs(event, typeGig) {
+
+        var listGigs = document.getElementsByClassName('list-gigs');
+        for (let i = 0; i < listGigs.length; i++) {
+            listGigs[i].style.display = "none";
+        }
+        var tabGig = document.getElementsByClassName('tab-gig');
+        for (let i = 0; i < tabGig.length; i++) {
+            tabGig[i].className = tabGig[i].className.replace(" active", "");
+        }
+        document.getElementById(typeGig).style.display = "flex";
+        event.currentTarget.className += " active";
+    }
+</script>
+}

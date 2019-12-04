@@ -1,5 +1,4 @@
-﻿﻿  
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Vtc_Freelancer</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
-	<link rel="stylesheet" type="text/css" href="~/css/Seller.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
+    <link rel="stylesheet" type="text/css" href="~/css/profile.css">
 
-	<!-- Linh css request -->
-	
-	<link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
+
+    <!-- Linh css request -->
+
+    <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
     <link rel="stylesheet" type="text/css" href="~/css/serviceDetail.css">
-    
+
 
 </head>
 
@@ -26,8 +28,8 @@
             <nav class="site-sidebars">
                 <div class="profile-wrapper">
                     <label class="lable-profile">
-						<img class="img-profile" src="~/images/product1.jpeg" alt="">
-					</label>
+                        <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                    </label>
                     <br>
                     <p class="username">Username</p>
                     <br>
@@ -107,9 +109,7 @@
                         <a href="/Seller/Index">
                             <div class="prf-div">
                                 <h4 style="color: #1dbf73;">Switch to Selling</h4>
-
-                                <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
-
+                                <a href=""><img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt=""></a>
                             </div>
                         </a>
                     </li>
@@ -117,75 +117,75 @@
                 </ul>
             </div>
         </div>
-     
 
-	
-	<div class="nav-categories">
-		<ul class="ul-categories container">
-			<li class="li-categories">
-				<a href="" class="categories-link">Graphics & Design</a>
-				<ul class="ul-package">
 
-					@if(ViewBag.listcategory != null)
-					{
-					@foreach (var item in ViewBag.listcategory)
-					{
-					<li class="li-package">
-						<a href="" class="a-package">item.CategoryName</a>
-					</li>
-					}
-					}
 
-					<li class="li-package">
-						<a href="" class="a-package">Logo Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brand Style Guides</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Game Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Graphics for Streamers </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Business Cards & Stationery</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Illustration</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Brochure Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Poster Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Flyer Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Book & Album Covers</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Storyboards </a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Web & Mobile Design</a>
-					</li>
-					<li class="li-package">
-						<a href="" class="a-package">Social Media Design</a>
-					</li>
-				</ul>
-			</li>
-			<li class="li-categories">
-				<a href="" class="categories-link">Programming & Tech</a>
-				<ul class="ul-package">
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-					<li class="li-package"><a class="a-package" href="">a</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
+        <div class="nav-categories">
+            <ul class="ul-categories container">
+                <li class="li-categories">
+                    <a href="" class="categories-link">Graphics & Design</a>
+                    <ul class="ul-package">
+
+                        @if(ViewBag.listcategory != null)
+                        {
+                        @foreach (var item in ViewBag.listcategory)
+                        {
+                        <li class="li-package">
+                            <a href="" class="a-package">item.CategoryName</a>
+                        </li>
+                        }
+                        }
+
+                        <li class="li-package">
+                            <a href="" class="a-package">Logo Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Brand Style Guides</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Game Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Graphics for Streamers </a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Business Cards & Stationery</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Illustration</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Brochure Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Poster Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Flyer Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Book & Album Covers</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Storyboards </a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Web & Mobile Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Social Media Design</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="li-categories">
+                    <a href="" class="categories-link">Programming & Tech</a>
+                    <ul class="ul-package">
+                        <li class="li-package"><a class="a-package" href="">a</a></li>
+                        <li class="li-package"><a class="a-package" href="">a</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
         @RenderBody()
         <div class="footer">
@@ -314,8 +314,8 @@
                     <div class="privacy">
                         <a href="">Privacy Policy</a>|
                         <a href="">Terms of Service
-							<br />
-							<span><small>© VTC Freelancer International Ltd. 2019</small></span></a>
+                            <br />
+                            <span><small>© VTC Freelancer International Ltd. 2019</small></span></a>
                     </div>
                 </div>
                 <!-- <hr /> -->
