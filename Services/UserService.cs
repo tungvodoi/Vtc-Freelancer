@@ -240,5 +240,17 @@ namespace Vtc_Freelancer.Services
             Users user = dbContext.Users.FirstOrDefault(s => s.UserName == username);
             return user;
         }
+        public bool UploadAvater(int? userId, string urlAvatar)
+        {
+            var entity = dbContext.Users.FirstOrDefault(u => u.UserId == userId);
+            if (entity != null)
+            {
+                entity.Avatar = urlAvatar;
+                dbContext.Users.Update(entity);
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

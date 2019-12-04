@@ -63,8 +63,6 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
   
   document.querySelectorAll('.file').forEach((ip, index) => {
     ip.addEventListener('change', function () {
-      console.log(this);
-      console.log(index);
       if (this.files && this.files[0]) {
         var img = document.querySelectorAll('.myImg')[index]; // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to blob url

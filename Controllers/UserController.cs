@@ -7,17 +7,21 @@ using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Vtc_Freelancer.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IHostingEnvironment _environment;
         private MyDbContext dbContext;
         private UserService userService;
         private AdminService adminService;
-        public UserController(MyDbContext dbContext, UserService userService, AdminService adminService)
+        public UserController(MyDbContext dbContext, UserService userService, AdminService adminService, IHostingEnvironment IHostingEnvironment)
         {
-
+            _environment = IHostingEnvironment;
             this.dbContext = dbContext;
             this.userService = userService;
             this.adminService = adminService;
@@ -71,6 +75,7 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.Notification = true;
                 if (user.Status == 0)
                 {
+                    ViewBag.Error = "Account locked";
                     if (user.UserLevel == 1)
                     {
                         return Redirect("/Admin/Dashboard");
@@ -158,6 +163,59 @@ namespace Vtc_Freelancer.Controllers
 
             }
             return View();
+
+        }
+        [HttpPost("User/UploadImage")]
+        public bool UploadImage()
+        {
+            var newFileName = string.Empty;
+            if (HttpContext.Request.Form.Files != null)
+            {
+                Console.WriteLine("tung dep trai");
+                var fileName = string.Empty;
+                string PathDB = string.Empty;
+
+                var files = HttpContext.Request.Form.Files;
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        //Getting FileName
+                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        //Assigning Unique Filename (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        //Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // concating  FileName + FileExtension
+                        newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path.
+                        fileName = Path.Combine(_environment.WebRootPath, "Images/User/") + $@"\{newFileName}";
+
+                        // if you want to store path of folder in database
+                        PathDB = "Images/User/" + newFileName;
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
+
+                        int? UserId = HttpContext.Session.GetInt32("UserId");
+
+                        bool check = userService.UploadAvater(UserId, PathDB);
+                        if (check)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
 
         }
 

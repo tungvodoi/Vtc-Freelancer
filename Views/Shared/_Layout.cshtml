@@ -102,8 +102,30 @@
                         <a href="/Login" class="nav-link"><b>Login</b></a>
                     </li>
                     <li>
-                        <a href="/Register" class="nav-link"><b>Join</b></a>
+                        <a href="/Login" class="nav-link"><b>Join</b></a>
                     </li>
+                    } 
+                    @if(ViewBag.UserName != null) 
+                    { 
+                        @if(ViewBag.IsSeller == 1) 
+                        {
+                            <li>
+                                <a href="/Seller/Index">
+                                    <div class="prf-div">
+                                        <h4 style="color: #1dbf73;">Switch to Selling</h4>
+
+                                        
+                                @if(ViewBag.userAvatar == null)
+                                {
+                                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                                }
+                                else
+                                {
+                                <img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar">
+                                }
+                                    </div>
+                                </a>
+                            </li>
                     }
                     @if(ViewBag.UserName != null)
                     {
