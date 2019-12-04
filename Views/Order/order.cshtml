@@ -1,84 +1,139 @@
 @model Package;
 @{
 ViewData["Title"] = "Create new Service";
-Layout = "~/Views/Shared/_SellerLayout.cshtml";
+Layout = "~/Views/Shared/_Order.cshtml";
 }
-<div class="container">
-  <div class="col-10">
-    <section>
-      <h3><span>Customize Your Package</span></h3>
-      <div class="summary">
-        <div>
-          <div><a><span></span><img></a>
-            <div>
-              <p>
-                <a>
-                  @Model.Service.Title
-                </a>
-              </p>
-              <span>
-                <!-- <Img></Img> -->
-              </span>
-              <a>
-                <span>
-                </span>
-              </a>
-            </div>
+<div class="nav-step step-order container">
+  <nav>
+    <ul class="ul-step">
+      <li class="wrapper-li-step">
+        <div class="wrapper-logo">
+          <i id="icon-menu" class="fa fa-bars"></i>
+          <div class="logo">
+            <a href="#">VTC Freelancer</a>
+          </div>
         </div>
-        <div class="pricing"><label class="quantity"><span>Qty</span><select>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-              <br>
-            </select></label><span><b>@Model.Price $</b></span></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">1</div>
+        <div class="li-content">Order Detail ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step">2</div>
+        <div class="li-content">Confirm & Pay ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step">3</div>
+        <div class="li-content">Submit Requirements </div>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<div class="container-inner body-order font-size-14">
+  <div class="right-content">
+
+    <h1 class="back-content cutomemize-your-package">Customize Your Package</h1>
+    <div class="summary">
+      <div class="gig-summary">
+        <img src="/images/product1.jpeg" alt="" width="200px" style="margin: 0rem 1rem 0rem 1rem;">
+        <div>
+          <a style="font-weight: bold;">Title
+            <br>
+            <p>Dồng chí nào để rating vào đây</p>
+          </a>
+          <br>
+          <br>
+          <!-- <a href="#" style="color: #1dbf73;">View What's include</a> -->
+        </div>
       </div>
-      <div>
-        <h6>@Model.Title</h6>
-        <p>@Model.Description</p>
-        <section>
-          <ul>
-            <li><span>@Model.DeliveryTime Days Delivery</span></li>
-            <li><span>@Model.NumberRevision Revision</span></li>
-          </ul>
-        </section>
+      <div class="pricing"><label class="quantity"><span>Qty</span>
+          <select id="sect" onchange="onSelect()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <br>
+          </select>
+        </label>
+        <span>
+          <b>@Model.Price $
+          </b>
+        </span>
       </div>
-    </section>
-  </div>
-  <div class="col-2">
+
+    </div>
     <div>
-      <h6><span>Summary</span></h6>
-      <div><span>Subtotal</span><span>@Model.Price $</span></div>
+      <br>
+      <br>
+      <h2 class="back-content">@Model.Title</h2>
+      <p>@Model.Description</p>
+      <ul>
+        <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.DeliveryTime Days Delivery</li>
+        <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.NumberRevision Revision</li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-content">
+    <div class="wrapper-order-content">
+      <h2 class="back-content">Summary</h2>
+      <br>
+      <div><span>Subtotal</span><span class="float-right" id="basic-price">@Model.Price $</span></div>
+      <br>
       <div>
         <div>
-          <div><span>Service Fee</span><span></i></span></div><span>@(Model.Price * 5 / 100) $</span>
+          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 5 / 100) $</span></div>
+          <br>
         </div>
       </div>
-      <div><span>Total</span><span>@(Model.Price + (@Model.Price * 5/100)) $</span></div>
+      <br>
+      <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price * 5/100)) $</span>
+      </div>
+      <br>
+
       <div><span>Delivery Time</span><span>
-          <span>@Model.DeliveryTime Days</span></span></div>
+          <span class="float-right">@Model.DeliveryTime Days</span></span></div>
       <div>
-        <div><button type="button">Order
-            Now</button>
+        <br>
+        <div>
+          <button type="button" class="btn-continue btn-prc-detail">Order Now</button>
+          <br>
+          <br>
           <div class="cta-comment">You won't be charged yet</div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  var totle = document.getElementById('totle-price');
+  var subb = document.getElementById('sub-price');
+  var basic = document.getElementById('basic-price');
+  var sec = document.getElementById('sect');
+  var option = document.getElementsByTagName("option");
+
+  function onSelect() {
+    var optionhtml = sec[sec.selectedIndex].text;
+    basic.innerHTML = @Model.Price * optionhtml + "$";
+    subb.innerHTML = @(Model.Price * 5 / 100) * optionhtml + "$";
+    totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 5 / 100) * optionhtml + "$";
+  }
+
+</script>

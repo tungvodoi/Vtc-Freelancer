@@ -165,5 +165,10 @@ namespace Vtc_Freelancer.Services
             Images = dbContext.ImageService.FromSql("select * from ImageService where ImageService.serviceid =" + serviceId).ToList();
             return Images;
         }
+        public List<Service> GetServicesBySellerId(int sellerId)
+        {
+            List<Service> services = dbContext.Service.Where(x => x.SellerId == sellerId).ToList();
+            return services;
+        }
     }
 }
