@@ -53,3 +53,38 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
     </div>
 
 </div>
+<script>
+  let base64 = [];
+  
+  document.querySelectorAll('.hiden').forEach((ip, index) => {
+    ip.addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        var img = document.querySelectorAll('.img-profile-menu')[index]; // $('img')[0]
+        img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+        img.onload = imageIsLoaded(this.files,img.src);
+      }
+      function imageIsLoaded(files,imgSrc){
+           var data = new FormData();
+            for (var i = 0; i < files.length ; i++) {
+                data.append(files[i].name, files[i]);
+            }
+        $.ajax({
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: data,
+            url: "/User/UploadImage",
+            success: function (result) {
+                $('#img-prf')[0].src = imgSrc;
+                console.log(result);
+            },
+             error: function (err) {
+                   console.log(err);
+                }
+        });
+      }
+    });
+  })
+
+
+</script>

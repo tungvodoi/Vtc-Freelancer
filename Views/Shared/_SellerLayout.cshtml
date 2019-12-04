@@ -23,10 +23,14 @@
             <nav class="site-sidebars">
                 <div class="profile-wrapper">
                     <label class="lable-profile">
-                        <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                        @if(ViewBag.userProfile.Avatar != null)
+                        {
+                        <img class="img-profile" id="img-prf" src="~/@ViewBag.userProfile.Avatar" alt="avatar">
+                        }
+                        
                     </label>
                     <br>
-                    <p class="username">Username</p>
+                    <p class="username">@ViewBag.userProfile.UserName</p>
                     <br>
                 </div>
                 <ul class="ul-sidebars">
@@ -89,9 +93,10 @@
         <a href="/Home/Index">
             <div class="prf-div">
                 <p style="color: #1dbf73;font-weight: bold;">Switch Buying</p>
-
-                <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
-
+                @if(ViewBag.userProfile.Avatar != null)
+                        {
+                        <img class="img-profile" id="img-prf" src="~/@ViewBag.userProfile.Avatar" alt="avatar">
+                        }
             </div>
         </a>
 

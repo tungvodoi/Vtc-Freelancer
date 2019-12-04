@@ -726,8 +726,9 @@ img {
 
 .img-profile {
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 36px;
+  height: 36px;
+  margin-left: 25px;
 }
 
 .container-profile {
