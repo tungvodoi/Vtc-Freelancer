@@ -82,9 +82,9 @@
                 <ul class="nav-top">
                     @if(ViewBag.IsSeller == 0)
                     {
-                    <li>
-                        <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-                    </li>
+                        <li>
+                            <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
+                        </li>
                     }
 
                     <li>
@@ -102,49 +102,38 @@
                         <a href="/Login" class="nav-link"><b>Login</b></a>
                     </li>
                     <li>
-                        <a href="/Login" class="nav-link"><b>Join</b></a>
+                        <a href="/Register" class="nav-link"><b>Join</b></a>
                     </li>
-                    } 
-                    @if(ViewBag.UserName != null) 
-                    { 
-                        @if(ViewBag.IsSeller == 1) 
-                        {
-                            <li>
-                                <a href="/Seller/Index">
-                                    <div class="prf-div">
-                                        <h4 style="color: #1dbf73;">Switch to Selling</h4>
-
-                                        
-                                @if(ViewBag.userAvatar == null)
-                                {
-                                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
-                                }
-                                else
-                                {
-                                <img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar">
-                                }
-                                    </div>
-                                </a>
-                            </li>
                     }
                     @if(ViewBag.UserName != null)
                     {
-                        @if(ViewBag.IsSeller == 1)
+                        @if(ViewBag.IsSeller == 1) 
                         {
                         <li>
-                            <a href="/Seller/Index">
+                            <a href="/Seller">
                                 <div class="prf-div">
                                     <h4 style="color: #1dbf73;">Switch to Selling</h4>
+
+
+                                    @if(ViewBag.userAvatar == null)
+                                    {
+                                        <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar">
+                                    }
                                 </div>
                             </a>
                         </li>
                         }
-                    <a href="/Logout"><img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt=""></a>
+                        <li>
+                            <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                        </li>
                     }
                 </ul>
             </div>
         </div>
-
 
 
         <div class="nav-categories">
@@ -222,7 +211,8 @@
                     <div class="footer-content">
                         <button class="btn-footer-link">Categories</button>
                         <ul class="ul-footer-link">
-                            @if(ViewBag.listcategory!= null) { @foreach(var item in ViewBag.listcategory ) {
+                            @if(ViewBag.listcategory!= null) 
+                            { @foreach(var item in ViewBag.listcategory ) {
                             <li class="li-footer-content">
                                 <a href="#">@item.CategoryName</a>
                             </li>

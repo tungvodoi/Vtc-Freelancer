@@ -52,6 +52,7 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
             ViewBag.userProfile = users;
+            ViewBag.userAvatar = users.Avatar;
             ViewBag.listServiceProfile = services;
             return View();
         }
