@@ -1,0 +1,55 @@
+@{
+ViewData["Title"] = "EditProfile";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="left-content ">
+        <div class="content-wrapper content">
+            <div class="container-profile">
+                <div class="profile-wrapper">
+                    <label class="change-profile">
+
+                        <input type="file" class="hiden" accept="image/png,image/jpeg">
+                        @if(ViewBag.userProfile.Avatar == null)
+                        {
+                        <img class="img-profile-menu" src="~/Images/avatardefault.png" alt="avatar">
+                        }
+                        else
+                        {
+                        <img class="img-profile-menu" src="~/@ViewBag.userProfile.Avatar" alt="avatar">
+                        }
+
+                    </label>
+                    <br>
+                    <br>
+                    <p class="username back-content">@ViewBag.userProfile.UserName</p>
+                    <br>
+                </div>
+            </div>
+            <div class="content-detail-user">
+                <span class="ft-left"><i class="fa fa-street-view"></i> From</span>
+                <b class="ft-right">@ViewBag.userProfile.Country</b>
+            </div>
+            <br>
+            <div class="content-detail-user">
+                <span class="ft-left"><i class="fa fa-user"></i> Member since</span>
+                <b class="ft-right">@ViewBag.userProfile.RegisterDate</b>
+            </div>
+        </div>
+        <div class="description-user content content-wrapper">
+            <div class="content-detail-user">
+                <span class="ft-left"><b>Description</b></span>
+                <a href="#" class="ft-right">Edit Description</a>
+                <br>
+            </div>
+            <div class="content-detail-user">
+                ĐỊT Con mẹ thằng nào k làm desciption thì bố mày thêm vào kiểu loz gì đây
+            </div>
+        </div>
+    </div>
+    <div class="right-content ">
+
+    </div>
+
+</div>

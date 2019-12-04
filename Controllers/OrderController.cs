@@ -29,5 +29,15 @@ namespace Vtc_Freelancer.Controllers
             }
             return View(pac);
         }
+        [HttpGet("/Order/Payment")]
+        public IActionResult Payment()
+        {
+            Package pac = orderService.GetPackageByID(1);
+            if (pac != null)
+            {
+                pac.Service = orderService.GetServiceByID(pac.ServiceId);
+            }
+            return View(pac);
+        }
     }
 }

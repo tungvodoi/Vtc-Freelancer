@@ -24,6 +24,8 @@ namespace Vtc_Freelancer.Models
         [Column(TypeName = "text")]
         public string Avatar { get; set; }
         public int Status { get; set; }
+        // [Column(TypeName = "text")]
+        // public string Description { get; set; }
         public Users() { }
 
     }
