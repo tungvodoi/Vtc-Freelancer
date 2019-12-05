@@ -116,23 +116,17 @@
         <div class="container">
 
             <div class="footer-content-wrapper">
-                <div class="footer-content">
-                    <button class="btn-footer-link">Categories</button>
-                    <ul>
-                        @if(ViewBag.listcategory!= null)
-                        {
-                        @foreach(var item in ViewBag.listcategory )
-                        {
-                        <li class="li-footer-content">
-                            <a href="#">@item.CategoryName</a>
-                        </li>
-                        }
-                        }
-                        <li class="li-footer-content">
-                            <a href="#">dcmm</a>
-                        </li>
-                    </ul>
-                </div>
+                 <div class="footer-content">
+                        <button class="btn-footer-link">Categories</button>
+                        <ul class="ul-footer-link">
+                            @if(ViewBag.listcategory!= null)
+                            { @foreach(var item in ViewBag.listcategory ) {
+                            <li class="li-footer-content">
+                                <a href="#">@item.CategoryName</a>
+                            </li>
+                            } }
+                        </ul>
+                    </div>
 
                 <div class="footer-content">
                     <button class="btn-footer-link">About</button>
