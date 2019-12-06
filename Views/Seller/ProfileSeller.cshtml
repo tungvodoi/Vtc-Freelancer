@@ -7,7 +7,6 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
 else{
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 }
 
 <div class="container body-content">
@@ -55,12 +54,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <span class="ft-left"><b>Description</b></span>
                 @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
                 {
-                <a href="#" class="ft-right">Edit Description</a>
+                <a class="ft-right" onclick="openFormDescription()" style="cursor: pointer;">Edit Description</a>
                 }
 
                 <br>
             </div>
-            <div class="content-detail-user">
+            <div class="content-detail-user" id="description">
                 <p>
                     @ViewBag.sellerprofile.Description
                 </p>
@@ -234,7 +233,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
         }
     </div>
-
+    <!-- <form method="post">
+        <textarea name="description-content" id="" cols="30" rows="10"></textarea>
+        <input type="button">
+    </form> -->
 </div>
 
 @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
@@ -251,6 +253,39 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         }
         document.getElementById(typeGig).style.display = "flex";
         event.currentTarget.className += " active";
+    }
+    var flag = true;
+    function openFormDescription() {
+        $('#bgc-key').click(() => {
+            console.log($('#text-description').innerHTML);
+            $.ajax({
+                type: "POST",
+                data: {
+                    categoryName: this.value
+                },
+                url: "/admin/GetListSubCategoryByCategoryParentId",
+                success: function (result) {
+                    $('#subCategory').stop().animate({ "opacity": "0" }, 0, function () {
+                        // After first animation finished
+                        $(this).html(
+                            result.map((res) => {
+                                // return `<option name=${res.categoryName}>${res.categoryName}</option>`
+                                return `<label  name="${res.CategoryId}" value="${res.categoryName}">${res.categoryName}</label> <a href="/Admin/EditCategory?name=${res.categoryName}">Edit</a><br>`
+                            })
+                        ).animate({ opacity: 1 });
+                    });
+                }
+            });
+        })
+        if (flag == true) {
+            document.getElementById('description').innerHTML = "<textarea name=" + 'description' + " id='text-description' cols='100' rows='10' >@ViewBag.sellerprofile.Description</textarea>"
+                + "<input class=" + 'btn-edit' + " onclick=" + 'openFormDescription()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
+            flag = false;
+        }
+        else {
+            document.getElementById('description').innerHTML = " <p>@ViewBag.sellerprofile.Description </p > ";
+            flag = true;
+        }
     }
 </script>
 }
@@ -286,6 +321,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             }
         });
     })
+
+
 
 
 </script>
