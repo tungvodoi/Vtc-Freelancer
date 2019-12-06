@@ -25,9 +25,16 @@ namespace Vtc_Freelancer.Controllers
             this.gigService = gigService;
             _logger = logger;
         }
+        [Authentication]
 
         public IActionResult Index()
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
@@ -36,6 +43,13 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet]
         public IActionResult ProfileSeller(string username)
         {
+
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             if (username == null)
             {
                 return Redirect("/");
@@ -63,6 +77,19 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.listServiceProfile = services;
 
             return View(services);
+        }
+        [HttpPost]
+        public bool UpdateDescription(string description)
+        {
+            Seller seller = new Seller();
+            seller.Description = description;
+            int? UserId = HttpContext.Session.GetInt32("UserId");
+            bool check = userService.UpdateDescription(UserId, description);
+            if (check)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -6,7 +6,7 @@ using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.ActionFilter;
 using System;
-
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -47,7 +47,7 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View(services);
+
             }
             return View(services);
         }
@@ -58,6 +58,12 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.UserName = userads.UserName;
             return View();
         }
+        // [HttpPost]
+        // public IActionResult EditDescription(string description)
+        // {
+
+        //     return Redirect(PageBase.RedirectToPage());
+        // }
         [HttpGet("/Logout")]
         public IActionResult Logout()
         {
