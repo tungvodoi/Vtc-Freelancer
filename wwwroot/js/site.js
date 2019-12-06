@@ -98,3 +98,9 @@ function InputOther(e) {
   document.getElementById("js-other-value").style.display = "inline-block";
   document.getElementById("js-other-value").value = "";
 }
+
+function SetServiceIdToModal(ServiceId, UserId) {
+  document.getElementById(
+    "reportService"
+  ).href = `/Gig/Report?UserId=${UserId}&ServiceId=${ServiceId}`;
+}

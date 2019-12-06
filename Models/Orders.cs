@@ -9,6 +9,7 @@ namespace Vtc_Freelancer.Models
         public int WorkStatus { get; set; }
         public int Quantity { get; set; }
         public DateTime OrderTime { get; set; }
+        public int PackageId { get; set; }
         public int UserId { get; set; }
         public int ServiceId { get; set; }
         [ForeignKey("UserId")]

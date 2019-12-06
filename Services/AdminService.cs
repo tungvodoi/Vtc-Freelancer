@@ -76,7 +76,7 @@ namespace Vtc_Freelancer.Services
         }
         public List<Orders> GetListOrders(string Search)
         {
-            List<Orders> ListOrders = dbContext.Order.Include(x => x.Users).Include(x => x.Service)
+            List<Orders> ListOrders = dbContext.Orders.Include(x => x.Users).Include(x => x.Service)
             .Where(x => EF.Functions.Like(x.Users.UserName, $"%{Search}%") || EF.Functions.Like(x.Service.Title, $"%{Search}%"))
             .OrderByDescending(x => x.OrderTime).ToList();
             return ListOrders;

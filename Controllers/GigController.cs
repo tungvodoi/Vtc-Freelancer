@@ -177,7 +177,7 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/CreateService/Step4");
         }
-        [HttpPost]
+        [HttpGet("/Gig/Report")]
         public IActionResult reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {
             if (gigService.reportGig(UserId, ServiceId, titleReport, contentReport))
@@ -213,6 +213,8 @@ namespace Vtc_Freelancer.Controllers
                 images = gigService.GetListImagesByServiceId(serviceId);
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
+                ViewBag.UserName = users.UserName;
+                ViewBag.IsSeller = users.IsSeller;
                 return View();
 
             }
