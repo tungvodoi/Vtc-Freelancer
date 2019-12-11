@@ -91,7 +91,7 @@ namespace Vtc_Freelancer.Controllers
             int? ServiceId = HttpContext.Session.GetInt32("serviceId");
             Console.WriteLine(ServiceId);
             Package pacBasic = new Package();
-            pacBasic.Name = "BASIC";
+            pacBasic.Name = "Basic";
             pacBasic.Title = basicTitle;
             pacBasic.Description = basicDescription;
             pacBasic.DeliveryTime = basicDelivery;
@@ -102,7 +102,7 @@ namespace Vtc_Freelancer.Controllers
             if (standardTitle != null && premiumTitle != null && standardDescription != null && premiumDescription != null)
             {
                 Package pacStandard = new Package();
-                pacStandard.Name = "STANDARD";
+                pacStandard.Name = "Standard";
                 pacStandard.Title = standardTitle;
                 pacStandard.Description = standardDescription;
                 pacStandard.DeliveryTime = standardDelivery;
@@ -111,7 +111,7 @@ namespace Vtc_Freelancer.Controllers
                 pacStandard.ServiceId = ServiceId;
                 check = gigService.CreateServiceStepTwo(pacStandard);
                 Package pacPremium = new Package();
-                pacPremium.Name = "PREMIUM";
+                pacPremium.Name = "Premium";
                 pacPremium.Title = premiumTitle;
                 pacPremium.Description = premiumDescription;
                 pacPremium.DeliveryTime = premiumDelivery;
@@ -208,12 +208,34 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("Gig/ServiceDetail")]
         public IActionResult ServiceDetail(int? serviceId)
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             if (serviceId == null)
             {
                 return Redirect("/");
             }
             else
             {
+                if (HttpContext.Session.GetInt32("UserId") != null)
+                {
+                    int? userId = HttpContext.Session.GetInt32("UserId");
+                    Users userads = userService.GetUsersByID(userId);
+                    ViewBag.UserName = userads.UserName;
+                    ViewBag.userAvatar = userads.Avatar;
+                    //Lay Session lan 2
+                    ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+                    // HttpContext.Session.Remove("IsSeller");
+                    ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
+                }
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
                 Service service = new Service();
                 service = gigService.GetServiceByID(serviceId);
                 if (service == null)
@@ -225,12 +247,27 @@ namespace Vtc_Freelancer.Controllers
                 users = gigService.GetUserByServiceId(serviceId);
                 List<ImageService> images = new List<ImageService>();
                 images = gigService.GetListImagesByServiceId(serviceId);
+                List<Package> ListPackage = gigService.GetPackageByServiceID(serviceId);
+                foreach (var item in ListPackage)
+                {
+                    if (item.Name == "Premium")
+                    {
+                        ViewBag.PackagePremium = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                    else if (item.Name == "Standard")
+                    {
+                        ViewBag.PackageStandard = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                    else
+                    {
+                        ViewBag.PackageBasic = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                }
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
-                ViewBag.UserName = users.UserName;
+                // ViewBag.UserName = users.UserName;
                 ViewBag.IsSeller = users.IsSeller;
                 return View();
-
             }
         }
     }

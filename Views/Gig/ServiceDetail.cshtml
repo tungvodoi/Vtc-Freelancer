@@ -1,13 +1,20 @@
-@{
-ViewData["Title"] = "Create your Service";
-Layout = "~/Views/Shared/_Layout.cshtml";
-}
+  
+    @if(ViewBag.UserName == null)
+    {
+     ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Login.cshtml";
+    }
+    else
+    {ViewData["Title"] = "EditProfile";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 <div class="bars-service-detail container">
     <div class="bars-item">
-        <a href="/Gig/Report" onclick="SetServiceIdToModal(@ViewBag.serviceDetail.ServiceId, @ViewBag.serviceDetailUser.UserId)">
+        <a href="/Gig/Report"
+            onclick="SetServiceIdToModal(@ViewBag.serviceDetail.ServiceId, @ViewBag.serviceDetailUser.UserId)">
             <i class="fa fa-flag"></i>
         </a>
-        
+
     </div>
     <div class="bars-item"><a href="#"><i class="fa fa-share"></i></a><small>Share</small></div>
 </div>
@@ -20,18 +27,22 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             </h1>
 
             <br>
-            <a href="">
-                <div class="contain-username">
-                    <img class="img-profile" id="img-prf" src="/images/product1.jpeg" alt="">
-                    <b class="back-content">
-                        @ViewBag.serviceDetailUser.UserName
-                    </b>
-                    <a href="">Số sao(Số người rate)</a>
-                </div>
-            </a>
+            <div class="contain-username">
+                @if(ViewBag.serviceDetailUser.Avatar == null)
+                {
+                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                }
+                else
+                {
+                <img class="img-profile" src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar">
+                }
+                <b class="back-content">
+                    @ViewBag.serviceDetailUser.UserName
+                </b>
+                <a href="">Số sao(Số người rate)</a>
+            </div>
         </div>
         <div class="slideshow-container">
-
             @foreach(var item in @ViewBag.ImageService){
             <div class="mySlides fade">
                 <img src="~/@item.Image" style="max-width:80%;">
@@ -48,7 +59,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <br>
         <div class="about-seller">
             <div class="avatar-seller">
-                <img class="about-seller-avatar" src="/images/product1.jpeg" alt="" width="100px" height="100px">
+                @if(ViewBag.serviceDetailUser.Avatar == null)
+                {
+                <img class="img-seller" src="~/Images/avatardefault.png" alt="avatar">
+                }
+                else
+                {
+                <img class="img-seller" src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar">
+                }
             </div>
             <div class="contact-with-seller">
                 <b>@ViewBag.serviceDetailUser.UserName</b>
@@ -63,119 +81,186 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     <tr class="tr-package">
                         <th class="th-package">Package</th>
                         <td class="td-package">
-                            <p class="price">Premium Price</p>
-
-                            <b class="type">Premium</b>
+                            @if(ViewBag.PackagePremium != null)
+                            {
+                            <p class="price">@ViewBag.PackagePremium.Price</p>
+                            <h3 class="type"><b>Premium</b></h3>
                             <br>
-                            <b class="title">1 cai cu? lon` gi day</b>
+                            <b class="title">@ViewBag.PackagePremium.Title</b>
+                            }
                         </td>
                         <td class="td-package">
-                            <p class="price">Standard Price</p>
-                            <b class="type">Standard</b>
+                            @if(ViewBag.PackageStandard != null)
+                            {
+                            <p class="price">@ViewBag.PackageStandard.Price</p>
+                            <h3 class="type"><b>Standard</b></h3>
                             <br>
-                            <b class="title">1 cai cu? lon` gi day</b>
+                            <b class="title">@ViewBag.PackageStandard.Title</b>
+                            }
                         </td>
                         <td class="td-package">
-                            <p class="price">Basic Price</p>
-
-                            <b class="type">Basic</b>
+                            @if(ViewBag.PackageBasic != null)
+                            {
+                            <p class="price">@ViewBag.PackageBasic.Price</p>
+                            <h3 class="type"><b>Basic</b></h3>
                             <br>
-                            <b class="title">1 cai cu? lon` gi day</b>
+                            <b class="title">@ViewBag.PackageBasic.Title</b>
+                            }
                         </td>
                     </tr>
                     <tr class="description tr-package">
-                        <th class="th-package"></th>
-                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
-                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
-                        <td class="td-package">@ViewBag.serviceDetail.Description</td>
+                        <td class="td-package"></td>
+                        <td class="td-package">
+                            @if(ViewBag.PackagePremium != null)
+                            {
+                            <p>@ViewBag.PackagePremium.Description</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageStandard != null)
+                            {
+                            <p>@ViewBag.PackageStandard.Description</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageBasic != null)
+                            {
+                            <p>@ViewBag.PackageBasic.Description</p>
+                            }
+                        </td>
                     </tr>
                     <tr class="tr-package">
                         <th class="th-package">Revisions</th>
-                        <td class="td-package">4</td>
-                        <td class="td-package">4</td>
-                        <td class="td-package">4</td>
+                        <td class="td-package">
+                            @if(ViewBag.PackagePremium != null)
+                            {
+                            <p>@ViewBag.PackagePremium.NumberRevision</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageStandard != null)
+                            {
+                            <p>@ViewBag.PackageStandard.NumberRevision</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageBasic != null)
+                            {
+                            <p>@ViewBag.PackageBasic.NumberRevision</p>
+                            }
+                        </td>
                     </tr>
                     <tr class="tr-package">
                         <th class="th-package">Delevery Time</th>
-                        <td class="td-package">delevery time</td>
-                        <td class="td-package">delevery time</td>
-                        <td class="td-package">delevery time</td>
+                        <td class="td-package">
+                            @if(ViewBag.PackagePremium != null)
+                            {
+                            <p>@ViewBag.PackagePremium.DeliveryTime Days</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageStandard != null)
+                            {
+                            <p>@ViewBag.PackageStandard.DeliveryTime Days</p>
+                            }
+                        </td>
+                        <td class="td-package">
+                            @if(ViewBag.PackageBasic != null)
+                            {
+                            <p>@ViewBag.PackageBasic.DeliveryTime Days</p>
+                            }
+                        </td>
                     </tr>
                     <tr class="tr-package">
                         <th class="th-package">Total</th>
                         <td class="total-price">
-                            <p>$100</p>
-                            <button class="btn-continue btn-prc-detail">Select</button>
+                            @if(ViewBag.PackagePremium != null)
+                            {
+                            <p class="price">@ViewBag.PackagePremium.Price $</p>
+                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackagePremium.PackageId'">Select</button>
+                            }
                         </td>
                         <td class="total-price">
-                            <p>$100</p>
-                            <button class="btn-continue btn-prc-detail">Select</button>
+                            @if(ViewBag.PackageStandard != null)
+                            {
+                            <p class="price">@ViewBag.PackageStandard.Price $</p>
+                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageStandard.PackageId'">Select</button>
+                            }
                         </td>
                         <td class="total-price">
-                            <p>$100</p>
-                            <button class="btn-continue btn-prc-detail">Select</button>
+                            @if(ViewBag.PackageBasic != null)
+                            {
+                            <p class="price">@ViewBag.PackageBasic.Price $</p>
+                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageBasic.PackageId'">Select</button>
+                            }
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
     <div class="right-detail-content">
         <div class="wrapper-price-detail" id="price-detail" onscroll="Onscroll()">
 
             <div class="w3-bar w3-black">
-                <button class="w3-bar-item w3-button" onclick="openCity('London')">Premium</button>
-                <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Standard</button>
-                <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Basic</button>
+                <button class="w3-bar-item w3-button" onclick="openCity(event,'London')">Premium</button>
+                <button class="w3-bar-item w3-button" onclick="openCity(event,'Paris')">Standard</button>
+                <button class="w3-bar-item w3-button" onclick="openCity(event,'Tokyo')">Basic</button>
             </div>
 
             <div id="London" class="w3-container city">
                 <div class="content-price">
-
-                    <h2 class="back-content">Premium Price</h2>
+                    @if(ViewBag.PackagePremium != null)
+                    {
+                    <h3 class="back-content">@ViewBag.PackagePremium.Title</h3>
                     <br>
-                    <p class="price-detail-content">Thach dep trai</p>
+                    <p class="price-detail-content">@ViewBag.PackagePremium.Description</p>
                     <br>
                     <div class="Delivery"><i class="fa fa-history"></i>
-                        <p>Days Delivery</p>
+                        <p>@ViewBag.PackagePremium.DeliveryTime Days Delivery</p>
                     </div>
                     <br>
-                    <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order';">Continue</button>
+                    <button class="btn-continue btn-prc-detail"
+                        onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackagePremium.PackageId'">Continue</button>
+                    }
                 </div>
             </div>
 
             <div id="Paris" class="w3-container city" style="display:none">
                 <div class="content-price">
-
-                    <h2 class="back-content">Standard Price</h2>
+                    @if(ViewBag.PackageStandard != null)
+                    {
+                    <h3 class="back-content">@ViewBag.PackageStandard.Title</h3>
                     <br>
-                    <p class="price-detail-content">Thach dep trai vl</p>
+                    <p class="price-detail-content">@ViewBag.PackageStandard.Description</p>
                     <br>
                     <div class="Delivery"><i class="fa fa-history"></i>
-                        <p>Days Delivery</p>
+                        <p>@ViewBag.PackageStandard.DeliveryTime Days Delivery</p>
                     </div>
                     <br>
-                    <button class="btn-continue btn-prc-detail">Continue</button>
+                    <button class="btn-continue btn-prc-detail"
+                        onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageStandard.PackageId'">Continue</button>
+                    }
                 </div>
             </div>
 
             <div id="Tokyo" class="w3-container city" style="display:none">
                 <div class="content-price">
-
-                    <h2 class="back-content">Basic Price</h2>
+                    @if(ViewBag.PackageBasic != null)
+                    {
+                    <h3 class="back-content">@ViewBag.PackageBasic.Title</h3>
                     <br>
-                    <p class="price-detail-content">Thach dep trai vcl</p>
+                    <p class="price-detail-content">@ViewBag.PackageBasic.Description</p>
                     <br>
                     <div class="Delivery"><i class="fa fa-history"></i>
-                        <p>Days Delivery</p>
+                        <p>@ViewBag.PackageBasic.DeliveryTime Days Delivery</p>
                     </div>
                     <br>
-                    <button class="btn-continue btn-prc-detail">Continue</button>
+                    <button class="btn-continue btn-prc-detail"
+                        onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageBasic.PackageId'">Continue</button>
+                    }
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

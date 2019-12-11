@@ -15,12 +15,14 @@ Layout = "~/Views/Shared/_Order.cshtml";
                 </div>
             </li>
             <li class="wrapper-li-step">
-                <div class="li-step" style="background-color: #1dbf73;">1</div>
-                <div class="li-content">Order Detail ></div>
+                <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
+                <div class="li-content" style="color: #1dbf73;"><a href="/Customize/Order?PackageId=@Model.PackageId">Order Detail</a></div>
+                <span style="margin-left: 10px;">></span>
             </li>
             <li class="wrapper-li-step">
                 <div class="li-step" style="background-color: #1dbf73;">2</div>
-                <div class="li-content">Confirm & Pay ></div>
+                <div class="li-content" style="color: #1dbf73;">Confirm & Pay</div>
+                <span style="margin-left: 10px;">></span>
             </li>
             <li class="wrapper-li-step">
                 <div class="li-step">3</div>
@@ -90,9 +92,6 @@ Layout = "~/Views/Shared/_Order.cshtml";
 
     </div>
     <div class="left-content ">
-
-
-
         <div class="wrapper-order-content">
             <div class="summary">
                 <div class="gig-summary">
@@ -126,7 +125,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
             <div>
                 <br>
                 <div>
-                    <button type="button" class="btn-continue btn-prc-detail">Confirm & Pay</button>
+                    <button type="button" onclick="window.location.href='/Order/Requirement'" class="btn-continue btn-prc-detail">Confirm & Pay</button>
                     <br>
                     <br>
                 </div>

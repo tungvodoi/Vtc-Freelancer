@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/HomePage.css">
+
     <!-- Linh css request -->
+
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
     <link rel="stylesheet" type="text/css" href="~/css/serviceDetail.css">
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 
 </head>
 
@@ -25,161 +26,122 @@
     <div class="menu-content-hiden" id="hidden-div">
         <div class="wrapper-content-menu-hiden">
             <nav class="site-sidebars">
-                <div class="profile-wrapper">
-                    <label class="lable-profile">
-                         @if(ViewBag.userAvatar == null)
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
-                                }
-                                else
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
-                                }
-                    </label>
-                    <br>
-                    <p class="username">Username</p>
-                    <br>
-                </div>
                 <ul class="ul-sidebars">
-                    <li class="li-sidebars">Home</li>
-                    <li class="li-sidebars">Inbox</li>
-                    <li class="li-sidebars">Dashboard</li>
-                    <li class="li-sidebars">Saved</li>
+                    <li class="li-sidebars join-to">Join VTC Freelancer</li>
+                    <li class="li-sidebars">Sign in</li>
                     <li class="li-sidebars">Browse Categories</li>
 
                     <br>
                     <div class="content-sidebars-wrapper">
-                        <li class="li-sidebars"><b>Buying</b></li>
-                        <hr>
-                        <li class="li-sidebars">Manage Requests</li>
-                        <li class="li-sidebars">Post a Request</li>
-                        <br>
-                        <li class="li-sidebars"><b>Selling</b></li>
-
-                        <hr>
-                        <li class="li-sidebars">Manage Sales</li>
-                        <li class="li-sidebars">Revenues</li>
-                        <br>
                         <li class="li-sidebars"><b>General</b></li>
                         <hr>
-                        <li class="li-sidebars">Setting</li>
-                        <li class="li-sidebars">Logout</li>
+                        <li class="li-sidebars">Home</li>
                     </div>
-
                 </ul>
             </nav>
         </div>
     </div>
     <div>
-        <div class="header container">
-            <div class="left-top-nav">
-                <div class="wrapper-logo">
-                    
-                    <i id="icon-menu" class="fa fa-bars"></i>
-                    <div class="logo">
-                        <a href="/">VTC Freelancer</a>
+        <div class="header-sticky" id="header-sticky">
+            <div class="header container">
+                <div class="left-top-nav">
+                    <div class="wrapper-logo">
+                        <i id="icon-menu" class="fa fa-bars"></i>
+                        <div class="logo">
+                            <a href="/">VTC Freelancer</a>
+                        </div>
                     </div>
+                    <form action="/Home/Search" method="GET" id="form-search-top">
+                        <input type="search" name="search_content" id="input-search-service"
+                            placeholder="Find Services" />
+                        <button id="btn-search-service">Search</button>
+                    </form>
+                    <br>
                 </div>
-                <form action="/Home/Search" method="GET">
-                    <input type="text" name="search_content" id="input-search-service" placeholder="Find Services" />
-                    <button id="btn-search-service">Search</button>
-                </form>
-                <br>
+                <!-- <<<<<<< HEAD -->
+                <div class="right-top-nav">
+                    <ul class="nav-top">
+                        <li>
+                            <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
+                        </li>
+                        <li>
+                            <a href="/Login" class="nav-link"><b>Login</b></a>
+                        </li>
+                        <li>
+                            <a href="/Register" class="nav-link join-btn"><b>Join</b></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <!-- <<<<<<< HEAD -->
-            <div class="right-top-nav">
-                <ul class="nav-top">
-                    @if(ViewBag.IsSeller == 0)
-                    {
-                    <li>
-                        <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-                    </li>
-                    }
+            <div class="nav-categories">
+                <ul class="ul-categories container">
+                    <li class="li-categories">
+                        <a href="" class="categories-link">Graphics & Design</a>
+                        <ul class="ul-package">
 
-                    <li>
-                        <a href="#" class="nav-link"><b>Messages</b></a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link"><b>Saved</b></a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link"><b>Orders</b></a>
-                    </li>
-                  
-                    @if(ViewBag.IsSeller == 1)
-                    {
-                    <li>
-                        <a href="/Seller">
-                            <div class="prf-div">
-                                <h4 style="color: #1dbf73;">Switch to Selling</h4>
+                            @if(ViewBag.listcategory != null)
+                            {
+                            @foreach (var item in ViewBag.listcategory)
+                            {
+                            <li class="li-package">
+                                <a href="" class="a-package">@item.CategoryName</a>
+                            </li>
+                            }
+                            }
 
-
-                                @if(ViewBag.userAvatar == null)
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
-                                }
-                                else
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
-                                }
-                            </div>
-                        </a>
+                            <li class="li-package">
+                                <a href="" class="a-package">Logo Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Brand Style Guides</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Game Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Graphics for Streamers </a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Business Cards & Stationery</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Illustration</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Brochure Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Poster Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Flyer Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Book & Album Covers</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Storyboards </a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Web & Mobile Design</a>
+                            </li>
+                            <li class="li-package">
+                                <a href="" class="a-package">Social Media Design</a>
+                            </li>
+                        </ul>
                     </li>
-                    
-                    <li>
-                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                    <li class="li-categories">
+                        <a href="" class="categories-link">Programming & Tech</a>
+                        <ul class="ul-package">
+                            <li class="li-package"><a class="a-package" href="">a</a></li>
+                            <li class="li-package"><a class="a-package" href="">a</a></li>
+                        </ul>
                     </li>
-                    }
                 </ul>
             </div>
+
         </div>
 
-
-        <div class="nav-categories">
-            <ul class="ul-categories container">
-                @if(ViewBag.listcategory != null)
-                        {
-                        @foreach (var item in ViewBag.listcategory)
-                        {
-                            <li class="li-categories">
-                                <a href="" class="categories-link">@item.CategoryName</a>
-                                <ul class="ul-package">
-                                        @if(item.subsCategory != null){
-                                            @foreach (var subsCategory in item.subsCategory)
-                                            {
-                                                <li class="li-package">
-                                                    <a href="" class="a-package">@subsCategory.CategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                </ul>
-                            </li>
-                        }
-                        }
-                <!-- <li class="li-categories">
-                    <a href="" class="categories-link">Graphics & Design</a>
-                    <ul class="ul-package">
-
-                        @if(ViewBag.listcategory != null)
-                        {
-                        @foreach (var item in ViewBag.listcategory)
-                        {
-                        <li class="li-package">
-                            <a href="" class="a-package">@item.CategoryName</a>
-                        </li>
-                        }
-                        }
-                    </ul>
-                </li>
-                <li class="li-categories">
-                    <a href="" class="categories-link">Programming & Tech</a>
-                    <ul class="ul-package">
-                        <li class="li-package"><a class="a-package" href="">a</a></li>
-                        <li class="li-package"><a class="a-package" href="">a</a></li>
-                    </ul>
-                </li> -->
-            </ul>
-        </div>
 
         @RenderBody()
         <div class="footer">
@@ -337,6 +299,19 @@
         </div>
     </div>
     <script>
+    </script>
+    <script>
+        var search = document.getElementById('form-search-top');
+        // var top = search.scrollHeight;
+        // console.log(top);
+        // if (top > 200) {
+        //     search.style.display = 'none';
+
+        // }
+        // else {
+        //     search.style.display = 'flex';
+        // }
+
         var dmm = document.getElementById('icon-menu');
         dmm.addEventListener('click', () => {
             var loz = document.getElementById('hidden-div');
@@ -350,10 +325,25 @@
             div.classList.remove('animate');
             body.classList.remove('animate')
         })
-        
+
     </script>
+    <script src="~/lib/jquery/dist/jquery.min.js">
+
+    </script>
+    <script>
+        var sticky = document.getElementById('header-sticky');
+        $(window).scroll(function () {
+            var height = $(window).scrollTop();
+            if (height < 200) {
+                sticky.style.display = 'none';
+            }
+            else {
+                sticky.style.display = 'block';
+            }
+        });</script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/slide.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>

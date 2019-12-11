@@ -89,7 +89,6 @@
 .bars-service-detail {
   position: sticky;
   background-color: white;
-  z-index: 5;
   top: 0px;
 }
 
@@ -163,14 +162,12 @@
   vertical-align: text-top;
 }
 
-.tr-package {}
-
 .td-package {
   width: 50px;
   padding-top: 24px;
   position: relative;
   vertical-align: text-top;
-  text-align: left;
+  text-align: center;
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -181,4 +178,20 @@
   padding-right: 16px;
   text-align: center;
   padding-bottom: 10px;
+}
+
+.img-seller {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: block;
+}
+
+.contact-with-seller {
+  margin-left: 10px;
+}
+
+.brg {
+  background-color: #1dbf73;
+  color: white;
 }

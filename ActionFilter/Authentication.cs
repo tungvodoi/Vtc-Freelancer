@@ -13,7 +13,7 @@ namespace Vtc_Freelancer.ActionFilter
             if (context.HttpContext.Session.GetInt32("UserId") == null)
             {
                 var controller = (Controller)context.Controller;
-                context.Result = controller.Redirect("/Login");
+                context.Result = controller.Redirect("/HomePage");
             }
         }
     }
