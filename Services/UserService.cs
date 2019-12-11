@@ -252,5 +252,17 @@ namespace Vtc_Freelancer.Services
             }
             return false;
         }
+        public bool UpdateDescription(int? userId, string description)
+        {
+            var entity = dbContext.Seller.FirstOrDefault(u => u.UserId == userId);
+            if (entity != null)
+            {
+                entity.Description = description;
+                dbContext.Seller.Update(entity);
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

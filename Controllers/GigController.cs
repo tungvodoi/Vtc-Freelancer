@@ -17,16 +17,28 @@ namespace Vtc_Freelancer.Controllers
         private readonly IHostingEnvironment _environment;
         private GigService gigService;
         private UserService userService;
-        public GigController(GigService gigService, UserService userService, IHostingEnvironment IHostingEnvironment)
+        private AdminService adminService;
+        public GigController(GigService gigService, UserService userService, AdminService adminService, IHostingEnvironment IHostingEnvironment)
         {
             _environment = IHostingEnvironment;
             this.gigService = gigService;
             this.userService = userService;
+            this.adminService = adminService;
         }
 
         [HttpGet("/CreateService/Step1")]
         public IActionResult Step1()
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            if (listcategory != null)
+            {
+                List<Category> listSubCategory = new List<Category>();
+                listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
+
+                ViewBag.subcategory = listSubCategory;
+                ViewBag.listcategory = listcategory;
+            }
             return View();
         }
 
@@ -60,6 +72,8 @@ namespace Vtc_Freelancer.Controllers
         [HttpPost("/CreateService/CreateServiceStep1")]
         public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tags)
         {
+
+
             int? userID = HttpContext.Session.GetInt32("UserId");
             int SellerID = userService.GetSellerByUserID(userID).SellerId;
             int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tags, SellerID);

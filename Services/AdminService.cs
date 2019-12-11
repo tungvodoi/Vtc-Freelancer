@@ -207,6 +207,12 @@ namespace Vtc_Freelancer.Services
             listCategory = dbContext.Category.Where(c => c.ParenId == 0).ToList();
             return listCategory;
         }
+        public List<Category> GetListSubCategoryByParentId(int parentId)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.Where(c => c.ParenId == parentId).ToList();
+            return listCategory;
+        }
         public List<Category> GetListSubCategoryByCategoryParentId(int id)
         {
             List<Category> listCategory = new List<Category>();

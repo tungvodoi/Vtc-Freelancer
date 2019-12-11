@@ -6,7 +6,7 @@ using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.ActionFilter;
 using System;
-
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -26,6 +26,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             List<Service> services = new List<Service>();
             services = adminService.GetListServices("");
             foreach (var item in services)
@@ -47,7 +51,7 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View(services);
+
             }
             return View(services);
         }
@@ -58,6 +62,12 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.UserName = userads.UserName;
             return View();
         }
+        // [HttpPost]
+        // public IActionResult EditDescription(string description)
+        // {
+
+        //     return Redirect(PageBase.RedirectToPage());
+        // }
         [HttpGet("/Logout")]
         public IActionResult Logout()
         {
