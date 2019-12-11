@@ -289,7 +289,10 @@ ul {
   overflow: hidden;
   height: 294px;
 }
-
+.slider__gig-index .slide-gig-css:hover .arrowSlide-right{
+  
+  right: 10px;
+}
 .slider__gig:hover .gig__content .slider__gig-title h3 {
   color: #1dbf73;
   text-decoration: underline;
@@ -346,7 +349,7 @@ ul {
 }
 
 .slide-gig-css:hover .arrowSlide-right {
-  right: 10px;
+  right: 0;
 }
 
 .slider__gig-image {
@@ -1010,10 +1013,6 @@ h3 {
   height: 30px;
   line-height: 30px;
   text-align: center;
-}
-
-.arrowSlide-right {
-  right: 0;
 }
 
 .wrapper-become-seller {

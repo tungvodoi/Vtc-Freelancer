@@ -22,7 +22,7 @@ namespace Vtc_Freelancer.Services
                 service.Category = category;
                 service.SubCategory = subcategory;
                 service.TimeCreateService = System.DateTime.Now;
-                service.Status = -1;
+                service.Status = 1;
                 service.SellerId = sellerId;
                 dbContext.Add(service);
                 dbContext.SaveChanges();
