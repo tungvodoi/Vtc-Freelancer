@@ -14,30 +14,58 @@ namespace Vtc_Freelancer.Controllers
     {
         private UserService userService;
         private OrderService orderService;
-        public OrderController(UserService userService, OrderService orderService)
+        private AdminService adminService;
+        public OrderController(UserService userService, OrderService orderService, AdminService adminService)
         {
             this.userService = userService;
             this.orderService = orderService;
+            this.adminService = adminService;
         }
         [HttpGet("/Customize/Order")]
-        public IActionResult Order()
+        public IActionResult Order(int PackageId)
         {
-            Package pac = orderService.GetPackageByID(1);
-            if (pac != null)
+            Package package = orderService.GetPackageByPackageId(PackageId);
+            if (package != null)
             {
-                pac.Service = orderService.GetServiceByID(pac.ServiceId);
+                package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                return View(package);
             }
-            return View(pac);
+            else
+            {
+                return Redirect("/");
+            }
         }
+
         [HttpGet("/Order/Payment")]
-        public IActionResult Payment()
+        public IActionResult Payment(int PackageId)
         {
-            Package pac = orderService.GetPackageByID(1);
-            if (pac != null)
+            Package package = orderService.GetPackageByPackageId(PackageId);
+            if (package != null)
             {
-                pac.Service = orderService.GetServiceByID(pac.ServiceId);
+                package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                return View(package);
             }
-            return View(pac);
+            else
+            {
+                return Redirect("/");
+            }
+        }
+
+        [HttpGet("/Order/Requirement")]
+        public IActionResult Requirement()
+        {
+            Package package = orderService.GetPackageByPackageId(1);
+            if (package != null)
+            {
+                package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                return View(package);
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
     }
 }

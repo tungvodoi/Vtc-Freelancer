@@ -71,13 +71,18 @@ function getdeliveredTime(e, time) {
   document.getElementById("js-other-value").value = time;
 }
 
-function openCity(cityName) {
+function openCity(event, cityName) {
   var i;
   var x = document.getElementsByClassName("city");
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
   }
   document.getElementById(cityName).style.display = "block";
+  var tablin = document.getElementsByClassName("w3-bar-item");
+  for (let i = 0; i < tablin.length; i++) {
+    tablin[i].className = tablin[i].className.replace(" brg", "");
+  }
+  event.currentTarget.className += " brg";
 }
 
 function Onscroll() {

@@ -26,6 +26,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             List<Service> services = new List<Service>();
             services = adminService.GetListServices("");
             if (listcategory != null)
@@ -40,6 +44,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             List<Service> services = new List<Service>();
             services = adminService.GetListServices("");
             foreach (var item in services)
@@ -77,6 +85,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;

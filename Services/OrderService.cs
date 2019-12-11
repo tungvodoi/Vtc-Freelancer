@@ -5,21 +5,21 @@ using Vtc_Freelancer.Models;
 
 namespace Vtc_Freelancer.Services
 {
-  public class OrderService
-  {
-    private MyDbContext dbContext;
-    public OrderService(MyDbContext dbContext)
+    public class OrderService
     {
-      this.dbContext = dbContext;
-    }
+        private MyDbContext dbContext;
+        public OrderService(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
-    public Package GetPackageByID(int ID)
-    {
-      return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
+        public Package GetPackageByPackageId(int PackageId)
+        {
+            return dbContext.Package.FirstOrDefault(p => p.PackageId == PackageId);
+        }
+        public Service GetServiceByServiceId(int? ServiceId)
+        {
+            return dbContext.Service.FirstOrDefault(x => x.ServiceId == ServiceId);
+        }
     }
-    public Service GetServiceByID(int? ID)
-    {
-      return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
-    }
-  }
 }

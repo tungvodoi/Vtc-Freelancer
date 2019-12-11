@@ -22,7 +22,7 @@ namespace Vtc_Freelancer.Services
                 service.Category = category;
                 service.SubCategory = subcategory;
                 service.TimeCreateService = System.DateTime.Now;
-                service.Status = 1;
+                service.Status = -1;
                 service.SellerId = sellerId;
                 dbContext.Add(service);
                 dbContext.SaveChanges();
@@ -137,9 +137,13 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
         }
-        public Package GetPackageByID(int ID)
+        public List<Package> GetPackageByServiceID(int? ServiceId)
         {
-            return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
+            return dbContext.Package.Where(p => p.ServiceId == ServiceId).ToList();
+        }
+        public Package GetPackageByPackageID(int? packageId)
+        {
+            return dbContext.Package.FirstOrDefault(p => p.PackageId == packageId);
         }
         public List<Service> GetListService()
         {

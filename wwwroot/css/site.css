@@ -1031,3 +1031,8 @@ h3 {
 .form-become-seller {
   margin: 1rem;
 }
+
+.bgr {
+  background-color: #1dbf73;
+  color: white;
+}

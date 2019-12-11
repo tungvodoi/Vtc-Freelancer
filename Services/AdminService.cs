@@ -60,7 +60,7 @@ namespace Vtc_Freelancer.Services
                 }
             }
         }
-        public List<ImageService> GetListImageService(int idService)
+        public List<ImageService> GetListImageService(int? idService)
         {
             List<ImageService> ListImageService = dbContext.ImageService.Where(x => x.ServiceId == idService).ToList();
 
@@ -207,28 +207,27 @@ namespace Vtc_Freelancer.Services
             listCategory = dbContext.Category.Where(c => c.ParenId == 0).ToList();
             return listCategory;
         }
+        public List<Category> GetListSubCategoryByParentId(int parentId)
+        {
+            List<Category> listCategory = new List<Category>();
+            listCategory = dbContext.Category.Where(c => c.ParenId == parentId).ToList();
+            return listCategory;
+        }
         public List<Category> GetListSubCategoryByCategoryParentId(int id)
         {
             List<Category> listCategory = new List<Category>();
             listCategory = dbContext.Category.FromSql($"SELECT * FROM Category where parenId = {id}").ToList();
-            foreach (var item in listCategory)
-            {
-                Console.WriteLine(item.CategoryName);
-            }
             return listCategory;
         }
 
         public bool EditCategory(Category category, string name)
         {
             var category1 = GetCategoryByCategoryName(name);
-            Console.WriteLine(444444444);
-            Console.WriteLine(category1.CategoryName);
             if (category1 != null)
             {
                 category1.CategoryName = category.CategoryName;
                 dbContext.Update(category1);
                 dbContext.SaveChanges();
-                Console.WriteLine(8888888888888);
                 return true;
             }
             return false;
@@ -240,5 +239,10 @@ namespace Vtc_Freelancer.Services
             return category;
 
         }
+
+        // public bool getTotalPriceByMonth()
+        // {
+        //     var Order = dbContext.Orders.Where(x => x.WorkStatus == 1).GroupBy(x => x.OrderTime.Month);
+        // }
     }
 }
