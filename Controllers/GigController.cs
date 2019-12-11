@@ -77,7 +77,7 @@ namespace Vtc_Freelancer.Controllers
             int? ServiceId = HttpContext.Session.GetInt32("serviceId");
             Console.WriteLine(ServiceId);
             Package pacBasic = new Package();
-            pacBasic.Name = "BASIC";
+            pacBasic.Name = "Basic";
             pacBasic.Title = basicTitle;
             pacBasic.Description = basicDescription;
             pacBasic.DeliveryTime = basicDelivery;
@@ -88,7 +88,7 @@ namespace Vtc_Freelancer.Controllers
             if (standardTitle != null && premiumTitle != null && standardDescription != null && premiumDescription != null)
             {
                 Package pacStandard = new Package();
-                pacStandard.Name = "STANDARD";
+                pacStandard.Name = "Standard";
                 pacStandard.Title = standardTitle;
                 pacStandard.Description = standardDescription;
                 pacStandard.DeliveryTime = standardDelivery;
@@ -97,7 +97,7 @@ namespace Vtc_Freelancer.Controllers
                 pacStandard.ServiceId = ServiceId;
                 check = gigService.CreateServiceStepTwo(pacStandard);
                 Package pacPremium = new Package();
-                pacPremium.Name = "PREMIUM";
+                pacPremium.Name = "Premium";
                 pacPremium.Title = premiumTitle;
                 pacPremium.Description = premiumDescription;
                 pacPremium.DeliveryTime = premiumDelivery;
@@ -211,12 +211,27 @@ namespace Vtc_Freelancer.Controllers
                 users = gigService.GetUserByServiceId(serviceId);
                 List<ImageService> images = new List<ImageService>();
                 images = gigService.GetListImagesByServiceId(serviceId);
+                List<Package> ListPackage = gigService.GetPackageByServiceID(serviceId);
+                foreach (var item in ListPackage)
+                {
+                    if (item.Name == "Premium")
+                    {
+                        ViewBag.PackagePremium = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                    else if (item.Name == "Standard")
+                    {
+                        ViewBag.PackageStandard = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                    else
+                    {
+                        ViewBag.PackageBasic = gigService.GetPackageByPackageID(item.PackageId);
+                    }
+                }
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
                 ViewBag.UserName = users.UserName;
                 ViewBag.IsSeller = users.IsSeller;
                 return View();
-
             }
         }
     }

@@ -1,6 +1,6 @@
 @model Package;
 @{
-ViewData["Title"] = "Create new Service";
+ViewData["Title"] = "Requirement";
 Layout = "~/Views/Shared/_Order.cshtml";
 }
 <div class="nav-step step-order container">
@@ -15,18 +15,18 @@ Layout = "~/Views/Shared/_Order.cshtml";
         </div>
       </li>
       <li class="wrapper-li-step">
-        <div class="li-step" style="background-color: #1dbf73;">1</div>
+        <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
         <div class="li-content" style="color: #1dbf73;">Order Detail</div>
         <span style="margin-left: 10px;">></span>
       </li>
       <li class="wrapper-li-step">
-        <div class="li-step">2</div>
-        <div class="li-content">Confirm & Pay</div>
+        <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
+        <div class="li-content" style="color: #1dbf73;">Confirm & Pay</div>
         <span style="margin-left: 10px;">></span>
       </li>
       <li class="wrapper-li-step">
-        <div class="li-step">3</div>
-        <div class="li-content">Submit Requirements </div>
+        <div class="li-step" style="background-color: #1dbf73;">3</div>
+        <div class="li-content" style="color: #1dbf73;">Submit Requirements </div>
       </li>
 
     </ul>
@@ -38,13 +38,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
     <h1 class="back-content cutomemize-your-package">Customize Your Package</h1>
     <div class="summary">
       <div class="gig-summary">
-        @for (int i = 0; i < Model.Service.ListImage.Count; i++)
-        {
-          @if(i == 1)
-          {
-            <img src="~/@Model.Service.ListImage[i].Image" alt="" width="200px" style="margin: 0rem 1rem 0rem 1rem;">
-          }
-        }
+        <img src="/images/product1.jpeg" alt="" width="200px" style="margin: 0rem 1rem 0rem 1rem;">
         <div>
           <a style="font-weight: bold;">Title
             <br>
@@ -106,12 +100,12 @@ Layout = "~/Views/Shared/_Order.cshtml";
       <br>
       <div>
         <div>
-          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 20 / 100) $</span></div>
+          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 5 / 100) $</span></div>
           <br>
         </div>
       </div>
       <br>
-      <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price * 20/100)) $</span>
+      <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price * 5/100)) $</span>
       </div>
       <br>
 
@@ -120,7 +114,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
       <div>
         <br>
         <div>
-          <button type="button" class="btn-continue btn-prc-detail" onclick="window.location.href='/Order/Payment?PackageId=@Model.PackageId';">Order Now</button>
+          <button type="button" class="btn-continue btn-prc-detail" onclick="window.location.href='/Order/Payment';">Order Now</button>
           <br>
           <br>
           <div class="cta-comment">You won't be charged yet</div>
@@ -140,8 +134,8 @@ Layout = "~/Views/Shared/_Order.cshtml";
   function onSelect() {
     var optionhtml = sec[sec.selectedIndex].text;
     basic.innerHTML = @Model.Price * optionhtml + "$";
-    subb.innerHTML = @(Model.Price * 20 / 100) * optionhtml + "$";
-    totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 20 / 100) * optionhtml + "$";
+    subb.innerHTML = @(Model.Price * 5 / 100) * optionhtml + "$";
+    totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 5 / 100) * optionhtml + "$";
   }
 
 </script>

@@ -137,9 +137,13 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Service.FirstOrDefault(x => x.ServiceId == ID);
         }
-        public Package GetPackageByID(int ID)
+        public List<Package> GetPackageByServiceID(int? ServiceId)
         {
-            return dbContext.Package.FirstOrDefault(p => p.PackageId == ID);
+            return dbContext.Package.Where(p => p.ServiceId == ServiceId).ToList();
+        }
+        public Package GetPackageByPackageID(int? packageId)
+        {
+            return dbContext.Package.FirstOrDefault(p => p.PackageId == packageId);
         }
         public List<Service> GetListService()
         {

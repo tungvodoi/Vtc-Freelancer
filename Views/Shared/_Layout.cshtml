@@ -118,11 +118,11 @@
 
                                 @if(ViewBag.userAvatar == null)
                                 {
-                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
                                 }
                                 else
                                 {
-                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
                                 }
                             </div>
                         </a>
