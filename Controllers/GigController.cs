@@ -214,6 +214,7 @@ namespace Vtc_Freelancer.Controllers
             }
             else
             {
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
                 Service service = new Service();
                 service = gigService.GetServiceByID(serviceId);
                 if (service == null)
@@ -227,7 +228,7 @@ namespace Vtc_Freelancer.Controllers
                 images = gigService.GetListImagesByServiceId(serviceId);
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
-                ViewBag.UserName = users.UserName;
+                // ViewBag.UserName = users.UserName;
                 ViewBag.IsSeller = users.IsSeller;
                 return View();
 

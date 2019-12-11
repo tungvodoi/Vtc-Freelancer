@@ -67,13 +67,14 @@
         <div class="header container">
             <div class="left-top-nav">
                 <div class="wrapper-logo">
+                    
                     <i id="icon-menu" class="fa fa-bars"></i>
                     <div class="logo">
                         <a href="/">VTC Freelancer</a>
                     </div>
                 </div>
-                <form action="" method="post">
-                    <input type="text" name="" id="input-search-service" placeholder="Find Services" />
+                <form action="/Home/Search" method="GET">
+                    <input type="text" name="search_content" id="input-search-service" placeholder="Find Services" />
                     <button id="btn-search-service">Search</button>
                 </form>
                 <br>
@@ -97,17 +98,7 @@
                     <li>
                         <a href="#" class="nav-link"><b>Orders</b></a>
                     </li>
-                    @if(ViewBag.UserName == null)
-                    {
-                    <li>
-                        <a href="/Login" class="nav-link"><b>Login</b></a>
-                    </li>
-                    <li>
-                        <a href="/Register" class="nav-link"><b>Join</b></a>
-                    </li>
-                    }
-                    @if(ViewBag.UserName != null)
-                    {
+                  
                     @if(ViewBag.IsSeller == 1)
                     {
                     <li>
@@ -118,16 +109,18 @@
 
                                 @if(ViewBag.userAvatar == null)
                                 {
-                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png"
+                                        alt="avatar"></a>
                                 }
                                 else
                                 {
-                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                <a href="@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar"
+                                        alt="avatar"></a>
                                 }
                             </div>
                         </a>
                     </li>
-                    }
+                    
                     <li>
                         <a href="/Logout" class="nav-link"><b>Logout</b></a>
                     </li>

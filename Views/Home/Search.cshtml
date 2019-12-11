@@ -1,0 +1,66 @@
+   
+    @if(ViewBag.UserName == null)
+    {
+     ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Login.cshtml";
+    }
+    else
+    {ViewData["Title"] = "EditProfile";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+<div class="">
+
+    <div class="container">
+        <br>
+        <h1 class="back-content">
+            Result for "@ViewBag.searchResult":
+        </h1>
+        <br>
+        <div class="box-row__slider">
+            @if(ViewBag.ListServicesSearch != null)
+            {
+            @foreach (var service in ViewBag.ListServicesSearch)
+            {
+            <div class="slider__gig">
+                <a href="/Gig/ServiceDetail?serviceId=@service.ServiceId" class="slide-gig-css slide-gig-js">
+                    @foreach (var imageService in service.ListImage)
+                    {
+                    <img src="~/@imageService.Image" alt="" class="slider__gig-image">
+                    }
+                </a>
+                <div class="gig__content">
+                    <div class="slider__gig-seller">
+                        <span class="gig__seller-avatar">
+                            <img src="~/@service.Seller.User.Avatar" alt="">
+                        </span>
+                        <div class="gig__seller-info">
+                            <a href="">@service.Seller.User.UserName</a>
+                        </div>
+                    </div>
+                    <a href="" class="slider__gig-title">
+                        <h3>@service.Title</h3>
+                    </a>
+                    <div class="slider__gig-star">
+                        <i class="fa fa-star"></i>
+                        <span class="gig__star-number">5.0</span>
+                        <span class="gig__star-user-star">(100)</span>
+                    </div>
+                </div>
+                <div class="slider__gig-footer">
+                    <div class="gig-fav">
+                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-heart"></i>
+                    </div>
+                    <div class="gig-price">
+                        <small>Starting At</small>
+                        $25
+                    </div>
+                </div>
+            </div>
+            }
+            }
+        </div>
+
+    </div>
+</div>

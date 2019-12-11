@@ -5,14 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Vtc_Freelancer</title>
-     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
     <link rel="stylesheet" type="text/css" href="~/css/HomePage.css">
-    <link rel="stylesheet" type="text/css" href="~/css/login.css">
 
     <!-- Linh css request -->
 
@@ -47,9 +46,7 @@
             <div class="header container">
                 <div class="left-top-nav">
                     <div class="wrapper-logo">
-                        <i id="icon-menu" class="fa fa-bars" style="color: black;"></i>
-                        <!-- <i  class="fa fa-ellipsis-h"></i> -->
-                        <!-- <i  class="fa fa-bars"></i> -->
+                        <i id="icon-menu" class="fa fa-bars"></i>
                         <div class="logo">
                             <a href="/">VTC Freelancer</a>
                         </div>
@@ -305,6 +302,15 @@
     </script>
     <script>
         var search = document.getElementById('form-search-top');
+        // var top = search.scrollHeight;
+        // console.log(top);
+        // if (top > 200) {
+        //     search.style.display = 'none';
+
+        // }
+        // else {
+        //     search.style.display = 'flex';
+        // }
 
         var dmm = document.getElementById('icon-menu');
         dmm.addEventListener('click', () => {

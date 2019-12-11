@@ -1,7 +1,13 @@
-@{
-ViewData["Title"] = "Create your Service";
-Layout = "~/Views/Shared/_Layout.cshtml";
-}
+  
+    @if(ViewBag.UserName == null)
+    {
+     ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Login.cshtml";
+    }
+    else
+    {ViewData["Title"] = "EditProfile";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 <div class="bars-service-detail container">
     <div class="bars-item">
         <a href="/Gig/Report" onclick="SetServiceIdToModal(@ViewBag.serviceDetail.ServiceId, @ViewBag.serviceDetailUser.UserId)">

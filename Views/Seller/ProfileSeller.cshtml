@@ -1,5 +1,9 @@
 @{
 ViewData["Title"] = "EditProfile";
+@if(@ViewBag.UserName == null)
+{
+Layout = "~/Views/Shared/_login.cshtml";
+}
 @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
 {
 Layout = "~/Views/Shared/_SellerLayout.cshtml";
@@ -256,7 +260,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     }
     var flag = true;
     function openFormDescription() {
-        
+
         if (flag == true) {
             document.getElementById('description').innerHTML = "<textarea name=" + 'description' + " id='text-description' cols='100' rows='10' >@ViewBag.sellerprofile.Description</textarea>"
                 + "<input class=" + 'btn-edit' + " onclick=" + 'openFormDescription()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
@@ -286,7 +290,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
     let base64 = [];
-
     document.querySelectorAll('.hiden').forEach((ip, index) => {
         ip.addEventListener('change', function () {
             if (this.files && this.files[0]) {

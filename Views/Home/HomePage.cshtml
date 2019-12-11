@@ -1,0 +1,62 @@
+@{
+ViewData["Title"] = "Home Page";
+Layout = "~/Views/Shared/_HomePageLayout.cshtml";
+}
+
+<div class="banner">
+    <div class="top-banner"></div>
+    <div class="bottom-banner container">
+        <div class="banner-content">
+            <h1 class="back-content">Find The Perfect Freelance Services For Your Business</h1>
+            <form action="/Home/Search" method="GET" id="form-search-top1">
+                <input type="text" name="search_content" id="input-search-service1" placeholder="Try 'Web Front-End'" />
+                <button id="btn-search-service1">Search</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="trust-by">
+    <h1 id="trust-by">VTC Academy</h1>
+</div>
+<div class="about-vtcf container" id="about-vtcf">
+    <ul class="ul-about-vtcf">
+        <li class="li-about-vtcf">
+            <h2>Get Work Done Faster On VTC Freelance, With Confidence</h2>
+        </li>
+        <li class="li-about-vtcf">
+            <h6>Payment Protection, Guaranteed</h6>
+            <p>Payment is released to the freelancer once you’re pleased and approve the work you get.
+            </p>
+        </li>
+        <li class="li-about-vtcf">
+            <h6>Know The Price Upfront</h6>
+            <p>Find any service within minutes and know exactly what you’ll pay. No hourly rates, just a fixed price.
+            </p>
+        </li>
+        <li class="li-about-vtcf">
+            <h6>We’re Here For You 24/7</h6>
+            <p>VTC Freelancer is here for you, anything from answering any questions to resolving any issues, at any
+                time.</p>
+        </li>
+    </ul>
+    <img width="50%" src="https://susansellers.files.wordpress.com/2011/05/writing-center2.jpg" alt=""
+        class="img-banner">
+</div>
+<div class="Marketplace container">
+    <h2>Explore The Marketplace</h2>
+    <ul>
+        <li><a href=""><img class="img-cate" src="~/Images/programming.9362366.svg" alt=""></a></li>
+        <li><a href="">
+                <img class="img-cate" src="~/Images/graphics-design.svg" alt="">
+            </a></li>
+    </ul>
+</div>
+
+
+<div class="Marketplace container" id="try-vtcf">
+    <div>
+        <h2>Find Freelance Services For Your Business Today</h2>
+        <p>We've got you covered for all your business needs</p>
+    </div>
+</div>
