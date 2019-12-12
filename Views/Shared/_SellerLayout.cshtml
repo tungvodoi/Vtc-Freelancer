@@ -26,11 +26,11 @@
                     <label class="lable-profile">
                         @if(ViewBag.userAvatar != null)
                         {
-                        <img class="img-profile" id="img-prf" src="~/@ViewBag.userAvatar" alt="avatar">
+                            <img class="img-profile" id="img-prf" src="~/@ViewBag.userAvatar" alt="avatar">
                         }
                         else
                         {
-                        <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                            <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
                         }
                     </label>
                     <br>
@@ -119,11 +119,14 @@
                         <button class="btn-footer-link">Categories</button>
                         <ul class="ul-footer-link">
                             @if(ViewBag.listcategory!= null)
-                            { @foreach(var item in ViewBag.listcategory ) {
-                            <li class="li-footer-content">
-                                <a href="#">@item.CategoryName</a>
-                            </li>
-                            } }
+                            { 
+                                @foreach(var item in ViewBag.listcategory ) 
+                                {
+                                <li class="li-footer-content">
+                                    <a href="#">@item.CategoryName</a>
+                                </li>
+                                } 
+                            }
                         </ul>
                     </div>
 

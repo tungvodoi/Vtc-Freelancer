@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
@@ -114,8 +117,6 @@
                         <a href="/Seller">
                             <div class="prf-div">
                                 <h4 style="color: #1dbf73;">Switch to Selling</h4>
-
-
                                 @if(ViewBag.userAvatar == null)
                                 {
                                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
@@ -139,23 +140,15 @@
 
         <div class="nav-categories">
             <ul class="ul-categories container">
-                @if(ViewBag.listcategory != null)
-                        {
-                        @foreach (var item in ViewBag.listcategory)
-                        {
-                            <li class="li-categories">
-                                <a href="" class="categories-link">@item.CategoryName</a>
-                                <ul class="ul-package">
-                                        @foreach (var subsCategory in item.subsCategory)
-                                        {
-                                        <li class="li-package">
-                                            <a href="" class="a-package">@subsCategory.CategoryName</a>
-                                        </li>
-                                        }
-                                </ul>
-                            </li>
-                        }
-                        }
+                @if(ViewBag.listcategory!= null)
+                { 
+                    @foreach(var item in ViewBag.listcategory ) 
+                    {
+                    <li class="li-footer-content">
+                        <a href="#">@item.CategoryName</a>
+                    </li>
+                    } 
+                }
                 <!-- <li class="li-categories">
                     <a href="" class="categories-link">Graphics & Design</a>
                     <ul class="ul-package">

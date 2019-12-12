@@ -52,6 +52,12 @@
   width: 80%;
 }
 
+.ListCategory {
+  border-radius: 2px;
+  padding: 5px;
+  width: 200px;
+}
+
 /* 
 Textarea, {
     width: 100%;
@@ -181,6 +187,22 @@ Textarea, {
   flex-grow: 1;
 }
 
+.title-summary {
+  font-weight: 600;
+  color: #62646a;
+  text-align: left;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.img-summary {
+  max-height: 62px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
 .pricing {
   display: flex;
   min-width: 190px;
@@ -202,7 +224,6 @@ Textarea, {
 
 .float-right {
   float: right;
-  font-weight: bold;
 }
 
 .li-detail-order {
@@ -273,11 +294,11 @@ Textarea, {
 }
 
 #number-card {
-  flex-basis: 48%
+  flex-basis: 48%;
 }
 
 .bottom-input-card {
-  flex-basis: 48%
+  flex-basis: 48%;
 }
 
 .input-detail {
@@ -290,4 +311,93 @@ Textarea, {
 
 .info-card-detail {
   margin-top: 2rem;
+}
+
+#button-odNow {
+  padding: 14px 79px;
+  color: white;
+}
+
+.Notification-sent-mail {
+  display: block;
+  background-color: #add8c5;
+  margin: 20px 0px;
+  width: 98%;
+  position: relative;
+  border-radius: 4px;
+}
+
+.icon-checked {
+  margin: 1rem;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #1dbf73;
+  font-size: 28px;
+  text-align: center;
+  padding: 6px;
+  display: inline-block;
+}
+.icon-checked i {
+  color: #1dbf73;
+}
+.close-notification {
+  max-width: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  position: absolute;
+  right: 1%;
+}
+.close-notification b {
+  font-size: 18px;
+  color: #1dbf73;
+}
+.Notification-content-sent-mail {
+  display: inline-block;
+  padding-top: 20px;
+}
+.Notification-content-sent-mail h3 b,
+.Notification-content-sent-mail p {
+  color: black;
+}
+.border-content {
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 4px;
+}
+.content-requirement {
+  margin: 20px;
+}
+
+.title-requirement {
+  padding: 20px;
+  background-color: rgb(223, 223, 223);
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+.content-title-requirement {
+  color: black;
+  font-weight: bold;
+}
+
+.require {
+  font-weight: bold;
+}
+
+.sect-option-require {
+  margin: 10px 0px;
+  width: 350px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.sub-content-require {
+  border-top: 1px solid rgb(206, 206, 206);
+  padding: 10px 0px;
+  margin: 10px 0px;
+}
+.form-input-require {
+  margin: 10px 0px;
+}
+.input-require {
+  width: 100%;
 }

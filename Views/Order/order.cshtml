@@ -81,8 +81,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
           </select>
         </label>
         <span>
-          <b>@Model.Price $
-          </b>
+          <b id="preview-price">@(Model.Price * ViewBag.Quantity) $</b>
         </span>
       </div>
 
@@ -102,16 +101,16 @@ Layout = "~/Views/Shared/_Order.cshtml";
     <div class="wrapper-order-content">
       <h2 class="back-content">Summary</h2>
       <br>
-      <div><span>Subtotal</span><span class="float-right" id="basic-price">@Model.Price $</span></div>
+      <div><span>Subtotal</span><span class="float-right" id="basic-price">@(Model.Price * ViewBag.Quantity) $</span></div>
       <br>
       <div>
         <div>
-          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 20 / 100) $</span></div>
+          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * ViewBag.Quantity * 20 / 100) $</span></div>
           <br>
         </div>
       </div>
       <br>
-      <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price * 20/100)) $</span>
+      <div><span><b>Total</b></span><span id="totle-price" class="float-right"><b>@(Model.Price * ViewBag.Quantity + (@Model.Price * ViewBag.Quantity * 20/100)) $</b></span>
       </div>
       <br>
 
@@ -120,7 +119,16 @@ Layout = "~/Views/Shared/_Order.cshtml";
       <div>
         <br>
         <div>
-          <button type="button" class="btn-continue btn-prc-detail" onclick="window.location.href='/Order/Payment?PackageId=@Model.PackageId';">Order Now</button>
+          <button type="button" class="btn-continue btn-prc-detail">
+            @if(ViewBag.Quantity == null)
+            {
+            <a href="/Order/Payment?PackageId=@Model.PackageId&Quantity=1" id="button-odNow">Order Now</a>
+            }
+            else
+            {
+              <a href="/Order/Payment?PackageId=@Model.PackageId&Quantity=@ViewBag.Quantity" id="button-odNow">Order Now</a>
+            }
+          </button>
           <br>
           <br>
           <div class="cta-comment">You won't be charged yet</div>
@@ -135,13 +143,16 @@ Layout = "~/Views/Shared/_Order.cshtml";
   var subb = document.getElementById('sub-price');
   var basic = document.getElementById('basic-price');
   var sec = document.getElementById('sect');
+  var previewPrice = document.getElementById('preview-price');
   var option = document.getElementsByTagName("option");
-
+  var order = document.getElementById("button-odNow");
   function onSelect() {
     var optionhtml = sec[sec.selectedIndex].text;
+    previewPrice.innerHTML = @Model.Price * optionhtml + "$";
     basic.innerHTML = @Model.Price * optionhtml + "$";
     subb.innerHTML = @(Model.Price * 20 / 100) * optionhtml + "$";
     totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 20 / 100) * optionhtml + "$";
+    order.href = `/Order/Payment?PackageId=@Model.PackageId&Quantity=${optionhtml}`;
   }
 
 </script>

@@ -200,7 +200,6 @@ namespace Vtc_Freelancer.Controllers
 
         public IActionResult GetListSubCategoryByCategoryParentId(string categoryName)
         {
-
             Category category = dbContext.Category.FirstOrDefault(u => u.CategoryName == categoryName);
             List<Category> listcategory = new List<Category>();
 

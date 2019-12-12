@@ -31,11 +31,13 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users userads = userService.GetUsersByID(userId);
+            ViewBag.userAvatar = userads.Avatar;
             if (listcategory != null)
             {
                 List<Category> listSubCategory = new List<Category>();
                 listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
-
                 ViewBag.subcategory = listSubCategory;
                 ViewBag.listcategory = listcategory;
             }
@@ -51,6 +53,9 @@ namespace Vtc_Freelancer.Controllers
             JObject json = JObject.Parse(line);
             sr.Close();
             ViewBag.json = json;
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users userads = userService.GetUsersByID(userId);
+            ViewBag.userAvatar = userads.Avatar;
             return View();
         }
 
@@ -58,6 +63,9 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/CreateService/Step3")]
         public IActionResult Step3()
         {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users userads = userService.GetUsersByID(userId);
+            ViewBag.userAvatar = userads.Avatar;
             return View();
         }
 
@@ -65,6 +73,9 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/CreateService/Step4")]
         public IActionResult Step4()
         {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users userads = userService.GetUsersByID(userId);
+            ViewBag.userAvatar = userads.Avatar;
             return View();
         }
 

@@ -19,9 +19,10 @@ namespace Vtc_Freelancer.Controllers
         private MyDbContext dbContext;
         private RequestService requestService;
         private AdminService adminService;
-        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, IHostingEnvironment IHostingEnvironment)
+        private UserService userService;
+        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, UserService userService, IHostingEnvironment IHostingEnvironment)
         {
-
+            this.userService = userService;
             this.dbContext = dbContext;
             this.requestService = requestService;
             this.adminService = adminService;
@@ -34,15 +35,12 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
-
             if (listcategory != null)
             {
-                List<Category> listSubCategory = new List<Category>();
-                listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
-
-                ViewBag.subcategory = listSubCategory;
+                List<Category> listSubcategory = new List<Category>();
+                listSubcategory = adminService.GetListSubCategoryByParentId(1);
+                ViewBag.subcategory = listSubcategory;
                 ViewBag.listcategory = listcategory;
-
                 return View("request");
             }
             return View();

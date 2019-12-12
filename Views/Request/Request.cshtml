@@ -3,72 +3,96 @@ ViewData["Title"] = "Request a Service";
 }
 
 <div class="container-request">
-        <div class="content">
-            <div class="title-request">
-                <h1>What Service Are You Looking For?</h1>
-            </div>
-            <div class="container-request2">
-                <form method="POST" action="/manager_request" enctype="multipart/form-data">
-                    <div class="step1">
-                        <label for="inputRequest">Describe the service you're looking to purchase -
-                            please be as
-                            detailed as possible:</label>
-                        <div class="input-description">
-                            <textarea name="inputRequest" placeholder="I'm looking for..." maxlength="2500" required></textarea>
-                            <div class="UpLoadFileRequest">
-                                <input type="file" name="files" class="uploadifive-input" multiple>
-                            </div>
+    <div class="content">
+        <div class="title-request">
+            <h1>What Service Are You Looking For?</h1>
+        </div>
+        <div class="container-request2">
+            <form method="POST" action="/manager_request" enctype="multipart/form-data">
+                <div class="step1">
+                    <label for="inputRequest">Describe the service you're looking to purchase -
+                        please be as
+                        detailed as possible:</label>
+                    <div class="input-description">
+                        <textarea name="inputRequest" placeholder="I'm looking for..." maxlength="2500"
+                            required></textarea>
+                        <div class="UpLoadFileRequest">
+                            <input type="file" name="files" class="uploadifive-input" multiple>
                         </div>
                     </div>
-                    <hr>
-                    <div class="step2">
-                        <label for="">Choose a category:</label>
-                        <div class="select-category">
-                            <div>
-                                <select name="category" class="category">
-                                    <option>Select...</option>
-                                    @if(ViewBag.listcategory != null)
-                                    {
-                                        @foreach (var item in ViewBag.listcategory)
-                                        {
-                                            <option value="@item.CategoryName">@item.CategoryName</option>
-                                        }
-                                    }
-                                </select>
-                                <select name="SubCategory" class="category">
-                                    <option>Select subcategory</option>
-                                    @if( ViewBag.subcategory != null)
-                                    {
-                                        @foreach (var item in  ViewBag.subcategory)
-                                        {
-                                            <option value="@item.CategoryName">@item.CategoryName</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                        </div>
+                </div>
+                <hr>
+                <div class="step2">
+                    <label for="">Choose a category:</label>
+                    <div class="select-category">
+                        <select name="category" id="parentCategory" class="category">
+                            <option>Select Category...</option>
+                            @foreach (var item in ViewBag.listcategory)
+                            {
+                                <option name="@item.CategoryName">@item.CategoryName </option>
+                            }
+                        </select>
+                        <select name="subcategory" id="subCategory" class="category">
+                            <option>Select SubCategory...</option>
+                            @if(ViewBag.subcategory!= null)
+                            {
+                                @foreach (var item in ViewBag.subcategory)
+                                {
+                                    <option name="@item.CategoryId">@item.CategoryName</option>
+                                }
+                            }
+                        </select>
                     </div>
-                    <hr>
-                    <div class="step3">
-                        <label for="">Once you place your order, when would you like your service delivered?</label>
-                        <div class="select-time">
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 1)">24 Hours</a>
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 3)">3 Days</a>
-                            <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 7)">7 Days</a>
-                            <a href="" class="deliveredTime" onclick="InputOther(event)">Other</a>
-                            <input type="number" name="inputDeliveredTime" placeholder="1-30 days" value id="js-other-value" required>
-                        </div>
+                </div>
+                <hr>
+                <div class="step3">
+                    <label for="">Once you place your order, when would you like your service delivered?</label>
+                    <div class="select-time">
+                        <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 1)">24 Hours</a>
+                        <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 3)">3 Days</a>
+                        <a href="" class="deliveredTime" onclick="getdeliveredTime(event, 7)">7 Days</a>
+                        <a href="" class="deliveredTime" onclick="InputOther(event)">Other</a>
+                        <input type="number" name="inputDeliveredTime" placeholder="1-30 days" value id="js-other-value"
+                            required>
                     </div>
-                    <hr>
-                    <div class="step4">
-                        <label for="">What is your budget for this service?</label>
-                        <div class="input-budget">
-                            <small class="js-currency-symbol">$</small>
-                            <input type="number" class="budget-display" name="inputBudget" placeholder="Enter Budget" required>
-                        </div>
+                </div>
+                <hr>
+                <div class="step4">
+                    <label for="">What is your budget for this service?</label>
+                    <div class="input-budget">
+                        <small class="js-currency-symbol">$</small>
+                        <input type="number" class="budget-display" name="inputBudget" placeholder="Enter Budget"
+                            required>
                     </div>
-                    <input type="submit" class="submit" value="Post">
-                </form>
-            </div>
+                </div>
+                <input type="submit" class="submit" value="Post">
+            </form>
         </div>
     </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#parentCategory").change(function () {
+
+            $('#subCategory').html('');
+            $.ajax({
+                type: "POST",
+                data: {
+                    categoryName: this.value
+                },
+                url: "/admin/GetListSubCategoryByCategoryParentId",
+                success: function (result) {
+                    $('#subCategory').stop().animate({ "opacity": "0" }, 0, function () {
+                        // After first animation finished
+                        $(this).html(
+                            result.map((res) => {
+                                return `<option name=${res.categoryName}>${res.categoryName}</option>`
+                            })
+                        ).animate({ opacity: 1 });
+                    });
+                }
+            });
+        });
+    });
+</script>

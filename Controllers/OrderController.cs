@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
+using Vtc_Freelancer.ActionFilter;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -29,6 +30,15 @@ namespace Vtc_Freelancer.Controllers
             {
                 package.Service = orderService.GetServiceByServiceId(package.ServiceId);
                 package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                int? Qty = HttpContext.Session.GetInt32("Quantity");
+                if (Qty != null)
+                {
+                    ViewBag.Quantity = Qty;
+                }
+                else
+                {
+                    ViewBag.Quantity = 1;
+                }
                 return View(package);
             }
             else
@@ -36,15 +46,21 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
         }
-
+        [Authentication]
         [HttpGet("/Order/Payment")]
-        public IActionResult Payment(int PackageId)
+        public IActionResult Payment(int PackageId, int Quantity)
         {
             Package package = orderService.GetPackageByPackageId(PackageId);
+            HttpContext.Session.SetInt32("Quantity", Quantity);
             if (package != null)
             {
                 package.Service = orderService.GetServiceByServiceId(package.ServiceId);
                 package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                int? Qty = HttpContext.Session.GetInt32("Quantity");
+                if (Qty != null)
+                {
+                    ViewBag.Quantity = Qty;
+                }
                 return View(package);
             }
             else
@@ -52,14 +68,21 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
         }
-
+        // [Authentication]
         [HttpGet("/Order/Requirement")]
-        public IActionResult Requirement()
+        public IActionResult Requirement(int PackageId, int Quantity)
         {
-            Package package = orderService.GetPackageByPackageId(1);
+            Package package = orderService.GetPackageByPackageId(PackageId);
+            HttpContext.Session.SetInt32("Quantity", Quantity);
             if (package != null)
             {
                 package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                int? Qty = HttpContext.Session.GetInt32("Quantity");
+                if (Qty != null)
+                {
+                    ViewBag.Quantity = Qty;
+                }
                 return View(package);
             }
             else

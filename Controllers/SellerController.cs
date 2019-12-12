@@ -35,6 +35,9 @@ namespace Vtc_Freelancer.Controllers
             {
                 ViewBag.listcategory = listcategory;
             }
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            Users userads = userService.GetUsersByID(userId);
+            ViewBag.userAvatar = userads.Avatar;
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
