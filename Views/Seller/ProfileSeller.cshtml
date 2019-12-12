@@ -1,5 +1,9 @@
 @{
 ViewData["Title"] = "EditProfile";
+@if(@ViewBag.UserName == null)
+{
+Layout = "~/Views/Shared/_login.cshtml";
+}
 @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
 {
 Layout = "~/Views/Shared/_SellerLayout.cshtml";
@@ -241,8 +245,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
 @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
 <script>
-    function OpenGigs(event, typeGig) {
+    $('.arrowSlide').click((e) => {
+        e.preventDefault();
+    })
 
+    function OpenGigs(event, typeGig) {
+       
         var listGigs = document.getElementsByClassName('list-gigs');
         for (let i = 0; i < listGigs.length; i++) {
             listGigs[i].style.display = "none";
@@ -253,10 +261,17 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         }
         document.getElementById(typeGig).style.display = "flex";
         event.currentTarget.className += " active";
+          $('.slide-gig-js').slick({
+        infinite: true,
+        prevArrow: `<i class="fa fa-chevron-left arrowSlide arrowSlide-left"></i>`,
+        nextArrow: `<i class="fa fa-chevron-right arrowSlide arrowSlide-right"></i>`,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
     }
     var flag = true;
     function openFormDescription() {
-        
+
         if (flag == true) {
             document.getElementById('description').innerHTML = "<textarea name=" + 'description' + " id='text-description' cols='100' rows='10' >@ViewBag.sellerprofile.Description</textarea>"
                 + "<input class=" + 'btn-edit' + " onclick=" + 'openFormDescription()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
@@ -286,7 +301,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
     let base64 = [];
-
     document.querySelectorAll('.hiden').forEach((ip, index) => {
         ip.addEventListener('change', function () {
             if (this.files && this.files[0]) {
@@ -317,7 +331,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         });
     })
 
-
-
+    
 
 </script>

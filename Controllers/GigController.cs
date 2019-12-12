@@ -219,12 +219,34 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("Gig/ServiceDetail")]
         public IActionResult ServiceDetail(int? serviceId)
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             if (serviceId == null)
             {
                 return Redirect("/");
             }
             else
             {
+                if (HttpContext.Session.GetInt32("UserId") != null)
+                {
+                    int? userId = HttpContext.Session.GetInt32("UserId");
+                    Users userads = userService.GetUsersByID(userId);
+                    ViewBag.UserName = userads.UserName;
+                    ViewBag.userAvatar = userads.Avatar;
+                    //Lay Session lan 2
+                    ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+                    // HttpContext.Session.Remove("IsSeller");
+                    ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
+                }
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
                 Service service = new Service();
                 service = gigService.GetServiceByID(serviceId);
                 if (service == null)
@@ -254,7 +276,7 @@ namespace Vtc_Freelancer.Controllers
                 }
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
-                ViewBag.UserName = users.UserName;
+                // ViewBag.UserName = users.UserName;
                 ViewBag.IsSeller = users.IsSeller;
                 return View();
             }

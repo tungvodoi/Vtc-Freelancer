@@ -148,23 +148,23 @@ namespace Vtc_Freelancer.Controllers
             return View();
         }
         [HttpGet("/EditProfile")]
-        public IActionResult EditProfile()
-        {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            var user = userService.GetUsersByID(userId);
-            if (user != null)
-            {
-                ViewBag.UserId = userId;
-                ViewBag.UserName = user.UserName;
-                ViewBag.Email = user.Email;
-                ViewBag.FullName = user.FullName;
-                ViewBag.Country = user.Country;
-                ViewBag.Address = user.Address;
+        // public IActionResult EditProfile()
+        // {
+        //     var userId = HttpContext.Session.GetInt32("UserId");
+        //     var user = userService.GetUsersByID(userId);
+        //     if (user != null)
+        //     {
+        //         ViewBag.UserId = userId;
+        //         ViewBag.UserName = user.UserName;
+        //         ViewBag.Email = user.Email;
+        //         ViewBag.FullName = user.FullName;
+        //         ViewBag.Country = user.Country;
+        //         ViewBag.Address = user.Address;
 
-            }
-            return View();
+        //     }
+        //     return View();
 
-        }
+        // }
         [HttpPost("User/UploadImage")]
         public bool UploadImage()
         {

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Vtc_Freelancer.Controllers
 {
-    // [Authentication]
     public class HomeController : Controller
     {
         private UserService userService;
@@ -22,6 +21,25 @@ namespace Vtc_Freelancer.Controllers
             this.userService = userService;
             this.adminService = adminService;
         }
+        [HttpGet("/HomePage")]
+        public IActionResult HomePage()
+        {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            List<Service> services = new List<Service>();
+            services = adminService.GetListServices("");
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
+
+            return View();
+        }
+        [Authentication]
         public IActionResult Index()
         {
             HttpContext.Session.Remove("Quantity");
@@ -54,6 +72,7 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.listcategory = listcategory;
 
             }
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View(services);
         }
         public IActionResult EditProfile()
@@ -63,12 +82,39 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.UserName = userads.UserName;
             return View();
         }
-        // [HttpPost]
-        // public IActionResult EditDescription(string description)
-        // {
+        public IActionResult Search(string search_content)
+        {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            if (search_content == null)
+            {
+                return Redirect("/");
+            }
+            List<Service> services = new List<Service>();
+            services = adminService.GetListServices(search_content);
+            if (services == null)
+            {
+                return Redirect("/");
+            }
+            foreach (var item in services)
+            {
+                item.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
+            ViewBag.ListServicesSearch = services;
+            ViewBag.searchResult = search_content;
 
-        //     return Redirect(PageBase.RedirectToPage());
-        // }
+            return View();
+        }
+
         [HttpGet("/Logout")]
         public IActionResult Logout()
         {

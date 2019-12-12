@@ -34,8 +34,7 @@
   border: 1px solid #d5d4d2;
 }
 
-.body-service-detail {
-}
+.body-service-detail {}
 
 .flex {
   display: flex;
@@ -94,7 +93,6 @@
 .bars-service-detail {
   position: sticky;
   background-color: white;
-  z-index: 5;
   top: 0px;
 }
 
@@ -195,4 +193,9 @@
 
 .contact-with-seller {
   margin-left: 10px;
+}
+
+.brg {
+  background-color: #1dbf73;
+  color: white;
 }

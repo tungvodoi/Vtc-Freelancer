@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Linh css request -->
-
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
     <link rel="stylesheet" type="text/css" href="~/css/serviceDetail.css">
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 </head>
 
@@ -30,7 +30,14 @@
             <nav class="site-sidebars">
                 <div class="profile-wrapper">
                     <label class="lable-profile">
-                        <img class="img-profile" src="~/images/product1.jpeg" alt="">
+                         @if(ViewBag.userAvatar == null)
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                }
+                                else
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                }
                     </label>
                     <br>
                     <p class="username">Username</p>
@@ -70,13 +77,14 @@
         <div class="header container">
             <div class="left-top-nav">
                 <div class="wrapper-logo">
+                    
                     <i id="icon-menu" class="fa fa-bars"></i>
                     <div class="logo">
                         <a href="/">VTC Freelancer</a>
                     </div>
                 </div>
-                <form action="" method="post">
-                    <input type="text" name="" id="input-search-service" placeholder="Find Services" />
+                <form action="/Home/Search" method="GET">
+                    <input type="text" name="search_content" id="input-search-service" placeholder="Find Services" />
                     <button id="btn-search-service">Search</button>
                 </form>
                 <br>
@@ -100,17 +108,7 @@
                     <li>
                         <a href="#" class="nav-link"><b>Orders</b></a>
                     </li>
-                    @if(ViewBag.UserName == null)
-                    {
-                    <li>
-                        <a href="/Login" class="nav-link"><b>Login</b></a>
-                    </li>
-                    <li>
-                        <a href="/Register" class="nav-link"><b>Join</b></a>
-                    </li>
-                    }
-                    @if(ViewBag.UserName != null)
-                    {
+                  
                     @if(ViewBag.IsSeller == 1)
                     {
                     <li>
@@ -128,7 +126,7 @@
                             </div>
                         </a>
                     </li>
-                    }
+                    
                     <li>
                         <a href="/Logout" class="nav-link"><b>Logout</b></a>
                     </li>
@@ -140,6 +138,7 @@
 
         <div class="nav-categories">
             <ul class="ul-categories container">
+<<<<<<< HEAD
                 @if(ViewBag.listcategory!= null)
                 { 
                     @foreach(var item in ViewBag.listcategory ) 
@@ -149,6 +148,27 @@
                     </li>
                     } 
                 }
+=======
+                @if(ViewBag.listcategory != null)
+                        {
+                        @foreach (var item in ViewBag.listcategory)
+                        {
+                            <li class="li-categories">
+                                <a href="" class="categories-link">@item.CategoryName</a>
+                                <ul class="ul-package">
+                                        @if(item.subsCategory != null){
+                                            @foreach (var subsCategory in item.subsCategory)
+                                            {
+                                                <li class="li-package">
+                                                    <a href="" class="a-package">@subsCategory.CategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                </ul>
+                            </li>
+                        }
+                        }
+>>>>>>> a5eb40577aa0449323d943e99b289850d76b2da1
                 <!-- <li class="li-categories">
                     <a href="" class="categories-link">Graphics & Design</a>
                     <ul class="ul-package">
@@ -343,11 +363,10 @@
             div.classList.remove('animate');
             body.classList.remove('animate')
         })
+        
     </script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/slide.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>
