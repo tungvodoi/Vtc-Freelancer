@@ -1,13 +1,13 @@
-  
-    @if(ViewBag.UserName == null)
-    {
-     ViewData["Title"] = "EditProfile";
-    Layout = "~/Views/Shared/_Login.cshtml";
-    }
-    else
-    {ViewData["Title"] = "EditProfile";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@if(ViewBag.UserName == null)
+{
+ViewData["Title"] = "EditProfile";
+Layout = "~/Views/Shared/_Login.cshtml";
+}
+else
+{
+ViewData["Title"] = "EditProfile";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <div class="bars-service-detail container">
     <div class="bars-item">
         <a href="/Gig/Report"
@@ -42,12 +42,21 @@
                 <a href="">Số sao(Số người rate)</a>
             </div>
         </div>
-        <div class="slideshow-container">
-            @foreach(var item in @ViewBag.ImageService){
-            <div class="mySlides fade">
-                <img src="~/@item.Image" style="max-width:80%;">
+        <div class="slide-section">
+            <div class="slideshow-container">
+                <div class="w3-content">
+                    @foreach(var item in @ViewBag.ImageService){
+                    <div class="mySlides1 fade">
+                        <img src="~/@item.Image" width="100%" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
+                    </div>
+                    }
+                    <button class="prev btn-slide" onclick="plusDivs(-1)">&#10094;</button>
+                    <button class="next btn-slide" onclick="plusDivs(1)">&#10095;</button>
+                </div>
+
+
+
             </div>
-            }
         </div>
         <br>
         <br>
@@ -177,21 +186,24 @@
                             @if(ViewBag.PackagePremium != null)
                             {
                             <p class="price">@ViewBag.PackagePremium.Price $</p>
-                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackagePremium.PackageId'">Select</button>
+                            <button class="btn-continue btn-prc-detail"
+                                onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackagePremium.PackageId'">Select</button>
                             }
                         </td>
                         <td class="total-price">
                             @if(ViewBag.PackageStandard != null)
                             {
                             <p class="price">@ViewBag.PackageStandard.Price $</p>
-                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageStandard.PackageId'">Select</button>
+                            <button class="btn-continue btn-prc-detail"
+                                onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageStandard.PackageId'">Select</button>
                             }
                         </td>
                         <td class="total-price">
                             @if(ViewBag.PackageBasic != null)
                             {
                             <p class="price">@ViewBag.PackageBasic.Price $</p>
-                            <button class="btn-continue btn-prc-detail" onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageBasic.PackageId'">Select</button>
+                            <button class="btn-continue btn-prc-detail"
+                                onclick="window.location.href='/Customize/Order?PackageId=@ViewBag.PackageBasic.PackageId'">Select</button>
                             }
                         </td>
                     </tr>
@@ -264,3 +276,22 @@
         </div>
     </div>
 </div>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides1");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+</script>

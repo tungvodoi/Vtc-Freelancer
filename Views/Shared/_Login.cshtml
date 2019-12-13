@@ -5,26 +5,87 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Vtc_Freelancer</title>
-     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
-    <link rel="stylesheet" type="text/css" href="~/css/HomePage.css">
-    <link rel="stylesheet" type="text/css" href="~/css/login.css">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
     <!-- Linh css request -->
-
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
     <link rel="stylesheet" type="text/css" href="~/css/serviceDetail.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-
+    <link rel="stylesheet" type="text/css" href="~/css/HomePage.css">
+    <link rel="stylesheet" type="text/css" href="~/css/login.css">
 </head>
 
 <body>
     <div class="wrapper-all" id="wrapper-all"></div>
+    <div id="logreg-forms" class="logged">
+        <form class="form-signin" method="POST" action="/Login">
+            <h5 class="h3 mb-3 font-weight-normal">Login to VTC Freelancer</h5>
+            <br />
+            <div class="social-login">
+                <!-- <p>Continue With Facebook</p> -->
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button>
+                <!-- <button onclick="logout()">Logout</button> -->
+            </div>
+            <p style="text-align:center"> OR </p>
+            <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName"
+                required="" autofocus="">
+            <p style="color:red">@ViewBag.Error</p>
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password"
+                required="">
+            <p style="color:red">@ViewBag.Error1</p>
+            <p style="color:red">@ViewBag.Accountlocked </p>
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign
+                in</button>
+            <a href="#" id="forgot_pswd">Forgot password?</a>
+            <!-- <hr> -->
+            <br>
+            <!-- <p>Don't have an account!</p>  -->
+            <!-- <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i
+                            class="fa fa-user-plus"></i> Sign up New Account</button></a> -->
+        </form>
+    </div>
+
+    <div class="logged" id="register-form">
+        <form method="POST" action="/Register" class="form-register">
+            <h5>
+                Join VTC Freelancer
+            </h5>
+            <br>
+
+            <h3 style="color:Green" id="error"> @ViewBag.error</h3>
+            <br>
+            <br>
+
+            <input type="text" name="username" placeholder="Username..." required />
+            <br>
+            <br>
+
+            <input type="email" name="email" placeholder="Email..." required />
+            <br>
+            <br>
+
+            <input type="password" name="password" id="p1" placeholder="Password..." required />
+            <br>
+            <br>
+
+            <input type="password" name="password2" id="p2" onkeyup="Checkpass()" placeholder="Re-Enter Password"
+                required />
+            <br>
+
+            <br>
+            <button id="but" class="btn-success">Sign up</button>
+            <br>
+            <!-- <a href="/Login">Alreaddy have Account?</a> -->
+        </form>
+    </div>
     <div class="menu-content-hiden" id="hidden-div">
         <div class="wrapper-content-menu-hiden">
             <nav class="site-sidebars">
@@ -43,271 +104,269 @@
             </nav>
         </div>
     </div>
+
     <div>
         <div class="header-sticky" id="header-sticky"></div>
-            <div class="header container">
-                <div class="left-top-nav">
-                    <div class="wrapper-logo">
-                        <i id="icon-menu" class="fa fa-bars" style="color: black;"></i>
-                        <!-- <i  class="fa fa-ellipsis-h"></i> -->
-                        <!-- <i  class="fa fa-bars"></i> -->
-                        <div class="logo">
-                            <a href="/">VTC Freelancer</a>
-                        </div>
+        <div class="header container">
+            <div class="left-top-nav">
+                <div class="wrapper-logo">
+                    <i id="icon-menu" class="fa fa-bars" style="color: black;"></i>
+                    <div class="logo">
+                        <a href="/">VTC Freelancer</a>
                     </div>
-                    <form action="/Home/Search" method="GET" id="form-search-top">
-                        <input type="search" name="search_content" id="input-search-service"
-                            placeholder="Find Services" />
-                        <button id="btn-search-service">Search</button>
-                    </form>
-                    <br>
                 </div>
-                <!-- <<<<<<< HEAD -->
-                <div class="right-top-nav">
-                    <ul class="nav-top">
-                        <li>
-                            <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
-                        </li>
-                        <li>
-                            <a href="/Login" class="nav-link"><b>Login</b></a>
-                        </li>
-                        <li>
-                            <a href="/Register" class="nav-link join-btn"><b>Join</b></a>
-                        </li>
-                    </ul>
-                </div>
+                <form action="/Home/Search" method="GET" id="form-search-top">
+                    <input type="search" name="search_content" id="input-search-service" placeholder="Find Services" />
+                    <button id="btn-search-service">Search</button>
+                </form>
+                <br>
             </div>
-            <div class="nav-categories">
-                <ul class="ul-categories container">
-                    <li class="li-categories">
-                        <a href="" class="categories-link">Graphics & Design</a>
-                        <ul class="ul-package">
-
-                            @if(ViewBag.listcategory != null)
-                            {
-                            @foreach (var item in ViewBag.listcategory)
-                            {
-                            <li class="li-package">
-                                <a href="" class="a-package">@item.CategoryName</a>
-                            </li>
-                            }
-                            }
-
-                            <li class="li-package">
-                                <a href="" class="a-package">Logo Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Brand Style Guides</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Game Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Graphics for Streamers </a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Business Cards & Stationery</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Illustration</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Brochure Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Poster Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Flyer Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Book & Album Covers</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Storyboards </a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Web & Mobile Design</a>
-                            </li>
-                            <li class="li-package">
-                                <a href="" class="a-package">Social Media Design</a>
-                            </li>
-                        </ul>
+            <!-- <<<<<<< HEAD -->
+            <div class="right-top-nav">
+                <ul class="nav-top">
+                    <li>
+                        <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
                     </li>
-                    <li class="li-categories">
-                        <a href="" class="categories-link">Programming & Tech</a>
-                        <ul class="ul-package">
-                            <li class="li-package"><a class="a-package" href="">a</a></li>
-                            <li class="li-package"><a class="a-package" href="">a</a></li>
-                        </ul>
+                    <li>
+                        <a id="login" class="nav-link"><b>Login</b></a>
+                    </li>
+                    <li>
+                        <a id="join" class="nav-link join-btn"><b>Join</b></a>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="nav-categories">
+            <ul class="ul-categories container">
+                <li class="li-categories">
+                    <a href="" class="categories-link">Graphics & Design</a>
+                    <ul class="ul-package">
 
+                        @if(ViewBag.listcategory != null)
+                        {
+                        @foreach (var item in ViewBag.listcategory)
+                        {
+                        <li class="li-package">
+                            <a href="" class="a-package">@item.CategoryName</a>
+                        </li>
+                        }
+                        }
+
+                        <li class="li-package">
+                            <a href="" class="a-package">Logo Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Brand Style Guides</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Game Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Graphics for Streamers </a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Business Cards & Stationery</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Illustration</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Brochure Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Poster Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Flyer Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Book & Album Covers</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Storyboards </a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Web & Mobile Design</a>
+                        </li>
+                        <li class="li-package">
+                            <a href="" class="a-package">Social Media Design</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="li-categories">
+                    <a href="" class="categories-link">Programming & Tech</a>
+                    <ul class="ul-package">
+                        <li class="li-package"><a class="a-package" href="">a</a></li>
+                        <li class="li-package"><a class="a-package" href="">a</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
+    </div>
 
-        @RenderBody()
-        <div class="footer">
-            <div class="container">
 
-                <div class="footer-content-wrapper">
-                    <div class="footer-content">
-                        <button class="btn-footer-link">Categories</button>
-                        <ul class="ul-footer-link">
-                            @if(ViewBag.listcategory!= null)
-                            { @foreach(var item in ViewBag.listcategory ) {
-                            <li class="li-footer-content">
-                                <a href="#">@item.CategoryName</a>
-                            </li>
-                            } }
-                        </ul>
-                    </div>
+    @RenderBody()
+    <div class="footer">
+        <div class="container">
 
-                    <div class="footer-content">
-                        <button class="btn-footer-link">About</button>
-                        <ul class="ul-footer-link">
-                            <li class="li-footer-content"><a href="#">Careers</a></li>
-                            <li class="li-footer-content">
-                                <a href="#">Press & News</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Partnerships</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Privacy Policy</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Terms of Service</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Intellectual Property</a>
-                            </li>
-                            <li class="li-footer-content"><a href="">Claims</a></li>
-                            <li class="li-footer-content">
-                                <a href="">Investor Relations</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-content">
-                        <button class="btn-footer-link">Support</button>
-                        <ul class="ul-footer-link">
-                            <li class="li-footer-content">
-                                <a href="#">Help & Support</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="#">Trust & Safety</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Selling on Fiverr</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Buying on Fiverr</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-content">
-                        <button class="btn-footer-link">Community</button>
-                        <ul class="ul-footer-link">
-                            <li class="li-footer-content">
-                                <a href="#">Events</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="#">Blog</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Forum</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Podcast</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Affiliates</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Invite a Friend</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Become a Seller</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-content">
-                        <button class="btn-footer-link">More From Fiverr</button>
-                        <ul class="ul-footer-link">
-                            <li class="li-footer-content">
-                                <a href="#">Fiverr Pro</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="#">Fiverr Studios</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Get Inspired</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">ClearVoice</a>
-                                <br />
-                                <small>Content Marketing</small>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="#">AND CO</a><br />
-                                <small>Invoice Software</small>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Learn</a><br />
-                                <small>Online Courses</small>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="">Fiverr Elevate</a><br />
-                                <small>Exclusive Benefits</small>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="footer-content-wrapper">
+                <div class="footer-content">
+                    <button class="btn-footer-link">Categories</button>
+                    <ul class="ul-footer-link">
+                        @if(ViewBag.listcategory!= null)
+                        { @foreach(var item in ViewBag.listcategory ) {
+                        <li class="li-footer-content">
+                            <a href="#">@item.CategoryName</a>
+                        </li>
+                        } }
+                    </ul>
                 </div>
-                <div class="smail-content">
-                    <div class="hiden-btn">
 
-                    </div>
-                    <div class="logo">
-                        <a href="#">VTC Freelancer</a>
-                    </div>
-                    <div class="privacy">
-                        <a href="">Privacy Policy</a>|
-                        <a href="">Terms of Service
-                            <br />
-                            <span><small>© VTC Freelancer International Ltd. 2019</small></span></a>
-                    </div>
-                </div>
-                <!-- <hr /> -->
-                <div class="footer-icon">
-                    <ul>
-                        <li class="li-footer-icon">
-                            <a href=""></a>
+                <div class="footer-content">
+                    <button class="btn-footer-link">About</button>
+                    <ul class="ul-footer-link">
+                        <li class="li-footer-content"><a href="#">Careers</a></li>
+                        <li class="li-footer-content">
+                            <a href="#">Press & News</a>
                         </li>
-                        <li class="li-footer-icon">
-                            <a href=""></a>
+                        <li class="li-footer-content">
+                            <a href="">Partnerships</a>
                         </li>
-                        <li class="li-footer-icon">
-                            <a href=""></a>
+                        <li class="li-footer-content">
+                            <a href="">Privacy Policy</a>
                         </li>
-                        <li class="li-footer-icon">
-                            <a href=""></a>
+                        <li class="li-footer-content">
+                            <a href="">Terms of Service</a>
                         </li>
-                        <li class="li-footer-icon">
-                            <a href=""></a>
+                        <li class="li-footer-content">
+                            <a href="">Intellectual Property</a>
+                        </li>
+                        <li class="li-footer-content"><a href="">Claims</a></li>
+                        <li class="li-footer-content">
+                            <a href="">Investor Relations</a>
                         </li>
                     </ul>
                 </div>
+
+                <div class="footer-content">
+                    <button class="btn-footer-link">Support</button>
+                    <ul class="ul-footer-link">
+                        <li class="li-footer-content">
+                            <a href="#">Help & Support</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="#">Trust & Safety</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Selling on Fiverr</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Buying on Fiverr</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-content">
+                    <button class="btn-footer-link">Community</button>
+                    <ul class="ul-footer-link">
+                        <li class="li-footer-content">
+                            <a href="#">Events</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="#">Blog</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Forum</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Podcast</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Affiliates</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Invite a Friend</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Become a Seller</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-content">
+                    <button class="btn-footer-link">More From Fiverr</button>
+                    <ul class="ul-footer-link">
+                        <li class="li-footer-content">
+                            <a href="#">Fiverr Pro</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="#">Fiverr Studios</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Get Inspired</a>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">ClearVoice</a>
+                            <br />
+                            <small>Content Marketing</small>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="#">AND CO</a><br />
+                            <small>Invoice Software</small>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Learn</a><br />
+                            <small>Online Courses</small>
+                        </li>
+                        <li class="li-footer-content">
+                            <a href="">Fiverr Elevate</a><br />
+                            <small>Exclusive Benefits</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="smail-content">
+                <div class="hiden-btn">
+
+                </div>
+                <div class="logo">
+                    <a href="#">VTC Freelancer</a>
+                </div>
+                <div class="privacy">
+                    <a href="">Privacy Policy</a>|
+                    <a href="">Terms of Service
+                        <br />
+                        <span><small>© VTC Freelancer International Ltd. 2019</small></span></a>
+                </div>
+            </div>
+            <!-- <hr /> -->
+            <div class="footer-icon">
+                <ul>
+                    <li class="li-footer-icon">
+                        <a href=""></a>
+                    </li>
+                    <li class="li-footer-icon">
+                        <a href=""></a>
+                    </li>
+                    <li class="li-footer-icon">
+                        <a href=""></a>
+                    </li>
+                    <li class="li-footer-icon">
+                        <a href=""></a>
+                    </li>
+                    <li class="li-footer-icon">
+                        <a href=""></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
     <script>
     </script>
     <script>
-        var search = document.getElementById('form-search-top');
-
+        var form = document.getElementById('logreg-forms')
         var dmm = document.getElementById('icon-menu');
+        var registerform = document.getElementById('register-form');
+        var regist = document.getElementById('join');
         dmm.addEventListener('click', () => {
             var loz = document.getElementById('hidden-div');
             loz.classList.toggle('animate');
@@ -317,14 +376,28 @@
         var body = document.getElementById('wrapper-all');
         body.addEventListener('click', () => {
             var div = document.getElementById('hidden-div');
+            form.style.display = "none";
+            registerform.style.display = "none";
             div.classList.remove('animate');
             body.classList.remove('animate')
         })
+        var login = document.getElementById('login');
+        login.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            form.style.display = "block";
+        })
+        regist.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            registerform.style.display = "block";
+            console.log('dcmm')
+        })
+
     </script>
-    
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/slide.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>

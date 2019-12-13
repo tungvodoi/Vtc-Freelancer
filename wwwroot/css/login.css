@@ -25,17 +25,25 @@ span {
 }
 
 .btn-success {
+  font-size: 18px;
   border: none;
-  font-size: 2rem;
-  height: 50px;
   background-color: #1dbf73;
   border-radius: 5px;
   color: white;
-  padding: 5px;
+  padding: 12px 10px;
+  line-height: 24px;
+  height: 50px;
+  width: 100%;
 }
 
 .form-signin {
   text-align: center;
+}
+
+.form-signin h5 {
+  text-align: center;
+  color: #555;
+  font: bold 22px/100% "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .btn-register {
@@ -50,14 +58,88 @@ span {
   text-align: center;
 }
 
-.form-register > input {
-  width: 100%;
-  height: 34px;
-  border-radius: 4px;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
+.form-register h5 {
+  text-align: center;
+  color: #555;
+  font: bold 22px/100% "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-@media screen and (max-width: 500px) {
+.form-register>input {
+  padding: 12px 10px;
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+  height: 50px;
+  -webkit-transition: padding 0.1s;
+  transition: padding 0.1s;
+  border: 1px solid #c5c6c9;
+  border-radius: 4px;
+  color: #404145;
+}
+
+@media screen and (max-width: 500px) {}
+
+.form-control {
+  padding: 12px 10px;
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+  height: 50px;
+  -webkit-transition: padding 0.1s;
+  transition: padding 0.1s;
+  border: 1px solid #c5c6c9;
+  border-radius: 4px;
+  color: #404145;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+/* .social-login {
+  width: 100%;
+  height: 50px;
+  background-color: #4267b2;
+  opacity: 0.9;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  padding: 1rem;
+} */
+
+.social-login p {
+  color: white;
+}
+
+.social-login fb:login-button {
+  display: none;
+}
+
+#logged-form {
+  z-index: 2;
+}
+
+.logged {
+  cursor: pointer;
+  display: none;
+  border-radius: 4px;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  max-width: 412px;
+  transform: translateX(-50%);
+  width: 412px;
+  margin: 2rem auto 2rem auto;
+  background-color: #f3f3f3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
+#join, #login {
+  cursor: pointer;
+}
+
+#register-form {
+  padding: 15px;
 }

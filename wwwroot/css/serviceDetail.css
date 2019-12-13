@@ -38,7 +38,8 @@
 }
 
 .left-detail-content {
-  width: 70%;
+  width: 60%;
+  margin-right: 10%;
 }
 
 .right-detail-content {
@@ -194,4 +195,9 @@
 .brg {
   background-color: #1dbf73;
   color: white;
+}
+
+.btn-slide {
+  border: none;
+  background-color: transparent;
 }

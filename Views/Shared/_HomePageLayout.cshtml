@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
     <link rel="stylesheet" type="text/css" href="~/css/HomePage.css">
+    <link rel="stylesheet" type="text/css" href="~/css/login.css">
 
     <!-- Linh css request -->
 
@@ -22,7 +23,69 @@
 </head>
 
 <body>
-    <div class="wrapper-all" id="wrapper-all"></div>
+    <div class="wrapper-all" id="wrapper-all"> </div>
+    <div id="logreg-forms" class="logged">
+        <form class="form-signin" method="POST" action="/Login">
+            <h5 class="h3 mb-3 font-weight-normal">Login to VTC Freelancer</h5>
+            <br />
+            <div class="social-login">
+                <!-- <p>Continue With Facebook</p> -->
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                </fb:login-button>
+                <!-- <button onclick="logout()">Logout</button> -->
+            </div>
+            <p style="text-align:center"> OR </p>
+            <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName"
+                required="" autofocus="">
+            <p style="color:red">@ViewBag.Error</p>
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password"
+                required="">
+            <p style="color:red">@ViewBag.Error1</p>
+            <p style="color:red">@ViewBag.Accountlocked </p>
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign
+                in</button>
+            <a href="#" id="forgot_pswd">Forgot password?</a>
+            <!-- <hr> -->
+            <br>
+            <!-- <p>Don't have an account!</p>  -->
+            <!-- <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i
+                        class="fa fa-user-plus"></i> Sign up New Account</button></a> -->
+        </form>
+    </div>
+
+    <div class="logged" id="register-form">
+        <form method="POST" action="/Register" class="form-register">
+            <h5>
+                Join VTC Freelancer
+            </h5>
+            <br>
+
+            <h3 style="color:Green" id="error"> @ViewBag.error</h3>
+            <br>
+            <br>
+
+            <input type="text" name="username" placeholder="Username..." required />
+            <br>
+            <br>
+
+            <input type="email" name="email" placeholder="Email..." required />
+            <br>
+            <br>
+
+            <input type="password" name="password" id="p1" placeholder="Password..." required />
+            <br>
+            <br>
+
+            <input type="password" name="password2" id="p2" onkeyup="Checkpass()" placeholder="Re-Enter Password"
+                required />
+            <br>
+
+            <br>
+            <button id="but" class="btn-success">Sign up</button>
+            <br>
+            <!-- <a href="/Login">Alreaddy have Account?</a> -->
+        </form>
+    </div>
     <div class="menu-content-hiden" id="hidden-div">
         <div class="wrapper-content-menu-hiden">
             <nav class="site-sidebars">
@@ -65,10 +128,10 @@
                             <a href="/BecomeSeller" class="nav-link"><b>Become a Seller</b></a>
                         </li>
                         <li>
-                            <a href="/Login" class="nav-link"><b>Login</b></a>
+                            <a class="nav-link" id="login"><b>Login</b></a>
                         </li>
                         <li>
-                            <a href="/Register" class="nav-link join-btn"><b>Join</b></a>
+                            <a id="join" class="nav-link join-btn"><b>Join</b></a>
                         </li>
                     </ul>
                 </div>
@@ -312,7 +375,11 @@
         //     search.style.display = 'flex';
         // }
 
+
+        var form = document.getElementById('logreg-forms')
         var dmm = document.getElementById('icon-menu');
+        var registerform = document.getElementById('register-form');
+        var regist = document.getElementById('join');
         dmm.addEventListener('click', () => {
             var loz = document.getElementById('hidden-div');
             loz.classList.toggle('animate');
@@ -322,8 +389,22 @@
         var body = document.getElementById('wrapper-all');
         body.addEventListener('click', () => {
             var div = document.getElementById('hidden-div');
+            form.style.display = "none";
+            registerform.style.display = "none";
             div.classList.remove('animate');
             body.classList.remove('animate')
+        })
+        var login = document.getElementById('login');
+        login.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            form.style.display = "block";
+        })
+        regist.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            registerform.style.display = "block";
+            console.log('dcmm')
         })
 
     </script>

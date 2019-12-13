@@ -5,9 +5,10 @@ Layout = "~/Views/Shared/_Login.cshtml";
 
     <div id="logreg-forms">
         <form class="form-signin" method="POST" action="/Login">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to VTC Freelancer</h1>
+            <h5 class="h3 mb-3 font-weight-normal" >Login to VTC Freelancer</h5>
             <br />
             <div class="social-login">
+              <!-- <p>Continue With Facebook</p> -->
               <fb:login-button 
                 scope="public_profile,email"
                 onlogin="checkLoginState();">
@@ -26,10 +27,7 @@ Layout = "~/Views/Shared/_Login.cshtml";
             <!-- <p>Don't have an account!</p>  -->
             <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i class="fa fa-user-plus"></i> Sign up New Account</button></a>
             </form>
-
-          
             <br>
-            
     </div>
   
        
