@@ -31,6 +31,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
                 int? userId = HttpContext.Session.GetInt32("UserId");
@@ -46,20 +50,23 @@ namespace Vtc_Freelancer.Controllers
             {
                 ViewBag.listcategory = listcategory;
             }
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
-            ViewBag.userAvatar = userads.Avatar;
+            // int? userId = HttpContext.Session.GetInt32("UserId");
+            // Users userads = userService.GetUsersByID(userId);
+            // ViewBag.userAvatar = userads.Avatar;
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
-        // [HttpGet("/fdasfaf")]
         [Route("{username}")]
         [HttpGet]
         public IActionResult ProfileSeller(string username)
         {
-
+            ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
@@ -69,28 +76,39 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
             Users users = userService.GetUserByUsername(username);
+
+            int? u = HttpContext.Session.GetInt32("UserId");
+            if (u != null)
+            {
+                System.Console.WriteLine(u + "dcmm");
+                Users user = userService.GetUserByUserId(u);
+                ViewBag.userAvatar = user.Avatar;
+                // ViewBag.userProfile = user;
+                ViewBag.MyUser = user;
+            }
+
             if (users == null)
             {
                 return Redirect("/");
             }
+            ViewBag.userProfile = users;
+            ViewBag.userAvatar1 = users.Avatar;
             ViewBag.UserLoged = HttpContext.Session.GetString("UserName");
             Seller seller = userService.GetSellerByUserID(users.UserId);
-            List<Service> services = new List<Service>();
-            services = gigService.GetServicesBySellerId(seller.SellerId);
-            if (seller == null)
+            if (seller != null)
             {
-                return Redirect("/");
+                List<Service> services = new List<Service>();
+                services = gigService.GetServicesBySellerId(seller.SellerId);
+                foreach (var item in services)
+                {
+                    item.ListImage = adminService.GetListImageService(item.ServiceId);
+                    ViewBag.listServiceProfile = services;
+                    ViewBag.sellerprofile = seller;
+                    return View(services);
+                }
             }
-            foreach (var item in services)
-            {
-                item.ListImage = adminService.GetListImageService(item.ServiceId);
-            }
-            ViewBag.sellerprofile = seller;
-            ViewBag.userProfile = users;
-            ViewBag.userAvatar = users.Avatar;
-            ViewBag.listServiceProfile = services;
+            return View();
 
-            return View(services);
         }
         [HttpPost]
         public bool UpdateDescription(string description)

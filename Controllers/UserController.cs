@@ -29,6 +29,16 @@ namespace Vtc_Freelancer.Controllers
         }
         public IActionResult Index()
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             var userId = HttpContext.Session.GetInt32("UserId");
             return View();
         }

@@ -198,7 +198,7 @@ namespace Vtc_Freelancer.Services
 
         }
 
-        public Users GetUserByUserId(int Id)
+        public Users GetUserByUserId(int? Id)
         {
             Users users = new Users();
             users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);

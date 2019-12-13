@@ -54,8 +54,9 @@
 }
 
 .content-wrapper {
+    padding: 1rem;
+    padding-bottom: 2rem;
     background-color: white;
-    padding: 2rem;
     max-height: auto !important;
     border: 1px solid #d5d4d2;
 }
@@ -96,6 +97,7 @@
     padding: 1rem;
     border: none;
     flex-wrap: wrap;
+    grid-template-columns: auto auto auto;
     padding: 0;
 }
 
@@ -115,7 +117,8 @@
 }
 
 .list-gigs1 {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto;
     padding: 1rem;
     border: none;
     flex-wrap: wrap;
