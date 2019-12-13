@@ -31,9 +31,10 @@ namespace Vtc_Freelancer.Controllers
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId != null)
             {
-                int? userId = HttpContext.Session.GetInt32("UserId");
                 Users userads = userService.GetUsersByID(userId);
                 ViewBag.UserName = userads.UserName;
                 ViewBag.userAvatar = userads.Avatar;
@@ -46,9 +47,6 @@ namespace Vtc_Freelancer.Controllers
             {
                 ViewBag.listcategory = listcategory;
             }
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
-            ViewBag.userAvatar = userads.Avatar;
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }

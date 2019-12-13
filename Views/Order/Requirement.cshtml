@@ -1,4 +1,4 @@
-@model Package;
+@model Orders;
 @{
 ViewData["Title"] = "Requirement";
 Layout = "~/Views/Shared/_Order.cshtml";
@@ -22,7 +22,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
       </li>
       <li class="wrapper-li-step">
         <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
-        <div class="li-content"><a href="/Order/Payment?PackageId=@Model.PackageId&Quantity=@ViewBag.Quantity"
+        <div class="li-content"><a href="/Order/Payment?PackageId=@Model.PackageId&Quantity=@Model.Quantity"
             style="color: #1dbf73;">Confirm & Pay</a></div>
         <span style="margin-left: 10px;">></span>
       </li>
@@ -45,77 +45,84 @@ Layout = "~/Views/Shared/_Order.cshtml";
     </div>
   </div>
 </div>
-<div class="container-inner body-order font-size-14">
+<div class="container-inner body-require font-size-14">
   <div class="right-content">
-    <div class="border-content">
+    <form method="POST" action="StartOrder?OrderId=@Model.OrderId" enctype="multipart/form-data">
+      <div class="border-content">
         <div class="title-requirement">
           <h3 class="content-title-requirement">Submit Requirements to Start Your Order</h3>
         </div>
         <div class="content-requirement">
           <h4 class="require">The seller needs the following infomation to start working on your order.</h4>
           <br>
-          <p>1. What industry does this order relate to? (optional)</p>
-            <select class="sect-option-require" onchange="onSelect()">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-            </select>
-            <div class="sub-content-require">
-              acscacnsac
-              <div class="form-input-require">
-                <form method="POST" action="">
-                  <textarea rows="5" class="input-require" maxlength="2500" name="content-input-require"></textarea>
-                  <input type="file" name="file">
-                </form>
-              </div>
+          <div class="sub-content-require">
+            <div class="form-input-require">
+              <textarea rows="5" class="input-require" maxlength="2500" name="ContentRequire"></textarea>
+              <input type="file" name="files" multiple>
             </div>
+          </div>
         </div>
       </div>
-    </div>
-  <div class="left-content">
+      <div class="check">
+        <input type="checkbox" onclick="setCheckbox(this)" id="input-check"><label for="input-check">The information I provided is <b>accurate and complete</b>. Any <b>changes</b> will require the 
+        seller's approval, and may be subject to additional costs
+      </label>
+      </div>
+      <div class="button-start-order">
+        <a href="/">Remind Me Later</a>
+      <button class="btn-continue btn-start-order" id="clickStartOrder" disabled>Start Order</button>
+      </div>
+    </form>
+  </div>
+  <div class="left-content ">
     <div class="wrapper-order-content">
-      <h2 class="back-content">Summary</h2>
+      <div class="require-summary">
+        @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img src="~/@Model.Service.ListImage[i].Image" alt=""
+          width="100%" class="img-summary-require">
+          break;
+          }
+          <div class="title-summary-require">
+            <p class="content-summary-require">@Model.Package.Title</p>
+          </div>
+          <ul>
+            <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.Package.DeliveryTime Days
+              Delivery</li>
+            <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.Package.NumberRevision Revision
+            </li>
+          </ul>
+      </div>
       <br>
-      <div><span>Subtotal</span><span class="float-right" id="basic-price">@Model.Price $</span></div>
-      <br>
-      <div>
+      <div class="detail-order">
         <div>
-          <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 5 / 100) $</span></div>
-          <br>
+          <span>Status</span>
+          @if (@Model.WorkStatus == 0)
+          {
+            <span class="float-right incomp">INCOMPLETE</span>
+          }
+          else if (@Model.WorkStatus == 1)
+          {
+            <span class="float-right proress">IN PRORESS</span>
+          }
+          else
+          {
+            <span class="float-right comp">COMPLETE</span>
+          }
         </div>
-      </div>
-      <br>
-      <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price * 5/100)) $</span>
-      </div>
-      <br>
-
-      <div><span>Delivery Time</span><span>
-          <span class="float-right">@Model.DeliveryTime Days</span></span></div>
-      <div>
-        <br>
         <div>
-          <button type="button" class="btn-continue btn-prc-detail"
-            onclick="window.location.href='/Order/Payment';">Order Now</button>
-          <br>
-          <br>
-          <div class="cta-comment">You won't be charged yet</div>
+          <span>Order</span>
+          <span class="float-right">@Model.OrderId</span>
+        </div>
+        <div>
+          <span>Order Date</span>
+          <span class="float-right">@Model.OrderTime.ToString("dd/MM/yyyy")</span>
+        </div>
+        <div>
+          <span>Quantity</span>
+          <span class="float-right">X @Model.Quantity</span>
+        </div>
+        <div>
+          <span>Price</span>
+          <span class="float-right">$ @Model.Package.Price</span>
         </div>
       </div>
     </div>
@@ -123,20 +130,20 @@ Layout = "~/Views/Shared/_Order.cshtml";
 </div>
 
 <script>
-  var totle = document.getElementById('totle-price');
-  var subb = document.getElementById('sub-price');
-  var basic = document.getElementById('basic-price');
-  var sec = document.getElementById('sect');
-  var option = document.getElementsByTagName("option");
-
-  function onSelect() {
-    var optionhtml = sec[sec.selectedIndex].text;
-    basic.innerHTML = @Model.Price * optionhtml + "$";
-    subb.innerHTML = @(Model.Price * 5 / 100) * optionhtml + "$";
-    totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 5 / 100) * optionhtml + "$";
-  }
-
   function CloseNoti() {
     document.getElementById("Noti-sent-mail").style.display = "none";
+  }
+
+  function setCheckbox(cb){
+    if(cb.checked)
+    {
+      document.getElementById("clickStartOrder").disabled = false;
+      document.getElementById("clickStartOrder").style.opacity = 1;
+    }
+    else
+    {
+      document.getElementById("clickStartOrder").disabled = true;
+      document.getElementById("clickStartOrder").style.opacity = 0.5;
+    }
   }
 </script>
