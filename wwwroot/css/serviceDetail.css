@@ -7,7 +7,11 @@
 } */
 
 .back-content {
+  display: inline-block;
   color: black;
+}
+.brand-mini span {
+  margin-left: 65px;
 }
 
 .contain-username {

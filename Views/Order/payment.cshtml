@@ -15,8 +15,10 @@ Layout = "~/Views/Shared/_Order.cshtml";
                 </div>
             </li>
             <li class="wrapper-li-step">
-                <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
-                <div class="li-content" style="color: #1dbf73;"><a href="/Customize/Order?PackageId=@Model.PackageId">Order Detail</a></div>
+                <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check"
+                        style="color: white;"></i></div>
+                <div class="li-content"><a href="/Customize/Order?PackageId=@Model.PackageId"
+                        style="color: #1dbf73;">Order Detail</a></div>
                 <span style="margin-left: 10px;">></span>
             </li>
             <li class="wrapper-li-step">
@@ -95,37 +97,51 @@ Layout = "~/Views/Shared/_Order.cshtml";
         <div class="wrapper-order-content">
             <div class="summary">
                 <div class="gig-summary">
-                    <img src="/images/product1.jpeg" alt="" width="100px" style="margin: 0rem 1rem 0rem 1rem;">
-                    <div>
+                    @for (int i = 0; i < Model.Service.ListImage.Count; i++) 
+                    { 
+                        @if(i==1) 
+                        { 
+                            <img src="~/@Model.Service.ListImage[i].Image" alt="" width="100px" class="img-summary">
+                        }
+                    }
+                    <div class="title-summary">
                         @Model.Title
                     </div>
                 </div>
             </div>
-            <h2 class="back-content">Summary</h2>
             <br>
-            <div><span>Subtotal</span><span class="float-right" id="basic-price">@Model.Price $</span></div>
+            <div class="brand-mini">
+                <h3 class="back-content"><b>Brand Mini</b></h3>
+                <span>x @ViewBag.Quantity</span>
+                <span>@(Model.Price * ViewBag.Quantity) $</span>
+            </div>
+            <br>
             <br>
             <div>
                 <div>
-                    <div><span>Service Fee</span><span class="float-right" id="sub-price">@(Model.Price * 5 / 100)
-                            $</span>
+                    <div>
+                        <span>Service Fee</span>
+                        <span class="float-right" id="sub-price">@(Model.Price * ViewBag.Quantity * 20 / 100) $</span>
                     </div>
                     <br>
                 </div>
             </div>
             <br>
-            <div><span>Total</span><span id="totle-price" class="float-right">@(Model.Price + (@Model.Price *
-                    5/100))
-                    $</span>
+            <div>
+                <span><b>Total</b></span>
+                <span id="totle-price" class="float-right"><b>@(Model.Price * ViewBag.Quantity + (@Model.Price * ViewBag.Quantity * 20/100)) $</b></span>
             </div>
             <br>
 
-            <div><span>Delivery Time</span><span>
-                    <span class="float-right">@Model.DeliveryTime Days</span></span></div>
+            <div>
+                <span>Delivery Time</span>
+                <span class="float-right">@Model.DeliveryTime Days</span>
+            </div>
             <div>
                 <br>
                 <div>
-                    <button type="button" onclick="window.location.href='/Order/Requirement'" class="btn-continue btn-prc-detail">Confirm & Pay</button>
+                    <button type="button" onclick="window.location.href='/Order/Requirement?PackageId=@Model.PackageId&Quantity=@ViewBag.Quantity'"
+                        class="btn-continue btn-prc-detail">Confirm & Pay</button>
                     <br>
                     <br>
                 </div>

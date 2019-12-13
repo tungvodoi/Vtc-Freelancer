@@ -42,6 +42,7 @@ namespace Vtc_Freelancer.Controllers
         [Authentication]
         public IActionResult Index()
         {
+            HttpContext.Session.Remove("Quantity");
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             foreach (var item in listcategory)

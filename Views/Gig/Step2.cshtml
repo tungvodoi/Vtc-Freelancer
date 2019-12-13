@@ -61,19 +61,19 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
           <td></td>
           <td>
             <select name="basicDelivery">
-              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              @foreach (var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
               </option>}
             </select>
           </td>
           <td>
             <select name="standardDelivery">
-              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              @foreach (var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
               </option>}
             </select>
           </td>
           <td>
             <select name="premiumDelivery">
-              @foreach(var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
+              @foreach (var delivery in @ViewBag.json.deliveryOptions) { <option value="@delivery">@delivery Day Delivery
               </option>}
             </select>
           </td>
@@ -81,28 +81,28 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
         <tr>
           <td>Revisions</td>
           <td><select name="basicRevision">
-              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              @foreach (var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
               <option value="-1">Unlimited</option>
             </select></td>
           <td><select name="standardRevision">
-              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              @foreach (var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
               <option value="-1">Unlimited</option>
             </select></td>
           <td><select name="premiumRevision">
-              @foreach(var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
+              @foreach (var revision in @ViewBag.json.revisionOptions) { <option value="@revision">@revision</option>}
               <option value="-1">Unlimited</option>
             </select></td>
         </tr>
         <tr>
           <td>Price</td>
           <td> <select name="basicPrice">
-              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+              @foreach (var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
             </select></td>
           <td><select name="standardPrice">
-              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+              @foreach (var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
             </select></td>
           <td><select name="premiumPrice">
-              @foreach(var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
+              @foreach (var price in @ViewBag.json.priceOptions) { <option value="@price">@price$</option>}
             </select></td>
         </tr>
       </table>

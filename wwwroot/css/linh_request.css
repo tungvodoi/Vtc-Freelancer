@@ -151,7 +151,6 @@ hr {
   overflow: hidden;
   width: 250px;
   padding: 7px 30px 7px 10px;
-  white-space: nowrap;
   cursor: pointer;
   border-radius: 3px;
 }

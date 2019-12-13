@@ -16,82 +16,79 @@ Layout = "~/Views/Shared/_Order.cshtml";
       </li>
       <li class="wrapper-li-step">
         <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
-        <div class="li-content" style="color: #1dbf73;">Order Detail</div>
+        <div class="li-content"><a href="/Customize/Order?PackageId=@Model.PackageId" style="color: #1dbf73;">Order
+            Detail</a></div>
         <span style="margin-left: 10px;">></span>
       </li>
       <li class="wrapper-li-step">
         <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
-        <div class="li-content" style="color: #1dbf73;">Confirm & Pay</div>
+        <div class="li-content"><a href="/Order/Payment?PackageId=@Model.PackageId&Quantity=@ViewBag.Quantity"
+            style="color: #1dbf73;">Confirm & Pay</a></div>
         <span style="margin-left: 10px;">></span>
       </li>
       <li class="wrapper-li-step">
-        <div class="li-step" style="background-color: #1dbf73;">3</div>
-        <div class="li-content" style="color: #1dbf73;">Submit Requirements </div>
+        <div class="li-step" style="background-color: #1dbf73;"><i class="fa fa-map-marker" style="color: white;"></i>
+        </div>
+        <div class="li-content" style="color: #1dbf73;">Submit Requirements & Start Order</div>
       </li>
 
     </ul>
   </nav>
 </div>
 <div class="container-inner body-order font-size-14">
-  <div class="right-content">
-
-    <h1 class="back-content cutomemize-your-package">Customize Your Package</h1>
-    <div class="summary">
-      <div class="gig-summary">
-        <img src="/images/product1.jpeg" alt="" width="200px" style="margin: 0rem 1rem 0rem 1rem;">
-        <div>
-          <a style="font-weight: bold;">Title
-            <br>
-            <p>Dồng chí nào để rating vào đây</p>
-          </a>
-          <br>
-          <br>
-          <!-- <a href="#" style="color: #1dbf73;">View What's include</a> -->
-        </div>
-      </div>
-      <div class="pricing"><label class="quantity"><span>Qty</span>
-          <select id="sect" onchange="onSelect()">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <br>
-          </select>
-        </label>
-        <span>
-          <b>@Model.Price $
-          </b>
-        </span>
-      </div>
-
-    </div>
-    <div>
-      <br>
-      <br>
-      <h2 class="back-content">@Model.Title</h2>
-      <p>@Model.Description</p>
-      <ul>
-        <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.DeliveryTime Days Delivery</li>
-        <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.NumberRevision Revision</li>
-      </ul>
+  <div class="Notification-sent-mail" id="Noti-sent-mail">
+    <p class="close-notification" onclick="CloseNoti()"><b>x</b></p>
+    <div class="icon-checked"><i class="fa fa-check"></i></div>
+    <div class="Notification-content-sent-mail">
+      <h3><b>Thank You For Your Purchase</b></h3>
+      <p>A receipt was sent to your mail address</p>
     </div>
   </div>
+</div>
+<div class="container-inner body-order font-size-14">
+  <div class="right-content">
+    <div class="border-content">
+        <div class="title-requirement">
+          <h3 class="content-title-requirement">Submit Requirements to Start Your Order</h3>
+        </div>
+        <div class="content-requirement">
+          <h4 class="require">The seller needs the following infomation to start working on your order.</h4>
+          <br>
+          <p>1. What industry does this order relate to? (optional)</p>
+            <select class="sect-option-require" onchange="onSelect()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+            </select>
+            <div class="sub-content-require">
+              acscacnsac
+              <div class="form-input-require">
+                <form method="POST" action="">
+                  <textarea rows="5" class="input-require" maxlength="2500" name="content-input-require"></textarea>
+                  <input type="file" name="file">
+                </form>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
   <div class="left-content">
     <div class="wrapper-order-content">
       <h2 class="back-content">Summary</h2>
@@ -114,7 +111,8 @@ Layout = "~/Views/Shared/_Order.cshtml";
       <div>
         <br>
         <div>
-          <button type="button" class="btn-continue btn-prc-detail" onclick="window.location.href='/Order/Payment';">Order Now</button>
+          <button type="button" class="btn-continue btn-prc-detail"
+            onclick="window.location.href='/Order/Payment';">Order Now</button>
           <br>
           <br>
           <div class="cta-comment">You won't be charged yet</div>
@@ -138,4 +136,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
     totle.innerHTML = @Model.Price * optionhtml + @(Model.Price * 5 / 100) * optionhtml + "$";
   }
 
+  function CloseNoti() {
+    document.getElementById("Noti-sent-mail").style.display = "none";
+  }
 </script>
