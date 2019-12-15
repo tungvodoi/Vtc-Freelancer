@@ -81,7 +81,9 @@ ViewData["Title"] = "EditProfile";
                 <button class="tab-gig back-content" onclick="OpenGigs(event, 'Active-Gig')">Active-Gigs</button>
                 <button class="tab-gig back-content" onclick="OpenGigs(event, 'Drafts')">Drafts</button>
             </div>
-            <div id="Active-Gig" class="list-gigs">
+           
+        </div>
+         <div id="Active-Gig" class="list-gigs">
                 @if(@ViewBag.listServiceProfile != null)
                 {
                 @foreach (var service in ViewBag.listServiceProfile)
@@ -101,7 +103,14 @@ ViewData["Title"] = "EditProfile";
                     <div class="gig__content">
                         <div class="slider__gig-seller">
                             <span class="gig__seller-avatar">
-                                <img src="~/images/avatar-user1.png" alt="">
+                            @if (@service.Seller.User.Avatar != null)
+                            {
+                                <img src="@service.Seller.User.Avatar" alt="Avatar"> 
+                            }
+                            else
+                            {
+                                <img class="img-profile-menu" src="~/Images/avatardefault.png" alt="avatar">
+                            }
                             </span>
                             <div class="gig__seller-info">
                                 <a href="">@service.Seller.User.UserName</a>
@@ -153,7 +162,14 @@ ViewData["Title"] = "EditProfile";
                     <div class="gig__content">
                         <div class="slider__gig-seller">
                             <span class="gig__seller-avatar">
-                                <img src="~/images/avatar-user1.png" alt="">
+                                                           @if (@service.Seller.User.Avatar != null)
+                            {
+                                <img src="@service.Seller.User.Avatar" alt="Avatar"> 
+                            }
+                            else
+                            {
+                                <img class="img-profile-menu" src="~/Images/avatardefault.png" alt="avatar">
+                            }
                             </span>
                             <div class="gig__seller-info">
                                 <a href="">@service.Seller.User.UserName</a>
@@ -185,7 +201,6 @@ ViewData["Title"] = "EditProfile";
             </div>
             }
 
-        </div>
         }
         else
         {
@@ -209,7 +224,15 @@ ViewData["Title"] = "EditProfile";
                 <div class="gig__content">
                     <div class="slider__gig-seller">
                         <span class="gig__seller-avatar">
-                            <img src="~/images/avatar-user1.png" alt="">
+                            @if (@service.Seller.User.Avatar != null)
+                            {
+                                <img src="@service.Seller.User.Avatar" alt="Avatar"> 
+                            }
+                            else
+                            {
+                                <img class="img-profile-menu" src="~/Images/avatardefault.png" alt="avatar">
+                            }
+                           
                         </span>
                         <div class="gig__seller-info">
                             <a href="">@service.Seller.User.UserName</a>
@@ -241,10 +264,6 @@ ViewData["Title"] = "EditProfile";
         </div>
         }
     </div>
-    <!-- <form method="post">
-        <textarea name="description-content" id="" cols="30" rows="10"></textarea>
-        <input type="button">
-    </form> -->
 </div>
 
 @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {

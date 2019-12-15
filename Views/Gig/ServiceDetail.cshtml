@@ -45,10 +45,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="slide-section">
             <div class="slideshow-container">
                 <div class="w3-content">
-                    @foreach(var item in @ViewBag.ImageService){
-                    <div class="mySlides1 fade">
-                        <img src="~/@item.Image" width="100%" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
-                    </div>
+                    @foreach(var item in @ViewBag.ImageService)
+                    {
+                        <div class="mySlides1 fade">
+                            <img src="~/@item.Image" width="100%" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
+                        </div>
                     }
                     <button class="prev btn-slide" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="next btn-slide" onclick="plusDivs(1)">&#10095;</button>
@@ -215,7 +216,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="wrapper-price-detail" id="price-detail" onscroll="Onscroll()">
 
             <div class="w3-bar w3-black">
-                <button class="w3-bar-item w3-button" onclick="openCity(event,'London')">Premium</button>
+                <button class="w3-bar-item w3-button brg" onclick="openCity(event,'London')">Premium</button>
                 <button class="w3-bar-item w3-button" onclick="openCity(event,'Paris')">Standard</button>
                 <button class="w3-bar-item w3-button" onclick="openCity(event,'Tokyo')">Basic</button>
             </div>

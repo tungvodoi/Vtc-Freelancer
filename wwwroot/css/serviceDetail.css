@@ -12,7 +12,7 @@
 }
 
 .brand-mini span {
-  margin-left: 65px;
+  margin-left: 50px;
 }
 
 .contain-username {
@@ -36,7 +36,8 @@
   border: 1px solid #d5d4d2;
 }
 
-.body-service-detail {}
+.body-service-detail {
+}
 
 .flex {
   display: flex;
@@ -118,6 +119,7 @@
 
 .btn-prc-detail {
   width: 100% !important;
+  cursor: pointer;
 }
 
 /* 

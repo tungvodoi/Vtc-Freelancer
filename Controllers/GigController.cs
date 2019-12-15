@@ -100,40 +100,43 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult CreateServiceStep2(string basicTitle, string standardTitle, string premiumTitle, string basicDescription, string standardDescription, string premiumDescription, int basicDelivery, int standardDelivery, int premiumDelivery, int basicRevision, int standardRevision, int premiumRevision, double basicPrice, double standardPrice, double premiumPrice)
         {
             int? ServiceId = HttpContext.Session.GetInt32("serviceId");
-            Console.WriteLine(ServiceId);
-            Package pacBasic = new Package();
-            pacBasic.Name = "Basic";
-            pacBasic.Title = basicTitle;
-            pacBasic.Description = basicDescription;
-            pacBasic.DeliveryTime = basicDelivery;
-            pacBasic.NumberRevision = basicRevision;
-            pacBasic.Price = basicPrice;
-            pacBasic.ServiceId = ServiceId;
-            bool check = gigService.CreateServiceStepTwo(pacBasic);
-            if (standardTitle != null && premiumTitle != null && standardDescription != null && premiumDescription != null)
+            Service service = gigService.GetServiceByID(ServiceId);
+            if (service != null)
             {
-                Package pacStandard = new Package();
-                pacStandard.Name = "Standard";
-                pacStandard.Title = standardTitle;
-                pacStandard.Description = standardDescription;
-                pacStandard.DeliveryTime = standardDelivery;
-                pacStandard.NumberRevision = standardRevision;
-                pacStandard.Price = standardPrice;
-                pacStandard.ServiceId = ServiceId;
-                check = gigService.CreateServiceStepTwo(pacStandard);
-                Package pacPremium = new Package();
-                pacPremium.Name = "Premium";
-                pacPremium.Title = premiumTitle;
-                pacPremium.Description = premiumDescription;
-                pacPremium.DeliveryTime = premiumDelivery;
-                pacPremium.NumberRevision = premiumRevision;
-                pacPremium.Price = premiumPrice;
-                pacPremium.ServiceId = ServiceId;
-                check = gigService.CreateServiceStepTwo(pacPremium);
-            }
-            if (check)
-            {
-                return Redirect("/CreateService/Step3");
+                Package pacBasic = new Package();
+                pacBasic.Name = "Basic";
+                pacBasic.Title = basicTitle;
+                pacBasic.Description = basicDescription;
+                pacBasic.DeliveryTime = basicDelivery;
+                pacBasic.NumberRevision = basicRevision;
+                pacBasic.Price = basicPrice;
+                pacBasic.ServiceId = service.ServiceId;
+                bool check = gigService.CreateServiceStepTwo(pacBasic);
+                if (standardTitle != null && premiumTitle != null && standardDescription != null && premiumDescription != null)
+                {
+                    Package pacStandard = new Package();
+                    pacStandard.Name = "Standard";
+                    pacStandard.Title = standardTitle;
+                    pacStandard.Description = standardDescription;
+                    pacStandard.DeliveryTime = standardDelivery;
+                    pacStandard.NumberRevision = standardRevision;
+                    pacStandard.Price = standardPrice;
+                    pacStandard.ServiceId = service.ServiceId;
+                    check = gigService.CreateServiceStepTwo(pacStandard);
+                    Package pacPremium = new Package();
+                    pacPremium.Name = "Premium";
+                    pacPremium.Title = premiumTitle;
+                    pacPremium.Description = premiumDescription;
+                    pacPremium.DeliveryTime = premiumDelivery;
+                    pacPremium.NumberRevision = premiumRevision;
+                    pacPremium.Price = premiumPrice;
+                    pacPremium.ServiceId = service.ServiceId;
+                    check = gigService.CreateServiceStepTwo(pacPremium);
+                }
+                if (check)
+                {
+                    return Redirect("/CreateService/Step3");
+                }
             }
             return Redirect("/CreateService/Step2");
         }

@@ -145,3 +145,7 @@
     background-color: #1dbf73;
     color: white !important;
 }
+
+.slider__gig {
+    max-width: 235px !important;
+}

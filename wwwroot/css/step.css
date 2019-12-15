@@ -167,6 +167,11 @@ Textarea, {
   display: flex;
   align-items: center;
 }
+.body-require {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .step-order {
   padding: 1rem;
@@ -179,6 +184,11 @@ Textarea, {
 .summary {
   padding-bottom: 3rem;
   display: flex;
+  border-bottom: 1px solid;
+}
+
+.require-summary {
+  padding-bottom: 2rem;
   border-bottom: 1px solid;
 }
 
@@ -195,8 +205,27 @@ Textarea, {
   text-transform: capitalize;
 }
 
+.title-summary-require {
+  margin-top: 20px;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.content-summary-require {
+  font-weight: 600;
+  color: #62646a;
+  text-align: left;
+}
+
 .img-summary {
   max-height: 62px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.img-summary-require {
   -o-object-fit: contain;
   object-fit: contain;
   border-radius: 4px;
@@ -216,7 +245,7 @@ Textarea, {
 }
 
 .wrapper-order-content {
-  margin: 2rem;
+  margin: 0rem 2rem;
   padding: 1rem;
   border-radius: 4px;
   border: 1px solid #d5d4d2;
@@ -321,7 +350,7 @@ Textarea, {
 .Notification-sent-mail {
   display: block;
   background-color: #add8c5;
-  margin: 20px 0px;
+  margin-top: 20px;
   width: 98%;
   position: relative;
   border-radius: 4px;
@@ -400,4 +429,55 @@ Textarea, {
 }
 .input-require {
   width: 100%;
+}
+
+.cta-comment {
+  margin-top: 10px;
+}
+
+.detail-order div {
+  margin-top: 10px;
+}
+
+.incomp,
+.comp,
+.proress {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 3px 10px;
+  color: white;
+  font-weight: 600;
+}
+
+.incomp {
+  background-color: rgb(212, 174, 68);
+}
+
+.comp {
+  background-color: rgb(45, 233, 45);
+}
+
+.proress {
+  background-color: rgb(46, 46, 207);
+}
+
+.button-start-order {
+  margin-top: 20px;
+  cursor: pointer;
+  float: right;
+}
+
+.btn-start-order {
+  opacity: 0.5;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.check {
+  margin: 20px 0px;
+  width: 85%;
+}
+
+.check span {
+  font-size: 14px;
 }

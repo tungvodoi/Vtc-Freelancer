@@ -33,120 +33,115 @@ Layout = "~/Views/Shared/_Order.cshtml";
         </ul>
     </nav>
 </div>
-<div class="payment-detail container-inner">
-    <div class="right-content info-card-detail">
-        <div class="cash-option">
-            <div>
-
-            </div>
-        </div>
-        <nav class="cards">
-            <h3 class="back-content">
-                Creadit & Debit Cards
-            </h3>
-            <ul class="ul-cards">
-                <li class="li-cards"><img class="card-options" src="~/Images/payment_visa.png" alt="visa"></li>
-                <li class="li-cards"><img class="card-options" src="~/Images/mastercard.jpg" alt="master-card"></li>
-                <li class="li-cards"><img class="card-options" src="~/Images/discover-payment.png" alt="discover">
-                </li>
-                <li class="li-cards"><img class="card-options" src="~/Images/jcb.jpg" alt="jcb"></li>
-            </ul>
-        </nav>
-        <div class="cash-info">
-            <div class="card-datail">
-                <label for="" class="card-number" id="number-card">
-                    <span>Card Number</span>
-                    <br>
-                    <input class="input-card-detail" type="number" style="width: 100%;">
-                </label>
-                <label for="" class="card-date">
-                    <span>Expiration Date</span>
-                    <br>
-                    <input type="datetime" placeholder="MM/YY" class="input-card-detail">
-                    <span class="error-date"></span>
-                </label>
-                <label for="" class="card-number">
-                    <span>Security Code</span>
-                    <br>
-                    <input type="number" class="input-card-detail">
-                </label>
-            </div>
-
-            <div class="card-datail bottom-detail-content">
-                <label for="" class="card-number bottom-input-card">
-                    <span>First Name</span>
-                    <br>
-                    <input class="input-card-detail input-detail" type="text" width="100%">
-                </label>
-
-                <label for="" class="card-number  bottom-input-card">
-                    <span>Last Name</span>
-                    <br>
-                    <input type="text" class="input-card-detail input-detail" width="100%">
-                </label>
-            </div>
-            <br>
-            <br>
-            <div class="check-point">
-                <input type="checkbox"><span>Save as default</span>
-            </div>
-        </div>
-
-    </div>
-    <div class="left-content ">
-        <div class="wrapper-order-content">
-            <div class="summary">
-                <div class="gig-summary">
-                    @for (int i = 0; i < Model.Service.ListImage.Count; i++) 
-                    { 
-                        @if(i==1) 
-                        { 
-                            <img src="~/@Model.Service.ListImage[i].Image" alt="" width="100px" class="img-summary">
-                        }
-                    }
-                    <div class="title-summary">
-                        @Model.Title
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="brand-mini">
-                <h3 class="back-content"><b>Brand Mini</b></h3>
-                <span>x @ViewBag.Quantity</span>
-                <span>@(Model.Price * ViewBag.Quantity) $</span>
-            </div>
-            <br>
-            <br>
-            <div>
+<form action="Payment?PackageId=@Model.PackageId" method="post">
+    <div class="payment-detail container-inner">
+        <div class="right-content info-card-detail">
+            <div class="cash-option">
                 <div>
-                    <div>
-                        <span>Service Fee</span>
-                        <span class="float-right" id="sub-price">@(Model.Price * ViewBag.Quantity * 20 / 100) $</span>
-                    </div>
-                    <br>
+
                 </div>
             </div>
-            <br>
-            <div>
-                <span><b>Total</b></span>
-                <span id="totle-price" class="float-right"><b>@(Model.Price * ViewBag.Quantity + (@Model.Price * ViewBag.Quantity * 20/100)) $</b></span>
-            </div>
-            <br>
+            <nav class="cards">
+                <h3 class="back-content">
+                    Creadit & Debit Cards
+                </h3>
+                <ul class="ul-cards">
+                    <li class="li-cards"><img class="card-options" src="~/Images/payment_visa.png" alt="visa"></li>
+                    <li class="li-cards"><img class="card-options" src="~/Images/mastercard.jpg" alt="master-card"></li>
+                    <li class="li-cards"><img class="card-options" src="~/Images/discover-payment.png" alt="discover">
+                    </li>
+                    <li class="li-cards"><img class="card-options" src="~/Images/jcb.jpg" alt="jcb"></li>
+                </ul>
+            </nav>
+            <div class="cash-info">
+                <div class="card-datail">
+                    <label for="" class="card-number" id="number-card">
+                        <span>Card Number</span>
+                        <br>
+                        <input class="input-card-detail" type="number" style="width: 100%;">
+                    </label>
+                    <label for="" class="card-date">
+                        <span>Expiration Date</span>
+                        <br>
+                        <input type="datetime" placeholder="MM/YY" class="input-card-detail">
+                        <span class="error-date"></span>
+                    </label>
+                    <label for="" class="card-number">
+                        <span>Security Code</span>
+                        <br>
+                        <input type="number" class="input-card-detail">
+                    </label>
+                </div>
 
-            <div>
-                <span>Delivery Time</span>
-                <span class="float-right">@Model.DeliveryTime Days</span>
+                <div class="card-datail bottom-detail-content">
+                    <label for="" class="card-number bottom-input-card">
+                        <span>First Name</span>
+                        <br>
+                        <input class="input-card-detail input-detail" type="text" width="100%">
+                    </label>
+
+                    <label for="" class="card-number  bottom-input-card">
+                        <span>Last Name</span>
+                        <br>
+                        <input type="text" class="input-card-detail input-detail" width="100%">
+                    </label>
+                </div>
+                <br>
+                <br>
+                <div class="check-point">
+                    <input type="checkbox" name="save"><span>Save as default</span>
+                </div>
             </div>
-            <div>
+
+        </div>
+        <div class="left-content ">
+            <div class="wrapper-order-content">
+                <div class="summary">
+                    <div class="gig-summary">
+                        @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img
+                            src="~/@Model.Service.ListImage[i].Image" alt="" width="100px" class="img-summary">
+                            break;
+                            }
+                            <div class="title-summary">
+                                @Model.Title
+                            </div>
+                    </div>
+                </div>
+                <br>
+                <div class="brand-mini">
+                    <h3 class="back-content"><b>Brand Mini</b></h3>
+                    <span>x @ViewBag.Quantity</span>
+                    <span>@(Model.Price * ViewBag.Quantity) $</span>
+                </div>
+                <br>
                 <br>
                 <div>
-                    <button type="button" onclick="window.location.href='/Order/Requirement?PackageId=@Model.PackageId&Quantity=@ViewBag.Quantity'"
-                        class="btn-continue btn-prc-detail">Confirm & Pay</button>
+                    <div>
+                        <div>
+                            <span>Service Fee</span>
+                            <span class="float-right" id="sub-price">@(Model.Price * ViewBag.Quantity * 20 / 100)
+                                $</span>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <span><b>Total</b></span>
+                    <span id="totle-price" class="float-right"><b>@(Model.Price * ViewBag.Quantity + (@Model.Price *
+                            ViewBag.Quantity * 20/100)) $</b></span>
+                </div>
+                <br>
+
+                <div>
+                    <span>Delivery Time</span>
+                    <span class="float-right">@Model.DeliveryTime Days</span>
+                </div>
+                <div>
                     <br>
-                    <br>
+                    <button class="btn-continue btn-prc-detail">Confirm & Pay</button>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
+</form>

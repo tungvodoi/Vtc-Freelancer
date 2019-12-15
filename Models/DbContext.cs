@@ -111,6 +111,9 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.WorkStatus);
                 entity.Property(x => x.Quantity);
                 entity.Property(x => x.OrderTime);
+                entity.Property(x => x.ContentRequire);
+                entity.Property(x => x.File);
+                entity.Property(x => x.PackageId);
                 entity.Property(x => x.UserId);
                 entity.Property(x => x.ServiceId);
             });
