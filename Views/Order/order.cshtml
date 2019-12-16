@@ -38,11 +38,11 @@ Layout = "~/Views/Shared/_Order.cshtml";
     <h1 class="back-content cutomemize-your-package">Customize Your Package</h1>
     <div class="summary">
       <div class="gig-summary">
-        @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <a
-          href="/Gig/ServiceDetail?serviceId=@Model.ServiceId"><img src="~/@Model.Service.ListImage[i].Image" alt=""
+        @for (int i = 0; i < Model.Service.ListImage.Count; i++) 
+        { <a href="/Gig/ServiceDetail?serviceId=@Model.ServiceId"><img src="~/@Model.Service.ListImage[i].Image" alt=""
             width="200px" style="margin: 0rem 1rem 0rem 1rem;"></a>
           break;
-          }
+        }
           <div>
             <a href="/Gig/ServiceDetail?serviceId=@Model.ServiceId" style="font-weight: bold;">
               <h2 class="back-content">@Model.Title</h2>

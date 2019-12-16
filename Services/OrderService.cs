@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -8,9 +9,11 @@ namespace Vtc_Freelancer.Services
     public class OrderService
     {
         private MyDbContext dbContext;
-        public OrderService(MyDbContext dbContext)
+        private AdminService adminService;
+        public OrderService(MyDbContext dbContext, AdminService adminService)
         {
             this.dbContext = dbContext;
+            this.adminService = adminService;
         }
 
         public Package GetPackageByPackageId(int PackageId)
@@ -98,6 +101,18 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
             return false;
+        }
+
+        public List<Orders> GetListOrderbyUserId(int? userId)
+        {
+            List<Orders> listOrder = dbContext.Orders.Where(x => x.UserId == userId).ToList();
+            foreach (var item in listOrder)
+            {
+                item.Service = GetServiceByServiceId(item.ServiceId);
+                item.Package = GetPackageByPackageId(item.PackageId);
+                item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
+            return listOrder;
         }
     }
 }

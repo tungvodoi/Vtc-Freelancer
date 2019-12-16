@@ -42,15 +42,19 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
                 i++;
                 <tr>
                   <td class="d-inline-block text-truncate" style="width: 50px;">@i</td>
-                  <td class="d-inline-block text-truncate" style="width: 237px;">@item.User.UserName</td>
+                  <td class="d-inline-block text-truncate" style="width: 237px;">@item.Users.UserName</td>
                   <td class="d-inline-block text-truncate" style="width: 306px;">@item.Service.Title</td>
                   <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderTime.ToString("dd/MM/yyyy")</td>
                   @if(item.WorkStatus == 0)
                   {
-                    <td class="d-inline-block text-truncate" style="width: 175px;">Doing</td>
-                  }else
+                    <td class="d-inline-block text-truncate" style="width: 175px;">INCOMPLETE</td>
+                  }else if(item.WorkStatus == 1)
                   {
-                    <td class="d-inline-block text-truncate" style="width: 175px;">Done</td>
+                    <td class="d-inline-block text-truncate" style="width: 175px;">IN PRORESS</td>
+                  }
+                  else
+                  {
+                    <td class="d-inline-block text-truncate" style="width: 175px;">COMPLETE</td>
                   }
                 </tr>
               }
