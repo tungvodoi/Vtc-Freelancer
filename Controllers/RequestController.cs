@@ -43,10 +43,29 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View();
+                return View("Request");
             }
 
-            return View();
+            return View("Request");
+        }
+
+        [HttpGet("/view_requests")]
+        public IActionResult ViewRequests()
+        {
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+                return View();
+            }
+            Users users = userService.GetUserByUsername(HttpContext.Session.GetString("UserName"));
+            return View("Request/ViewRequests");
         }
 
         [HttpPost("/manager_request")]

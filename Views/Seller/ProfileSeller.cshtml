@@ -54,6 +54,8 @@ ViewData["Title"] = "EditProfile";
                 <b class="ft-right">@ViewBag.userProfile.RegisterDate</b>
             </div>
         </div>
+        @if(@ViewBag.sellerprofile != null)
+        {
         <div class="description-user content content-wrapper">
             <div class="content-detail-user">
                 <span class="ft-left"><b>Description</b></span>
@@ -73,6 +75,7 @@ ViewData["Title"] = "EditProfile";
             </div>
             }
         </div>
+        }
     </div>
     <div class="right-content right-profile">
         @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
@@ -81,7 +84,6 @@ ViewData["Title"] = "EditProfile";
                 <button class="tab-gig back-content" onclick="OpenGigs(event, 'Active-Gig')">Active-Gigs</button>
                 <button class="tab-gig back-content" onclick="OpenGigs(event, 'Drafts')">Drafts</button>
             </div>
-           
         </div>
          <div id="Active-Gig" class="list-gigs">
                 @if(@ViewBag.listServiceProfile != null)
@@ -296,12 +298,12 @@ ViewData["Title"] = "EditProfile";
     function openFormDescription() {
 
         if (flag == true) {
-            document.getElementById('description').innerHTML = "<textarea name=" + 'description' + " id='text-description' cols='100' rows='10' >@ViewBag.sellerprofile.Description</textarea>"
+            document.getElementById('description').innerHTML = "<textarea name=" + 'description' + " id='text-description' cols='100' rows='10' >@if(@ViewBag.sellerprofile != null){@ViewBag.sellerprofile.Description}</textarea>"
                 + "<input class=" + 'btn-edit' + " onclick=" + 'openFormDescription()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
             flag = false;
         }
         else {
-            document.getElementById('description').innerHTML = " <p>@ViewBag.sellerprofile.Description </p > ";
+            document.getElementById('description').innerHTML = " <p>@if(@ViewBag.sellerprofile != null){@ViewBag.sellerprofile.Description} </p > ";
             flag = true;
         }
         $('#bgc-key').click(() => {

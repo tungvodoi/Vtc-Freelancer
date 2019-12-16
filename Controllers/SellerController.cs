@@ -92,18 +92,24 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.userAvatar1 = users.Avatar;
             ViewBag.UserLoged = HttpContext.Session.GetString("UserName");
             Seller seller = userService.GetSellerByUserID(users.UserId);
+
+
             if (seller != null)
             {
+
+
+                ViewBag.sellerprofile = seller;
                 List<Service> services = new List<Service>();
                 services = gigService.GetServicesBySellerId(seller.SellerId);
                 foreach (var item in services)
                 {
                     item.ListImage = adminService.GetListImageService(item.ServiceId);
                     ViewBag.listServiceProfile = services;
-                    ViewBag.sellerprofile = seller;
+
                     return View(services);
                 }
             }
+
             return View();
 
         }

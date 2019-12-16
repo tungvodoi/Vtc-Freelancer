@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -66,7 +68,6 @@ namespace Vtc_Freelancer.Controllers
         }
 
         [HttpPost("/Login")]
-
         public IActionResult Login(string email, string password)
         {
             Users user = new Users();
@@ -297,7 +298,6 @@ namespace Vtc_Freelancer.Controllers
 
         //     return View(services);
         // }
-
 
     }
 }
