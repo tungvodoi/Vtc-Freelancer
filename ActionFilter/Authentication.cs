@@ -15,12 +15,6 @@ namespace Vtc_Freelancer.ActionFilter
             {
                 var url = context.HttpContext.Request.GetDisplayUrl();
                 var myEncodedString = System.Net.WebUtility.UrlEncode(url);
-                Console.WriteLine(1);
-                Console.WriteLine(url);
-                Console.WriteLine(myEncodedString);
-                Console.WriteLine(2);
-
-
                 var controller = (Controller)context.Controller;
                 context.Result = controller.Redirect("/login?returnUrl=" + myEncodedString);
             }
