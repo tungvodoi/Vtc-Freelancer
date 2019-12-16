@@ -57,7 +57,7 @@ namespace Vtc_Freelancer.Controllers
 
         [HttpPost("/Login")]
 
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string email, string password, string returnUrl)
         {
             Users user = new Users();
             user = userService.Login(email, password);
@@ -80,6 +80,10 @@ namespace Vtc_Freelancer.Controllers
                     {
                         return Redirect("/Admin/Dashboard");
                     }
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
                     return Redirect("/");
                 }
             }
@@ -87,7 +91,7 @@ namespace Vtc_Freelancer.Controllers
             return View("Login");
         }
         [HttpGet("/Login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
@@ -105,6 +109,14 @@ namespace Vtc_Freelancer.Controllers
                 // ViewBag.Error = "Wrong Username/email";
                 // ViewBag.Error1 = "Wrong Passwowrd";
             }
+
+            if (returnUrl != null)
+            {
+                ViewBag.returnUrl = returnUrl;
+                var myEncodedString = System.Net.WebUtility.UrlDecode(returnUrl);
+                Console.WriteLine(myEncodedString);
+            }
+
             return View();
         }
         [HttpPost("/BecomeSeller")]

@@ -27,6 +27,8 @@ namespace Vtc_Freelancer.Controllers
             this.orderService = orderService;
             this.adminService = adminService;
         }
+        
+        [Authentication]
         [HttpGet("/Customize/Order")]
         public IActionResult Order(int PackageId)
         {

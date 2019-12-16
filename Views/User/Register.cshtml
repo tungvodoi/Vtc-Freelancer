@@ -9,32 +9,17 @@ Layout = "~/Views/Shared/_Login.cshtml";
         <h5>
             Join VTC Freelancer
         </h5>
-        <br>
-
         <h3 style="color:Green" id="error"> @ViewBag.error</h3>
         <br>
-        <br>
-        <label>
-            Username
-        </label>
         <input type="text" name="username" placeholder="Username..." required />
         <br>
         <br>
-        <label>
-            Email
-        </label>
         <input type="email" name="email" placeholder="Email..." required />
         <br>
         <br>
-        <label>
-            Password
-        </label>
         <input type="password" name="password" id="p1" placeholder="Password..." required />
         <br>
         <br>
-        <label>
-            Re-Enter Password
-        </label>
         <input type="password" name="password2" id="p2" onkeyup="Checkpass()" placeholder="Re-Enter Password"
             required />
         <br>
@@ -42,6 +27,6 @@ Layout = "~/Views/Shared/_Login.cshtml";
         <br>
         <button id="but" class="btn-success">Sign up</button>
         <br>
-        <a href="/Login">Alreaddy have Account?</a>
+        <a href="/Login">Already have Account?</a>
     </form>
 </div>
