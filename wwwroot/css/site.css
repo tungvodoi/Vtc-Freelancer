@@ -1189,7 +1189,8 @@ h3 {
   text-align: center;
   padding: 9px;
 }
-.li-content-order {
+.li-content-order,
+.li-content-order1 {
   width: 150px;
 }
 

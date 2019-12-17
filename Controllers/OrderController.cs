@@ -222,6 +222,7 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.UserName = userads.UserName;
                     ViewBag.userAvatar = userads.Avatar;
                     ViewBag.IsSeller = userads.IsSeller;
+                    ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
                     return View(order);
                 }
             }
