@@ -3,9 +3,21 @@
 ViewData["Title"] = "Requirement";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="hidden-form">
-  <form action="" method="post">
+<div class="hidden-form" id="hidden-form">
+  <div class="top-form-deliver">
+    <h3>Deliver Completed Your Work</h3>
+    <button class="ignore" onclick="openHidden()">✖</button>
+  </div>
+  <form action="" method="post" class="form-hidden-form">
+    <div class="flex">
 
+      <input type="file" name="file" id="file" class="inputfile" />
+
+      <input type="file" name="file" id="file1" class="inputfile" />
+
+    </div>
+    <textarea name="" id="textarea-delever" placeholder="Describe your delevery in detail..."></textarea>
+    <button class="btn-sub right-bo">Delever Work </button>
   </form>
 </div>
 <div class="nav-step container">
@@ -32,7 +44,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
       <div class="order-status  right-top">
         <li class="wrapper-li-step flex-end">
-          <button class="btn-sub">Deliver Your Order</button>
+          <button class="btn-sub" id="btn-sub-right" onclick="openHidden()">Deliver Your Order</button>
         </li>
       </div>
 
@@ -92,5 +104,20 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 
 <script>
+  var button1 = document.getElementById('btn-sub-right');
+  var hidden1 = document.getElementById('hidden-form');
+  var flag1 = true;
+  function openHidden() {
+
+    if (flag1 == true) {
+      hidden1.style.display = "block";
+      flag1 = false;
+    }
+    else {
+      hidden1.style.display = "none";
+      flag1 = true;
+    }
+  }
+
 
 </script>
