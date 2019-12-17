@@ -30,7 +30,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="contain-username">
                 @if(ViewBag.serviceDetailUser.Avatar == null)
                 {
-                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile"
+                        src="~/Images/avatardefault.png" alt="avatar"></a>
                 }
                 else
                 {
@@ -72,7 +73,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="avatar-seller">
                 @if(ViewBag.serviceDetailUser.Avatar == null)
                 {
-                <img class="img-seller" src="~/Images/avatardefault.png" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-seller" src="~/Images/avatardefault.png"
+                        alt="avatar"></a>
                 }
                 else
                 {
