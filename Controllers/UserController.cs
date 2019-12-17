@@ -68,12 +68,8 @@ namespace Vtc_Freelancer.Controllers
         }
 
         [HttpPost("/Login")]
-<<<<<<< HEAD
-        public IActionResult Login(string email, string password)
-=======
 
         public IActionResult Login(string email, string password, string returnUrl)
->>>>>>> 634ad696f16a1b70c3c333b2c8d6f2e7a8860cdb
         {
             Users user = new Users();
             user = userService.Login(email, password);
