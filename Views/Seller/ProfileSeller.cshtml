@@ -307,6 +307,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 var img = document.querySelectorAll('.img-profile-menu')[index]; // $('img')[0]
                 img.src = URL.createObjectURL(this.files[0]); // set src to blob url
                 img.onload = imageIsLoaded(this.files, img.src);
+                document.querySelectorAll('.img-profile')[1].src = img.src; // set src to blob url
+                console.log(document.querySelectorAll('.img-profile')[1].src);
             }
             function imageIsLoaded(files, imgSrc) {
                 var data = new FormData();
