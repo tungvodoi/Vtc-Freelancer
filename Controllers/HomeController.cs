@@ -6,6 +6,7 @@ using Vtc_Freelancer.Services;
 using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.ActionFilter;
 using System;
+using PagedList;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Vtc_Freelancer.Controllers
@@ -41,9 +42,13 @@ namespace Vtc_Freelancer.Controllers
 
             return View();
         }
-        [Authentication]
+        // [Authentication]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("UserName") == null)
+            {
+                return Redirect("/HomePage");
+            }
             HttpContext.Session.Remove("Quantity");
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
@@ -104,15 +109,18 @@ namespace Vtc_Freelancer.Controllers
             }
             List<Service> services = new List<Service>();
             services = adminService.GetListServices(search_content);
-            if (services == null)
-            {
-                return Redirect("/");
-            }
             foreach (var item in services)
             {
                 item.ListImage = adminService.GetListImageService(item.ServiceId);
             }
             ViewBag.ListServicesSearch = services;
+            // if (page == null) page = 1;
+
+            // int pageSize = 30;
+
+            // // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
+            // // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
+            // int pageNumber = (page ?? 1);
             ViewBag.searchResult = search_content;
 
             return View();

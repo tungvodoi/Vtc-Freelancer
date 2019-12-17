@@ -7,7 +7,6 @@ else
 {ViewData["Title"] = "EditProfile";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="">
 
 	<div class="container">
@@ -16,11 +15,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 			Result for "@ViewBag.searchResult":
 		</h1>
 		<br>
-		<div class="product">
+
+		<div class="product" style="min-height: 500px;">
 			<div class="">
+				@if(@ViewBag.ListServicesSearch != null)
+				{
 				<section class="box-row" style="display: grid;grid-template-columns:20% 20% 20% 20% 20%">
-					@if(@ViewBag.ListServicesSearch != null)
-					{
+
 					@foreach (var service in ViewBag.ListServicesSearch)
 					{
 					<div class="slider__gig slider__gig-index">
@@ -60,16 +61,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 						</div>
 					</div>
 					}
-					}
+
 				</section>
+				}
+				@if(@ViewBag.ListServicesSearch.Count < 1){ <div class="search-null"
+					style="margin: 200px auto; min-height: 500px;text-align: center;">
+					<h1>No services were found</h1>
 			</div>
+			}
 		</div>
 	</div>
 </div>
-
-
-
-
+</div>
 <script>
 
 	$(document).ready(function () {
