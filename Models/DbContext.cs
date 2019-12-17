@@ -110,7 +110,8 @@ namespace Vtc_Freelancer.Models
                 entity.HasKey(x => x.OrderId);
                 entity.Property(x => x.WorkStatus);
                 entity.Property(x => x.Quantity);
-                entity.Property(x => x.OrderTime);
+                entity.Property(x => x.OrderCreateTime);
+                entity.Property(x => x.OrderStartTime);
                 entity.Property(x => x.ContentRequire);
                 entity.Property(x => x.File);
                 entity.Property(x => x.PackageId);

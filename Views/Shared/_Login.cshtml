@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
@@ -316,44 +318,45 @@
                 </div>
             </div>
         </div>
-        <script>
-        </script>
-        <script>
-            var form = document.getElementById('logreg-forms')
-            var dmm = document.getElementById('icon-menu');
-            var registerform = document.getElementById('register-form');
-            var regist = document.getElementById('join');
-            dmm.addEventListener('click', () => {
-                var loz = document.getElementById('hidden-div');
-                loz.classList.toggle('animate');
-                var all = document.getElementById('wrapper-all');
-                all.classList.toggle('animate');
-            })
-            var body = document.getElementById('wrapper-all');
-            body.addEventListener('click', () => {
-                var div = document.getElementById('hidden-div');
-                form.style.display = "none";
-                registerform.style.display = "none";
-                div.classList.remove('animate');
-                body.classList.remove('animate')
-            })
-            var login = document.getElementById('login');
-            login.addEventListener('click', () => {
-                var hiiden = document.getElementById('wrapper-all');
-                hiiden.classList.toggle('animate');
-                form.style.display = "block";
-            })
-            regist.addEventListener('click', () => {
-                var hiiden = document.getElementById('wrapper-all');
-                hiiden.classList.toggle('animate');
-                registerform.style.display = "block";
-                console.log('dcmm')
-            })
+    </div>
+    <script>
+    </script>
+    <script>
+        var form = document.getElementById('logreg-forms')
+        var dmm = document.getElementById('icon-menu');
+        var registerform = document.getElementById('register-form');
+        var regist = document.getElementById('join');
+        dmm.addEventListener('click', () => {
+            var loz = document.getElementById('hidden-div');
+            loz.classList.toggle('animate');
+            var all = document.getElementById('wrapper-all');
+            all.classList.toggle('animate');
+        })
+        var body = document.getElementById('wrapper-all');
+        body.addEventListener('click', () => {
+            var div = document.getElementById('hidden-div');
+            form.style.display = "none";
+            registerform.style.display = "none";
+            div.classList.remove('animate');
+            body.classList.remove('animate')
+        })
+        var login = document.getElementById('login');
+        login.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            form.style.display = "block";
+        })
+        regist.addEventListener('click', () => {
+            var hiiden = document.getElementById('wrapper-all');
+            hiiden.classList.toggle('animate');
+            registerform.style.display = "block";
+            console.log('dcmm')
+        })
 
-        </script>
+    </script>
 
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/slide.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/slide.js" asp-append-version="true"></script>
 </body>
 
 </html>

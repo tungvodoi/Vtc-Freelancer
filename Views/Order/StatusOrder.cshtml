@@ -1,0 +1,96 @@
+@model Orders;
+@{
+ViewData["Title"] = "Requirement";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="hidden-form">
+  <form action="" method="post">
+
+  </form>
+</div>
+<div class="nav-step container">
+  <nav>
+    <ul class="ul-step-order">
+      <div class="order-status left-top">
+        <li class="wrapper-li-step">
+          <div class="li-step-order" style="background-color: #1dbf73;"><i class="fa fa-check"
+              style="color: white;"></i>
+          </div>
+          <div class="li-content-order">
+            <p>REQUIREMENT'S SUBMITTED</p>
+          </div>
+        </li>
+        <li class="wrapper-li-step">
+          <div class="li-step-order" style="background-color: #e29637;"><i class="fa fa-map-marker"
+              style="color: white;"></i>
+          </div>
+          <div class="li-content-order1">
+            <p>ORDER IN PROGRESS EXPECTED DELIVERY: @ViewBag.Delivery.ToString("dd/MM/yyyy")</p>
+          </div>
+        </li>
+
+      </div>
+      <div class="order-status  right-top">
+        <li class="wrapper-li-step flex-end">
+          <button class="btn-sub">Deliver Your Order</button>
+        </li>
+      </div>
+
+    </ul>
+  </nav>
+</div>
+<div class="container-inner body-require font-size-14">
+  <div class="right-content">
+    <div class="border-content container-order">
+      @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img src="~/@Model.Service.ListImage[i].Image" alt=""
+        width="150px" height="100px" class="img-summary-require">
+        break;
+        }
+        <div class="content-detail-service">
+          <h1>@Model.Service.Title</h1>
+          <div class="info-more">
+            <p>Seller: <a href="/@Model.Service.Seller.User.UserName">@Model.Service.Seller.User.UserName</a></p>
+            <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">Order: @Model.OrderId</p>
+            <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">
+              @Model.OrderStartTime.ToString("dd/MM/yyyy")</p>
+          </div>
+        </div>
+        <div class="price-order">
+          <h1>$ @(Model.Package.Price * Model.Quantity +
+            (@Model.Package.Price * Model.Quantity * 20/100))</h1>
+        </div>
+    </div>
+  </div>
+  <div class="left-content">
+    <div class="wrapper-process-order-content">
+      <div class="process-order">
+        <div class="content-order">
+          <h4 class="process-success">Placed Order</h4>
+        </div>
+        <div class="content-order">
+          <h4 class="process-success">Provide Requirements</h4>
+        </div>
+        <div class="content-order">
+          <h4 class="processing">Order in Progress</h4>
+          <p>Exiting stuff! The Seller is now working on your delivery. The order is due:
+            <b>@ViewBag.Delivery.ToString("dd/MM/yyyy")</b></p>
+        </div>
+
+        <div class="content-order await">
+          <h4 class="await-process">Review the Delivery</h4>
+        </div>
+        <div class="content-order await">
+          <h4 class="await-process">Order Complete</h4>
+        </div>
+      </div>
+      <div class="FAQs-order">
+        <p>Something unclear?</p>
+        <a href="">Check out our FAQs</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+</script>

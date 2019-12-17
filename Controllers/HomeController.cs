@@ -15,10 +15,12 @@ namespace Vtc_Freelancer.Controllers
     {
         private UserService userService;
         private AdminService adminService;
+        private OrderService orderService;
         private readonly ILogger<HomeController> _logger;
-        public HomeController(UserService userService, AdminService adminService, ILogger<HomeController> logger)
+        public HomeController(UserService userService, AdminService adminService, OrderService orderService, ILogger<HomeController> logger)
         {
             this._logger = logger;
+            this.orderService = orderService;
             this.userService = userService;
             this.adminService = adminService;
         }
@@ -60,13 +62,14 @@ namespace Vtc_Freelancer.Controllers
             {
                 item.ListImage = adminService.GetListImageService(item.ServiceId);
             }
-            if (HttpContext.Session.GetInt32("UserId") != null)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId != null)
             {
-                int? userId = HttpContext.Session.GetInt32("UserId");
                 Users userads = userService.GetUsersByID(userId);
                 ViewBag.UserName = userads.UserName;
                 ViewBag.userAvatar = userads.Avatar;
-                //Lay Session lan 2
+                ViewBag.ListOrder = orderService.GetListOrderbyUserId(userId);
+
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
