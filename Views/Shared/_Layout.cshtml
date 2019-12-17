@@ -107,55 +107,9 @@
                     <li>
                         <a class="nav-link"><b>Saved</b></a>
                     </li>
-                    <li>
+                    <li style="position: relative;">
                         <a id="display-tipOrder" class="nav-link"><b>Orders</b></a>
-                    </li>
-                  
-                    @if(ViewBag.IsSeller == 1)
-                    {
-                    <li>
-                        <a href="/Seller">
-                            <div class="prf-div">
-                                <h4 style="color: #1dbf73;">Switch to Selling</h4>
-                                @if(ViewBag.userAvatar == null)
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
-                                }
-                                else
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
-                                }
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
-                    </li>
-                    }
-                    else
-                    {
-                        <li>
-                        <a href="/Seller">
-                            <div class="prf-div">
-                                @if(ViewBag.userAvatar == null)
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
-                                }
-                                else
-                                {
-                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
-                                }
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
-                    </li>
-                    }
-                </ul>
-                <div id="tip" class="tip-orders">
+                        <div id="tip" class="tip-orders">
                     <div class="Triangular"></div>
                     <div class="list-state">
                             @if(ViewBag.ListOrder != null)
@@ -221,6 +175,53 @@
                             }
                     </div>
                 </div>
+                    </li>
+                  
+                    @if(ViewBag.IsSeller == 1)
+                    {
+                    <li>
+                        <a href="/Seller">
+                            <div class="prf-div">
+                                <h4 style="color: #1dbf73;">Switch to Selling</h4>
+                                @if(ViewBag.userAvatar == null)
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                }
+                                else
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                    </li>
+                    }
+                    else
+                    {
+                        <li>
+                        <a href="/Seller">
+                            <div class="prf-div">
+                                @if(ViewBag.userAvatar == null)
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                }
+                                else
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                    </li>
+                    }
+                </ul>
+                
             </div>
         </div>
 
