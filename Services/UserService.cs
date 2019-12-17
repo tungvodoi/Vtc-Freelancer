@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Vtc_Freelancer.Models;
 
 namespace Vtc_Freelancer.Services
@@ -34,7 +36,8 @@ namespace Vtc_Freelancer.Services
                     Users User = new Users();
                     User.UserName = username;
                     User.Email = email;
-                    User.Password = password;
+                    MD5 mD5 = MD5.Create();
+                    User.Password = GetMd5Hash(mD5, password);
                     User.RegisterDate = DateTime.Now;
                     dbContext.Add(User);
                     dbContext.SaveChanges();
@@ -52,15 +55,20 @@ namespace Vtc_Freelancer.Services
         {
             var character = "@";
             var user = new Users();
+            MD5 md5Hash = MD5.Create();
             if (email.Contains(character))
             {
                 user = dbContext.Users.FirstOrDefault(u => u.Email == email);
                 if (user != null)
                 {
-                    if (user.Password == password)
+                    if (VerifyMd5Hash(md5Hash, password, user.Password))
                     {
                         // System.Console.WriteLine(user.UserName);
                         return user;
+                    }
+                    else
+                    {
+                        return null;
                     }
 
                 }
@@ -198,7 +206,7 @@ namespace Vtc_Freelancer.Services
 
         }
 
-        public Users GetUserByUserId(int Id)
+        public Users GetUserByUserId(int? Id)
         {
             Users users = new Users();
             users = dbContext.Users.FirstOrDefault(u => u.UserId == Id);
@@ -262,7 +270,47 @@ namespace Vtc_Freelancer.Services
                 dbContext.SaveChanges();
                 return true;
             }
+
             return false;
         }
+
+
+        public bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
+        {
+            string hashOfInput = GetMd5Hash(md5Hash, input);
+
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            if (0 == comparer.Compare(hashOfInput, hash))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public string GetMd5Hash(MD5 md5Hash, string input)
+        {
+
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes
+            // and create a string.
+            StringBuilder sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data 
+            // and format each one as a hexadecimal string.
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string.
+            return sBuilder.ToString();
+        }
+
+
     }
 }

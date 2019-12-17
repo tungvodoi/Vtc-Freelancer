@@ -8,7 +8,8 @@ namespace Vtc_Freelancer.Models
         public int OrderId { get; set; }
         public int WorkStatus { get; set; }
         public int Quantity { get; set; }
-        public DateTime OrderTime { get; set; }
+        public DateTime OrderCreateTime { get; set; }
+        public DateTime OrderStartTime { get; set; }
         public int PackageId { get; set; }
         public int UserId { get; set; }
         public string ContentRequire { get; set; }

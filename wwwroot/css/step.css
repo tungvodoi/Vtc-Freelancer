@@ -436,7 +436,7 @@ Textarea, {
 }
 
 .detail-order div {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .incomp,
@@ -444,9 +444,10 @@ Textarea, {
 .proress {
   border: 1px solid;
   border-radius: 4px;
-  padding: 3px 10px;
+  padding: 10px;
   color: white;
   font-weight: 600;
+  height: 35px;
 }
 
 .incomp {
@@ -480,4 +481,33 @@ Textarea, {
 
 .check span {
   font-size: 14px;
+}
+
+.container-order {
+  display: flex;
+  padding: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+}
+
+.content-detail-service {
+  width: 515px;
+}
+
+.content-detail-service h1 {
+  height: 65px;
+  overflow: hidden;
+}
+
+.info-more {
+  display: flex;
+}
+
+.info-more p a {
+  color: #1dbf73;
+}
+
+.price-order {
+  margin-left: 10px;
 }

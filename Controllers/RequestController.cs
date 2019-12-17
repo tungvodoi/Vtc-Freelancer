@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -28,22 +29,42 @@ namespace Vtc_Freelancer.Controllers
             this.adminService = adminService;
             this._environment = IHostingEnvironment;
         }
-
+        [Authentication]
         [HttpGet("/manager_request")]
         public IActionResult FormInputRequest()
         {
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
             if (listcategory != null)
             {
-                List<Category> listSubcategory = new List<Category>();
-                listSubcategory = adminService.GetListSubCategoryByParentId(1);
-                ViewBag.subcategory = listSubcategory;
                 ViewBag.listcategory = listcategory;
-                return View("request");
             }
-            return View();
+
+            return View("Request");
+        }
+
+        [HttpGet("/view_requests")]
+        public IActionResult ViewRequests()
+        {
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+                return View();
+            }
+            Users users = userService.GetUserByUsername(HttpContext.Session.GetString("UserName"));
+            return View("Request/ViewRequests");
         }
 
         [HttpPost("/manager_request")]

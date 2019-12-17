@@ -1,0 +1,96 @@
+@model Orders;
+@{
+    ViewData["Title"] = "Requirement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="nav-step container">
+  <nav>
+    <ul class="ul-step-order">
+      <li class="wrapper-li-step">
+        <div class="li-step-order" style="background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i></div>
+        <div class="li-content-order" style="color: #1dbf73;">REQUIREMENT'S SUBMITTED</div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step-order" style="background-color: #e29637;"><i class="fa fa-map-marker" style="color: white;"></i></div>
+        <div class="li-content-order" style="color: #e29637;">ORDER IN PROGRESS EXPECTED DELIVERY: @(Model.OrderStartTime.ToString("dd/MM/yyyy") + Convert.ToDateTime(Model.Package.DeliveryTime))</div>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<div class="container-inner body-require font-size-14">
+  <div class="right-content">
+      <div class="border-content container-order">
+            @for (int i = 0; i < Model.Service.ListImage.Count; i++) 
+            { <img src="~/@Model.Service.ListImage[i].Image" alt=""
+            width="150px" height="100px" class="img-summary-require">
+            break;
+            }
+            <div class="content-detail-service">
+                <h1>@Model.Service.Title</h1>
+                <div class="info-more">
+                    <p>Seller: <a href="/@Model.Service.Seller.User.UserName">@Model.Service.Seller.User.UserName</a></p>
+                    <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">Order: @Model.OrderId</p>
+                    <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">@Model.OrderStartTime.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+            <div class="price-order">
+                <h1>$ @(Model.Package.Price * Model.Quantity +
+            (@Model.Package.Price * Model.Quantity * 20/100))</h1>
+            </div>
+      </div>
+  </div>
+  <div class="left-content ">
+    <div class="wrapper-order-content">
+      <div class="require-summary">
+        @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img src="~/@Model.Service.ListImage[i].Image" alt=""
+          width="100%" class="img-summary-require">
+          break;
+          }
+          <div class="title-summary-require">
+            <p class="content-summary-require">@Model.Package.Title</p>
+          </div>
+          <ul>
+            <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.Package.DeliveryTime Days
+              Delivery</li>
+            <li class="li-detail-order"><span class="span-detail-order">✔ </span> @Model.Package.NumberRevision Revision
+            </li>
+          </ul>
+      </div>
+      <br>
+      <div class="detail-order">
+        <div>
+          <span>Status</span>
+          @if (@Model.WorkStatus == 0)
+          {
+            <span class="float-right incomp">INCOMPLETE</span>
+          }
+          else if (@Model.WorkStatus == 1)
+          {
+            <span class="float-right proress">IN PRORESS</span>
+          }
+          else
+          {
+            <span class="float-right comp">COMPLETE</span>
+          }
+        </div>
+        <div>
+          <span>Order</span>
+          <span class="float-right">@Model.OrderId</span>
+        </div>
+        <div>
+          <span>Order Date</span>
+          <span class="float-right">@Model.OrderCreateTime.ToString("dd/MM/yyyy")</span>
+        </div>
+        <div>
+          <span>Quantity</span>
+          <span class="float-right">X @Model.Quantity</span>
+        </div>
+        <div>
+          <span>Price</span>
+          <span class="float-right">$ @Model.Package.Price</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Request.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/step.css">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Linh css request -->
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
@@ -89,7 +92,6 @@
                 </form>
                 <br>
             </div>
-            <!-- <<<<<<< HEAD -->
             <div class="right-top-nav">
                 <ul class="nav-top">
                     @if(ViewBag.IsSeller == 0)
@@ -131,6 +133,27 @@
                         <a href="/Logout" class="nav-link"><b>Logout</b></a>
                     </li>
                     }
+                    else
+                    {
+                        <li>
+                        <a href="/Seller">
+                            <div class="prf-div">
+                                @if(ViewBag.userAvatar == null)
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                }
+                                else
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                    </li>
+                    }
                 </ul>
                 <div id="tip" class="tip-orders">
                     <div class="Triangular"></div>
@@ -140,29 +163,51 @@
                                 <ul style="margin: 0px">
                                 @foreach (var item in ViewBag.ListOrder)
                                 {
-                                    <a href="/order?orderId=@item.OrderId">
-                                        <li>
-                                            @for (int i = 0; i < item.Service.ListImage.Count; i++) 
-                                            { 
-                                                <img src="~/@item.Service.ListImage[i].Image" alt=""
-                                                width="60px" style="margin-right: 1rem;">
-                                                break;
-                                            }
-                                            <h4>@item.Service.Title</h4>
-                                            @if (@item.WorkStatus == 0)
-                                            {
+                                    @if (@item.WorkStatus == 0)
+                                    {
+                                        <a href="/Order/Requirement?orderId=@item.OrderId">
+                                            <li>
+                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                                { 
+                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
+                                                    width="60px" style="margin-right: 1rem;">
+                                                    break;
+                                                }
+                                                <h4>@item.Service.Title</h4>
                                                 <span class="float-right incomp">INCOMPLETE</span>
-                                            }
-                                            else if (@item.WorkStatus == 1)
-                                            {
+                                            </li>
+                                        </a>
+                                    }
+                                    else if (@item.WorkStatus == 1)
+                                    {
+                                        <a href="/Order?orderId=@item.OrderId">
+                                            <li>
+                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                                { 
+                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
+                                                    width="60px" style="margin-right: 1rem;">
+                                                    break;
+                                                }
+                                                <h4>@item.Service.Title</h4>
                                                 <span class="float-right proress">IN PRORESS</span>
-                                            }
-                                            else
-                                            {
+                                            </li>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Order?orderId=@item.OrderId">
+                                            <li>
+                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                                { 
+                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
+                                                    width="60px" height="36px" style="margin-right: 1rem;">
+                                                    break;
+                                                }
+                                                <h4>@item.Service.Title</h4>
                                                 <span class="float-right comp">COMPLETE</span>
-                                            }
-                                        </li>
-                                    </a>
+                                            </li>
+                                        </a>
+                                    }
                                 }
                                 </ul>
                             }
@@ -202,28 +247,6 @@
                             </li>
                         }
                         }
-                <!-- <li class="li-categories">
-                    <a href="" class="categories-link">Graphics & Design</a>
-                    <ul class="ul-package">
-
-                        @if(ViewBag.listcategory != null)
-                        {
-                        @foreach (var item in ViewBag.listcategory)
-                        {
-                        <li class="li-package">
-                            <a href="" class="a-package">@item.CategoryName</a>
-                        </li>
-                        }
-                        }
-                    </ul>
-                </li>
-                <li class="li-categories">
-                    <a href="" class="categories-link">Programming & Tech</a>
-                    <ul class="ul-package">
-                        <li class="li-package"><a class="a-package" href="">a</a></li>
-                        <li class="li-package"><a class="a-package" href="">a</a></li>
-                    </ul>
-                </li> -->
             </ul>
         </div>
 

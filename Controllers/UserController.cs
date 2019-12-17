@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -29,6 +31,16 @@ namespace Vtc_Freelancer.Controllers
         }
         public IActionResult Index()
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             var userId = HttpContext.Session.GetInt32("UserId");
             return View();
         }
@@ -57,7 +69,7 @@ namespace Vtc_Freelancer.Controllers
 
         [HttpPost("/Login")]
 
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string email, string password, string returnUrl)
         {
             Users user = new Users();
             user = userService.Login(email, password);
@@ -76,9 +88,13 @@ namespace Vtc_Freelancer.Controllers
                 if (user.Status == 0)
                 {
                     ViewBag.Error = "Account locked";
-                    if (user.UserName == "admin@gmail.com")
+                    if (user.Email == "admin@gmail.com")
                     {
                         return Redirect("/Admin/Dashboard");
+                    }
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
                     }
                     return Redirect("/");
                 }
@@ -87,7 +103,7 @@ namespace Vtc_Freelancer.Controllers
             return View("Login");
         }
         [HttpGet("/Login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
@@ -105,6 +121,14 @@ namespace Vtc_Freelancer.Controllers
                 // ViewBag.Error = "Wrong Username/email";
                 // ViewBag.Error1 = "Wrong Passwowrd";
             }
+
+            if (returnUrl != null)
+            {
+                ViewBag.returnUrl = returnUrl;
+                var myEncodedString = System.Net.WebUtility.UrlDecode(returnUrl);
+                Console.WriteLine(myEncodedString);
+            }
+
             return View();
         }
         [HttpPost("/BecomeSeller")]
@@ -287,7 +311,6 @@ namespace Vtc_Freelancer.Controllers
 
         //     return View(services);
         // }
-
 
     }
 }

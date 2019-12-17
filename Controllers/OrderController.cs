@@ -27,6 +27,8 @@ namespace Vtc_Freelancer.Controllers
             this.orderService = orderService;
             this.adminService = adminService;
         }
+
+        [Authentication]
         [HttpGet("/Customize/Order")]
         public IActionResult Order(int PackageId)
         {
@@ -185,7 +187,7 @@ namespace Vtc_Freelancer.Controllers
             }
             if (orderService.StartOrder(OrderId, ContentRequire, urlFile))
             {
-                return View("Requirement");
+                return Redirect("/order?orderId=" + OrderId);
             }
             return Redirect("/");
         }
@@ -196,12 +198,30 @@ namespace Vtc_Freelancer.Controllers
             Orders order = orderService.GetOrderByOrderId(OrderId);
             if (order != null)
             {
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
                 int? UserId = HttpContext.Session.GetInt32("UserId");
                 if (UserId == order.UserId)
                 {
                     order.Service = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Package = orderService.GetPackageByPackageId(order.PackageId);
+                    order.Users = userService.GetUserByUserId(order.UserId);
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
+                    Service se = orderService.GetServiceByServiceId(order.ServiceId);
+                    order.Service.Seller = orderService.GetSellerNameBySellerId(se.SellerId);
+                    Users userads = userService.GetUsersByID(UserId);
+                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
+                    ViewBag.UserName = userads.UserName;
+                    ViewBag.userAvatar = userads.Avatar;
+                    ViewBag.IsSeller = userads.IsSeller;
                     return View(order);
                 }
             }

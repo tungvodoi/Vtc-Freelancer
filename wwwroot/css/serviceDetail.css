@@ -10,6 +10,7 @@
   display: inline-block;
   color: black;
 }
+
 .brand-mini span {
   margin-left: 50px;
 }
@@ -22,6 +23,7 @@
 }
 
 .bars-service-detail {
+  z-index: 9;
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid #d5d4d2;

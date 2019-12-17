@@ -1,0 +1,193 @@
+.tab {
+    display: flex;
+}
+
+.mngr-request {
+    color: black !important;
+    font-weight: 300;
+}
+
+.tab-request {
+    display: block;
+    padding: 3px 5px 10px;
+    color: #999;
+    font-size: 14px;
+    line-height: 42px;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.request-body {
+    margin-top: 3rem;
+    max-width: 800px;
+    min-height: 500px;
+    margin: 3rem auto;
+}
+
+.table-request {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-request tbody tr {
+    background-color: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+.table-request tbody tr th:first-child {
+    padding-left: 20px;
+}
+
+.table-request tbody tr td {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #999;
+    line-height: 33px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.wrapper-table-request {
+    display: none;
+}
+
+.wrapper-table-request table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wrapper-table-request table thead tr {
+    background-color: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+.wrapper-table-request table thead td {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #999;
+    line-height: 33px;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding: 15px 15px 15px 0;
+}
+
+.wrapper-table-request table td:first-child {
+    padding-left: 20px;
+}
+
+.p-l-15 {
+    padding-left: 15px!important;
+}
+
+.t-a-right {
+    text-align: right!important;
+}
+
+.wrapper-table-request table tbody tr {
+    background-color: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+.wrapper-table-request table td.date.height95, .wrapper-table-request table td.user-date.height95 {
+    height: 95px;
+}
+
+.wrapper-table-request.align-top table tbody td {
+    vertical-align: top;
+}
+
+.wrapper-table-request table td:first-child {
+    padding-left: 20px;
+}
+
+.wrapper-table-request table td.date, .wrapper-table-request table td.user-date {
+    width: 110px;
+    padding-right: 15px;
+}
+
+.wrapper-table-request table td {
+    padding: 15px 15px 15px 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.wrapper-table-request.align-top table tbody td {
+    vertical-align: top;
+}
+
+.wrapper-table-request table td.text-wide {
+    max-width: 300px;
+    white-space: normal;
+    padding-right: 15px;
+    word-wrap: break-word;
+}
+
+.wrapper-table-request table td .info-line {
+    color: #999;
+    display: inline-block;
+    padding: 10px 10px 0 0;
+}
+
+.wrapper-table-request table td .tags-standard.tags-white-bg {
+    text-align: left;
+    white-space: normal;
+}
+
+.tags-standard {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.wrapper-table-request table td .tags-standard.tags-white-bg span {
+    color: #777;
+    margin: 15px 7px 0 0;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.tags-standard.tags-white-bg span {
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.tags-standard a, .tags-standard span {
+    background-color: #000;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 7px 10px;
+    padding: 8px 10px;
+    display: inline-block;
+    border: solid 1px #1f1f1f;
+    border-radius: 3px;
+}
+
+.wrapper-table-request .db-new-main-table td.applications {
+    padding-top: 19px;
+}
+
+.wrapper-table-request table td.applications {
+    width: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.wrapper-table-request .db-new-main-table td.dropdown {
+    width: 75px;
+    padding-top: 19px;
+}
+
+.wrapper-table-request table td:last-child {
+    padding-right: 20px;
+}
