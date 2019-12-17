@@ -436,7 +436,7 @@ Textarea, {
 }
 
 .detail-order div {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .incomp,
@@ -444,9 +444,10 @@ Textarea, {
 .proress {
   border: 1px solid;
   border-radius: 4px;
-  padding: 3px 10px;
+  padding: 10px;
   color: white;
   font-weight: 600;
+  height: 35px;
 }
 
 .incomp {
@@ -480,4 +481,129 @@ Textarea, {
 
 .check span {
   font-size: 14px;
+}
+
+.container-order {
+  display: flex;
+  padding: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+}
+
+.content-detail-service {
+  width: 515px;
+}
+
+.content-detail-service h1 {
+  height: 65px;
+  overflow: hidden;
+}
+
+.info-more {
+  display: flex;
+}
+
+.info-more p a {
+  color: #1dbf73;
+}
+
+.price-order {
+  margin-left: 10px;
+}
+
+.li-content-order p {
+  color: #1dbf73;
+}
+
+.li-content-order1 p {
+  color: #e29637;
+}
+
+/* Timeline order */
+.left-content {
+  font-size: 14px;
+  width: 30%;
+}
+
+.wrapper-process-order-content {
+  margin: 0rem 2rem;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  border: 1px solid #d5d4d2;
+}
+
+.process-order {
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.process-success::before {
+  content: "";
+  display: inline-block;
+  background: #1dbf73;
+  border-radius: 50%;
+  padding: 5px;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+.content-order::before {
+  content: "";
+  position: absolute;
+  background: #1dbf73;
+  width: 2px;
+  bottom: 11rem;
+  right: 356px;
+  top: 265px;
+  z-index: -1;
+}
+
+.await::before {
+  content: "";
+  position: absolute;
+  background: #d5d4d2 !important;
+  width: 2px;
+  bottom: 11rem;
+  right: 356px;
+  top: 28rem;
+  z-index: -1;
+}
+
+.content-order p {
+  margin-left: 30px;
+}
+.content-order {
+  margin-bottom: 20px;
+}
+
+.await-process::before {
+  content: "";
+  display: inline-block;
+  border: 1px solid #d5d4d2;
+  border-radius: 50%;
+  padding: 5px;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  background: white;
+}
+.processing {
+  color: #1dbf73;
+}
+.processing::before {
+  content: "";
+  display: inline-block;
+  border: 5px solid #1dbf73;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  background: white;
+}
+
+.FAQs-order a {
+  color: rgb(62, 62, 255);
 }

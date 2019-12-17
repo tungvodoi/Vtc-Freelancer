@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
@@ -145,7 +146,8 @@
                             <li class="li-categories">
                                 <a href="" class="categories-link">@item.CategoryName</a>
                                 <ul class="ul-package">
-                                        @if(item.subsCategory != null){
+                                        @if(item.subsCategory != null)
+                                        {
                                             @foreach (var subsCategory in item.subsCategory)
                                             {
                                                 <li class="li-package">
@@ -155,8 +157,8 @@
                                         }
                                 </ul>
                             </li>
-                        }
-                     }
+                    }
+                }
             </ul>
         </div>
 
@@ -346,7 +348,6 @@
             var hiiden = document.getElementById('wrapper-all');
             hiiden.classList.toggle('animate');
             registerform.style.display = "block";
-            console.log('dcmm')
         })
 
     </script>

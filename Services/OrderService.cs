@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -8,9 +9,11 @@ namespace Vtc_Freelancer.Services
     public class OrderService
     {
         private MyDbContext dbContext;
-        public OrderService(MyDbContext dbContext)
+        private AdminService adminService;
+        public OrderService(MyDbContext dbContext, AdminService adminService)
         {
             this.dbContext = dbContext;
+            this.adminService = adminService;
         }
 
         public Package GetPackageByPackageId(int PackageId)
@@ -20,6 +23,11 @@ namespace Vtc_Freelancer.Services
         public Service GetServiceByServiceId(int? ServiceId)
         {
             return dbContext.Service.FirstOrDefault(x => x.ServiceId == ServiceId);
+        }
+        public Seller GetSellerNameBySellerId(int SellerId)
+        {
+            Seller seller = dbContext.Seller.Include(x => x.User).FirstOrDefault(x => x.SellerId == SellerId);
+            return seller;
         }
 
         public bool CreateOrder(int UserId, int ServiceId, int PackageId, int Quantity)
@@ -31,7 +39,7 @@ namespace Vtc_Freelancer.Services
                 {
                     order.WorkStatus = 0;
                     order.Quantity = Quantity;
-                    order.OrderTime = DateTime.Now;
+                    order.OrderCreateTime = DateTime.Now;
                     order.PackageId = PackageId;
                     order.UserId = UserId;
                     order.ServiceId = ServiceId;
@@ -52,7 +60,7 @@ namespace Vtc_Freelancer.Services
                     Orders newOrder = new Orders();
                     newOrder.WorkStatus = 0;
                     newOrder.Quantity = Quantity;
-                    newOrder.OrderTime = DateTime.Now;
+                    newOrder.OrderCreateTime = DateTime.Now;
                     newOrder.PackageId = PackageId;
                     newOrder.UserId = UserId;
                     newOrder.ServiceId = ServiceId;
@@ -85,6 +93,7 @@ namespace Vtc_Freelancer.Services
                 if (order != null)
                 {
                     order.WorkStatus = 1;
+                    order.OrderStartTime = DateTime.Now;
                     order.ContentRequire = ContentRequire;
                     order.File = urlFile;
                     dbContext.Update(order);
@@ -98,6 +107,18 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
             return false;
+        }
+
+        public List<Orders> GetListOrderbyUserId(int? userId)
+        {
+            List<Orders> listOrder = dbContext.Orders.Where(x => x.UserId == userId).ToList();
+            foreach (var item in listOrder)
+            {
+                item.Service = GetServiceByServiceId(item.ServiceId);
+                item.Package = GetPackageByPackageId(item.PackageId);
+                item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
+            return listOrder;
         }
     }
 }

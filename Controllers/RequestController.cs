@@ -43,7 +43,6 @@ namespace Vtc_Freelancer.Controllers
             if (listcategory != null)
             {
                 ViewBag.listcategory = listcategory;
-                return View("Request");
             }
 
             return View("Request");

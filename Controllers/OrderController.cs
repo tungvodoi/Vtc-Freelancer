@@ -27,7 +27,7 @@ namespace Vtc_Freelancer.Controllers
             this.orderService = orderService;
             this.adminService = adminService;
         }
-        
+
         [Authentication]
         [HttpGet("/Customize/Order")]
         public IActionResult Order(int PackageId)
@@ -106,17 +106,17 @@ namespace Vtc_Freelancer.Controllers
             {
                 if (save == "on")
                 {
-                    package.Service = orderService.GetServiceByServiceId(package.ServiceId);
-                    package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
-                    int? Qty = HttpContext.Session.GetInt32("Quantity");
-                    if (Qty != null)
-                    {
-                        ViewBag.Quantity = Qty;
-                    }
-                    else
-                    {
-                        ViewBag.Quantity = 1;
-                    }
+                    // package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                    // package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                    // int? Qty = HttpContext.Session.GetInt32("Quantity");
+                    // if (Qty != null)
+                    // {
+                    //     ViewBag.Quantity = Qty;
+                    // }
+                    // else
+                    // {
+                    //     ViewBag.Quantity = 1;
+                    // }
                 }
                 Orders order = orderService.GetOrderByPackageId(package.PackageId);
                 if (order != null)
@@ -133,10 +133,14 @@ namespace Vtc_Freelancer.Controllers
             Orders order = orderService.GetOrderByOrderId(OrderId);
             if (order != null)
             {
-                order.Service = orderService.GetServiceByServiceId(order.ServiceId);
-                order.Package = orderService.GetPackageByPackageId(order.PackageId);
-                order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
-                return View(order);
+                int? UserId = HttpContext.Session.GetInt32("UserId");
+                if (UserId == order.UserId)
+                {
+                    order.Service = orderService.GetServiceByServiceId(order.ServiceId);
+                    order.Package = orderService.GetPackageByPackageId(order.PackageId);
+                    order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
+                    return View(order);
+                }
             }
             return Redirect("/");
         }
@@ -183,7 +187,44 @@ namespace Vtc_Freelancer.Controllers
             }
             if (orderService.StartOrder(OrderId, ContentRequire, urlFile))
             {
-                return View("Requirement");
+                return Redirect("/order?orderId=" + OrderId);
+            }
+            return Redirect("/");
+        }
+
+        [HttpGet("/order")]
+        public IActionResult StatusOrder(int OrderId)
+        {
+            Orders order = orderService.GetOrderByOrderId(OrderId);
+            if (order != null)
+            {
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                int? UserId = HttpContext.Session.GetInt32("UserId");
+                if (UserId == order.UserId)
+                {
+                    order.Service = orderService.GetServiceByServiceId(order.ServiceId);
+                    order.Package = orderService.GetPackageByPackageId(order.PackageId);
+                    order.Users = userService.GetUserByUserId(order.UserId);
+                    order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
+                    Service se = orderService.GetServiceByServiceId(order.ServiceId);
+                    order.Service.Seller = orderService.GetSellerNameBySellerId(se.SellerId);
+                    Users userads = userService.GetUsersByID(UserId);
+                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
+                    ViewBag.UserName = userads.UserName;
+                    ViewBag.userAvatar = userads.Avatar;
+                    ViewBag.IsSeller = userads.IsSeller;
+                    ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
+                    return View(order);
+                }
             }
             return Redirect("/");
         }
