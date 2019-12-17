@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/css/Seller.css">
     <link rel="stylesheet" type="text/css" href="~/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Request.css">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Linh css request -->
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
@@ -89,7 +90,6 @@
                 </form>
                 <br>
             </div>
-            <!-- <<<<<<< HEAD -->
             <div class="right-top-nav">
                 <ul class="nav-top">
                     @if(ViewBag.IsSeller == 0)
@@ -115,6 +115,27 @@
                         <a href="/Seller">
                             <div class="prf-div">
                                 <h4 style="color: #1dbf73;">Switch to Selling</h4>
+                                @if(ViewBag.userAvatar == null)
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
+                                }
+                                else
+                                {
+                                <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                    </li>
+                    }
+                    else
+                    {
+                        <li>
+                        <a href="/Seller">
+                            <div class="prf-div">
                                 @if(ViewBag.userAvatar == null)
                                 {
                                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>

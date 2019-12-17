@@ -3,85 +3,107 @@ ViewData["Title"] = "Login";
 Layout = "~/Views/Shared/_Login.cshtml";
 }
 
-    <div id="logreg-forms">
-        <form class="form-signin" method="POST" action="/Login">
-            <h5 class="h3 mb-3 font-weight-normal" >Login to VTC Freelancer</h5>
-            <br />
-            <div class="social-login">
-              <!-- <p>Continue With Facebook</p> -->
-              <fb:login-button 
-                scope="public_profile,email"
-                onlogin="checkLoginState();">
-              </fb:login-button>
-              <!-- <button onclick="logout()">Logout</button> -->
-            </div>
-            <p style="text-align:center"> OR  </p>
-            <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName" required="" autofocus="">
-            <p style="color:red">@ViewBag.Error</p>
-            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
-            <input type="hidden"  value=@ViewBag.returnUrl name="returnUrl" >
-            <p style="color:red">@ViewBag.Error1</p>
-            <p style="color:red">@ViewBag.Accountlocked </p>
-            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-            <a href="#" id="forgot_pswd">Forgot password?</a>
-            <hr>
-            <!-- <p>Don't have an account!</p>  -->
-            <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i class="fa fa-user-plus"></i> Sign up New Account</button></a>
-            </form>
-            <br>
+<div id="logreg-forms">
+  <form class="form-signin" method="POST" action="/Login">
+    <h5 class="h3 mb-3 font-weight-normal">Login to VTC Freelancer</h5>
+    <br />
+    <div class="social-login">
+      <!-- <p>Continue With Facebook</p> -->
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+      </fb:login-button>
+      <!-- <button onclick="logout()">Logout</button> -->
     </div>
-  
-       
+    <p style="text-align:center"> OR </p>
+    <div id="message"></div>
+    <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Email or UserName" required=""
+      autofocus="">
+    <p style="color:red">@ViewBag.Error</p>
+    <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
+    <p style="color:red">@ViewBag.Error1</p>
+    <p style="color:red">@ViewBag.Accountlocked </p>
+    <button class="btn btn-success btn-block" id="submit" type="submit"><i class="fas fa-sign-in-alt"></i> Sign
+      in</button>
+    <a href="#" id="forgot_pswd">Forgot password?</a>
+    <hr>
+    <!-- <p>Don't have an account!</p>  -->
+    <a href="/Register"><button class="btn btn-register btn-block" type="button" id="btn-signup"><i
+          class="fa fa-user-plus"></i> Sign up New Account</button></a>
+  </form>
+  <br>
+</div>
+
+
 
 <script>
-function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+  function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
     console.log('statusChangeCallback');
     console.log(response);                   // The current login status of the person.
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-      testAPI();  
+      testAPI();
     } else {                                 // Not logged into your webpage or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this webpage.';
     }
   }
-  window.fbAsyncInit = function() {
+  window.fbAsyncInit = function () {
     FB.init({
-      appId      : '802573856856059',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v5.0'
+      appId: '802573856856059',
+      cookie: true,
+      xfbml: true,
+      version: 'v5.0'
     });
-      
-    FB.AppEvents.logPageView();   
-      
+
+    FB.AppEvents.logPageView();
+
   };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-   
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-     statusChangeCallback(response);
-  });
-}
-function logout() {
-  FB.logout(function(response) {
-  console.log(response);
-});
-}
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    
-    FB.api('/me','GET',{"fields":"id,name,email,first_name,last_name"}, function(response) {
+  function checkLoginState() {
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+  }
+  function logout() {
+    FB.logout(function (response) {
       console.log(response);
     });
   }
 
+  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+
+    FB.api('/me', 'GET', { "fields": "id,name,email,first_name,last_name" }, function (response) {
+      console.log(response);
+    });
+  }
+
+  $(document).ready(function () {
+    $('#submit').submit(function () {
+      var username = $('#inputEmail');
+      var password = $('#inputPassword');
+      if (username != null && password != null) {
+        $.ajax({
+          url: '/Login"',
+          type: 'post',
+          data: { email: username, password: password },
+          success: function (response) {
+            var msg = "";
+            if (response == 1) {
+              window.location = "/";
+            } else {
+              msg = "Invalid username and password!";
+            }
+            $("#message").html(msg);
+          }
+        });
+      }
+    })
+  })
 </script>
- 

@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Vtc_Freelancer.Controllers
 {
@@ -29,6 +31,16 @@ namespace Vtc_Freelancer.Controllers
         }
         public IActionResult Index()
         {
+            List<Category> listcategory = new List<Category>();
+            listcategory = adminService.GetListCategoryBy();
+            foreach (var item in listcategory)
+            {
+                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+            }
+            if (listcategory != null)
+            {
+                ViewBag.listcategory = listcategory;
+            }
             var userId = HttpContext.Session.GetInt32("UserId");
             return View();
         }
@@ -56,8 +68,12 @@ namespace Vtc_Freelancer.Controllers
         }
 
         [HttpPost("/Login")]
+<<<<<<< HEAD
+        public IActionResult Login(string email, string password)
+=======
 
         public IActionResult Login(string email, string password, string returnUrl)
+>>>>>>> 634ad696f16a1b70c3c333b2c8d6f2e7a8860cdb
         {
             Users user = new Users();
             user = userService.Login(email, password);
@@ -299,7 +315,6 @@ namespace Vtc_Freelancer.Controllers
 
         //     return View(services);
         // }
-
 
     }
 }
