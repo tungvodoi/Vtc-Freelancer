@@ -392,7 +392,8 @@ Textarea, {
   padding-top: 20px;
 }
 
-.Notification-content-sent-mail h3 b, .Notification-content-sent-mail p {
+.Notification-content-sent-mail h3 b,
+.Notification-content-sent-mail p {
   color: black;
 }
 
@@ -449,7 +450,9 @@ Textarea, {
   margin-top: 20px;
 }
 
-.incomp, .comp, .proress {
+.incomp,
+.comp,
+.proress {
   border: 1px solid;
   border-radius: 4px;
   padding: 10px;
@@ -654,8 +657,14 @@ Textarea, {
 }
 
 .top-form-deliver {
+  display: flex;
+  position: relative;
   background-color: rgb(235, 229, 229);
   padding: 15px 5px;
+}
+
+.top-form-deliver h3 {
+  margin-left: 20px;
 }
 
 .flex {
@@ -671,13 +680,9 @@ Textarea, {
   border: 1px solid #d5d4d2;
 }
 
-.top-form-deliver {
-  display: flex;
-  position: relative;
-}
-
 .ignore {
   position: absolute;
+  cursor: pointer;
   right: 1rem;
   border: none;
   font-size: 20px;
@@ -695,6 +700,7 @@ Textarea, {
 .btn-sub {
   padding: 15px;
   color: white;
+  cursor: pointer;
   background-color: #1dbf73;
   font-size: 18px;
   font-weight: 600;

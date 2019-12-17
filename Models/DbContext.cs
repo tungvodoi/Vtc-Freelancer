@@ -113,7 +113,9 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.OrderCreateTime);
                 entity.Property(x => x.OrderStartTime);
                 entity.Property(x => x.ContentRequire);
-                entity.Property(x => x.File);
+                entity.Property(x => x.FileRequire);
+                entity.Property(x => x.FileResult);
+                entity.Property(x => x.ContentReply);
                 entity.Property(x => x.PackageId);
                 entity.Property(x => x.UserId);
                 entity.Property(x => x.ServiceId);

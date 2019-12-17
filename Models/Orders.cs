@@ -14,7 +14,11 @@ namespace Vtc_Freelancer.Models
         public int UserId { get; set; }
         public string ContentRequire { get; set; }
         [Column(TypeName = "text")]
-        public string File { get; set; }
+        public string FileRequire { get; set; }
+        [Column(TypeName = "text")]
+        public string FileResult { get; set; }
+        [Column(TypeName = "text")]
+        public string ContentReply { get; set; }
         public int ServiceId { get; set; }
         [ForeignKey("UserId")]
         public virtual Users Users { get; set; }

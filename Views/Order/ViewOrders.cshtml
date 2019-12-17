@@ -1,12 +1,12 @@
-@model IEnumerable<Vtc_Freelancer.Models.Request>;
+@model IEnumerable<Vtc_Freelancer.Models.Orders>;
     @{
-    ViewData["Title"] = "Manager Request";
+    ViewData["Title"] = "Manager Orders";
     }
 
     <div class="container">
 
         <div class="request-body">
-            <h1 class="mngr-request" style="color: black; font-weight: 300;">Manager Requests</h1>
+            <h1 class="mngr-request" style="color: black; font-weight: 300;">Manager Orders</h1>
             <div class="tab" id="tab-request">
                 <button class="tab-requests active" onclick="OpenGigs(event, 'Active')">ACTIVE</button>
                 <button class="tab-requests" onclick="OpenGigs(event, 'Unapproved')">UNAPPROVED</button>
@@ -21,14 +21,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            @if(@Model != null)
+                            @* @if(@Model != null)
                             {
                                 @foreach (var item in Model)
                                 {
-                                    @if (item.Status == 0)
+                                    @if (item.WorkStatus == 0)
                                     {
                                         <td class="date  height95">
-                                        @item.TimeCreate.ToString("dd/MM/yyyy")
+                                        @item.OrderCreateTime.ToString("dd/MM/yyyy")
                                         </td>
                                         <td class="text-wide">
                                             <p></p>
@@ -45,7 +45,7 @@
                                         </td>
                                     }
                                 }
-                            }
+                            } *@
                         </tr>
                     </tbody>
                 </table>
@@ -60,7 +60,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            @if(@Model != null)
+                            @* @if(@Model != null)
                             {
                                 @foreach (var item in Model)
                                 {
@@ -84,7 +84,7 @@
                                         </td>
                                     }
                                 }
-                            }
+                            } *@
                         </tr>
                     </tbody>
                 </table>

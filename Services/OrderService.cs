@@ -95,7 +95,29 @@ namespace Vtc_Freelancer.Services
                     order.WorkStatus = 1;
                     order.OrderStartTime = DateTime.Now;
                     order.ContentRequire = ContentRequire;
-                    order.File = urlFile;
+                    order.FileRequire = urlFile;
+                    dbContext.Update(order);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+            return false;
+        }
+        public bool DeliverWord(int OrderId, string ContentResult, string urlFile)
+        {
+            Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == OrderId);
+            try
+            {
+                if (order != null)
+                {
+                    order.WorkStatus = 2;
+                    order.ContentReply = ContentResult;
+                    order.FileResult = urlFile;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     return true;
