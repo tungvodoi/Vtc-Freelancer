@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Vtc_Freelancer.Models;
@@ -24,7 +25,7 @@ namespace Vtc_Freelancer.Services
                 req.SubCategory = SubCategory;
                 req.LinkFile = urlFile;
                 req.TimeCreate = DateTime.Now;
-                req.Status = 1;
+                req.Status = 0;
                 req.UserId = UserId;
                 dbContext.Add(req);
                 dbContext.SaveChanges();
@@ -35,6 +36,11 @@ namespace Vtc_Freelancer.Services
                 Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
+        }
+
+        public List<Request> getListRequestByUserId(int userId)
+        {
+            return dbContext.Request.Where(x => x.UserId == userId).ToList();
         }
     }
 }

@@ -51,20 +51,25 @@ namespace Vtc_Freelancer.Controllers
         [HttpGet("/view_requests")]
         public IActionResult ViewRequests()
         {
-            ViewBag.UserName = HttpContext.Session.GetString("UserName");
-            List<Category> listcategory = new List<Category>();
-            listcategory = adminService.GetListCategoryBy();
-            foreach (var item in listcategory)
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
             {
-                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                ViewBag.UserName = users.UserName;
+                List<Request> listRequest = requestService.getListRequestByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+
+                }
+                return View(listRequest);
             }
-            if (listcategory != null)
-            {
-                ViewBag.listcategory = listcategory;
-                return View();
-            }
-            Users users = userService.GetUserByUsername(HttpContext.Session.GetString("UserName"));
-            return View("Request/ViewRequests");
+            return Redirect("/");
         }
 
         [HttpPost("/manager_request")]
