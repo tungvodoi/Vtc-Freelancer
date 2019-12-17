@@ -44,7 +44,7 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
                   <td class="d-inline-block text-truncate" style="width: 50px;">@i</td>
                   <td class="d-inline-block text-truncate" style="width: 237px;">@item.Users.UserName</td>
                   <td class="d-inline-block text-truncate" style="width: 306px;">@item.Service.Title</td>
-                  <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderTime.ToString("dd/MM/yyyy")</td>
+                  <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderCreateTime.ToString("dd/MM/yyyy")</td>
                   @if(item.WorkStatus == 0)
                   {
                     <td class="d-inline-block text-truncate" style="width: 175px;">INCOMPLETE</td>

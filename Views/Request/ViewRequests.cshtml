@@ -8,8 +8,8 @@
         <div class="request-body">
             <h1 class="mngr-request" style="color: black; font-weight: 300;">Manage Requests</h1>
             <div class="tab" id="tab-request">
-                <button class="tab-requests active" onclick="OpenGigs(event, 'Active')">Active</button>
-                <button class="tab-requests" onclick="OpenGigs(event, 'Unapproved')">Unapproved</button>
+                <button class="tab-requests active" onclick="OpenGigs(event, 'Active')">ACTIVE</button>
+                <button class="tab-requests" onclick="OpenGigs(event, 'Unapproved')">UNAPPROVED</button>
             </div>
             <div class="wrapper-table-request" id="Active" style="display: grid;">
                 <table>
@@ -17,7 +17,6 @@
                         <tr>
                             <td>Date</td>
                             <td>Request</td>
-                            <td>Status</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,28 +25,24 @@
                             {
                                 @foreach (var item in Model)
                                 {
-                                <td class="date  height95">
-                                    @item.TimeCreate.ToString("dd/MM/yyyy")
-                                </td>
-                                <td class="text-wide">
-                                    <p></p>
-                                    <div>
-                                        <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
-                                        <div class="info-line">Budget - <span>$@item.Budget</span></div>
-                                    </div>
-                                    <div class="tags-standard tags-white-bg">
-                                        @foreach (var item1 in ViewBag.listcategory)
-                                        {
-                                        <span>@item1.CategoryName</span>
-                                        }
-                                    </div>
-                                </td>
-                                    @if(item.Status == 1)
+                                    @if (item.Status == 0)
                                     {
-                                        <td>DeActivate</td>
-                                    }else
-                                    {
-                                        <td>Active</td>
+                                        <td class="date  height95">
+                                        @item.TimeCreate.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td class="text-wide">
+                                            <p></p>
+                                            <div>
+                                                <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
+                                                <div class="info-line">Budget - <span>$@item.Budget</span></div>
+                                            </div>
+                                            <div class="tags-standard tags-white-bg">
+                                                @foreach (var item1 in ViewBag.listcategory)
+                                                {
+                                                <span>@item1.CategoryName</span>
+                                                }
+                                            </div>
+                                        </td>
                                     }
                                 }
                             }
@@ -61,7 +56,6 @@
                         <tr>
                             <td>Date</td>
                             <td>Request</td>
-                            <td>Status</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,28 +64,24 @@
                             {
                                 @foreach (var item in Model)
                                 {
-                                <td class="date  height95">
-                                    @item.TimeCreate.ToString("dd/MM/yyyy")
-                                </td>
-                                <td class="text-wide">
-                                    <p></p>
-                                    <div>
-                                        <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
-                                        <div class="info-line">Budget - <span>$@item.Budget</span></div>
-                                    </div>
-                                    <div class="tags-standard tags-white-bg">
-                                        @foreach (var item1 in ViewBag.listcategory)
-                                        {
-                                        <span>@item1.CategoryName</span>
-                                        }
-                                    </div>
-                                </td>
-                                    @if(item.Status == 1)
+                                    @if (item.Status == 1)
                                     {
-                                        <td>DeActivate</td>
-                                    }else
-                                    {
-                                        <td>Active</td>
+                                        <td class="date  height95">
+                                            @item.TimeCreate.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td class="text-wide">
+                                            <p></p>
+                                            <div>
+                                                <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
+                                                <div class="info-line">Budget - <span>$@item.Budget</span></div>
+                                            </div>
+                                            <div class="tags-standard tags-white-bg">
+                                                @foreach (var item1 in ViewBag.listcategory)
+                                                {
+                                                <span>@item1.CategoryName</span>
+                                                }
+                                            </div>
+                                        </td>
                                     }
                                 }
                             }
