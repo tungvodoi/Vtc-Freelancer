@@ -244,9 +244,8 @@ namespace Vtc_Freelancer.Controllers
                     Users userads = userService.GetUsersByID(userId);
                     ViewBag.UserName = userads.UserName;
                     ViewBag.userAvatar = userads.Avatar;
-                    //Lay Session lan 2
+
                     ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
-                    // HttpContext.Session.Remove("IsSeller");
                     ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
                 }
                 ViewBag.UserName = HttpContext.Session.GetString("UserName");
@@ -280,7 +279,7 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.ImageService = images;
                 ViewBag.serviceDetailUser = users;
                 // ViewBag.UserName = users.UserName;
-                ViewBag.IsSeller = users.IsSeller;
+                // ViewBag.IsSeller = users.IsSeller;
                 return View();
             }
         }
