@@ -16,9 +16,11 @@ namespace Vtc_Freelancer.Controllers
         private UserService userService;
         private AdminService adminService;
         private OrderService orderService;
+        private GigService gigService;
         private readonly ILogger<HomeController> _logger;
-        public HomeController(UserService userService, AdminService adminService, OrderService orderService, ILogger<HomeController> logger)
+        public HomeController(GigService gigService, UserService userService, AdminService adminService, OrderService orderService, ILogger<HomeController> logger)
         {
+            this.gigService = gigService;
             this._logger = logger;
             this.orderService = orderService;
             this.userService = userService;
@@ -61,7 +63,10 @@ namespace Vtc_Freelancer.Controllers
             foreach (var item in services)
             {
                 item.ListImage = adminService.GetListImageService(item.ServiceId);
+                List<Package> ListPackage = gigService.GetPackageByServiceID(item.ServiceId);
+                item.listPackage = ListPackage;
             }
+
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId != null)
             {
@@ -112,6 +117,8 @@ namespace Vtc_Freelancer.Controllers
             foreach (var item in services)
             {
                 item.ListImage = adminService.GetListImageService(item.ServiceId);
+                List<Package> ListPackage = gigService.GetPackageByServiceID(item.ServiceId);
+                item.listPackage = ListPackage;
             }
             ViewBag.ListServicesSearch = services;
             // if (page == null) page = 1;

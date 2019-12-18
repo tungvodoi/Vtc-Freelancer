@@ -49,16 +49,12 @@
                 <ul class="ul-sidebars">
                     <li class="li-sidebars">Home</li>
                     <li class="li-sidebars">Inbox</li>
-                    <li class="li-sidebars">Dashboard</li>
-                    <li class="li-sidebars">Saved</li>
-                    <li class="li-sidebars">Browse Categories</li>
-
                     <br>
                     <div class="content-sidebars-wrapper">
                         <li class="li-sidebars"><b>Buying</b></li>
                         <hr>
                         <li class="li-sidebars">Manage Requests</li>
-                        <li class="li-sidebars">Post a Request</li>
+                        <li class="li-sidebars"  onclick="window.location.href = '/manager_request'">Post a Request</li>
                         <br>
                         <li class="li-sidebars"><b>Selling</b></li>
 
@@ -125,12 +121,21 @@
                                 {
                                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
                                 }
+                                <div class="dropdown-profile">
+                                    <ul class="ul-dropdown-profile">
+                                        <li><a href="/@ViewBag.UserName">Profile</a></li>
+                                        <li><a href="#">Manager Request</a></li>
+                                        <li><a href="#"  onclick="window.location.href = '/manager_request'">Post a Request</a></li>
+                                        <li><a href="#">Setting</a></li>
+                                        <li><a href="/Logout" ><b>Logout</b></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </a>
                     </li>
                     
                     <li>
-                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
+                        
                     </li>
                     }
                     else
@@ -303,10 +308,10 @@
                                 <a href="#">Trust & Safety</a>
                             </li>
                             <li class="li-footer-content">
-                                <a href="">Selling on Fiverr</a>
+                                <a href="">Selling on  VTC Freelancer</a>
                             </li>
                             <li class="li-footer-content">
-                                <a href="">Buying on Fiverr</a>
+                                <a href="">Buying on  VTC Freelancer</a>
                             </li>
                         </ul>
                     </div>
@@ -337,13 +342,11 @@
                         </ul>
                     </div>
                     <div class="footer-content">
-                        <button class="btn-footer-link">More From Fiverr</button>
+                        <button class="btn-footer-link">More From VTC Freelancer</button>
                         <ul class="ul-footer-link">
+                         
                             <li class="li-footer-content">
-                                <a href="#">Fiverr Pro</a>
-                            </li>
-                            <li class="li-footer-content">
-                                <a href="#">Fiverr Studios</a>
+                                <a href="#"> VTC Freelancer Studios</a>
                             </li>
                             <li class="li-footer-content">
                                 <a href="">Get Inspired</a>
@@ -362,7 +365,7 @@
                                 <small>Online Courses</small>
                             </li>
                             <li class="li-footer-content">
-                                <a href="">Fiverr Elevate</a><br />
+                                <a href=""> VTC Freelancer Elevate</a><br />
                                 <small>Exclusive Benefits</small>
                             </li>
                         </ul>

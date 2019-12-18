@@ -32,7 +32,6 @@ namespace Vtc_Freelancer.Controllers
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             int? userId = HttpContext.Session.GetInt32("UserId");
-
             if (userId != null)
             {
                 Users userads = userService.GetUsersByID(userId);
@@ -40,6 +39,10 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.userAvatar = userads.Avatar;
                 //Lay Session lan 2
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+                if (ViewBag.IsSeller < 1)
+                {
+                    return Redirect("/");
+                }
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
             }
@@ -58,6 +61,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult ProfileSeller(string username)
         {
             ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             foreach (var item in listcategory)
@@ -96,18 +100,17 @@ namespace Vtc_Freelancer.Controllers
 
             if (seller != null)
             {
-
-
                 ViewBag.sellerprofile = seller;
                 List<Service> services = new List<Service>();
                 services = gigService.GetServicesBySellerId(seller.SellerId);
                 foreach (var item in services)
                 {
                     item.ListImage = adminService.GetListImageService(item.ServiceId);
-                    ViewBag.listServiceProfile = services;
-
-                    return View(services);
+                    List<Package> ListPackage = gigService.GetPackageByServiceID(item.ServiceId);
+                    item.listPackage = ListPackage;
                 }
+                ViewBag.listServiceProfile = services;
+                return View(services);
             }
 
             return View();
