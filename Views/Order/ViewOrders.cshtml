@@ -1,91 +1,258 @@
 @model IEnumerable<Vtc_Freelancer.Models.Orders>;
     @{
     ViewData["Title"] = "Manager Orders";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
     }
 
     <div class="container">
 
-        <div class="request-body">
-            <h1 class="mngr-request" style="color: black; font-weight: 300;">Manager Orders</h1>
+        <div class="order-body">
+            <h1 class="mngr-request" style="color: black; font-weight: 300;">Manager Sales</h1>
             <div class="tab" id="tab-request">
-                <button class="tab-requests active" onclick="OpenGigs(event, 'Active')">ACTIVE</button>
-                <button class="tab-requests" onclick="OpenGigs(event, 'Unapproved')">UNAPPROVED</button>
+                <button class="tab-requests active" onclick="OpenGigs(event, 'New')">NEW</button>
+                <button class="tab-requests" onclick="OpenGigs(event, 'Active')">ACTIVE</button>
+                <button class="tab-requests" onclick="OpenGigs(event, 'Delivered')">DELIVERED</button>
+                <button class="tab-requests" onclick="OpenGigs(event, 'Completed')">COMPLETED</button>
+                <button class="tab-requests" onclick="OpenGigs(event, 'Cancelled')">CANCELLED</button>
             </div>
-            <div class="wrapper-table-request" id="Active" style="display: grid;">
+            <div class="wrapper-table-request" id="New" style="display: grid;">
                 <table>
                     <thead>
                         <tr>
-                            <td>Date</td>
-                            <td>Request</td>
+                            <td>BUYER</td>
+                            <td>GIG</td>
+                            <td>DUE ON</td>
+                            <td>TOTAL</td>
+                            <td>NOTE</td>
+                            <td>STATUS</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @* @if(@Model != null)
-                            {
-                                @foreach (var item in Model)
-                                {
-                                    @if (item.WorkStatus == 0)
-                                    {
-                                        <td class="date  height95">
-                                        @item.OrderCreateTime.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td class="text-wide">
-                                            <p></p>
-                                            <div>
-                                                <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
-                                                <div class="info-line">Budget - <span>$@item.Budget</span></div>
-                                            </div>
-                                            <div class="tags-standard tags-white-bg">
-                                                @foreach (var item1 in ViewBag.listcategory)
-                                                {
-                                                <span>@item1.CategoryName</span>
-                                                }
-                                            </div>
-                                        </td>
-                                    }
-                                }
-                            } *@
+
+                        @if(@Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.WorkStatus == 0)
+                        {
+                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date  height95">
+                                @item.Users.UserName
+                            </td>
+                            <td class="text-wide">
+                                @item.Service.Title
+                            </td>
+                            <td class="text-wide">
+                                @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                $@(item.Package.Price * item.Quantity)
+                            </td>
+                            <td class="text-wide">
+                                @item.ContentRequire
+                            </td>
+                            <td class="text-wide">
+                                ACTIVE
+                            </td>
                         </tr>
+                        }
+                        }
+                        }
+
                     </tbody>
                 </table>
             </div>
-            <div class="wrapper-table-request" id="Unapproved">
+            <div class="wrapper-table-request" id="Active">
                 <table>
                     <thead>
                         <tr>
-                            <td>Date</td>
-                            <td>Request</td>
+                            <td>BUYER</td>
+                            <td>GIG</td>
+                            <td>DUE ON</td>
+                            <td>TOTAL</td>
+                            <td>NOTE</td>
+                            <td>STATUS</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @* @if(@Model != null)
-                            {
-                                @foreach (var item in Model)
-                                {
-                                    @if (item.Status == 1)
-                                    {
-                                        <td class="date  height95">
-                                            @item.TimeCreate.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td class="text-wide">
-                                            <p></p>
-                                            <div>
-                                                <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
-                                                <div class="info-line">Budget - <span>$@item.Budget</span></div>
-                                            </div>
-                                            <div class="tags-standard tags-white-bg">
-                                                @foreach (var item1 in ViewBag.listcategory)
-                                                {
-                                                <span>@item1.CategoryName</span>
-                                                }
-                                            </div>
-                                        </td>
-                                    }
-                                }
-                            } *@
+
+                        @if(@Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.WorkStatus == 1)
+                        {
+                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date  height95">
+                                @item.Users.UserName
+                            </td>
+                            <td class="text-wide">
+                                @item.Service.Title
+                            </td>
+                            <td class="text-wide">
+                                @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                $@(item.Package.Price * item.Quantity)
+                            </td>
+                            <td class="text-wide">
+                                @item.ContentRequire
+                            </td>
+                            <td class="text-wide">
+                                IN PROGRESS
+                            </td>
                         </tr>
+                        }
+                        }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="wrapper-table-request" id="Delivered">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>BUYER</td>
+                            <td>GIG</td>
+                            <td>DUE ON</td>
+                            <td>DELIVERED AT</td>
+                            <td>TOTAL</td>
+                            <td>NOTE</td>
+                            <td>STATUS</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(@Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.WorkStatus == 2)
+                        {
+                            <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                                <td class="date  height95">
+                                    @item.Users.UserName
+                                </td>
+                                <td class="text-wide">
+                                    @item.Service.Title
+                                </td>
+                                <td class="text-wide">
+                                    @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-wide">
+                                    @item.OrderDeliveredTime.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-wide">
+                                    $@(item.Package.Price * item.Quantity)
+                                </td>
+                                <td class="text-wide">
+                                    @item.ContentRequire
+                                </td>
+                                <td class="text-wide">
+                                    DELIVERED
+                                </td>
+                            </tr>
+                        }
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="wrapper-table-request" id="Completed">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>BUYER</td>
+                            <td>GIG</td>
+                            <td>DUE ON</td>
+                            <td>DELIVERED AT</td>
+                            <td>TOTAL</td>
+                            <td>NOTE</td>
+                            <td>STATUS</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if(@Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.WorkStatus == 3)
+                        {
+                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date  height95">
+                                @item.Users.UserName
+                            </td>
+                            <td class="text-wide">
+                                @item.Service.Title
+                            </td>
+                            <td class="text-wide">
+                                @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                @item.OrderDeliveredTime.ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                $@(item.Package.Price * item.Quantity)
+                            </td>
+                            <td class="text-wide">
+                                @item.ContentRequire
+                            </td>
+                            <td class="text-wide">
+                                COMPLETED
+                            </td>
+                        </tr>
+                        }
+                        }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="wrapper-table-request" id="Cancelled">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>BUYER</td>
+                            <td>GIG</td>
+                            <td>DUE ON</td>
+                            <td>TOTAL</td>
+                            <td>NOTE</td>
+                            <td>STATUS</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if(@Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.WorkStatus == 5)
+                        {
+                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date  height95">
+                                @item.Users.UserName
+                            </td>
+                            <td class="text-wide">
+                                @item.Service.Title
+                            </td>
+                            <td class="text-wide">
+                                @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                $@(item.Package.Price * item.Quantity)
+                            </td>
+                            <td class="text-wide">
+                                @item.ContentRequire
+                            </td>
+                            <td class="text-wide">
+                                CANCELED
+                            </td>
+                        </tr>
+                        }
+                        }
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -105,6 +272,5 @@
             }
             document.getElementById(typeGig).style.display = "grid";
             event.currentTarget.className += " active";
-
         }
     </script>

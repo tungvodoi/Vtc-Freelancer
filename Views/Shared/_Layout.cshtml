@@ -158,14 +158,15 @@
                 <div id="tip" class="tip-orders">
                     <div class="Triangular"></div>
                     <div class="list-state">
-                            @if(ViewBag.ListOrder != null)
+                            @if(ViewBag.ListOrder != null && ViewBag.ListOrder.Count != 0)
                             {
                                 <ul style="margin: 0px">
                                 @foreach (var item in ViewBag.ListOrder)
                                 {
-                                    @if (@item.WorkStatus == 0)
+                                    @switch (@item.WorkStatus)
                                     {
-                                        <a href="/Order/Requirement?orderId=@item.OrderId">
+                                        case 0:
+                                            <a href="/Order/Requirement?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -177,10 +178,9 @@
                                                 <span class="float-right incomp">INCOMPLETE</span>
                                             </li>
                                         </a>
-                                    }
-                                    else if (@item.WorkStatus == 1)
-                                    {
-                                        <a href="/Order?orderId=@item.OrderId">
+                                            break;
+                                        case 1:
+                                            <a href="/Order?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -189,13 +189,26 @@
                                                     break;
                                                 }
                                                 <h4>@item.Service.Title</h4>
-                                                <span class="float-right proress">IN PRORESS</span>
+                                                <span class="float-right progress">IN PROGRESS</span>
                                             </li>
                                         </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="/Order?orderId=@item.OrderId">
+                                            break;
+                                        case 2:
+                                            <a href="/Order?orderId=@item.OrderId">
+                                            <li>
+                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                                { 
+                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
+                                                    width="60px" height="35px" style="margin-right: 1rem;">
+                                                    break;
+                                                }
+                                                <h4>@item.Service.Title</h4>
+                                                <span class="float-right deli">DELIVERED</span>
+                                            </li>
+                                        </a>
+                                            break;
+                                        case 3:
+                                            <a href="/Order?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -207,6 +220,21 @@
                                                 <span class="float-right comp">COMPLETE</span>
                                             </li>
                                         </a>
+                                            break;
+                                        default:
+                                            <a href="/Order?orderId=@item.OrderId">
+                                            <li>
+                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                                { 
+                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
+                                                    width="60px" height="35px" style="margin-right: 1rem;">
+                                                    break;
+                                                }
+                                                <h4>@item.Service.Title</h4>
+                                                <span class="float-right cancel">CANCEL</span>
+                                            </li>
+                                        </a>
+                                            break;
                                     }
                                 }
                                 </ul>

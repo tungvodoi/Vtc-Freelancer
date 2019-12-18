@@ -452,7 +452,9 @@ Textarea, {
 
 .incomp,
 .comp,
-.proress {
+.progress,
+.deli,
+.cancel {
   border: 1px solid;
   border-radius: 4px;
   padding: 10px;
@@ -469,8 +471,16 @@ Textarea, {
   background-color: rgb(45, 233, 45);
 }
 
-.proress {
+.progress {
   background-color: rgb(46, 46, 207);
+}
+
+.deli {
+  background-color: rgb(247, 0, 255);
+}
+
+.cancel {
+  background-color: rgb(255, 0, 0);
 }
 
 .button-start-order {
@@ -714,4 +724,11 @@ Textarea, {
 
 .form-hidden-form {
   padding: 1rem 1rem 4rem 1rem;
+}
+
+/* View Orders in Seller */
+
+.order-body {
+  min-height: 500px;
+  margin: 3rem auto;
 }

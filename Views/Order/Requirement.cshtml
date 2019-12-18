@@ -95,17 +95,23 @@ Layout = "~/Views/Shared/_Order.cshtml";
       <div class="detail-order">
         <div>
           <span>Status</span>
-          @if (@Model.WorkStatus == 0)
+          @switch (@Model.WorkStatus)
           {
-            <span class="float-right incomp">INCOMPLETE</span>
-          }
-          else if (@Model.WorkStatus == 1)
-          {
-            <span class="float-right proress">IN PRORESS</span>
-          }
-          else
-          {
-            <span class="float-right comp">COMPLETE</span>
+              case 0:
+                <span class="float-right incomp">INCOMPLETE</span>
+                break;
+                case 1:
+                <span class="float-right proress">IN PRORESS</span>
+                break;
+                case 2:
+                <span class="float-right deli">DELIVERED</span>
+                break;
+                case 3:
+                <span class="float-right comp">COMPLETE</span>
+                break;
+                default:
+                <span class="float-right cancel">CANCEL</span>
+                break;
           }
         </div>
         <div>

@@ -69,7 +69,6 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.UserName = userads.UserName;
                 ViewBag.userAvatar = userads.Avatar;
                 ViewBag.ListOrder = orderService.GetListOrderbyUserId(userId);
-
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");

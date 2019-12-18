@@ -90,6 +90,11 @@
 .wrapper-table-request table tbody tr {
   background-color: #fff;
   border: 1px #e5e5e5 solid;
+  cursor: pointer;
+}
+
+.wrapper-table-request table tbody tr:hover {
+  background-color: rgb(223, 223, 223);
 }
 
 .wrapper-table-request table td.date.height95,

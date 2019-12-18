@@ -10,10 +10,12 @@ namespace Vtc_Freelancer.Services
     {
         private MyDbContext dbContext;
         private AdminService adminService;
-        public OrderService(MyDbContext dbContext, AdminService adminService)
+        private UserService userService;
+        public OrderService(MyDbContext dbContext, AdminService adminService, UserService userService)
         {
             this.dbContext = dbContext;
             this.adminService = adminService;
+            this.userService = userService;
         }
 
         public Package GetPackageByPackageId(int PackageId)
@@ -24,7 +26,7 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Service.FirstOrDefault(x => x.ServiceId == ServiceId);
         }
-        public Seller GetSellerNameBySellerId(int SellerId)
+        public Seller GetSellerBySellerId(int SellerId)
         {
             Seller seller = dbContext.Seller.Include(x => x.User).FirstOrDefault(x => x.SellerId == SellerId);
             return seller;
@@ -118,6 +120,7 @@ namespace Vtc_Freelancer.Services
                     order.WorkStatus = 2;
                     order.ContentReply = ContentResult;
                     order.FileResult = urlFile;
+                    order.OrderDeliveredTime = DateTime.Now;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     return true;
@@ -136,6 +139,18 @@ namespace Vtc_Freelancer.Services
             List<Orders> listOrder = dbContext.Orders.Where(x => x.UserId == userId).ToList();
             foreach (var item in listOrder)
             {
+                item.Service = GetServiceByServiceId(item.ServiceId);
+                item.Package = GetPackageByPackageId(item.PackageId);
+                item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
+            }
+            return listOrder;
+        }
+        public List<Orders> GetListOrderbyUserId(int userId)
+        {
+            List<Orders> listOrder = dbContext.Orders.Include(x => x.Service).ThenInclude(x => x.Seller).ThenInclude(x => x.User).Where(x => x.Service.Seller.UserId == userId).ToList();
+            foreach (var item in listOrder)
+            {
+                item.Users = userService.GetUserByUserId(item.UserId);
                 item.Service = GetServiceByServiceId(item.ServiceId);
                 item.Package = GetPackageByPackageId(item.PackageId);
                 item.Service.ListImage = adminService.GetListImageService(item.ServiceId);

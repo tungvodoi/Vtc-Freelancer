@@ -209,22 +209,25 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.listcategory = listcategory;
                 }
                 int? UserId = HttpContext.Session.GetInt32("UserId");
-                if (UserId == order.UserId)
+                Users userads = userService.GetUsersByID(UserId);
+                if (userads != null)
                 {
                     order.Service = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Package = orderService.GetPackageByPackageId(order.PackageId);
                     order.Users = userService.GetUserByUserId(order.UserId);
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
-                    order.Service.Seller = orderService.GetSellerNameBySellerId(se.SellerId);
-                    Users userads = userService.GetUsersByID(UserId);
-                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
-                    ViewBag.UserName = userads.UserName;
-                    ViewBag.UserId = userads.UserId;
-                    ViewBag.userAvatar = userads.Avatar;
-                    ViewBag.IsSeller = userads.IsSeller;
-                    ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
-                    return View(order);
+                    order.Service.Seller = orderService.GetSellerBySellerId(se.SellerId);
+                    if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
+                    {
+                        ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
+                        ViewBag.UserName = userads.UserName;
+                        ViewBag.UserId = userads.UserId;
+                        ViewBag.userAvatar = userads.Avatar;
+                        ViewBag.IsSeller = userads.IsSeller;
+                        ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
+                        return View(order);
+                    }
                 }
             }
             return Redirect("/");
@@ -284,6 +287,8 @@ namespace Vtc_Freelancer.Controllers
             if (users != null)
             {
                 ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
                 List<Orders> listOrders = orderService.GetListOrderbyUserId(users.UserId);
                 List<Category> listcategory = new List<Category>();
                 listcategory = adminService.GetListCategoryBy();

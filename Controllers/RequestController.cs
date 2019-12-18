@@ -32,7 +32,7 @@ namespace Vtc_Freelancer.Controllers
             this.orderService = orderService;
         }
         [Authentication]
-        [HttpGet("/manager_request")]
+        [HttpGet("/create_request")]
         public IActionResult FormInputRequest()
         {
             Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
@@ -54,30 +54,7 @@ namespace Vtc_Freelancer.Controllers
             return View("Request");
         }
 
-        [HttpGet("/manager_requests")]
-        public IActionResult ViewRequests()
-        {
-            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
-            if (users != null)
-            {
-                ViewBag.UserName = users.UserName;
-                List<Request> listRequest = requestService.getListRequestByUserId(users.UserId);
-                List<Category> listcategory = new List<Category>();
-                listcategory = adminService.GetListCategoryBy();
-                foreach (var item in listcategory)
-                {
-                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
-                }
-                if (listcategory != null)
-                {
-                    ViewBag.listcategory = listcategory;
-                }
-                return View(listRequest);
-            }
-            return Redirect("/");
-        }
-
-        [HttpPost("/manager_request")]
+        [HttpPost("/create_request")]
         public IActionResult CreateRequest(string inputRequest, string category, string SubCategory, string inputDeliveredTime, double inputBudget, string name)
         {
             string urlFile = "";
@@ -125,6 +102,31 @@ namespace Vtc_Freelancer.Controllers
             {
                 return Redirect("/manager_request");
             }
+        }
+
+        [HttpGet("/manager_requests")]
+        public IActionResult ViewRequests()
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                List<Request> listRequest = requestService.getListRequestByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View(listRequest);
+            }
+            return Redirect("/");
         }
     }
 }
