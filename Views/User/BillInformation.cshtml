@@ -1,0 +1,45 @@
+@{
+ViewData["Title"] = "Login";
+Layout = "~/Views/Shared/_Login.cshtml";
+}
+<div class="wrapper-become-seller container-inner">
+    <form method="POST" action="/BillInformation" class="form-become-seller">
+        <h5>
+            Bill Information VTC Freelancer
+        </h5>
+        <h3 style="color:Green" id="error"> @ViewBag.Error</h3>
+        <br>
+        <input type="text" name="FullName" class="form-control" placeholder="FullName..." required />
+        <br>
+       
+        <br>
+       <select name="Country" class="form-control">
+         <option name="Vietnam">Vietnam</option>
+         <option name="Japan">Japan</option>
+         <option name="China">China</option>
+         <option name="Korea">Korea</option>
+      </select>
+        <br>
+        <br>
+        <input type="text" name="Address" class="form-control" placeholder="Address"
+            required />
+        <br>
+
+        <br>
+        <button id="but" class="btn-success">Save Change</button>
+       
+    </form>
+</div>
+<script>
+    function Checkpass() {
+  var a = document.getElementById("p1").value;
+  var b = document.getElementById("p2").value;
+  if (a !== b) {
+    document.getElementById("error").innerHTML = "Invalid password";
+    document.getElementById("but").disabled = true;
+  } else {
+    document.getElementById("error").innerHTML = "Valid Password";
+    document.getElementById("but").disabled = false;
+  }
+}
+</script>

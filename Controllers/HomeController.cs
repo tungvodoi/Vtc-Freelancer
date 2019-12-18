@@ -42,7 +42,6 @@ namespace Vtc_Freelancer.Controllers
 
             return View();
         }
-        // [Authentication]
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("UserName") == null)
@@ -72,6 +71,8 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
+            }else{
+                return Redirect("/HomePage");
             }
 
             if (listcategory != null)
