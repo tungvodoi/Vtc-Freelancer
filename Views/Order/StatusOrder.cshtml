@@ -1,25 +1,15 @@
 @model Orders;
 @{
 ViewData["Title"] = "Requirement";
+@if(Model.Service.Seller.User.UserId == ViewBag.UserId)
+{
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+else
+{
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="hidden-form" id="hidden-form">
-  <div class="top-form-deliver">
-    <h3>Deliver Completed Your Work</h3>
-    <button class="ignore" onclick="openHidden()">✖</button>
-  </div>
-  <form action="" method="post" class="form-hidden-form">
-    <div class="flex">
-
-      <input type="file" name="file" id="file" class="inputfile" />
-
-      <input type="file" name="file" id="file1" class="inputfile" />
-
-    </div>
-    <textarea name="" id="textarea-delever" placeholder="Describe your delevery in detail..."></textarea>
-    <button class="btn-sub right-bo">Delever Work </button>
-  </form>
-</div>
+}
 <div class="nav-step container">
   <nav>
     <ul class="ul-step-order">
@@ -42,12 +32,31 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </li>
 
       </div>
+      @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
+      {
       <div class="order-status  right-top">
         <li class="wrapper-li-step flex-end">
           <button class="btn-sub" id="btn-sub-right" onclick="openHidden()">Deliver Your Order</button>
         </li>
       </div>
+      <div class="hidden-form" id="hidden-form">
+        <div class="top-form-deliver">
+          <h3>Deliver Completed Your Work</h3>
+          <button class="ignore" onclick="openHidden()">✖</button>
+        </div>
+        <form action="/DeleverWork?OrderId=@Model.OrderId" method="post" class="form-hidden-form"
+          enctype="multipart/form-data">
+          <div class="flex">
 
+            <input type="file" name="files" id="file" class="inputfile" multiple />
+
+          </div>
+          <textarea name="contentResult" id="textarea-delever"
+            placeholder="Describe your delevery in detail..."></textarea>
+          <button class="btn-sub right-bo">Deliver Work</button>
+        </form>
+      </div>
+      }
     </ul>
   </nav>
 </div>
@@ -72,6 +81,47 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             (@Model.Package.Price * Model.Quantity * 20/100))</h1>
         </div>
     </div>
+    @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
+    {
+      <div class="border-content container-order" style="margin-top: 20px">
+        <div class="wrapper-table-request" style="display: Grid; width : 100%">
+          <table>
+              <thead>
+                  <tr>
+                      <td style="width: 450px">Item</td>
+                      <td>Quantity</td>
+                      <td>Duration</td>
+                      <td>Amount</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="date  height95" style="width: 450px">
+                        <span class="span-detail-order">✔ </span> @Model.Package.NumberRevision Revision
+                      </td>
+                      <td class="text-wide">
+                        @Model.Quantity
+                      </td>
+                      <td class="text-wide">
+                        @if(Model.Package.DeliveryTime > 1)
+                        {
+                          <p>@Model.Package.DeliveryTime Days</p>
+                        }
+                        else
+                        {
+                          <p>@Model.Package.DeliveryTime Day</p>
+                        }
+                      </td>
+                      <td class="text-wide">
+                          $@Model.Package.Price
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <p style="margin-left: auto;"><b>Total: $@(Model.Quantity * Model.Package.Price)</b></p>
+        </div>
+      </div>
+    }
   </div>
   <div class="left-content">
     <div class="wrapper-process-order-content">
@@ -97,10 +147,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
       <div class="FAQs-order">
         <p>Something unclear?</p>
-        <a href="">Check out our FAQs</a>
+        <a href="#">Check out our FAQs</a>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <script>

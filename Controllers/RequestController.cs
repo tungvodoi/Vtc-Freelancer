@@ -21,19 +21,25 @@ namespace Vtc_Freelancer.Controllers
         private RequestService requestService;
         private AdminService adminService;
         private UserService userService;
-        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, UserService userService, IHostingEnvironment IHostingEnvironment)
+        private OrderService orderService;
+        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, UserService userService, OrderService orderService, IHostingEnvironment IHostingEnvironment)
         {
             this.userService = userService;
             this.dbContext = dbContext;
             this.requestService = requestService;
             this.adminService = adminService;
             this._environment = IHostingEnvironment;
+            this.orderService = orderService;
         }
         [Authentication]
-        [HttpGet("/manager_request")]
+        [HttpGet("/create_request")]
         public IActionResult FormInputRequest()
         {
-            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            ViewBag.UserName = users.UserName;
+            ViewBag.userAvatar = users.Avatar;
+            ViewBag.IsSeller = users.IsSeller;
+            ViewBag.ListOrder = orderService.GetListOrderbyUserId(users.UserId);
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             foreach (var item in listcategory)
@@ -48,26 +54,7 @@ namespace Vtc_Freelancer.Controllers
             return View("Request");
         }
 
-        [HttpGet("/view_requests")]
-        public IActionResult ViewRequests()
-        {
-            ViewBag.UserName = HttpContext.Session.GetString("UserName");
-            List<Category> listcategory = new List<Category>();
-            listcategory = adminService.GetListCategoryBy();
-            foreach (var item in listcategory)
-            {
-                item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
-            }
-            if (listcategory != null)
-            {
-                ViewBag.listcategory = listcategory;
-                return View();
-            }
-            Users users = userService.GetUserByUsername(HttpContext.Session.GetString("UserName"));
-            return View("Request/ViewRequests");
-        }
-
-        [HttpPost("/manager_request")]
+        [HttpPost("/create_request")]
         public IActionResult CreateRequest(string inputRequest, string category, string SubCategory, string inputDeliveredTime, double inputBudget, string name)
         {
             string urlFile = "";
@@ -115,6 +102,31 @@ namespace Vtc_Freelancer.Controllers
             {
                 return Redirect("/manager_request");
             }
+        }
+
+        [HttpGet("/manager_requests")]
+        public IActionResult ViewRequests()
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                List<Request> listRequest = requestService.getListRequestByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View(listRequest);
+            }
+            return Redirect("/");
         }
     }
 }

@@ -209,22 +209,98 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.listcategory = listcategory;
                 }
                 int? UserId = HttpContext.Session.GetInt32("UserId");
-                if (UserId == order.UserId)
+                Users userads = userService.GetUsersByID(UserId);
+                if (userads != null)
                 {
                     order.Service = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Package = orderService.GetPackageByPackageId(order.PackageId);
                     order.Users = userService.GetUserByUserId(order.UserId);
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
-                    order.Service.Seller = orderService.GetSellerNameBySellerId(se.SellerId);
-                    Users userads = userService.GetUsersByID(UserId);
-                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
-                    ViewBag.UserName = userads.UserName;
-                    ViewBag.userAvatar = userads.Avatar;
-                    ViewBag.IsSeller = userads.IsSeller;
-                    ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
-                    return View(order);
+                    order.Service.Seller = orderService.GetSellerBySellerId(se.SellerId);
+                    if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
+                    {
+                        ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
+                        ViewBag.UserName = userads.UserName;
+                        ViewBag.UserId = userads.UserId;
+                        ViewBag.userAvatar = userads.Avatar;
+                        ViewBag.IsSeller = userads.IsSeller;
+                        ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
+                        return View(order);
+                    }
                 }
+            }
+            return Redirect("/");
+        }
+
+        [HttpPost("/DeleverWork")]
+        public IActionResult DeleverWork(int OrderId, string contentResult, string name)
+        {
+            string urlFile = "";
+            var newFileName = string.Empty;
+
+            if (HttpContext.Request.Form.Files != null)
+            {
+                var fileName = string.Empty;
+                string PathDB = string.Empty;
+                var files = HttpContext.Request.Form.Files;
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        //Assigning Unique Filename (Guid)
+                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                        //Getting file Extension
+                        var FileExtension = Path.GetExtension(fileName);
+
+                        // concating  FileName + FileExtension
+                        newFileName = myUniqueFileName + FileExtension;
+
+                        // Combines two strings into a path.
+                        fileName = Path.Combine(_environment.WebRootPath, "FileResult/") + $@"\{newFileName}";
+
+                        // if you want to store path of folder in database
+                        urlFile = "FileResult/" + newFileName;
+
+                        using (FileStream fs = System.IO.File.Create(fileName))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
+                    }
+                }
+            }
+            if (orderService.DeliverWord(OrderId, contentResult, urlFile))
+            {
+                return Redirect("/order?orderId=" + OrderId);
+            }
+            return Redirect("/");
+        }
+
+        [HttpGet("/manager_orders")]
+        public IActionResult ViewOrders()
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                List<Orders> listOrders = orderService.GetListOrderbyUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View(listOrders);
             }
             return Redirect("/");
         }

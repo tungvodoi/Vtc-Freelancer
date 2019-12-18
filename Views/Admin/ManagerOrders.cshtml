@@ -44,17 +44,24 @@ Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
                   <td class="d-inline-block text-truncate" style="width: 50px;">@i</td>
                   <td class="d-inline-block text-truncate" style="width: 237px;">@item.Users.UserName</td>
                   <td class="d-inline-block text-truncate" style="width: 306px;">@item.Service.Title</td>
-                  <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderTime.ToString("dd/MM/yyyy")</td>
-                  @if(item.WorkStatus == 0)
+                  <td class="d-inline-block text-truncate" style="width: 266px;">@item.OrderCreateTime.ToString("dd/MM/yyyy")</td>
+                  @switch (@Model.WorkStatus)
                   {
-                    <td class="d-inline-block text-truncate" style="width: 175px;">INCOMPLETE</td>
-                  }else if(item.WorkStatus == 1)
-                  {
-                    <td class="d-inline-block text-truncate" style="width: 175px;">IN PRORESS</td>
-                  }
-                  else
-                  {
-                    <td class="d-inline-block text-truncate" style="width: 175px;">COMPLETE</td>
+                      case 0:
+                        <td class="d-inline-block text-truncate" style="width: 175px;">INCOMPLETE</td>
+                        break;
+                        case 1:
+                        <td class="d-inline-block text-truncate" style="width: 175px;">IN PROGRESS</td>
+                        break;
+                        case 2:
+                        <td class="d-inline-block text-truncate" style="width: 175px;">DELIVERED</td>
+                        break;
+                        case 3:
+                        <td class="d-inline-block text-truncate" style="width: 175px;">COMPLETE</td>
+                        break;
+                        default:
+                        <td class="d-inline-block text-truncate" style="width: 175px;">CANCEL</td>
+                        break;
                   }
                 </tr>
               }
