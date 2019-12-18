@@ -136,6 +136,14 @@ ul {
 .header form {
   width: 366px;
   display: flex;
+  position: relative;
+}
+
+.header form .fa-search {
+  position: absolute;
+  top: 49%;
+  left: 8px;
+  transform: translateY(-50%);
 }
 
 .header form input {
