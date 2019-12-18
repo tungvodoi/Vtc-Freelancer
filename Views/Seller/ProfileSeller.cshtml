@@ -6,12 +6,17 @@ ViewData["Title"] = "EditProfile";
     }
     else
     {
+      
         @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
         {
             Layout = "~/Views/Shared/_SellerLayout.cshtml";
         }
         else{
             Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        @if(ViewBag.IsSeller == 0)
+        {
+             Layout = "~/Views/Shared/_Layout.cshtml";
         }
     }
 

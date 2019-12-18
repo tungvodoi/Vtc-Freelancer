@@ -36,8 +36,7 @@
   border: 1px solid #d5d4d2;
 }
 
-.body-service-detail {
-}
+.body-service-detail {}
 
 .flex {
   display: flex;
@@ -208,4 +207,8 @@
 .btn-slide {
   border: none;
   background-color: transparent;
+}
+
+.img-profile {
+  margin-right: 10px;
 }

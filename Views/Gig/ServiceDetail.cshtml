@@ -10,7 +10,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="bars-service-detail container">
     <div class="bars-item">
-        <a href=""
+        <a href="/Gig/Report"
             onclick="SetServiceIdToModal(@ViewBag.serviceDetail.ServiceId, @ViewBag.serviceDetailUser.UserId)">
             <i style="color: black;" class="fa fa-flag"></i>
         </a>
@@ -30,11 +30,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="contain-username">
                 @if(ViewBag.serviceDetailUser.Avatar == null)
                 {
-                <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile"
+                        src="~/Images/avatardefault.png" alt="avatar"></a>
                 }
                 else
                 {
-                <img class="img-profile" src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile"
+                        src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar"></a>
                 }
                 <b class="back-content">
                     @ViewBag.serviceDetailUser.UserName
@@ -47,9 +49,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="w3-content">
                     @foreach(var item in @ViewBag.ImageService)
                     {
-                        <div class="mySlides1 fade">
-                            <img src="~/@item.Image" width="100%" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
-                        </div>
+                    <div class="mySlides1 fade">
+                        <img src="~/@item.Image" width="100%" style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
+                    </div>
                     }
                     <button class="prev btn-slide" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="next btn-slide" onclick="plusDivs(1)">&#10095;</button>
@@ -71,15 +73,17 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="avatar-seller">
                 @if(ViewBag.serviceDetailUser.Avatar == null)
                 {
-                <img class="img-seller" src="~/Images/avatardefault.png" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-seller" src="~/Images/avatardefault.png"
+                        alt="avatar"></a>
                 }
                 else
                 {
-                <img class="img-seller" src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar">
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-seller"
+                        src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar"> </a>
                 }
             </div>
             <div class="contact-with-seller">
-                <b>@ViewBag.serviceDetailUser.UserName</b>
+                <b><a href="/@ViewBag.serviceDetailUser.UserName">@ViewBag.serviceDetailUser.UserName</a></b>
                 <p>So' sao</p>
                 <button class="btn-contact-me">Contact me</button>
             </div>

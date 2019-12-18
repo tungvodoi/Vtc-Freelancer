@@ -221,5 +221,5 @@
     text-align: center;
     width: 100%;
     line-height: 3;
-    background-image: url(https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1400,dpr_1.0/general_assets/logged_out_homepage/assets/signup/1440-cta2x.jpg);
+    background: url('https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1400,dpr_1.0/general_assets/logged_out_homepage/assets/signup/1440-cta2x.jpg') no-repeat;
 }
