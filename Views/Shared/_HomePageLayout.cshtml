@@ -115,6 +115,7 @@
                         </div>
                     </div>
                     <form action="/Home/Search" method="GET" id="form-search-top">
+                        <i class="fa fa-search"></i>
                         <input type="search" name="search_content" id="input-search-service"
                             placeholder="Find Services" />
                         <button id="btn-search-service">Search</button>
@@ -136,30 +137,31 @@
                     </ul>
                 </div>
             </div>
-             <div class="nav-categories">
-            <ul class="ul-categories container">
-                @if(ViewBag.listcategory != null)
-                {
-                @foreach (var item in ViewBag.listcategory)
-                {
-                <li class="li-categories">
-                    <a href="" class="categories-link">@item.CategoryName</a>
-                    <ul class="ul-package">
-                        @if(item.subsCategory != null){
-                        @foreach (var subsCategory in item.subsCategory)
+            <div class="nav-categories">
+                <ul class="ul-categories container">
+                    @if(ViewBag.listcategory != null)
                         {
-                        <li class="li-package">
-                            <a href="Home/Search?search_content=@subsCategory.CategoryName"
-                                class="a-package">@subsCategory.CategoryName</a>
-                        </li>
+                        @foreach (var item in ViewBag.listcategory)
+                        {
+                            <li class="li-categories">
+                                <a href="" class="categories-link">@item.CategoryName</a>
+                                <ul class="ul-package">
+                                        @if(item.subsCategory != null)
+                                        {
+                                            @foreach (var subsCategory in item.subsCategory)
+                                            {
+                                                <li class="li-package">
+                                                    <a href="" class="a-package">@subsCategory.CategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                </ul>
+                            </li>
                         }
                         }
-                    </ul>
-                </li>
-                }
-                }
-            </ul>
-        </div>
+                </ul>
+            </div>
+
         </div>
 
 

@@ -39,10 +39,6 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.userAvatar = userads.Avatar;
                 //Lay Session lan 2
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
-                if (ViewBag.IsSeller < 1)
-                {
-                    return Redirect("/");
-                }
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
             }
@@ -61,7 +57,6 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult ProfileSeller(string username)
         {
             ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
-
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             foreach (var item in listcategory)
@@ -96,10 +91,15 @@ namespace Vtc_Freelancer.Controllers
             ViewBag.userAvatar1 = users.Avatar;
             ViewBag.UserLoged = HttpContext.Session.GetString("UserName");
             Seller seller = userService.GetSellerByUserID(users.UserId);
-
+            List<Languages> listlanguage = userService.GetLanguagesByUserId(users.UserId);
+            List<Skills> listskill = userService.GetSkillsByUserId(users.UserId);
 
             if (seller != null)
             {
+                ViewBag.sellerprofile = seller;
+                ViewBag.listlanguage = listlanguage;
+                ViewBag.listskill = listskill;
+                Console.WriteLine(ViewBag.listlanguage);
                 ViewBag.sellerprofile = seller;
                 List<Service> services = new List<Service>();
                 services = gigService.GetServicesBySellerId(seller.SellerId);
@@ -124,6 +124,33 @@ namespace Vtc_Freelancer.Controllers
             int? UserId = HttpContext.Session.GetInt32("UserId");
             bool check = userService.UpdateDescription(UserId, description);
             if (check)
+            {
+                return true;
+            }
+            return false;
+        }
+        [HttpPost]
+        public bool UpdateLanguage(string language)
+        {
+            Languages languages = new Languages();
+            languages.Language = language;
+            int? UserId = HttpContext.Session.GetInt32("UserId");
+            bool check = userService.UpdateLanguage(UserId, language);
+            if (check)
+            {
+                return true;
+            }
+            return false;
+        }
+        [HttpPost]
+        public bool UpdateSkill(string skill)
+        {
+            Skills skills = new Skills();
+            skills.SkillName = skill;
+            Console.WriteLine(8888888888);
+            Console.WriteLine(skill);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userService.UpdateSkills(userId, skill))
             {
                 return true;
             }

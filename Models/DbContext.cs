@@ -62,6 +62,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.Language);
                 entity.Property(x => x.Level);
                 entity.Property(x => x.SellerId);
+                entity.Property(x => x.UserId);
             });
             modelBuilder.Entity<Skills>(entity =>
             {
@@ -69,6 +70,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.SkillName);
                 entity.Property(x => x.SkillLevel);
                 entity.Property(x => x.SellerId);
+                entity.Property(x => x.UserId);
             });
             modelBuilder.Entity<Category>(entity =>
             {

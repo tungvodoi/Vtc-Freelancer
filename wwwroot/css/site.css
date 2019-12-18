@@ -136,6 +136,14 @@ ul {
 .header form {
   width: 366px;
   display: flex;
+  position: relative;
+}
+
+.header form .fa-search {
+  position: absolute;
+  top: 49%;
+  left: 8px;
+  transform: translateY(-50%);
 }
 
 .header form input {
@@ -837,8 +845,8 @@ h3 {
   margin-top: 25px;
   position: absolute;
   z-index: 9999;
-  left: 46%;
-  top: 50px;
+  right: 18px;
+  top: 10px;
 }
 
 .list-state {
@@ -1187,6 +1195,7 @@ h3 {
   font-size: 14px;
   font-weight: 600;
   display: flex;
+<<<<<<< HEAD
 }
 
 .gig__content {
@@ -1237,4 +1246,7 @@ h3 {
 .ul-dropdown-profile li a {
   margin: 10px;
   padding: 5px;
+=======
+  margin-left: 120px;
+>>>>>>> be3c0a30dad5ecadd1209ad1792a3df910bd0de6
 }

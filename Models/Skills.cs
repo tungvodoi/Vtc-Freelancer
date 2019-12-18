@@ -12,7 +12,11 @@ namespace Vtc_Freelancer.Models
     public int SkillLevel { get; set; }
     public int SellerId { get; set; }
     [ForeignKey("SellerId")]
+    public int UserId { get; set; }
+    [ForeignKey("UserId")]
+
     public virtual Seller Seller { get; set; }
+    public virtual Users Users { get; set; }
     public Skills() { }
 
   }
