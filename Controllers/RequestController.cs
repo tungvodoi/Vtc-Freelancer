@@ -104,7 +104,7 @@ namespace Vtc_Freelancer.Controllers
             }
         }
 
-        [HttpGet("/manager_requests")]
+        [HttpGet("/manager_request")]
         public IActionResult ViewRequests()
         {
             Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));

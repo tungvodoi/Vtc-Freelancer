@@ -27,19 +27,16 @@
 							<div class="mySlides fade">
 								<div class="numbertext">1 / 3</div>
 								<img class="img-slide" src="~/images/slide1.png" style="width:100%">
-								<div class="text">Caption Text</div>
 							</div>
 
 							<div class="mySlides fade">
 								<div class="numbertext">2 / 3</div>
 								<img class="img-slide" src="~/images/slide2.png" style="width:100%">
-								<div class="text">Caption Two</div>
 							</div>
 
 							<div class="mySlides fade">
 								<div class="numbertext">3 / 3</div>
 								<img class="img-slide" src="~/images/slide3.png" style="width:100%">
-								<div class="text">Caption Three</div>
 							</div>
 
 							<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -79,13 +76,20 @@
 							<div class="gig__content">
 								<div class="slider__gig-seller">
 									<span class="gig__seller-avatar">
-										<img src="~/@service.Seller.User.Avatar" alt="">
+										@if(service.Seller.User.Avatar != null)
+										{
+											<img src="~/@service.Seller.User.Avatar" alt="avatar-seller">
+										}
+										else
+										{
+											<img src="~/Images/avatardefault.png" alt="avatar-seller">
+										}
 									</span>
 									<div class="gig__seller-info">
-										<a href="">@service.Seller.User.UserName</a>
+										<a href="/@service.Seller.User.UserName">@service.Seller.User.UserName</a>
 									</div>
 								</div>
-								<a href="" class="slider__gig-title">
+								<a href="/Gig/ServiceDetail?serviceId=@service.ServiceId" class="slider__gig-title">
 									<h3>@service.Title</h3>
 								</a>
 								@* <div class="slider__gig-star">
