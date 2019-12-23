@@ -15,6 +15,7 @@ namespace Vtc_Freelancer.Services
         }
         public int CreateServiceStepOne(string title, string category, string subcategory, string tags, int sellerId)
         {
+            
             Service service = new Service();
             try
             {

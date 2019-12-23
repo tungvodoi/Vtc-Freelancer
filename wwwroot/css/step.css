@@ -49,7 +49,7 @@
 }
 
 .right-content-step1 {
-  width: 80%;
+  width: 80%; 
 }
 
 .ListCategory {
@@ -75,7 +75,6 @@ Textarea, {
 .form-step1 input {
   height: 34px;
   border-radius: 3px;
-  border: 1px solid;
 }
 
 #search-tag {
