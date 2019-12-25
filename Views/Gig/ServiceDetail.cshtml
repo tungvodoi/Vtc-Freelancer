@@ -8,6 +8,15 @@ else
 ViewData["Title"] = "EditProfile";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function Onscroll() {
+  console.log("dcmmm");
+  var price = document.getElementById("price-detail");
+  if ((price.scrollTop() = 200)) {
+    console.log(price.scrollTop() + "px");
+  }
+}
+</script>
 <div class="bars-service-detail container">
     <div class="bars-item">
         <a href="/Gig/Report"
@@ -18,7 +27,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     </div>
     <div class="bars-item"><a href="#"><i style="color: black;" class="fa fa-share"></i></a><small>Share</small></div>
 </div>
-<div class="flex container">
+<div class="flex container wrapper-service-detail1">
     <div class="left-detail-content">
         <div class="wrapper-serive-detail">
             <!-- Đồng chí nào làm back-end Select data của service ở đây -->
@@ -30,18 +39,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="contain-username">
                 @if(ViewBag.serviceDetailUser.Avatar == null)
                 {
-                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile"
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img  class="img-profile" style="margin-left: 0px;"
                         src="~/Images/avatardefault.png" alt="avatar"></a>
                 }
                 else
                 {
-                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile"
+                <a href="/@ViewBag.serviceDetailUser.UserName"> <img class="img-profile" style="margin-left: 0px;"
                         src="~/@ViewBag.serviceDetailUser.Avatar" alt="avatar"></a>
                 }
                 <b class="back-content">
                     @ViewBag.serviceDetailUser.UserName
                 </b>
-                <a href="">Số sao(Số người rate)</a>
+              
             </div>
         </div>
         <div class="slide-section">
@@ -65,9 +74,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <br>
         <h2 class="about-gig back-content">About This Gig</h2>
         <br>
-        <div class="content-descrip-gig">
-            <p>@ViewBag.serviceDetail.Description</p>
-        </div>
+        <pre>@ViewBag.serviceDetail.Description</pre>
         <br><br>
         <h2 class="back-content">About Seller</h2>
         <br>
@@ -231,11 +238,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="content-price">
                     @if(ViewBag.PackagePremium != null)
                     {
-                    <h3 class="back-content">@ViewBag.PackagePremium.Title</h3>
+                    <div class="titleAndPrice">
+                     <b class="back-content">@ViewBag.PackagePremium.Title</b>
+                    <span>@ViewBag.PackagePremium.Price $</span>
+                    </div>
+                   
                     <br>
                     <p class="price-detail-content">@ViewBag.PackagePremium.Description</p>
                     <br>
-                    <div class="Delivery"><i class="fa fa-history"></i>
+                    <div class="Delivery">
+
+                        @* <p>@ViewBag.PackagePremium.NumberRevision Days</p> *@
+                        <i class="fa fa-history"></i>
                         <p>@ViewBag.PackagePremium.DeliveryTime Days Delivery</p>
                     </div>
                     <br>
@@ -249,7 +263,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="content-price">
                     @if(ViewBag.PackageStandard != null)
                     {
-                    <h3 class="back-content">@ViewBag.PackageStandard.Title</h3>
+                    <div class="titleAndPrice">
+                    <b class="back-content">@ViewBag.PackageStandard.Title</b>
+                    <span>@ViewBag.PackageStandard.Price $</span>
+                    </div>
                     <br>
                     <p class="price-detail-content">@ViewBag.PackageStandard.Description</p>
                     <br>
@@ -267,7 +284,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="content-price">
                     @if(ViewBag.PackageBasic != null)
                     {
-                    <h3 class="back-content">@ViewBag.PackageBasic.Title</h3>
+                          <div class="titleAndPrice">
+                      <b class="back-content">@ViewBag.PackageBasic.Title</b>
+                    <span>@ViewBag.PackageBasic.Price $</span>
+
+                    </div>
+                   
                     <br>
                     <p class="price-detail-content">@ViewBag.PackageBasic.Description</p>
                     <br>

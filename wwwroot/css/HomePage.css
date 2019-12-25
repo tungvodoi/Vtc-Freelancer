@@ -1,225 +1,271 @@
 .join-to {
-    display: inline-block;
-    background: #1dbf73;
-    color: #fff;
-    padding: 12px 24px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 100%;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
+  display: inline-block;
+  background: #1dbf73;
+  color: #fff;
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
 }
 
 .join-btn {
-    border: 1px solid #1dbf73;
-    border-radius: 4px;
-    color: #1dbf73;
-    padding: 6px 19px;
+  border: 1px solid #1dbf73;
+  border-radius: 4px;
+  color: #1dbf73;
+  padding: 6px 19px;
 }
 
 .banner {
-    position: relative;
-    width: 100%;
-    height: 600px;
+  position: relative;
+  width: 100%;
+  height: 600px;
 }
 
 .banner:after {
-    content: "";
-    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, .7)));
-    background: -o-linear-gradient(top, transparent 0, rgba(0, 0, 0, .7) 100%);
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .7));
-    opacity: .4;
-    height: 120px;
-    width: 100%;
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
+  content: "";
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(transparent),
+    to(rgba(0, 0, 0, 0.7))
+  );
+  background: -o-linear-gradient(top, transparent 0, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+  opacity: 0.4;
+  height: 120px;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
 }
 
 .top-banner:before {
-    content: "";
-    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, .7)));
-    background: -o-linear-gradient(top, transparent 0, rgba(0, 0, 0, .7) 100%);
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .7));
-    opacity: .4;
-    height: 131px;
-    width: 100%;
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
+  content: "";
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(transparent),
+    to(rgba(0, 0, 0, 0.7))
+  );
+  background: -o-linear-gradient(top, transparent 0, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+  opacity: 0.4;
+  height: 131px;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
 }
 
 .top-banner {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-bottom: 30vw solid;
-    border-left: 80vw solid transparent;
-    border-bottom-color: #2e6a3c;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-bottom: 30vw solid;
+  border-left: 80vw solid transparent;
+  border-bottom-color: #2e6a3c;
 }
 
 .bottom-banner {
-    padding: 0 0 0 150px;
-    padding-top: 100px;
+  padding: 0 0 0 150px;
+  padding-top: 100px;
 }
 
 .banner-content {
-    width: 40%;
+  width: 40%;
 }
 
 .header-sticky {
-    display: none;
-    padding-top: 10px;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1;
+  display: none;
+  padding-top: 10px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
 }
 
 #form-search-top1 {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 }
 
 #input-search-service1 {
-    width: 100%;
-    border-top-left-radius: 1px;
-    border-bottom-left-radius: 1px;
-    border: 1px solid #b5b6ba;
-    border-right: none;
-    padding: 1rem 4rem;
+  width: 100%;
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+  border: 1px solid #b5b6ba;
+  border-right: none;
+  padding: 1rem 4rem;
 }
 
 #btn-search-service1 {
-    background-color: #1dbf73;
-    font-size: 16px;
-    line-height: 16px;
-    font-weight: 700;
-    color: #fff;
-    border: 1px solid transparent;
-    padding: 15px 35px;
-    margin: 0;
-    display: inline-block;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    box-sizing: border-box;
-    -webkit-transition: color .2s, background-color .2s, box-shadow .2s, border .2s;
-    transition: color .2s, background-color .2s, box-shadow .2s, border .2s;
+  background-color: #1dbf73;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 700;
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 15px 35px;
+  margin: 0;
+  display: inline-block;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-sizing: border-box;
+  -webkit-transition: color 0.2s, background-color 0.2s, box-shadow 0.2s,
+    border 0.2s;
+  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
 }
 
 #form-search-top1:after {
-    font: 16px FontAwesome;
-    content: "\f002";
-    color: #999;
-    position: absolute;
-    top: 30%;
-    left: 6%;
+  font: 16px FontAwesome;
+  content: "\f002";
+  color: #999;
+  position: absolute;
+  top: 30%;
+  left: 6%;
 }
 
 .trust-by {
-    color: gainsboro;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    height: 5rem;
-    box-shadow: 0 4px 105px 7px grey;
-    margin-bottom: 20rem;
-    font-weight: bold;
+  color: gainsboro;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 5rem;
+  box-shadow: 0 4px 105px 7px grey;
+  margin-bottom: 20rem;
+  font-weight: bold;
 }
 
 #trust-by {
-    color: gainsboro;
+  color: gainsboro;
 }
 
 .about-vtcf {
-    display: flex;
-    margin-bottom: 10rem;
+  display: flex;
+  margin-bottom: 10rem;
 }
 
 .ul-about-vtcf {
-    color: black
+  color: black;
 }
 
 .ul-about-vtcf {
-    width: 50%;
-    margin-right: 5%;
+  width: 50%;
+  margin-right: 5%;
 }
 
 .li-about-vtcf {
-    line-height: 38px;
-    padding-bottom: 24px;
+  line-height: 38px;
+  padding-bottom: 24px;
 }
 
 .ul-about-vtcf .li-about-vtcf h6:before {
-    background: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/checkmark.0c8e7a1.svg) no-repeat;
-    background-size: 16px;
-    content: "";
-    display: inline-block;
-    height: 16px;
-    width: 16px;
-    padding-right: 12px;
-    color: #1dbf73;
-    vertical-align: middle;
+  background: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/checkmark.0c8e7a1.svg)
+    no-repeat;
+  background-size: 16px;
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  padding-right: 12px;
+  color: #1dbf73;
+  vertical-align: middle;
 }
 
 .ul-about-vtcf .li-about-vtcf h6 {
-    color: black;
-    font-size: 17px;
+  color: black;
+  font-size: 17px;
 }
 
 .ul-about-vtcf .li-about-vtcf h2 {
-    color: black;
+  color: black;
 }
 
 .ul-about-vtcf .li-about-vtcf p {
-    color: #555;
-    font-size: 14px;
-    line-height: 1;
+  color: #555;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .Marketplace {
-    margin-bottom: 120px;
+  margin-bottom: 120px;
 }
 
 .Marketplace h2 {
-    color: black;
+  color: black;
 }
 
 .Marketplace ul li a img {
-    border-bottom: 2px solid transparent;
-    display: block;
-    width: 200px;
-    margin: 0 auto 15px;
+  border-bottom: 2px solid transparent;
+  display: block;
+  width: 200px;
+  margin: 0 auto 15px;
 }
 
 .Marketplace ul li {
-    display: inline-block;
-    width: 50%;
-    padding: 2rem;
+  display: inline-block;
+  width: 50%;
+  padding: 2rem;
 }
 
 .Marketplace ul li img:hover {
-    border-bottom: 2px solid #1dbf73;
+  border-bottom: 2px solid #1dbf73;
 }
 
 .Marketplace ul {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .img-banner {
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    width: 50%;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 50%;
 }
 
 #try-vtcf {
-    padding: 5rem;
-    text-align: center;
+  padding: 5rem;
+  text-align: center;
+  width: 100%;
+  line-height: 3;
+  background: url("https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1400,dpr_1.0/general_assets/logged_out_homepage/assets/signup/1440-cta2x.jpg")
+    no-repeat;
+}
+
+@media only screen and (max-width: 600px) {
+  .banner-content {
     width: 100%;
-    line-height: 3;
-    background: url('https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1400,dpr_1.0/general_assets/logged_out_homepage/assets/signup/1440-cta2x.jpg') no-repeat;
+  }
+  .bottom-banner {
+    padding: 1rem;
+    padding-top: 20px;
+  }
+  .banner {
+    height: 600px;
+  }
+  .banner-content {
+    transform: translateY(50%);
+  }
+  .img-banner {
+    width: 100% !important;
+  }
+  .about-vtcf {
+    display: block;
+  }
+  .ul-about-vtcf {
+    width: 100%;
+  }
+  .trust-by {
+    margin-bottom: 5rem;
+  }
+  .Marketplace ul li a img {
+    width: auto;
+  }
 }

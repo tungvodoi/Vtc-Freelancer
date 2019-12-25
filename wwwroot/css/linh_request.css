@@ -215,3 +215,25 @@ hr {
 .other {
   display: none !important;
 }
+
+@media only screen and (max-width: 600px) {
+  .container-request {
+    width: 100%;
+  }
+  .container-request2 {
+    width: 100%;
+  }
+  .request-wrapper {
+    margin: 0px !important;
+    padding: 3px;
+  }
+  .input-description textarea {
+    width: 100%;
+  }
+  .uploadifive-input {
+    width: 100%;
+  }
+  .category:last-child {
+    margin-left: 0px;
+  }
+}

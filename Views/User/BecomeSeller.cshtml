@@ -4,86 +4,122 @@ ViewData["Title"] = "Become Seller";
 }
 <div class="wrapper-become-seller container-inner">
    <form method="POST" action="/BecomeSeller" class="form-become-seller">
-      <h2>
-         Become Seller
-      </h2>
+      <div class="header-desciption">
+         <h2>
+            Become Seller
+         </h2>
+         <p id="detail-description">
+            Tell us a bit about yourself. This information will appear on your public profile, so that potential buyers
+            can
+            get to
+            know you better.
+         </p>
+      </div>
       <br>
       @if (@ViewBag.Noti == true)
       {
 
-      <!-- <br> -->
       }
-      <label>
-         Description
-      </label>
-      <br>
-      <!-- <input name="Description" required /> -->
-      <textarea class="text-sel" rows="5" cols="20" name="Description" placeholder="Enter Description"></textarea>
-      <br>
-      <br>
-      <label>
-         Language
-      </label>
-      <select name="Language">
-         <option name="Vietnam">Vietnam</option>
-         <option name="Japan">Japan</option>
-         <option name="China">China</option>
-         <option name="Korea">Korea</option>
-      </select>
-      <br>
-      <br>
-      <label>
-         Level Language
-      </label>
-
-      <select name="Level">
-         <option value="0">Unspecified</option>
-         <option value="1">Basic</option>
-         <option value="2">Conversational</option>
-         <option value="3">Fluent</option>
-         <option value="4">Native/Bilingual</option>
-      </select>
-      <br>
-      <br>
-      <label>
-         Category Name
-      </label>
-      <br>
-      @if(ViewBag.listcategory != null)
-      {
-      <select name="CategoryName" id="parentCategory">
-         @foreach (var item in ViewBag.listcategory)
-         {
-         <option name="@item.CategoryName">@item.CategoryName </option>
-         }
-      </select>
-      }
-
-      <br>
-      <br>
-      <label>
-         Sub Category
-      </label>
-      <div id="subCategory">
-         @if(ViewBag.subcategory!= null)
-         {
-         @foreach (var item in ViewBag.subcategory)
-         {
-         <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
-
-         }
-         }
+      <div class="flex wrapper-seller-become">
+         <div class="left-content">
+            <h3>
+               Your Description
+            </h3>
+         </div>
+         <div class="right-content">
+            <textarea class="text-sel" rows="5" cols="20" name="Description"
+               placeholder="Enter Description About You"></textarea>
+         </div>
       </div>
-      <br>
-      <label>
-         Skill
-      </label>
-      <input name="SkillName" />
-      <select name="Level">
-         <option value="0">Beginner</option>
-         <option value="1">Intermediate</option>
-         <option value="2">Expert</option>
-      </select>
+      <div class="flex wrapper-seller-become">
+         <div class="left-content">
+            <h3>
+               Language
+            </h3>
+         </div>
+         <div class="right-content">
+            <select class="select-become-seller" name="Language">
+               <option name="Vietnam">Vietnam</option>
+               <option name="Japan">Japan</option>
+               <option name="China">China</option>
+               <option name="Korea">Korea</option>
+            </select>
+         </div>
+      </div>
+      <div class="flex wrapper-seller-become">
+         <div class="left-content">
+            <h3>
+               Level Language
+            </h3>
+         </div>
+         <div class="right-content">
+            <select class="select-become-seller" name="Level">
+               <option value="0">Unspecified</option>
+               <option value="1">Basic</option>
+               <option value="2">Conversational</option>
+               <option value="3">Fluent</option>
+               <option value="4">Native/Bilingual</option>
+            </select>
+         </div>
+      </div>
+
+
+      <div class="flex wrapper-seller-become">
+         <div class="left-content">
+            <h3>
+               Category Name
+            </h3>
+         </div>
+         <div class="right-content">
+            @if(ViewBag.listcategory != null)
+            {
+            <select class="select-become-seller" name="CategoryName" id="parentCategory">
+               @foreach (var item in ViewBag.listcategory)
+               {
+               <option name="@item.CategoryName">@item.CategoryName </option>
+               }
+            </select>
+            }
+
+            <br>
+            <br>
+            <label>
+               Sub Category
+            </label>
+            <div id="subCategory">
+               @if(ViewBag.subcategory!= null)
+               {
+               @foreach (var item in ViewBag.subcategory)
+               {
+               <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
+
+               }
+               }
+            </div>
+            <br>
+         </div>
+      </div>
+
+
+
+      <div class="flex wrapper-seller-become">
+         <div class="left-content">
+            <h3>
+               Skill
+            </h3>
+         </div>
+         <div class="right-content">
+            <input name="SkillName" class="select-become-seller" />
+            <br>
+            <br>
+            <select class="select-become-seller" name="Level">
+               <option value="0">Beginner</option>
+               <option value="1">Intermediate</option>
+               <option value="2">Expert</option>
+            </select>
+         </div>
+      </div>
+
 
 
       <br>
@@ -94,27 +130,27 @@ ViewData["Title"] = "Become Seller";
    </form>
 </div>
 <script>
-    $(document).ready(function () {
-        $("#parentCategory").change(function () {
+   $(document).ready(function () {
+      $("#parentCategory").change(function () {
 
-            $('#subCategory').html('');
-            $.ajax({
-                type: "POST",
-                data: {
-                    categoryName: this.value
-                },
-                url: "/admin/GetListSubCategoryByCategoryParentId",
-                success: function (result) {
-                    $('#subCategory').stop().animate({ "opacity": "0" }, 0, function () {
-                        // After first animation finished
-                        $(this).html(
-                            result.map((res) => {
-                                return `<input type="checkbox" name="${res.CategoryId}" value="${res.categoryName}">${res.categoryName}<br>`
-                            })
-                        ).animate({ opacity: 1 });
-                    });
-                }
-            });
-        });
-    });
+         $('#subCategory').html('');
+         $.ajax({
+            type: "POST",
+            data: {
+               categoryName: this.value
+            },
+            url: "/admin/GetListSubCategoryByCategoryParentId",
+            success: function (result) {
+               $('#subCategory').stop().animate({ "opacity": "0" }, 0, function () {
+                  // After first animation finished
+                  $(this).html(
+                     result.map((res) => {
+                        return `<input type="checkbox" name="${res.CategoryId}" value="${res.categoryName}">${res.categoryName}<br>`
+                     })
+                  ).animate({ opacity: 1 });
+               });
+            }
+         });
+      });
+   });
 </script>

@@ -39,3 +39,37 @@
 #text-description {
   width: 100%;
 }
+
+.nameReceiver {
+  margin-right: 5px;
+  border: 1px solid;
+  display: inline-block;
+  padding: 6px;
+}
+
+.tag-container{
+  border: 2px solid #ccc;
+  padding: 3px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag-container .tag{
+  padding: 3px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+.tag i {
+  font-size: 16px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.tag-container input{
+  flex: 1;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+  border: 0;
+}

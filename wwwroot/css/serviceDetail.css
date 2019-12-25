@@ -2,6 +2,10 @@
   margin: 2rem 0px 2rem 0px;
 }
 
+.wrapper-serive-detail h1 {
+  font-size: 24px;
+}
+
 /* .wrapper-serive-detail h1 {
   color: black;
 } */
@@ -39,6 +43,11 @@
 .body-service-detail {
 }
 
+pre {
+  white-space: pre-line;
+  font-size: 14px;
+}
+
 .flex {
   display: flex;
   /* align-items: center; */
@@ -46,12 +55,21 @@
 
 .left-detail-content {
   width: 60%;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .right-detail-content {
   width: 30%;
   margin-bottom: 30px;
+  width: 40%;
+}
+
+.content-price p {
+  word-break: break-word;
+  font-size: 14px;
+  line-height: 140%;
+  margin-top: 10px;
+  margin-bottom: 1rem;
 }
 
 .w3-bar-item {
@@ -64,8 +82,10 @@
   color: black;
   background-color: white;
   border: 1px solid #d5d4d2;
+  border-left: none;
   font-weight: bold;
   font-size: 16px;
+  background-color: #fafafa;
 }
 
 .w3-bar-item:hover {
@@ -106,7 +126,7 @@
 }
 
 .price-detail-content {
-  margin: 1.5rem;
+  margin: 1.5rem 0px 1.5rem 0px;
 }
 
 .Delivery {
@@ -153,12 +173,12 @@
 }
 
 .wrapper-table-compare {
-  padding: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .wrapper-table-compare table {
-  margin: 2rem;
-  width: 80%;
+  width: 100%;
   font-size: 14px;
   line-height: 21px;
   border: 1px solid #efeff0;
@@ -177,7 +197,6 @@
   padding-top: 24px;
   position: relative;
   vertical-align: text-top;
-  text-align: center;
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -213,4 +232,37 @@
 
 .img-profile {
   margin-right: 10px;
+  /* margin-left: 0px !important; */
+}
+
+/* .titleAndPrice {
+  display: flex;
+} */
+
+.titleAndPrice b {
+  float: left;
+}
+
+.titleAndPrice span {
+  float: right;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper-service-detail1 {
+    display: block;
+  }
+  .left-detail-content,
+  .right-detail-content {
+    width: 100%;
+  }
+  .wrapper-table-compare {
+    display: none;
+  }
+  .about-seller {
+    display: block;
+    text-align: center;
+  }
+  .img-seller {
+    display: inline-block;
+  }
 }

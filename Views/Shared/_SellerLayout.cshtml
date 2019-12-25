@@ -7,7 +7,8 @@
     <title>@ViewData["Title"] - Vtc_Freelancer</title>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
@@ -28,11 +29,11 @@
                     <label class="lable-profile">
                         @if(ViewBag.userAvatar != null)
                         {
-                            <img class="img-profile" id="img-prf" src="~/@ViewBag.userAvatar" alt="avatar">
+                        <img class="img-profile" id="img-prf" src="~/@ViewBag.userAvatar" alt="avatar">
                         }
                         else
                         {
-                            <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
+                        <img class="img-profile" src="~/Images/avatardefault.png" alt="avatar">
                         }
                     </label>
                     <br>
@@ -40,29 +41,30 @@
                     <br>
                 </div>
                 <ul class="ul-sidebars">
-                    <li class="li-sidebars">Home</li>
+                    <li class="li-sidebars"><a href="/">Home</a></li>
                     <li class="li-sidebars">Inbox</li>
-                    <li class="li-sidebars">Dashboard</li>
                     <li class="li-sidebars">Saved</li>
-                    <li class="li-sidebars">Browse Categories</li>
 
                     <br>
                     <div class="content-sidebars-wrapper">
                         <li class="li-sidebars"><b>Buying</b></li>
                         <hr>
                         <li class="li-sidebars">Manage Requests</li>
-                        <li class="li-sidebars">Post a Request</li>
+                        <li class="li-sidebars"><a href="/create_request"> Post a Request</a></li>
                         <br>
+                        @if(ViewBag.IsSeller == 1)
+                         {   
                         <li class="li-sidebars"><b>Selling</b></li>
 
                         <hr>
                         <li class="li-sidebars">Manage Sales</li>
                         <li class="li-sidebars">Revenues</li>
+                         }
                         <br>
                         <li class="li-sidebars"><b>General</b></li>
                         <hr>
                         <li class="li-sidebars">Setting</li>
-                        <li class="li-sidebars">Logout</li>
+                        <li class="li-sidebars"><a href="/Logout">Logout</a></li>
                     </div>
 
                 </ul>
@@ -110,12 +112,12 @@
                 {
                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
                 }
-                 <div class="dropdown-profile">
+                <div class="dropdown-profile">
                     <ul class="ul-dropdown-profile">
                         <li><a href="/@ViewBag.UserName">Profile</a></li>
-                        
+
                         <li><a href="#">Setting</a></li>
-                        <li><a href="/Logout" ><b>Logout</b></a></li>
+                        <li><a href="/Logout"><b>Logout</b></a></li>
                     </ul>
                 </div>
             </div>
@@ -126,20 +128,20 @@
         <div class="container">
 
             <div class="footer-content-wrapper">
-                 <div class="footer-content">
-                        <button class="btn-footer-link">Categories</button>
-                        <ul class="ul-footer-link">
-                            @if(ViewBag.listcategory!= null)
-                            { 
-                                @foreach(var item in ViewBag.listcategory ) 
-                                {
-                                <li class="li-footer-content">
-                                    <a href="#">@item.CategoryName</a>
-                                </li>
-                                } 
-                            }
-                        </ul>
-                    </div>
+                <div class="footer-content">
+                    <button class="btn-footer-link">Categories</button>
+                    <ul class="ul-footer-link">
+                        @if(ViewBag.listcategory!= null)
+                        {
+                        @foreach(var item in ViewBag.listcategory )
+                        {
+                        <li class="li-footer-content">
+                            <a href="#">@item.CategoryName</a>
+                        </li>
+                        }
+                        }
+                    </ul>
+                </div>
 
                 <div class="footer-content">
                     <button class="btn-footer-link">About</button>
@@ -285,8 +287,8 @@
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/slide.js" asp-append-version="true"></script>
-    
-   
+
+
 </body>
 
 </html>
