@@ -8,6 +8,15 @@ else
 ViewData["Title"] = "EditProfile";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function Onscroll() {
+  console.log("dcmmm");
+  var price = document.getElementById("price-detail");
+  if ((price.scrollTop() = 200)) {
+    console.log(price.scrollTop() + "px");
+  }
+}
+</script>
 <div class="bars-service-detail container">
     <div class="bars-item">
         <a href="/Gig/Report"

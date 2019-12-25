@@ -81,13 +81,13 @@ namespace Vtc_Freelancer.Controllers
 
 
         [HttpPost("/CreateService/CreateServiceStep1")]
-        public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tags)
+        public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tag)
         {
 
-
+           
             int? userID = HttpContext.Session.GetInt32("UserId");
             int SellerID = userService.GetSellerByUserID(userID).SellerId;
-            int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tags, SellerID);
+            int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tag, SellerID);
             if (ServiceId == 0)
             {
                 return Redirect("/CreateService/Step1");
