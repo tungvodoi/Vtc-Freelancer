@@ -26,7 +26,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<ConversationDetail> ConversationDetail { get; set; }
         public DbSet<FAQ> FAQ { get; set; }
 
-<<<<<<< HEAD
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=127.0.0.1;uid=admin;pwd=123456;database=vtc_freelancer");
@@ -82,132 +82,6 @@ namespace Vtc_Freelancer.Models
             modelBuilder.Entity<SellerCategory>(entity =>
             {
                 entity.HasKey(x => new { x.SellerId, x.CategoryId });
-=======
-<<<<<<< HEAD
-            });
-            modelBuilder.Entity<Request>(entity =>
-            {
-                entity.HasKey(x => x.RequestId);
-                entity.Property(x => x.DeliveredTime);
-                entity.Property(x => x.Category);
-                entity.Property(x => x.SubCategory);
-                entity.Property(x => x.Budget);
-                entity.Property(x => x.Description);
-                entity.Property(x => x.LinkFile);
-                entity.Property(x => x.TimeCreate);
-                entity.Property(x => x.Status);
-                entity.Property(x => x.UserId);
-            });
-            modelBuilder.Entity<Offer>(entity =>
-            {
-                entity.HasKey(x => x.OfferId);
-                entity.Property(x => x.Description);
-                entity.Property(x => x.Amount);
-                entity.Property(x => x.Revisions);
-                entity.Property(x => x.DeliveryTime);
-                entity.Property(x => x.SellerId);
-                entity.Property(x => x.RequestId);
-                entity.Property(x => x.ServiceId);
-            });
-            modelBuilder.Entity<Orders>(entity =>
-            {
-                entity.HasKey(x => x.OrderId);
-                entity.Property(x => x.WorkStatus);
-                entity.Property(x => x.Quantity);
-                entity.Property(x => x.OrderCreateTime);
-                entity.Property(x => x.OrderStartTime);
-                entity.Property(x => x.OrderDeliveredTime);
-                entity.Property(x => x.ContentRequire);
-                entity.Property(x => x.FileRequire);
-                entity.Property(x => x.FileResult);
-                entity.Property(x => x.ContentReply);
-                entity.Property(x => x.PackageId);
-                entity.Property(x => x.UserId);
-                entity.Property(x => x.ServiceId);
-            });
-            modelBuilder.Entity<Conversation>(entity =>
-            {
-                entity.HasKey(x => x.ConversationId);
-                entity.Property(x => x.SellerId);
-                entity.Property(x => x.BuyerId);
-            });
-            modelBuilder.Entity<ConversationDetail>(entity =>
-            {
-                entity.HasKey(x => x.ConversationDetailId);
-                entity.Property(x => x.ConversationId);
-                entity.Property(x => x.SenderId);
-                entity.Property(x => x.Content);
-                entity.Property(x => x.Status);
-                entity.Property(x => x.TimeSend);
-            });
-            modelBuilder.Entity<Notification>(entity =>
-            {
-                entity.HasKey(x => x.NotificationId);
-                entity.Property(x => x.Content);
-                entity.Property(x => x.TimeSend);
-                entity.Property(x => x.UserId);
-=======
-      });
-      modelBuilder.Entity<Request>(entity =>
-      {
-        entity.HasKey(x => x.RequestId);
-        entity.Property(x => x.DeliveredTime);
-        entity.Property(x => x.Category);
-        entity.Property(x => x.SubCategory);
-        entity.Property(x => x.Budget);
-        entity.Property(x => x.Description);
-        entity.Property(x => x.LinkFile);
-        entity.Property(x => x.TimeCreate);
-        entity.Property(x => x.Status);
-        entity.Property(x => x.UserId);
-      });
-      modelBuilder.Entity<Offer>(entity =>
-      {
-        entity.HasKey(x => x.OfferId);
-        entity.Property(x => x.Description);
-        entity.Property(x => x.Amount);
-        entity.Property(x => x.Revisions);
-        entity.Property(x => x.DeliveryTime);
-        entity.Property(x => x.SellerId);
-        entity.Property(x => x.RequestId);
-        entity.Property(x => x.ServiceId);
-      });
-      modelBuilder.Entity<Orders>(entity =>
-      {
-        entity.HasKey(x => x.OrderId);
-        entity.Property(x => x.WorkStatus);
-        entity.Property(x => x.Quantity);
-        entity.Property(x => x.OrderCreateTime);
-        entity.Property(x => x.OrderStartTime);
-        entity.Property(x => x.ContentRequire);
-        entity.Property(x => x.File);
-        entity.Property(x => x.PackageId);
-        entity.Property(x => x.UserId);
-        entity.Property(x => x.ServiceId);
-      });
-      modelBuilder.Entity<Conversation>(entity =>
-      {
-        entity.HasKey(x => x.ConversationId);
-        entity.Property(x => x.SellerId);
-        entity.Property(x => x.BuyerId);
-      });
-      modelBuilder.Entity<ConversationDetail>(entity =>
-      {
-        entity.HasKey(x => x.ConversationDetailId);
-        entity.Property(x => x.ConversationId);
-        entity.Property(x => x.SenderId);
-        entity.Property(x => x.Content);
-        entity.Property(x => x.Status);
-        entity.Property(x => x.TimeSend);
-      });
-      modelBuilder.Entity<Notification>(entity =>
-      {
-        entity.HasKey(x => x.NotificationId);
-        entity.Property(x => x.Content);
-        entity.Property(x => x.TimeSend);
-        entity.Property(x => x.UserId);
->>>>>>> be3c0a30dad5ecadd1209ad1792a3df910bd0de6
->>>>>>> 9aa5d6e8f08e9acd68dcfe91cb967babe0f0b3a3
 
             });
             modelBuilder.Entity<Request>(entity =>
@@ -242,11 +116,75 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.OrderCreateTime);
                 entity.Property(x => x.OrderStartTime);
                 entity.Property(x => x.ContentRequire);
-                entity.Property(x => x.File);
+                entity.Property(x => x.FileRequire);
+                entity.Property(x => x.FileResult);
+                entity.Property(x => x.OrderDeliveredTime);
+
                 entity.Property(x => x.PackageId);
                 entity.Property(x => x.UserId);
                 entity.Property(x => x.ServiceId);
             });
+            modelBuilder.Entity<Conversation>(entity =>
+            {
+                entity.HasKey(x => x.ConversationId);
+                entity.Property(x => x.SellerId);
+                entity.Property(x => x.BuyerId);
+            });
+            modelBuilder.Entity<ConversationDetail>(entity =>
+            {
+                entity.HasKey(x => x.ConversationDetailId);
+                entity.Property(x => x.ConversationId);
+                entity.Property(x => x.SenderId);
+                entity.Property(x => x.Content);
+                entity.Property(x => x.Status);
+                entity.Property(x => x.TimeSend);
+            });
+            modelBuilder.Entity<Notification>(entity =>
+            {
+                entity.HasKey(x => x.NotificationId);
+                entity.Property(x => x.Content);
+                entity.Property(x => x.TimeSend);
+                entity.Property(x => x.UserId);
+
+
+            });
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.HasKey(x => x.RequestId);
+                entity.Property(x => x.DeliveredTime);
+                entity.Property(x => x.Category);
+                entity.Property(x => x.SubCategory);
+                entity.Property(x => x.Budget);
+                entity.Property(x => x.Description);
+                entity.Property(x => x.LinkFile);
+                entity.Property(x => x.TimeCreate);
+                entity.Property(x => x.Status);
+                entity.Property(x => x.UserId);
+            });
+            modelBuilder.Entity<Offer>(entity =>
+            {
+                entity.HasKey(x => x.OfferId);
+                entity.Property(x => x.Description);
+                entity.Property(x => x.Amount);
+                entity.Property(x => x.Revisions);
+                entity.Property(x => x.DeliveryTime);
+                entity.Property(x => x.SellerId);
+                entity.Property(x => x.RequestId);
+                entity.Property(x => x.ServiceId);
+            });
+            // modelBuilder.Entity<Orders>(entity =>
+            // {
+            //     entity.HasKey(x => x.OrderId);
+            //     entity.Property(x => x.WorkStatus);
+            //     entity.Property(x => x.Quantity);
+            //     entity.Property(x => x.OrderCreateTime);
+            //     entity.Property(x => x.OrderStartTime);
+            //     entity.Property(x => x.ContentRequire);
+            //     entity.Property(x => x.File);
+            //     entity.Property(x => x.PackageId);
+            //     entity.Property(x => x.UserId);
+            //     entity.Property(x => x.ServiceId);
+            // });
             modelBuilder.Entity<Conversation>(entity =>
             {
                 entity.HasKey(x => x.ConversationId);

@@ -26,6 +26,7 @@ namespace Vtc_Freelancer.Controllers
             this.userService = userService;
             this.adminService = adminService;
         }
+
         [HttpGet("/HomePage")]
         public IActionResult HomePage()
         {
@@ -76,7 +77,9 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                 // HttpContext.Session.Remove("IsSeller");
                 ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
-            }else{
+            }
+            else
+            {
                 return Redirect("/HomePage");
             }
 

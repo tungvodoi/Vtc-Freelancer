@@ -47,29 +47,29 @@
                     <br>
                 </div>
                 <ul class="ul-sidebars">
-                    <li class="li-sidebars">Home</li>
+                    <li class="li-sidebars"><a href="/">Home</a></li>
                     <li class="li-sidebars">Inbox</li>
-                    <li class="li-sidebars">Dashboard</li>
                     <li class="li-sidebars">Saved</li>
-                    <li class="li-sidebars">Browse Categories</li>
-
                     <br>
                     <div class="content-sidebars-wrapper">
                         <li class="li-sidebars"><b>Buying</b></li>
                         <hr>
                         <li class="li-sidebars">Manage Requests</li>
-                        <li class="li-sidebars"  onclick="window.location.href = '/manager_request'">Post a Request</li>
+                        <li class="li-sidebars"><a href="/create_request"> Post a Request</a></li>
                         <br>
+                        @if(ViewBag.IsSeller == 1)
+                         {   
                         <li class="li-sidebars"><b>Selling</b></li>
 
                         <hr>
                         <li class="li-sidebars">Manage Sales</li>
                         <li class="li-sidebars">Revenues</li>
+                         }
                         <br>
                         <li class="li-sidebars"><b>General</b></li>
                         <hr>
                         <li class="li-sidebars">Setting</li>
-                        <li class="li-sidebars">Logout</li>
+                        <li class="li-sidebars"><a href="/Logout">Logout</a></li>
                     </div>
 
                 </ul>
@@ -115,9 +115,15 @@
                     {
                     <li>
                         <a href="/Seller">
-                            <div class="prf-div">
+                          
                                 <h4 style="color: #1dbf73;">Switch to Selling</h4>
-                                @if(ViewBag.userAvatar == null)
+                         
+                        </a>
+                    </li>
+                    
+                    <li>
+                          <div class="prf-div">
+                          @if(ViewBag.userAvatar == null)
                                 {
                                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/Images/avatardefault.png" alt="avatar"></a>
                                 }
@@ -127,19 +133,14 @@
                                 }
                                 <div class="dropdown-profile">
                                     <ul class="ul-dropdown-profile">
-                                        <li><a href="/@ViewBag.UserName">Profile</a></li>
+                                        <li><a >Profile</a></li>
                                         <li><a href="#">Manager Request</a></li>
-                                        <li><a href="/manager_request"  onclick="window.location.href = '/manager_request'">Post a Request</a></li>
+                                        <li><a href="/create_request">Post a Request</a></li>
                                         <li><a href="#">Setting</a></li>
                                         <li><a href="/Logout" ><b>Logout</b></a></li>
                                     </ul>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        
+                                   </div>
                     </li>
                     }
                     else
@@ -155,27 +156,33 @@
                                 {
                                 <a href="/@ViewBag.UserName"><img class="img-profile" src="~/@ViewBag.userAvatar" alt="avatar"></a>
                                 }
+                                  <div class="dropdown-profile">
+                                    <ul class="ul-dropdown-profile">
+                                        <li><a href="/@ViewBag.UserName">Profile</a></li>
+                                        <li><a href="#">Manager Request</a></li>
+                                        <li><a href="/create_request">Post a Request</a></li>
+                                        <li><a href="#">Setting</a></li>
+                                        <li><a href="/Logout" ><b>Logout</b></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </a>
                     </li>
                     
-                    <li>
-                        <a href="/Logout" class="nav-link"><b>Logout</b></a>
-                    </li>
+                  
                     }
                 </ul>
                 <div id="tip" class="tip-orders">
                     <div class="Triangular"></div>
                     <div class="list-state">
-                            @if(ViewBag.ListOrder != null && ViewBag.ListOrder.Count != 0)
+                            @if(ViewBag.ListOrder != null)
                             {
                                 <ul style="margin: 0px">
                                 @foreach (var item in ViewBag.ListOrder)
                                 {
-                                    @switch (@item.WorkStatus)
+                                    @if (@item.WorkStatus == 0)
                                     {
-                                        case 0:
-                                            <a href="/Order/Requirement?orderId=@item.OrderId">
+                                        <a href="/Order/Requirement?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -187,9 +194,10 @@
                                                 <span class="float-right incomp">INCOMPLETE</span>
                                             </li>
                                         </a>
-                                            break;
-                                        case 1:
-                                            <a href="/Order?orderId=@item.OrderId">
+                                    }
+                                    else if (@item.WorkStatus == 1)
+                                    {
+                                        <a href="/Order?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -198,26 +206,13 @@
                                                     break;
                                                 }
                                                 <h4>@item.Service.Title</h4>
-                                                <span class="float-right progress">IN PROGRESS</span>
+                                                <span class="float-right proress">IN PRORESS</span>
                                             </li>
                                         </a>
-                                            break;
-                                        case 2:
-                                            <a href="/Order?orderId=@item.OrderId">
-                                            <li>
-                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
-                                                { 
-                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
-                                                    width="60px" height="35px" style="margin-right: 1rem;">
-                                                    break;
-                                                }
-                                                <h4>@item.Service.Title</h4>
-                                                <span class="float-right deli">DELIVERED</span>
-                                            </li>
-                                        </a>
-                                            break;
-                                        case 3:
-                                            <a href="/Order?orderId=@item.OrderId">
+                                    }
+                                    else
+                                    {
+                                        <a href="/Order?orderId=@item.OrderId">
                                             <li>
                                                 @for (int i = 0; i < item.Service.ListImage.Count; i++) 
                                                 { 
@@ -229,21 +224,6 @@
                                                 <span class="float-right comp">COMPLETE</span>
                                             </li>
                                         </a>
-                                            break;
-                                        default:
-                                            <a href="/Order?orderId=@item.OrderId">
-                                            <li>
-                                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
-                                                { 
-                                                    <img src="~/@item.Service.ListImage[i].Image" alt=""
-                                                    width="60px" height="35px" style="margin-right: 1rem;">
-                                                    break;
-                                                }
-                                                <h4>@item.Service.Title</h4>
-                                                <span class="float-right cancel">CANCEL</span>
-                                            </li>
-                                        </a>
-                                            break;
                                     }
                                 }
                                 </ul>

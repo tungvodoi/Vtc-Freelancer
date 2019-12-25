@@ -1,152 +1,158 @@
 .img-profile-menu {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .change-profile {
-    display: block;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    margin: 0 auto;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin: 0 auto;
 }
 
 .ft-left {
-    float: left;
+  float: left;
 }
 
 .ft-right {
-    float: right;
+  float: right;
 }
 
 .content-detail-user {
-    margin: 1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
 }
 
 .hiden {
-    display: none !important;
-    visibility: hidden!important;
+  display: none !important;
+  visibility: hidden !important;
 }
 
 .change-profile:hover::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 .change-profile:before {
-    background: rgba(0, 0, 0, .65);
-    content: "\F030";
-    font-size: 30px;
-    line-height: 150px;
-    font-family: FontAwesome;
-    color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    text-align: center;
+  background: rgba(0, 0, 0, 0.65);
+  content: "\F030";
+  font-size: 30px;
+  line-height: 150px;
+  font-family: FontAwesome;
+  color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  text-align: center;
 }
 
 .content-wrapper {
-    padding: 1rem;
-    padding-bottom: 2rem;
-    background-color: white;
-    max-height: auto !important;
-    border: 1px solid #d5d4d2;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  background-color: white;
+  max-height: auto !important;
+  border: 1px solid #d5d4d2;
 }
 
 .tab {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* Style the buttons inside the tab */
 
 .tab button {
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    font-size: 17px;
-    background-color: transparent;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  background-color: transparent;
 }
 
 /* Change background color of buttons on hover */
 
 .tab button:hover {
-    color: #1dbf73;
+  color: #1dbf73;
 }
 
 /* Create an active/current tablink class */
 
 .tab button.active {
-    border-bottom: 2px solid #1dbf73;
-    background-color: transparent;
+  border-bottom: 2px solid #1dbf73;
+  background-color: transparent;
 }
 
 /* Style the tab content */
 
 .list-gigs {
-    display: none;
-    padding: 1rem;
-    border: none;
-    flex-wrap: wrap;
-    grid-template-columns: 34% 34% 34%;
-    padding: 0;
+  display: none;
+  padding: 1rem;
+  border: none;
+  flex-wrap: wrap;
+  grid-template-columns: 34% 34% 34%;
+  padding: 0;
 }
 
 .tab-gig {
-    font-weight: 700;
-    color: black;
+  font-weight: 700;
+  color: black;
 }
 
 .right-profile {
-    margin-left: 10%;
+  margin-left: 10%;
 }
 
 @media only screen and (max-width: 900px) {
-    .right-profile {
-        margin-left: 0px;
-    }
+  .right-profile {
+    margin-left: 0px;
+  }
 }
 
 .list-gigs1 {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 1rem;
-    border: none;
-    flex-wrap: wrap;
-    padding: 0;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 1rem;
+  border: none;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 #text-description {
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #d5d4d2;
-    resize: none;
-    padding: 1rem;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #d5d4d2;
+  resize: none;
+  padding: 1rem;
 }
 
 .btn-edit {
-    padding: 10px 10px;
-    width: calc((100% - 15px)/2);
-    margin: 3.5px;
-    border: 1px solid #d5d4d2;
-    font-weight: bold;
+  padding: 10px 10px;
+  width: calc((100% - 15px) / 2);
+  margin: 3.5px;
+  border: 1px solid #d5d4d2;
+  font-weight: bold;
 }
 
 #bgc-key {
-    background-color: #1dbf73;
-    color: white !important;
+  background-color: #1dbf73;
+  color: white !important;
 }
 
 .slider__gig {
-    max-width: 235px !important;
+  max-width: 235px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .list-gigs {
+    grid-template-columns: auto;
+  }
 }
