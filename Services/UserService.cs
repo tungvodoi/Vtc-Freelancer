@@ -118,12 +118,9 @@ namespace Vtc_Freelancer.Services
                 bool lang = AddLanguage(seller, languages, users);
                 bool skill = AddSkills(seller, skills, users);
                 bool addcateseller = AddSellerCategory(seller, category);
-                if (lang)
+                if (userlevel && lang && skill && addcateseller)
                 {
-                    if (addcateseller)
-                    {
-                        return seller;
-                    }
+                    return seller;
                 }
                 return null;
             }
@@ -178,20 +175,16 @@ namespace Vtc_Freelancer.Services
         }
         public bool UpdateIsSeller(Users users)
         {
-            // Users users1 =  new Users();
             users.IsSeller = 1;
             dbContext.Update(users);
             dbContext.SaveChanges();
             return true;
 
         }
-        public bool AddSkills(Seller seller, Skills skills1, Users users)
+        public bool AddSkills(Seller seller, Skills skills, Users users)
         {
             try
             {
-                Skills skills = new Skills();
-                skills.SkillName = skills1.SkillName;
-                skills.SkillLevel = skills1.SkillLevel;
                 skills.SellerId = seller.SellerId;
                 skills.UserId = users.UserId;
                 dbContext.Add(skills);

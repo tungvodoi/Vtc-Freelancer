@@ -180,12 +180,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               </div>
               <div class="content-delivered">
                 <div class="name-seller">
-                  <p>@item.ConversationDetail.SenderId</p>
+                  <p>@item.Sender.UserName</p>
                 </div>
                 
-                <pre>@item.ConversationDetail.Content</pre>
+                <pre>@item.Conversation.Content</pre>
                 <div class="file-result">
-                  @foreach (var item2 in item.ConversationDetail.ListAttachments)
+                  @foreach (var item2 in item.Conversation.ListAttachments)
                   {
                   <a href="~/@item2.LinkFile" download>@item2.FileName</a>
                   }

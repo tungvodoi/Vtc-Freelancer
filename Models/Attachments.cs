@@ -9,9 +9,9 @@ namespace Vtc_Freelancer.Models
         public string FileName { get; set; }
         [Column(TypeName = "text")]
         public string LinkFile { get; set; }
-        public int ConversationDetailId { get; set; }
-        [ForeignKey("ConversationDetailId")]
-        public virtual ConversationDetail ConversationDetail { get; set; }
+        public int ConversationId { get; set; }
+        [ForeignKey("ConversationId")]
+        public virtual Conversation Conversation { get; set; }
         public Attachments() { }
     }
 }

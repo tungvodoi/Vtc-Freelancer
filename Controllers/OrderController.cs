@@ -227,14 +227,8 @@ namespace Vtc_Freelancer.Controllers
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Service.Seller = orderService.GetSellerBySellerId(se.SellerId);
-                    List<Conversation> ListConversation = chatService.GetListConversationBySellerIdAndBuyerId(order.Service.SellerId, order.UserId);
-                    if (ListConversation != null)
-                    {
-                        foreach (var item in ListConversation)
-                        {
-                            item.ConversationDetail = chatService.GetConversationDetailByConversationId(item.ConversationId);
-                        }
-                    }
+                    List<Conversation> ListConversation = chatService.GetListConversationByUserId(order.Service.SellerId, order.UserId);
+
                     if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
                     {
                         ViewBag.Chat = ListConversation;

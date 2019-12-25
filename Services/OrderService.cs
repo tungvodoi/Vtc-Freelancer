@@ -89,7 +89,7 @@ namespace Vtc_Freelancer.Services
 
         public bool StartOrder(int userId, int OrderId, string ContentRequire, List<Attachments> listFile)
         {
-            Orders order = dbContext.Orders.Include(x => x.Service).FirstOrDefault(x => x.OrderId == OrderId);
+            Orders order = dbContext.Orders.Include(x => x.Service).ThenInclude(x => x.Seller).FirstOrDefault(x => x.OrderId == OrderId);
             try
             {
                 if (order != null)
@@ -99,23 +99,18 @@ namespace Vtc_Freelancer.Services
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     Conversation conver = new Conversation();
-                    conver.BuyerId = order.UserId;
-                    conver.SellerId = order.Service.SellerId;
+                    conver.SenderId = userId;
+                    conver.ReceiverId = order.Service.Seller.UserId;
+                    conver.Content = ContentRequire;
+                    conver.TimeSend = DateTime.Now;
                     dbContext.Add(conver);
-                    dbContext.SaveChanges();
-                    ConversationDetail converDetail = new ConversationDetail();
-                    converDetail.ConversationId = conver.ConversationId;
-                    converDetail.SenderId = userId;
-                    converDetail.Content = ContentRequire;
-                    converDetail.TimeSend = DateTime.Now;
-                    dbContext.Add(converDetail);
                     dbContext.SaveChanges();
                     foreach (var item in listFile)
                     {
                         Attachments file = new Attachments();
                         file.LinkFile = item.LinkFile;
                         file.FileName = item.FileName;
-                        file.ConversationDetailId = converDetail.ConversationDetailId;
+                        file.ConversationId = conver.ConversationId;
                         dbContext.Add(file);
                         dbContext.SaveChanges();
                     }
@@ -182,23 +177,18 @@ namespace Vtc_Freelancer.Services
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     Conversation conver = new Conversation();
-                    conver.BuyerId = order.UserId;
-                    conver.SellerId = order.Service.SellerId;
+                    conver.SenderId = userId;
+                    conver.ReceiverId = order.Service.Seller.UserId;
+                    conver.Content = ContentResult;
+                    conver.TimeSend = DateTime.Now;
                     dbContext.Add(conver);
-                    dbContext.SaveChanges();
-                    ConversationDetail converDetail = new ConversationDetail();
-                    converDetail.ConversationId = conver.ConversationId;
-                    converDetail.SenderId = userId;
-                    converDetail.Content = ContentResult;
-                    converDetail.TimeSend = DateTime.Now;
-                    dbContext.Add(converDetail);
                     dbContext.SaveChanges();
                     foreach (var item in ListFile)
                     {
                         Attachments file = new Attachments();
                         file.LinkFile = item.LinkFile;
                         file.FileName = item.FileName;
-                        file.ConversationDetailId = converDetail.ConversationDetailId;
+                        file.ConversationId = conver.ConversationId;
                         dbContext.Add(file);
                         dbContext.SaveChanges();
                     }
