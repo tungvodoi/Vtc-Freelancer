@@ -24,7 +24,6 @@ namespace Vtc_Freelancer.Models
         public DbSet<Report> Report { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<Conversation> Conversation { get; set; }
-        public DbSet<ConversationDetail> ConversationDetail { get; set; }
         public DbSet<FAQ> FAQ { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -127,19 +126,13 @@ namespace Vtc_Freelancer.Models
                 entity.HasKey(x => x.AttachmentsId);
                 entity.Property(x => x.FileName);
                 entity.Property(x => x.LinkFile);
-                entity.Property(x => x.ConversationDetailId);
+                entity.Property(x => x.ConversationId);
             });
             modelBuilder.Entity<Conversation>(entity =>
             {
-                entity.HasKey(x => x.ConversationId);
-                entity.Property(x => x.SellerId);
-                entity.Property(x => x.BuyerId);
-            });
-            modelBuilder.Entity<ConversationDetail>(entity =>
-            {
-                entity.HasKey(x => x.ConversationDetailId);
                 entity.Property(x => x.ConversationId);
                 entity.Property(x => x.SenderId);
+                entity.Property(x => x.ReceiverId);
                 entity.Property(x => x.Content);
                 entity.Property(x => x.TimeSend);
                 entity.Property(x => x.Status);

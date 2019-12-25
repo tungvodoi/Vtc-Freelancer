@@ -91,7 +91,7 @@ ViewData["Title"] = "Become Seller";
                {
                @foreach (var item in ViewBag.subcategory)
                {
-               <input type="checkbox" name="@item.CategoryId" value="@item.CategoryName">@item.CategoryName<br>
+               <input type="checkbox" name="@item.CategoryName" value="@item.CategoryId">@item.CategoryName<br>
 
                }
                }
@@ -145,7 +145,7 @@ ViewData["Title"] = "Become Seller";
                   // After first animation finished
                   $(this).html(
                      result.map((res) => {
-                        return `<input type="checkbox" name="${res.CategoryId}" value="${res.categoryName}">${res.categoryName}<br>`
+                        return `<input type="checkbox" name="${res.categoryName}" value="${res.CategoryId}">${res.categoryName}<br>`
                      })
                   ).animate({ opacity: 1 });
                });

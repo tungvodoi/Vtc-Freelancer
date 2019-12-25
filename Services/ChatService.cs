@@ -14,16 +14,16 @@ namespace Vtc_Freelancer.Services
         {
             this.dbContext = dbContext;
         }
-        public List<Conversation> GetListConversationBySellerIdAndBuyerId(int sellerId, int BuyerId)
+        public List<Conversation> GetListConversationByUserId(int sellerId, int BuyerId)
         {
-            return dbContext.Conversation.Where(x => x.SellerId == sellerId && x.BuyerId == BuyerId).ToList();
-        }
-
-        public ConversationDetail GetConversationDetailByConversationId(int ConversationId)
-        {
-            ConversationDetail converDetail = dbContext.ConversationDetail.FirstOrDefault(x => x.ConversationId == ConversationId);
-            converDetail.ListAttachments = dbContext.Attachments.Where(x => x.ConversationDetailId == converDetail.ConversationDetailId).ToList();
-            return converDetail;
+            List<Conversation> listConversation = dbContext.Conversation.Where(x => x.ReceiverId == sellerId && x.SenderId == BuyerId).ToList();
+            foreach (var item in listConversation)
+            {
+                item.ListAttachments = dbContext.Attachments.Where(x => x.ConversationId == item.ConversationId).ToList();
+                item.Sender = dbContext.Users.FirstOrDefault(x => x.UserId == item.SenderId);
+                item.Receiver = dbContext.Users.FirstOrDefault(x => x.UserId == item.ReceiverId);
+            }
+            return listConversation;
         }
     }
 }
