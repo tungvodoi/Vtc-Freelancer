@@ -65,6 +65,7 @@
 .wrapper-table-request table thead td {
   font-size: 12px;
   font-weight: 600;
+  text-align: center;
   text-transform: uppercase;
   color: #999;
   line-height: 33px;
@@ -91,10 +92,6 @@
   background-color: #fff;
   border: 1px #e5e5e5 solid;
   cursor: pointer;
-}
-
-.wrapper-table-request table tbody tr:hover {
-  background-color: rgb(223, 223, 223);
 }
 
 .wrapper-table-request table td.date.height95,
@@ -197,4 +194,10 @@
 
 .wrapper-table-request table td:last-child {
   padding-right: 20px;
+}
+
+.review-offers {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 5px;
 }

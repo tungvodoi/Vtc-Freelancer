@@ -1,21 +1,21 @@
 @model IEnumerable<Vtc_Freelancer.Models.Orders>;
     @{
-    ViewData["Title"] = "Manager Orders";
+    ViewData["Title"] = "Management Orders";
     Layout = "~/Views/Shared/_SellerLayout.cshtml";
     }
 
     <div class="container">
 
         <div class="order-body">
-            <h1 class="mngr-request">Manager Sales</h1>
+            <h1 class="mngr-request">Manage Sales</h1>
             <div class="tab" id="tab-request">
-                <button class="tab-requests active" onclick="OpenGigs(event, 'New')">NEW</button>
+                <button class="tab-requests active" onclick="OpenGigs(event, 'All')">ALL</button>
                 <button class="tab-requests" onclick="OpenGigs(event, 'Active')">ACTIVE</button>
                 <button class="tab-requests" onclick="OpenGigs(event, 'Delivered')">DELIVERED</button>
                 <button class="tab-requests" onclick="OpenGigs(event, 'Completed')">COMPLETED</button>
                 <button class="tab-requests" onclick="OpenGigs(event, 'Cancelled')">CANCELLED</button>
             </div>
-            <div class="wrapper-table-request" id="New" style="display: grid;">
+            <div class="wrapper-table-request" id="All" style="display: grid;">
                 <table>
                     <thead>
                         <tr>
@@ -33,14 +33,19 @@
                         {
                         @foreach (var item in Model)
                         {
-                        @if (item.WorkStatus == 0)
+                        @if (item.WorkStatus > 0)
                         {
-                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
-                            <td class="date  height95">
+                        <tr class="height95" onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date">
                                 @item.Users.UserName
                             </td>
                             <td class="text-wide">
                                 @item.Service.Title
+                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                { 
+                                    <img src="~/@item.Service.ListImage[i].Image" alt="image-gig" width="100px" height="60px">
+                                    break;
+                                }
                             </td>
                             <td class="text-wide">
                                 @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
@@ -49,10 +54,24 @@
                                 $@(item.Package.Price * item.Quantity)
                             </td>
                             <td class="text-wide">
-                                @item.ContentRequire
+                                @item.Note
                             </td>
                             <td class="text-wide">
-                                ACTIVE
+                                @switch (@item.WorkStatus)
+                                {
+                                    case 1:
+                                    <span class="progress">IN PRORESS</span>
+                                    break;
+                                    case 2:
+                                    <span class="deli">DELIVERED</span>
+                                    break;
+                                    case 3:
+                                    <span class="comp">COMPLETE</span>
+                                    break;
+                                    case 4:
+                                    <span class="cancel">CANCEL</span>
+                                    break;
+                                }
                             </td>
                         </tr>
                         }
@@ -82,12 +101,17 @@
                         {
                         @if (item.WorkStatus == 1)
                         {
-                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
-                            <td class="date  height95">
+                        <tr class="height95" onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date">
                                 @item.Users.UserName
                             </td>
                             <td class="text-wide">
                                 @item.Service.Title
+                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                { 
+                                    <img src="~/@item.Service.ListImage[i].Image" alt="image-gig" width="100px" height="60px">
+                                    break;
+                                }
                             </td>
                             <td class="text-wide">
                                 @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
@@ -96,10 +120,10 @@
                                 $@(item.Package.Price * item.Quantity)
                             </td>
                             <td class="text-wide">
-                                @item.ContentRequire
+                                @item.Note
                             </td>
                             <td class="text-wide">
-                                IN PROGRESS
+                                <span class="progress">IN PRORESS</span>
                             </td>
                         </tr>
                         }
@@ -129,12 +153,17 @@
                         {
                         @if (item.WorkStatus == 2)
                         {
-                            <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
-                                <td class="date  height95">
+                            <tr class="height95" onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                                <td class="date">
                                     @item.Users.UserName
                                 </td>
                                 <td class="text-wide">
                                     @item.Service.Title
+                                    @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                { 
+                                    <img src="~/@item.Service.ListImage[i].Image" alt="image-gig" width="100px" height="60px">
+                                    break;
+                                }
                                 </td>
                                 <td class="text-wide">
                                     @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
@@ -146,10 +175,10 @@
                                     $@(item.Package.Price * item.Quantity)
                                 </td>
                                 <td class="text-wide">
-                                    @item.ContentRequire
+                                    @item.Note
                                 </td>
                                 <td class="text-wide">
-                                    DELIVERED
+                                    <span class="deli">DELIVERED</span>
                                 </td>
                             </tr>
                         }
@@ -179,12 +208,17 @@
                         {
                         @if (item.WorkStatus == 3)
                         {
-                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
-                            <td class="date  height95">
+                        <tr class="height95" onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date">
                                 @item.Users.UserName
                             </td>
                             <td class="text-wide">
                                 @item.Service.Title
+                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                { 
+                                    <img src="~/@item.Service.ListImage[i].Image" alt="image-gig" width="100px" height="60px">
+                                    break;
+                                }
                             </td>
                             <td class="text-wide">
                                 @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
@@ -196,10 +230,10 @@
                                 $@(item.Package.Price * item.Quantity)
                             </td>
                             <td class="text-wide">
-                                @item.ContentRequire
+                                @item.Note
                             </td>
                             <td class="text-wide">
-                                COMPLETED
+                                <span class="comp">COMPLETE</span>
                             </td>
                         </tr>
                         }
@@ -227,14 +261,19 @@
                         {
                         @foreach (var item in Model)
                         {
-                        @if (item.WorkStatus == 5)
+                        @if (item.WorkStatus == 4)
                         {
-                        <tr onclick="window.location.href='/Order?orderId=@item.OrderId'">
-                            <td class="date  height95">
+                        <tr class="height95" onclick="window.location.href='/Order?orderId=@item.OrderId'">
+                            <td class="date">
                                 @item.Users.UserName
                             </td>
                             <td class="text-wide">
                                 @item.Service.Title
+                                @for (int i = 0; i < item.Service.ListImage.Count; i++) 
+                                { 
+                                    <img src="~/@item.Service.ListImage[i].Image" alt="image-gig" width="100px" height="60px">
+                                    break;
+                                }
                             </td>
                             <td class="text-wide">
                                 @item.OrderStartTime.AddDays(item.Package.DeliveryTime).ToString("dd/MM/yyyy")
@@ -243,10 +282,10 @@
                                 $@(item.Package.Price * item.Quantity)
                             </td>
                             <td class="text-wide">
-                                @item.ContentRequire
+                                @item.Note
                             </td>
                             <td class="text-wide">
-                                CANCELED
+                                <span class="cancel">CANCEL</span>
                             </td>
                         </tr>
                         }

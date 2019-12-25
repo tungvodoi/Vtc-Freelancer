@@ -17,6 +17,7 @@ namespace Vtc_Freelancer.Models
         [Column(TypeName = "text")]
         public string LinkFile { get; set; }
         public DateTime TimeCreate { get; set; }
+        public int QuantityOffers { get; set; }
         public int Status { get; set; }
         public int? UserId { get; set; }
         [ForeignKey("UserId")]

@@ -128,5 +128,30 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/");
         }
+        [HttpGet("/Request")]
+        public IActionResult ListRequest()
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                List<Request> listRequest = requestService.getListRequestByCategoryOfSeller(category);
+                List<Category> listcategory = new List<Category>();
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View(listRequest);
+            }
+            return Redirect("/");
+        }
     }
 }

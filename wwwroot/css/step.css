@@ -505,7 +505,6 @@ Textarea, {
 }
 
 .container-order {
-  display: flex;
   padding: 32px;
   margin-left: auto;
   margin-right: auto;
@@ -536,6 +535,15 @@ Textarea, {
 .li-content-order p {
   color: #1dbf73;
 }
+.li-content-delivered p,
+.li-content-delivered span {
+  font-size: 24px;
+  color: #1dbf73;
+}
+
+.li-content-delivered span {
+  font-weight: 600;
+}
 
 .li-content-order1 p {
   color: #e29637;
@@ -549,6 +557,7 @@ Textarea, {
 }
 
 .wrapper-process-order-content {
+  position: relative;
   margin: 0rem 2rem;
   padding: 1rem 2rem;
   border-radius: 4px;
@@ -577,9 +586,9 @@ Textarea, {
   position: absolute;
   background: #1dbf73;
   width: 2px;
-  bottom: 11rem;
-  right: 356px;
-  top: 265px;
+  bottom: 104px;
+  left: 41px;
+  top: 25px;
   z-index: -1;
 }
 
@@ -588,9 +597,18 @@ Textarea, {
   position: absolute;
   background: #d5d4d2 !important;
   width: 2px;
-  bottom: 11rem;
-  right: 356px;
-  top: 28rem;
+  bottom: 105px;
+  top: 200px;
+  z-index: -1;
+}
+
+.await-delivered::before {
+  content: "";
+  position: absolute;
+  background: #d5d4d2 !important;
+  width: 2px;
+  bottom: 105px;
+  top: 163px;
   z-index: -1;
 }
 

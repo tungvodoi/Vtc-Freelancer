@@ -20,15 +20,16 @@ namespace Vtc_Freelancer.Controllers
         private UserService userService;
         private OrderService orderService;
         private AdminService adminService;
-        public OrderController(UserService userService, OrderService orderService, AdminService adminService, IHostingEnvironment _environment)
+        private ChatService chatService;
+        public OrderController(UserService userService, OrderService orderService, AdminService adminService, ChatService chatService, IHostingEnvironment _environment)
         {
             this._environment = _environment;
             this.userService = userService;
             this.orderService = orderService;
             this.adminService = adminService;
+            this.chatService = chatService;
         }
 
-        [Authentication]
         [HttpGet("/Customize/Order")]
         public IActionResult Order(int PackageId)
         {
@@ -53,6 +54,7 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
         }
+        [Authentication]
         [HttpPost("/Customize/CreateOrder")]
         public IActionResult CreateOrder(int PackageId, int selectQuantity)
         {
@@ -71,7 +73,6 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/");
         }
-        // [Authentication]
         [HttpGet("/Order/Payment")]
         public IActionResult Payment(int PackageId, int Quantity)
         {
@@ -148,46 +149,54 @@ namespace Vtc_Freelancer.Controllers
         [HttpPost("/Order/StartOrder")]
         public IActionResult StartOrder(int OrderId, string ContentRequire, string name)
         {
-            string urlFile = "";
-            var newFileName = string.Empty;
-
-            if (HttpContext.Request.Form.Files != null)
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            List<Attachments> listFile = new List<Attachments>();
+            if (users != null)
             {
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-                var files = HttpContext.Request.Form.Files;
-                foreach (var file in files)
+                var newFileName = string.Empty;
+                if (HttpContext.Request.Form.Files != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
                     {
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "FileRequire/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        urlFile = "FileRequire/" + newFileName;
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "Attachments/") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = "Attachments/" + newFileName;
+
+                            Attachments fileProduct = new Attachments();
+                            fileProduct.LinkFile = PathDB;
+                            fileProduct.FileName = newFileName;
+                            listFile.Add(fileProduct);
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
                         }
                     }
                 }
-            }
-            if (orderService.StartOrder(OrderId, ContentRequire, urlFile))
-            {
-                return Redirect("/order?orderId=" + OrderId);
+                if (orderService.StartOrder(users.UserId, OrderId, ContentRequire, listFile))
+                {
+                    return Redirect("/order?orderId=" + OrderId);
+                }
             }
             return Redirect("/");
         }
@@ -218,8 +227,17 @@ namespace Vtc_Freelancer.Controllers
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Service.Seller = orderService.GetSellerBySellerId(se.SellerId);
+                    List<Conversation> ListConversation = chatService.GetListConversationBySellerIdAndBuyerId(order.Service.SellerId, order.UserId);
+                    if (ListConversation != null)
+                    {
+                        foreach (var item in ListConversation)
+                        {
+                            item.ConversationDetail = chatService.GetConversationDetailByConversationId(item.ConversationId);
+                        }
+                    }
                     if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
                     {
+                        ViewBag.Chat = ListConversation;
                         ViewBag.ListOrder = orderService.GetListOrderbyUserId(UserId);
                         ViewBag.UserName = userads.UserName;
                         ViewBag.UserId = userads.UserId;
@@ -236,46 +254,81 @@ namespace Vtc_Freelancer.Controllers
         [HttpPost("/DeleverWork")]
         public IActionResult DeleverWork(int OrderId, string contentResult, string name)
         {
-            string urlFile = "";
-            var newFileName = string.Empty;
-
-            if (HttpContext.Request.Form.Files != null)
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
             {
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-                var files = HttpContext.Request.Form.Files;
-                foreach (var file in files)
+                List<Attachments> listFile = new List<Attachments>();
+                var newFileName = string.Empty;
+
+                if (HttpContext.Request.Form.Files != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
                     {
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "FileResult/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        urlFile = "FileResult/" + newFileName;
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "Attachments/") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = "Attachments/" + newFileName;
+
+                            Attachments fileProduct = new Attachments();
+                            fileProduct.LinkFile = PathDB;
+                            fileProduct.FileName = newFileName;
+                            listFile.Add(fileProduct);
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
                         }
+                    }
+                    if (orderService.DeliverWord(users.UserId, OrderId, contentResult, listFile))
+                    {
+                        return Redirect("/order?orderId=" + OrderId);
                     }
                 }
             }
-            if (orderService.DeliverWord(OrderId, contentResult, urlFile))
+            return Redirect("/");
+        }
+        [HttpPost("/AddNote")]
+        public IActionResult AddNote(int OrderId, string noteContent)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
             {
-                return Redirect("/order?orderId=" + OrderId);
+                if (orderService.Addnote(OrderId, noteContent))
+                {
+                    return Redirect("/order?orderId=" + OrderId);
+                }
+            }
+            return Redirect("/");
+        }
+        [HttpPost("/CancelOrder")]
+        public IActionResult CancelOrder(int OrderId, string contentCancelOrder)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                if (orderService.CancelOrder(OrderId, contentCancelOrder))
+                {
+                    return Redirect("/manager_orders");
+                }
             }
             return Redirect("/");
         }

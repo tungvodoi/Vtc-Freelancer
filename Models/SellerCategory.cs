@@ -7,12 +7,10 @@ namespace Vtc_Freelancer.Models
     {
 
         public int SellerId { get; set; }
-        // [ForeignKey("SellerId")]
         public int CategoryId { get; set; }
-        // [ForeignKey("CategoryId")]
-
+        [ForeignKey("SellerId")]
         public virtual Seller Seller { get; set; }
-
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
     }

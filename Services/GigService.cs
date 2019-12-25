@@ -89,21 +89,19 @@ namespace Vtc_Freelancer.Services
             {
                 foreach (var stringImage in urlImages)
                 {
-                    Console.WriteLine(stringImage.Length);
                     ImageService imageService = new ImageService();
                     imageService.Image = stringImage;
                     imageService.ServiceId = serviceID;
                     dbContext.Add(imageService);
                     dbContext.SaveChanges();
                 }
-
+                return true;
             }
             catch (System.Exception ex)
             {
                 Console.WriteLine(ex);
                 return false;
             }
-            return true;
         }
         public bool reportGig(int UserId, int ServiceId, string titleReport, string contentReport)
         {

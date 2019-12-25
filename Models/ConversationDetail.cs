@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtc_Freelancer.Models
@@ -10,6 +11,7 @@ namespace Vtc_Freelancer.Models
         public int SenderId { get; set; }
         [Column(TypeName = "text")]
         public string Content { get; set; }
+        public List<Attachments> ListAttachments { get; set; }
         public DateTime TimeSend { get; set; }
         public int Status { get; set; }
         [ForeignKey("ConversationId")]

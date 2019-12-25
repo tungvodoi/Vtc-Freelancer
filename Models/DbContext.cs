@@ -14,6 +14,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<Request> Request { get; set; }
         public DbSet<Offer> Offer { get; set; }
         public DbSet<Orders> Orders { get; set; }
+        public DbSet<Attachments> Attachments { get; set; }
         public DbSet<Service> Service { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationDetail> NotificationDetail { get; set; }
@@ -91,6 +92,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.Description);
                 entity.Property(x => x.LinkFile);
                 entity.Property(x => x.TimeCreate);
+                entity.Property(x => x.QuantityOffers);
                 entity.Property(x => x.Status);
                 entity.Property(x => x.UserId);
             });
@@ -113,13 +115,19 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.OrderCreateTime);
                 entity.Property(x => x.OrderStartTime);
                 entity.Property(x => x.OrderDeliveredTime);
-                entity.Property(x => x.ContentRequire);
-                entity.Property(x => x.FileRequire);
-                entity.Property(x => x.FileResult);
-                entity.Property(x => x.ContentReply);
+                entity.Property(x => x.Note);
+                entity.Property(x => x.BecauseCancelOrder);
+                entity.Property(x => x.NumberRevision);
                 entity.Property(x => x.PackageId);
                 entity.Property(x => x.UserId);
                 entity.Property(x => x.ServiceId);
+            });
+            modelBuilder.Entity<Attachments>(entity =>
+            {
+                entity.HasKey(x => x.AttachmentsId);
+                entity.Property(x => x.FileName);
+                entity.Property(x => x.LinkFile);
+                entity.Property(x => x.ConversationDetailId);
             });
             modelBuilder.Entity<Conversation>(entity =>
             {
@@ -133,8 +141,8 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.ConversationId);
                 entity.Property(x => x.SenderId);
                 entity.Property(x => x.Content);
-                entity.Property(x => x.Status);
                 entity.Property(x => x.TimeSend);
+                entity.Property(x => x.Status);
             });
             modelBuilder.Entity<Notification>(entity =>
             {

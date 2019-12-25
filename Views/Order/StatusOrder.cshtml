@@ -1,6 +1,6 @@
 @model Orders;
 @{
-ViewData["Title"] = "Requirement";
+ViewData["Title"] = "Status Order";
 @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
 {
 Layout = "~/Views/Shared/_SellerLayout.cshtml";
@@ -10,10 +10,35 @@ else
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 }
-<div class="nav-step container">
+<div class="nav-step">
   <nav>
+    @if (ViewBag.UserId == Model.UserId)
+    {
+    @if (Model.WorkStatus == 2)
+    {
+    <ul class="ul-step-order comp-order">
+      <div class="order-status">
+        <li class="wrapper-li-step">
+          <div class="li-step-order-border-white"><i class="fa fa-check" style="color: white;"></i>
+          </div>
+          <div class="li-content-order">
+            <p style="color: white">REQUIREMENT'S SUBMITTED</p>
+          </div>
+        </li>
+        <li class="wrapper-li-step">
+          <div class="li-step-order-border-large"><i class="fa fa-check" style="color: white;"></i>
+          </div>
+          <div class="li-content-delivered">
+            <p style="color: white">ORDER DELIVERED. PLEASE REVIEW</p>
+          </div>
+        </li>
+      </div>
+    </ul>
+    }
+    else if(Model.WorkStatus == 0 || Model.WorkStatus == 1)
+    {
     <ul class="ul-step-order">
-      <div class="order-status left-top">
+      <div class="order-status">
         <li class="wrapper-li-step">
           <div class="li-step-order" style="background-color: #1dbf73;"><i class="fa fa-check"
               style="color: white;"></i>
@@ -30,11 +55,41 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <p>ORDER IN PROGRESS EXPECTED DELIVERY: @ViewBag.Delivery.ToString("dd/MM/yyyy")</p>
           </div>
         </li>
-
       </div>
-      @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
-      {
-      <div class="order-status  right-top">
+    </ul>
+    }
+    else
+    {
+      <ul class="ul-step-order cancel-order">
+        <div class="order-status">
+          <li class="wrapper-li-step">
+            <div class="li-step-order" style="background: rgb(255, 65, 65);color: white;">
+              ✖ 
+            </div>
+            <div class="li-content-order1">
+              <p style="color: white;">Order had been cancel</p>
+            </div>
+          </li>
+        </div>
+      </ul>
+    }
+    }
+    @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
+    {
+    @if(Model.WorkStatus == 1 || Model.WorkStatus == 2)
+    {
+    <ul class="ul-step-order">
+      <div class="order-status left-top">
+        <li class="wrapper-li-step">
+          <div class="li-step-order" style="background-color: #e29637;"><i class="fa fa-map-marker"
+              style="color: white;"></i>
+          </div>
+          <div class="li-content-order1">
+            <p>ORDER IN PROGRESS DELIVER SOON</p>
+          </div>
+        </li>
+      </div>
+      <div class="order-status right-top">
         <li class="wrapper-li-step flex-end">
           <button class="btn-sub" id="btn-sub-right" onclick="openHidden()">Deliver Your Order</button>
         </li>
@@ -56,74 +111,197 @@ Layout = "~/Views/Shared/_Layout.cshtml";
           <button class="btn-sub right-bo">Deliver Work</button>
         </form>
       </div>
-      }
     </ul>
+    }
+    else
+    {
+      <ul class="ul-step-order cancel-order">
+        <div class="order-status">
+          <li class="wrapper-li-step">
+            <div class="li-step-order" style="background: rgb(255, 65, 65);color: white;">
+              ✖ 
+            </div>
+            <div class="li-content-order1">
+              <p style="color: white;">Order had been cancel</p>
+            </div>
+          </li>
+        </div>
+      </ul>
+    }
+    }
   </nav>
 </div>
 <div class="container-inner body-require font-size-14">
   <div class="right-content">
     <div class="border-content container-order">
-      @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img src="~/@Model.Service.ListImage[i].Image" alt=""
-        width="150px" height="100px" class="img-summary-require">
-        break;
-        }
-        <div class="content-detail-service">
-          <h1>@Model.Service.Title</h1>
-          <div class="info-more">
-            <p>Seller: <a href="/@Model.Service.Seller.User.UserName">@Model.Service.Seller.User.UserName</a></p>
-            <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">Order: @Model.OrderId</p>
-            <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">
-              @Model.OrderStartTime.ToString("dd/MM/yyyy")</p>
+      <div class="info-service-delivered">
+        @for (int i = 0; i < Model.Service.ListImage.Count; i++) { <img src="~/@Model.Service.ListImage[i].Image" alt=""
+          width="150px" height="100px" class="img-summary-require">
+          break;
+          }
+          <div class="content-detail-service">
+            <h1>@Model.Service.Title</h1>
+            <div class="info-more">
+              <p>Seller: <a href="/@Model.Service.Seller.User.UserName">@Model.Service.Seller.User.UserName</a></p>
+              <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">Order: @Model.OrderId</p>
+              <p style="border-left: 1px solid; margin-left: 10px; padding-left:10px">
+                @Model.OrderStartTime.ToString("dd/MM/yyyy")</p>
+            </div>
           </div>
+          <div class="price-order">
+            <h1>$ @(Model.Package.Price * Model.Quantity +
+              (@Model.Package.Price * Model.Quantity * 20/100))</h1>
+          </div>
+      </div>
+      @if(Model.WorkStatus == 2 || Model.WorkStatus == 3)
+      {
+      <div class="mail-result">
+        <div class="title-delivered">
+          <img src="~/Images/icon-unbox.png" alt="icon-unbox" width="50px">
+          <h3>HERE'S YOUR DELIVERY!</h3>
+          <p>This order will be marked as completed in 3days</p>
         </div>
-        <div class="price-order">
-          <h1>$ @(Model.Package.Price * Model.Quantity +
-            (@Model.Package.Price * Model.Quantity * 20/100))</h1>
+        
+          @if (ViewBag.Chat != null)
+          {
+            @foreach (var item in ViewBag.Chat)
+            {
+              <div class="body-delivered">
+              <div class="avt-seller-conv">
+                @if(@Model.Service.Seller.User.Avatar != null)
+                {
+                <img src="~/@Model.Service.Seller.User.Avatar" alt="avatar-seller" width="40px"
+                  class="avt-seller-delivered">
+                }
+                else
+                {
+                <img src="~/Images/avatardefault.png" alt="avatar-seller" width="40px" class="avt-seller-delivered">
+                }
+              </div>
+              <div class="content-delivered">
+                <div class="name-seller">
+                  <p>@item.ConversationDetail.SenderId</p>
+                </div>
+                
+                <pre>@item.ConversationDetail.Content</pre>
+                <div class="file-result">
+                  @foreach (var item2 in item.ConversationDetail.ListAttachments)
+                  {
+                  <a href="~/@item2.LinkFile" download>@item2.FileName</a>
+                  }
+                </div>
+              </div>
+              </div>
+            }
+          }
         </div>
+      
+      <div class="approve-order">
+        <div class="title-approve-order">
+          <p>Are you ready to approve and finalize you order?</p>
+        </div>
+        <div class="select-approve-order">
+          <button class="select-finalize">Yes</button>
+          <button class="select-finalize">No</button>
+        </div>
+        <div class="note-approve-order">
+          <p><b>Please note: </b>respond in the next three days or the order will be automatically approved and completed.</p>
+        </div>
+      </div>
+      }
     </div>
     @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
     {
-      <div class="border-content container-order" style="margin-top: 20px">
-        <div class="wrapper-table-request" style="display: Grid; width : 100%">
-          <table>
-              <thead>
-                  <tr>
-                      <td style="width: 450px">Item</td>
-                      <td>Quantity</td>
-                      <td>Duration</td>
-                      <td>Amount</td>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td class="date  height95" style="width: 450px">
-                        <span class="span-detail-order">✔ </span> @Model.Package.NumberRevision Revision
-                      </td>
-                      <td class="text-wide">
-                        @Model.Quantity
-                      </td>
-                      <td class="text-wide">
-                        @if(Model.Package.DeliveryTime > 1)
-                        {
-                          <p>@Model.Package.DeliveryTime Days</p>
-                        }
-                        else
-                        {
-                          <p>@Model.Package.DeliveryTime Day</p>
-                        }
-                      </td>
-                      <td class="text-wide">
-                          $@Model.Package.Price
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-          <p style="margin-left: auto;"><b>Total: $@(Model.Quantity * Model.Package.Price)</b></p>
-        </div>
+    <div class="border-content container-order" style="margin-top: 20px">
+      <div class="wrapper-table-request" style="display: Grid; width : 100%">
+        <table>
+          <thead>
+            <tr>
+              <td style="width: 450px">Item</td>
+              <td>Quantity</td>
+              <td>Duration</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="date  height95" style="width: 450px">
+                <span class="span-detail-order">✔ </span> @Model.Package.NumberRevision Revision
+              </td>
+              <td class="text-wide">
+                @Model.Quantity
+              </td>
+              <td class="text-wide">
+                @if(Model.Package.DeliveryTime > 1)
+                {
+                <p>@Model.Package.DeliveryTime Days</p>
+                }
+                else
+                {
+                <p>@Model.Package.DeliveryTime Day</p>
+                }
+              </td>
+              <td class="text-wide">
+                $@Model.Package.Price
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-left: auto;"><b>Total: $@(Model.Quantity * Model.Package.Price)</b></p>
       </div>
+    </div>
     }
   </div>
   <div class="left-content">
+    @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
+    {
+    <div class="wrapper-process-order-content">
+      <div class="title-note">
+        <h3>Private Note</h3>
+      </div>
+      <span>Only visible to you</span>
+      <div class="content-note">
+        <pre>@Model.Note</pre>
+      </div>
+      @if(Model.WorkStatus != 4)
+      {
+        <div class="add-note">
+          <p onclick="openHiddenFormNote()">Add note</p>
+        </div>
+      }
+      <div class="hidden-form" id="hidden-form-note">
+        <div class="top-form-deliver">
+          <h3>Note</h3>
+          <button class="ignore" onclick="openHiddenFormNote()">✖</button>
+        </div>
+        <form action="/AddNote?OrderId=@Model.OrderId" method="post" class="form-hidden-form">
+          <textarea name="noteContent" class="noteContent" placeholder="Note..."></textarea>
+          <button class="btn-sub right-bo">Add note</button>
+        </form>
+      </div>
+    </div>
+    @if(Model.WorkStatus != 4)
+    {
+    <div class="wrapper-process-order-content">
+      <div class="title-visit">
+        <p>Need to change or cancel your order?</p>
+      </div>
+      <button class="button-cancel-order" onclick="openHiddenFormCancelOrder()">Visit the Resolution Center</button>
+      <div class="hidden-form" id="hidden-form-cancel-order">
+        <div class="top-form-deliver">
+          <h3>Handle</h3>
+          <button class="ignore" onclick="openHiddenFormCancelOrder()">✖</button>
+        </div>
+        <form action="/CancelOrder?OrderId=@Model.OrderId" method="post" class="form-hidden-form">
+          <textarea name="contentCancelOrder" class="noteContent" placeholder="Write because you cancel order..."></textarea>
+          <button class="btn-sub right-bo">Cancel</button>
+        </form>
+      </div>
+    </div>
+    }
+    }
+    else
+    {
     <div class="wrapper-process-order-content">
       <div class="process-order">
         <div class="content-order">
@@ -132,6 +310,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="content-order">
           <h4 class="process-success">Provide Requirements</h4>
         </div>
+        @if (ViewBag.UserId == Model.UserId)
+        {
+        @if(Model.WorkStatus == 1)
+        {
         <div class="content-order">
           <h4 class="processing">Order in Progress</h4>
           <p>Exiting stuff! The Seller is now working on your delivery. The order is due:
@@ -144,32 +326,72 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="content-order await">
           <h4 class="await-process">Order Complete</h4>
         </div>
+        }
+        @if(Model.WorkStatus == 2)
+        {
+        <div class="content-order">
+          <h4 class="process-success">Order in Progress</h4>
+        </div>
+        <div class="content-order">
+          <h4 class="processing">Review the Delivery</h4>
+          <p>Your delivery is here! Review and accept it or request a revision. Please respond by
+            <b>@Model.OrderDeliveredTime.ToString("dd/MM/yyyy")</b> or the order will be automatically accepted</p>
+        </div>
+        <div class="content-order">
+          <h4 class="await-process">Order Complete</h4>
+        </div>
+        }
+        }
       </div>
       <div class="FAQs-order">
         <p>Something unclear?</p>
         <a href="#">Check out our FAQs</a>
       </div>
     </div>
+    }
   </div>
 </div>
-</div>
-</div>
 
-<script>
-  var button1 = document.getElementById('btn-sub-right');
-  var hidden1 = document.getElementById('hidden-form');
-  var flag1 = true;
-  function openHidden() {
+  <script>
+    var hidden1 = document.getElementById('hidden-form');
+    var hidden2 = document.getElementById('hidden-form-note');
+    var hidden3 = document.getElementById('hidden-form-cancel-order');
+    var flag1 = true;
+    var flag2 = true;
+    var flag3 = true;
+    function openHidden() {
 
-    if (flag1 == true) {
-      hidden1.style.display = "block";
-      flag1 = false;
+      if (flag1 == true) {
+        hidden1.style.display = "block";
+        flag1 = false;
+      }
+      else {
+        hidden1.style.display = "none";
+        flag1 = true;
+      }
     }
-    else {
-      hidden1.style.display = "none";
-      flag1 = true;
+    function openHiddenFormNote() {
+
+      if (flag2 == true) {
+        hidden2.style.display = "block";
+        flag2 = false;
+      }
+      else {
+        hidden2.style.display = "none";
+        flag2 = true;
+      }
     }
-  }
+    function openHiddenFormCancelOrder() {
+
+      if (flag3 == true) {
+        hidden3.style.display = "block";
+        flag3 = false;
+      }
+      else {
+        hidden3.style.display = "none";
+        flag3 = true;
+      }
+    }
 
 
-</script>
+  </script>

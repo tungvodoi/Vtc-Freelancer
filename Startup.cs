@@ -29,6 +29,7 @@ namespace Vtc_Freelancer
             services.AddScoped<MyDbContext, MyDbContext>();
             services.AddScoped<HashPassword, HashPassword>();
             services.AddScoped<UserService, UserService>();
+            services.AddScoped<ChatService, ChatService>();
             services.AddScoped<AdminService, AdminService>();
             services.AddScoped<GigService, GigService>();
             services.AddScoped<RequestService, RequestService>();
@@ -66,7 +67,7 @@ namespace Vtc_Freelancer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();

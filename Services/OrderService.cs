@@ -87,19 +87,38 @@ namespace Vtc_Freelancer.Services
             return dbContext.Orders.FirstOrDefault(x => x.OrderId == OrderId);
         }
 
-        public bool StartOrder(int OrderId, string ContentRequire, string urlFile)
+        public bool StartOrder(int userId, int OrderId, string ContentRequire, List<Attachments> listFile)
         {
-            Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == OrderId);
+            Orders order = dbContext.Orders.Include(x => x.Service).FirstOrDefault(x => x.OrderId == OrderId);
             try
             {
                 if (order != null)
                 {
                     order.WorkStatus = 1;
                     order.OrderStartTime = DateTime.Now;
-                    order.ContentRequire = ContentRequire;
-                    order.FileRequire = urlFile;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
+                    Conversation conver = new Conversation();
+                    conver.BuyerId = order.UserId;
+                    conver.SellerId = order.Service.SellerId;
+                    dbContext.Add(conver);
+                    dbContext.SaveChanges();
+                    ConversationDetail converDetail = new ConversationDetail();
+                    converDetail.ConversationId = conver.ConversationId;
+                    converDetail.SenderId = userId;
+                    converDetail.Content = ContentRequire;
+                    converDetail.TimeSend = DateTime.Now;
+                    dbContext.Add(converDetail);
+                    dbContext.SaveChanges();
+                    foreach (var item in listFile)
+                    {
+                        Attachments file = new Attachments();
+                        file.LinkFile = item.LinkFile;
+                        file.FileName = item.FileName;
+                        file.ConversationDetailId = converDetail.ConversationDetailId;
+                        dbContext.Add(file);
+                        dbContext.SaveChanges();
+                    }
                     return true;
                 }
             }
@@ -110,28 +129,88 @@ namespace Vtc_Freelancer.Services
             }
             return false;
         }
-        public bool DeliverWord(int OrderId, string ContentResult, string urlFile)
+        public bool Addnote(int orderId, string noteContent)
         {
-            Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == OrderId);
             try
             {
+                Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == orderId);
                 if (order != null)
                 {
-                    order.WorkStatus = 2;
-                    order.ContentReply = ContentResult;
-                    order.FileResult = urlFile;
-                    order.OrderDeliveredTime = DateTime.Now;
+                    order.Note = noteContent;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     return true;
                 }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public bool CancelOrder(int orderId, string contentCancelOrder)
+        {
+            try
+            {
+                Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == orderId);
+                if (order != null)
+                {
+                    order.BecauseCancelOrder = contentCancelOrder;
+                    order.WorkStatus = 4;
+                    dbContext.Update(order);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public bool DeliverWord(int userId, int OrderId, string ContentResult, List<Attachments> ListFile)
+        {
+            try
+            {
+                Orders order = dbContext.Orders.Include(x => x.Service).FirstOrDefault(x => x.OrderId == OrderId);
+                if (order != null)
+                {
+                    order.WorkStatus = 2;
+                    order.OrderDeliveredTime = DateTime.Now;
+                    dbContext.Update(order);
+                    dbContext.SaveChanges();
+                    Conversation conver = new Conversation();
+                    conver.BuyerId = order.UserId;
+                    conver.SellerId = order.Service.SellerId;
+                    dbContext.Add(conver);
+                    dbContext.SaveChanges();
+                    ConversationDetail converDetail = new ConversationDetail();
+                    converDetail.ConversationId = conver.ConversationId;
+                    converDetail.SenderId = userId;
+                    converDetail.Content = ContentResult;
+                    converDetail.TimeSend = DateTime.Now;
+                    dbContext.Add(converDetail);
+                    dbContext.SaveChanges();
+                    foreach (var item in ListFile)
+                    {
+                        Attachments file = new Attachments();
+                        file.LinkFile = item.LinkFile;
+                        file.FileName = item.FileName;
+                        file.ConversationDetailId = converDetail.ConversationDetailId;
+                        dbContext.Add(file);
+                        dbContext.SaveChanges();
+                    }
+                    return true;
+                }
+                return false;
             }
             catch (System.Exception ex)
             {
                 Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
-            return false;
         }
 
         public List<Orders> GetListOrderbyUserId(int? userId)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtc_Freelancer.Models
@@ -11,15 +12,11 @@ namespace Vtc_Freelancer.Models
         public DateTime OrderCreateTime { get; set; }
         public DateTime OrderStartTime { get; set; }
         public DateTime OrderDeliveredTime { get; set; }
+        public string Note { get; set; }
+        public string BecauseCancelOrder { get; set; }
+        public int NumberRevision { get; set; }
         public int PackageId { get; set; }
         public int UserId { get; set; }
-        public string ContentRequire { get; set; }
-        [Column(TypeName = "text")]
-        public string FileRequire { get; set; }
-        [Column(TypeName = "text")]
-        public string FileResult { get; set; }
-        [Column(TypeName = "text")]
-        public string ContentReply { get; set; }
         public int ServiceId { get; set; }
         [ForeignKey("UserId")]
         public virtual Users Users { get; set; }

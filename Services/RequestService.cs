@@ -25,6 +25,7 @@ namespace Vtc_Freelancer.Services
                 req.SubCategory = SubCategory;
                 req.LinkFile = urlFile;
                 req.TimeCreate = DateTime.Now;
+                req.QuantityOffers = 0;
                 req.Status = 0;
                 req.UserId = UserId;
                 dbContext.Add(req);
@@ -41,6 +42,15 @@ namespace Vtc_Freelancer.Services
         public List<Request> getListRequestByUserId(int userId)
         {
             return dbContext.Request.Where(x => x.UserId == userId).ToList();
+        }
+        public List<Request> getListRequestByCategoryOfSeller(List<Category> listCategory)
+        {
+            List<Request> listRequest = new List<Request>();
+            foreach (var item in listCategory)
+            {
+                listRequest.Add(dbContext.Request.FirstOrDefault(x => x.Category == item.CategoryName));
+            }
+            return listRequest;
         }
     }
 }
