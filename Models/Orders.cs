@@ -13,7 +13,7 @@ namespace Vtc_Freelancer.Models
         public DateTime OrderStartTime { get; set; }
         public DateTime OrderDeliveredTime { get; set; }
         public string Note { get; set; }
-        public string BecauseCancelOrder { get; set; }
+        public string ReasonCancelOrder { get; set; }
         public int NumberRevision { get; set; }
         public int PackageId { get; set; }
         public int UserId { get; set; }

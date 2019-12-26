@@ -26,7 +26,7 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Service.FirstOrDefault(x => x.ServiceId == ServiceId);
         }
-        public Seller GetSellerBySellerId(int SellerId)
+        public Seller GetUserIdOfSellerBySellerId(int SellerId)
         {
             Seller seller = dbContext.Seller.Include(x => x.User).FirstOrDefault(x => x.SellerId == SellerId);
             return seller;
@@ -98,24 +98,29 @@ namespace Vtc_Freelancer.Services
                     order.OrderStartTime = DateTime.Now;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
-                    Conversation conver = new Conversation();
-                    conver.SenderId = userId;
-                    conver.ReceiverId = order.Service.Seller.UserId;
-                    conver.Content = ContentRequire;
-                    conver.TimeSend = DateTime.Now;
-                    dbContext.Add(conver);
-                    dbContext.SaveChanges();
-                    foreach (var item in listFile)
+                    if ((ContentRequire != null && ContentRequire != "") || listFile.Count > 0)
                     {
-                        Attachments file = new Attachments();
-                        file.LinkFile = item.LinkFile;
-                        file.FileName = item.FileName;
-                        file.ConversationId = conver.ConversationId;
-                        dbContext.Add(file);
+                        Conversation conver = new Conversation();
+                        conver.SenderId = userId;
+                        conver.ReceiverId = order.Service.Seller.UserId;
+                        conver.Content = ContentRequire;
+                        conver.TimeSend = DateTime.Now;
+                        conver.IsDeliveredOrIsRevisions = 0;
+                        dbContext.Add(conver);
                         dbContext.SaveChanges();
+                        foreach (var item in listFile)
+                        {
+                            Attachments file = new Attachments();
+                            file.LinkFile = item.LinkFile;
+                            file.FileName = item.FileName;
+                            file.ConversationId = conver.ConversationId;
+                            dbContext.Add(file);
+                            dbContext.SaveChanges();
+                        }
                     }
                     return true;
                 }
+                return false;
             }
             catch (System.Exception ex)
             {
@@ -151,7 +156,7 @@ namespace Vtc_Freelancer.Services
                 Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == orderId);
                 if (order != null)
                 {
-                    order.BecauseCancelOrder = contentCancelOrder;
+                    order.ReasonCancelOrder = contentCancelOrder;
                     order.WorkStatus = 4;
                     dbContext.Update(order);
                     dbContext.SaveChanges();
@@ -177,20 +182,24 @@ namespace Vtc_Freelancer.Services
                     dbContext.Update(order);
                     dbContext.SaveChanges();
                     Conversation conver = new Conversation();
-                    conver.SenderId = userId;
-                    conver.ReceiverId = order.Service.Seller.UserId;
-                    conver.Content = ContentResult;
-                    conver.TimeSend = DateTime.Now;
-                    dbContext.Add(conver);
-                    dbContext.SaveChanges();
-                    foreach (var item in ListFile)
+                    if ((ContentResult != null && ContentResult != "") || ListFile.Count > 0)
                     {
-                        Attachments file = new Attachments();
-                        file.LinkFile = item.LinkFile;
-                        file.FileName = item.FileName;
-                        file.ConversationId = conver.ConversationId;
-                        dbContext.Add(file);
+                        conver.SenderId = userId;
+                        conver.ReceiverId = order.UserId;
+                        conver.Content = ContentResult;
+                        conver.TimeSend = DateTime.Now;
+                        conver.IsDeliveredOrIsRevisions = 1;
+                        dbContext.Add(conver);
                         dbContext.SaveChanges();
+                        foreach (var item in ListFile)
+                        {
+                            Attachments file = new Attachments();
+                            file.ConversationId = conver.ConversationId;
+                            file.LinkFile = item.LinkFile;
+                            file.FileName = item.FileName;
+                            dbContext.Add(file);
+                            dbContext.SaveChanges();
+                        }
                     }
                     return true;
                 }
@@ -225,6 +234,27 @@ namespace Vtc_Freelancer.Services
                 item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
             }
             return listOrder;
+        }
+
+        public bool ApproveFinalDelivery(int orderId, int userId)
+        {
+            try
+            {
+                Orders order = dbContext.Orders.FirstOrDefault(x => x.OrderId == orderId);
+                if (order.UserId == userId)
+                {
+                    order.WorkStatus = 3;
+                    dbContext.Update(order);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
         }
     }
 }
