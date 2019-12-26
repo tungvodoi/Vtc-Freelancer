@@ -236,6 +236,7 @@ namespace Vtc_Freelancer.Services
             return listOrder;
         }
 
+<<<<<<< HEAD
         public bool ApproveFinalDelivery(int orderId, int userId)
         {
             try
@@ -245,6 +246,25 @@ namespace Vtc_Freelancer.Services
                 {
                     order.WorkStatus = 3;
                     dbContext.Update(order);
+=======
+        public bool SendOffer(Seller seller, int RequestId, int serviceId, string description)
+        {
+            try
+            {
+                Service service = dbContext.Service.FirstOrDefault(x => x.ServiceId == serviceId);
+                Request request = dbContext.Request.FirstOrDefault(x => x.RequestId == RequestId);
+                if (service != null && request != null)
+                {
+                    Offer offer = new Offer();
+                    offer.Description = description;
+                    offer.Amount = 0;
+                    offer.Revisions = 0;
+                    offer.DeliveryTime = 0;
+                    offer.SellerId = seller.SellerId;
+                    offer.RequestId = RequestId;
+                    offer.ServiceId = serviceId;
+                    dbContext.Add(offer);
+>>>>>>> 1e5be8ba359946b1b9491a8efee46feb14af18f1
                     dbContext.SaveChanges();
                     return true;
                 }

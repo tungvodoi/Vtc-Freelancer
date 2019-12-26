@@ -183,12 +183,27 @@ namespace Vtc_Freelancer.Services
         }
         public bool AddSkills(Seller seller, Skills skills, Users users)
         {
+
             try
             {
-                skills.SellerId = seller.SellerId;
-                skills.UserId = users.UserId;
-                dbContext.Add(skills);
-                dbContext.SaveChanges();
+                // skills.SellerId = seller.SellerId;
+                // skills.UserId = users.UserId;
+                // dbContext.Add(skills);
+                // dbContext.SaveChanges();
+                Console.WriteLine(skills.SkillName);
+                string[] ListSkills = skills.SkillName.Split(',');
+                foreach (var item in ListSkills)
+                {
+                    if (item != "")
+                    {
+                        Skills skills1 = new Skills();
+                        skills1.SellerId = seller.SellerId;
+                        skills1.UserId = users.UserId;
+                        skills1.SkillName = item;
+                        dbContext.Add(skills1);
+                        dbContext.SaveChanges();
+                    }
+                }
                 return true;
             }
             catch (System.Exception e)

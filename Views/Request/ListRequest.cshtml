@@ -1,28 +1,55 @@
 @model IEnumerable<Vtc_Freelancer.Models.Request>;
-@{
-ViewData["Title"] = "List Request";
-Layout = "~/Views/Shared/_SellerLayout.cshtml";
-}
+    @{
+    ViewData["Title"] = "List Request";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+    }
+    <div class="hidden-wrapper-all" id="wrapper-all1" onclick="onClickHandle()">
 
-<div class="container">
-    <div class="request-body">
-        <h1 class="mngr-request" style="color: black; font-weight: 300;">List Requests</h1>
-        <div class="wrapper-table-request" id="Active" style="display: grid;">
-            <table>
-                <thead>
-                    <tr>
-                        <td>Date</td>
-                        <td>Request</td>
-                        <td>Offers</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @if(@Model != null)
-                        {
+    </div>
+    <div class="wrapper-send-offer" id="wrapper-form1">
+        <div class="head-content">
+            <h3>Create A Customer Offer</h3>
+            <span onclick="onClickHandle()">
+                X
+            </span>
+        </div>
+        <div class="your-offer" id="your-offer">
+            @foreach (var item in ViewBag.myService)
+            {
+            <div class="myservice-wrapper"
+                onclick='sendOffer("@item.ListImage[0].Image","@item.Title","@item.ServiceId")'>
+                <img src="@item.ListImage[0].Image" alt="">
+                <span class="back-content">@item.Title</span>
+            </div>
+            <hr>
+            }
+        </div>
+        <div class="detail-offer" id="detail-offer">
+        </div>
+        <div class="fot-btn">
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="request-body">
+            <h1 class="mngr-request" style="color: black; font-weight: 300;">List Requests</h1>
+            <div class="wrapper-table-request" id="Active" style="display: grid;">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Request</td>
+                            <td>Offers</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @if(@Model != null)
+                            {
                             @foreach (var item in Model)
                             {
+<<<<<<< HEAD
                                 @if (item.Status == 0)
                                 {
                                     <td class="date  height95">
@@ -46,11 +73,76 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
                                     </td>
                                     <td></td>
                                 }
+=======
+                            @if (item.Status == 0)
+                            {
+                            <td class="date  height95">
+                                @item.TimeCreate.ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="text-wide">
+                                <p>@item.Description</p>
+                                <div>
+                                    <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
+                                    <div class="info-line">Budget - <span>$@item.Budget</span></div>
+                                </div>
+                                <div class="tags-standard tags-white-bg">
+                                    @foreach (var item1 in ViewBag.listcategory)
+                                    {
+                                    <span>@item1.CategoryName</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <a href="" class="review-offers">@item.QuantityOffers Review Offers</a>
+                            </td>
+                            <td>
+                                <button onclick="onClickHandle('@item.RequestId')" id="btn-send-offer"
+                                    class="review-offers">Send
+                                    Offer</button>
+                            </td>
+>>>>>>> 1e5be8ba359946b1b9491a8efee46feb14af18f1
                             }
-                        }
-                    </tr>
-                </tbody>
-            </table>
+                            }
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+    <script>
+        var wrapper = document.getElementById('wrapper-all1');
+        var formOffer = document.getElementById('wrapper-form1');
+        var check = true;
+        var RequestId = 0;
+        function onClickHandle(requestId) {
+            if (check == true) {
+                wrapper.style.display = 'block';
+                formOffer.style.display = 'block';
+                RequestId = requestId;
+                check = false
+            }
+            else {
+                wrapper.style.display = 'none';
+                formOffer.style.display = 'none';
+                document.getElementById("your-offer").style.display = "block";
+                document.getElementById('detail-offer').style.display = "none";
+                document.getElementById('detail-offer').innerHTML = "";
+                check = true;
+            }
+        }
+
+        function sendOffer(imge, Title, serviceId) {
+            var youroffer = document.getElementById('detail-offer');
+            document.getElementById("your-offer").style.display = "none";
+            youroffer.style.display = "block";
+            youroffer.innerHTML = "<p class='title-service'>" + Title + "</p><form action='/sendOffer?RequestId=" + RequestId + "&ServiceId=" + serviceId + "' method='post'> " +
+                "<div class='img-text-input'><img src =" + imge + " alt ='Service Image' id ='img-service-offer'>" +
+                "<br>" +
+                "<textarea name='description' id='' cols='30' rows='10'></textarea>" +
+                "</div>" +
+                "<br>" +
+                "<button class='button-submit-offer'>Submit Offer</button>" +
+                "</form >";
+        }
+    </script>
