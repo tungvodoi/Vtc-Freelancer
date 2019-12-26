@@ -1,24 +1,24 @@
 @{
-ViewData["Title"] = "EditProfile";
-@if(ViewBag.UserLoged == null)
-{
-Layout = "~/Views/Shared/_login.cshtml";
-}
-else
-{
+    ViewData["Title"] = "EditProfile";
+    @if(ViewBag.UserLoged == null)
+    {
+    Layout = "~/Views/Shared/_login.cshtml";
+    }
+    else
+    {
 
-@if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
-{
-Layout = "~/Views/Shared/_SellerLayout.cshtml";
-}
-else{
-Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@if(ViewBag.IsSeller == 0)
-{
-Layout = "~/Views/Shared/_Layout.cshtml";
-}
-}
+        @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
+        {
+        Layout = "~/Views/Shared/_SellerLayout.cshtml";
+        }
+        else{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        @if(ViewBag.IsSeller == 0)
+        {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+    }
 
 }
 

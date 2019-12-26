@@ -16,7 +16,7 @@ namespace Vtc_Freelancer.Services
         }
         public List<Conversation> GetListConversationByUserId(int sellerId, int BuyerId)
         {
-            List<Conversation> listConversation = dbContext.Conversation.Where(x => x.ReceiverId == sellerId && x.SenderId == BuyerId).ToList();
+            List<Conversation> listConversation = dbContext.Conversation.Where(x => (x.ReceiverId == sellerId && x.SenderId == BuyerId) || (x.ReceiverId == BuyerId && x.SenderId == sellerId)).ToList();
             foreach (var item in listConversation)
             {
                 item.ListAttachments = dbContext.Attachments.Where(x => x.ConversationId == item.ConversationId).ToList();

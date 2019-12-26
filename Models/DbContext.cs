@@ -115,7 +115,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.OrderStartTime);
                 entity.Property(x => x.OrderDeliveredTime);
                 entity.Property(x => x.Note);
-                entity.Property(x => x.BecauseCancelOrder);
+                entity.Property(x => x.ReasonCancelOrder);
                 entity.Property(x => x.NumberRevision);
                 entity.Property(x => x.PackageId);
                 entity.Property(x => x.UserId);
@@ -136,6 +136,7 @@ namespace Vtc_Freelancer.Models
                 entity.Property(x => x.Content);
                 entity.Property(x => x.TimeSend);
                 entity.Property(x => x.Status);
+                entity.Property(x => x.IsDeliveredOrIsRevisions);
             });
             modelBuilder.Entity<Notification>(entity =>
             {

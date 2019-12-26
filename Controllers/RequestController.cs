@@ -22,7 +22,8 @@ namespace Vtc_Freelancer.Controllers
         private AdminService adminService;
         private UserService userService;
         private OrderService orderService;
-        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, UserService userService, OrderService orderService, IHostingEnvironment IHostingEnvironment)
+        private GigService gigService;
+        public RequestController(MyDbContext dbContext, RequestService requestService, AdminService adminService, UserService userService, OrderService orderService, IHostingEnvironment IHostingEnvironment, GigService gigService)
         {
             this.userService = userService;
             this.dbContext = dbContext;
@@ -30,6 +31,7 @@ namespace Vtc_Freelancer.Controllers
             this.adminService = adminService;
             this._environment = IHostingEnvironment;
             this.orderService = orderService;
+            this.gigService = gigService;
         }
         [Authentication]
         [HttpGet("/create_request")]
@@ -132,14 +134,23 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult ListRequest()
         {
             Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+
             if (users != null)
             {
+                Seller seller = userService.GetSellerByUserID(users.UserId);
                 ViewBag.UserName = users.UserName;
                 ViewBag.userAvatar = users.Avatar;
                 ViewBag.IsSeller = users.IsSeller;
                 List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
                 List<Request> listRequest = requestService.getListRequestByCategoryOfSeller(category);
                 List<Category> listcategory = new List<Category>();
+                List<Service> services = new List<Service>();
+                services = gigService.GetServicesBySellerId(seller.SellerId);
+                foreach (var item in services)
+                {
+                    item.ListImage = adminService.GetListImageService(item.ServiceId);
+                }
+                ViewBag.myService = services;
                 listcategory = adminService.GetListCategoryBy();
                 foreach (var item in listcategory)
                 {
@@ -150,6 +161,22 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.listcategory = listcategory;
                 }
                 return View(listRequest);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+        [HttpPost("/sendOffer")]
+        public IActionResult SendOffer(int RequestId, int ServiceId, string description)
+        {
+            Seller seller = userService.GetSellerByUserID(HttpContext.Session.GetInt32("UserId"));
+            if (seller != null)
+            {
+                if (orderService.SendOffer(seller, RequestId, ServiceId, description))
+                {
+                    return Redirect("/Request");
+                }
             }
             return Redirect("/");
         }

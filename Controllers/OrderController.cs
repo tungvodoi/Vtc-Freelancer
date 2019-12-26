@@ -226,8 +226,8 @@ namespace Vtc_Freelancer.Controllers
                     order.Users = userService.GetUserByUserId(order.UserId);
                     order.Service.ListImage = adminService.GetListImageService(order.ServiceId);
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
-                    order.Service.Seller = orderService.GetSellerBySellerId(se.SellerId);
-                    List<Conversation> ListConversation = chatService.GetListConversationByUserId(order.Service.SellerId, order.UserId);
+                    order.Service.Seller = orderService.GetUserIdOfSellerBySellerId(se.SellerId);
+                    List<Conversation> ListConversation = chatService.GetListConversationByUserId(order.Service.Seller.UserId, order.UserId);
 
                     if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
                     {
@@ -240,6 +240,19 @@ namespace Vtc_Freelancer.Controllers
                         ViewBag.Delivery = order.OrderStartTime.AddDays(order.Package.DeliveryTime);
                         return View(order);
                     }
+                }
+            }
+            return Redirect("/");
+        }
+        [HttpGet("/ApproveFinal")]
+        public IActionResult ApproveFinalDelivery(int orderId, int userId)
+        {
+            Users user = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (user != null && (user.UserId == userId))
+            {
+                if (orderService.ApproveFinalDelivery(orderId, user.UserId))
+                {
+                    return Redirect("/order?orderId=" + orderId);
                 }
             }
             return Redirect("/");

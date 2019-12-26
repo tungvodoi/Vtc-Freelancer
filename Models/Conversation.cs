@@ -14,6 +14,7 @@ namespace Vtc_Freelancer.Models
         public List<Attachments> ListAttachments { get; set; }
         public DateTime TimeSend { get; set; }
         public int Status { get; set; }
+        public int IsDeliveredOrIsRevisions { get; set; }
         [ForeignKey("SenderId")]
         public virtual Users Sender { get; set; }
         [ForeignKey("ReceiverId")]

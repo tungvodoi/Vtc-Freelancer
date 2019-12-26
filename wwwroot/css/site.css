@@ -941,7 +941,7 @@ h3 {
   border-width: 10px;
   border-top-width: 0;
   border-bottom-color: rgba(0, 0, 0, 0.25);
-  top: -10.5px;
+  top: -10px;
   left: 90%;
 }
 
@@ -956,7 +956,7 @@ h3 {
   border-width: 10px;
   border-top-width: 0;
   border-bottom-color: white;
-  top: 1px;
+  top: 1.5px;
   left: -10px;
 }
 
@@ -1351,10 +1351,18 @@ h3 {
   padding: 5px;
 }
 
-.mail-result {
+.status-order-start {
   border-top: 1px solid;
   margin-top: 20px;
   padding-top: 20px;
+}
+
+.conversation {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.bd-top {
+  border-top: 1px solid;
 }
 
 .info-service-delivered {
@@ -1405,13 +1413,22 @@ h3 {
 
 .add-note,
 .content-note {
-  margin-top: 10px;
-  border-top: 1px solid #7a7d85;
-  padding-top: 10px;
+  margin: 10px 0px;
+  padding: 10px 0px;
 }
+.content-note {
+  border-top: 1px solid #7a7d85;
+  border-bottom: 1px solid #7a7d85;
+}
+
 .add-note p {
   cursor: pointer;
   color: green;
+  margin: 10px 0px;
+}
+
+.mg-top-delivery {
+  margin-top: 10px;
 }
 
 .noteContent {
@@ -1451,7 +1468,7 @@ h3 {
 .select-finalize {
   border: 1px solid green;
   border-radius: 4px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: white;
   color: green;
   margin: 10px 20px 10px 0px;
@@ -1464,4 +1481,29 @@ h3 {
 
 .select-approve-order {
   margin: 10px 0px;
+}
+
+.time-send-message {
+  margin-top: 10px;
+}
+
+.time-send-message p {
+  font-size: 12px;
+}
+
+.avt-conversation img {
+  border-radius: 50%;
+}
+
+.reason-cancel-final-order,
+#next-or-previous {
+  display: none;
+}
+
+#next-or-previous button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: rgb(209, 209, 209);
 }
