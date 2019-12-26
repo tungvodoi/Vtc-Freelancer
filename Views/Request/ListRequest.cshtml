@@ -49,35 +49,10 @@
                             {
                             @foreach (var item in Model)
                             {
-<<<<<<< HEAD
-                                @if (item.Status == 0)
-                                {
-                                    <td class="date  height95">
-                                    @item.TimeCreate.ToString("MMMM dd, yyyy")
-                                    </td>
-                                    <td class="text-wide">
-                                        <p>@item.Description</p>
-                                        <div>
-                                            <div class="info-line">Delivery Time - @item.DeliveredTime days</div>
-                                            <div class="info-line">Budget - <span>$@item.Budget</span></div>
-                                        </div>
-                                        <div class="tags-standard tags-white-bg">
-                                            @foreach (var item1 in ViewBag.listcategory)
-                                            {
-                                            <span>@item1.CategoryName</span>
-                                            }
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="" class="review-offers">@item.QuantityOffers Review Offers</a>
-                                    </td>
-                                    <td></td>
-                                }
-=======
                             @if (item.Status == 0)
                             {
                             <td class="date  height95">
-                                @item.TimeCreate.ToString("dd/MM/yyyy")
+                                @item.TimeCreate.ToString("MMMM dd, yyyy")
                             </td>
                             <td class="text-wide">
                                 <p>@item.Description</p>
@@ -100,7 +75,6 @@
                                     class="review-offers">Send
                                     Offer</button>
                             </td>
->>>>>>> 1e5be8ba359946b1b9491a8efee46feb14af18f1
                             }
                             }
                             }
