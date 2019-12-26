@@ -226,5 +226,34 @@ namespace Vtc_Freelancer.Services
             }
             return listOrder;
         }
+
+        public bool SendOffer(Seller seller, int RequestId, int serviceId, string description)
+        {
+            try
+            {
+                Service service = dbContext.Service.FirstOrDefault(x => x.ServiceId == serviceId);
+                Request request = dbContext.Request.FirstOrDefault(x => x.RequestId == RequestId);
+                if (service != null && request != null)
+                {
+                    Offer offer = new Offer();
+                    offer.Description = description;
+                    offer.Amount = 0;
+                    offer.Revisions = 0;
+                    offer.DeliveryTime = 0;
+                    offer.SellerId = seller.SellerId;
+                    offer.RequestId = RequestId;
+                    offer.ServiceId = serviceId;
+                    dbContext.Add(offer);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return false;
+            }
+        }
     }
 }
