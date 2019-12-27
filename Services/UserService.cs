@@ -16,13 +16,6 @@ namespace Vtc_Freelancer.Services
             this.dbContext = dbContext;
             this.hashPassword = hashPassword;
         }
-        public Users GetUsersByID(int? ID)
-        {
-            System.Console.WriteLine(ID);
-            Users user = new Users();
-            user = dbContext.Users.FirstOrDefault(u => u.UserId == ID);
-            return user;
-        }
         public bool Register(string username, string email, string password)
         {
             var user = dbContext.Users.FirstOrDefault(x => x.UserName == username);
@@ -64,7 +57,6 @@ namespace Vtc_Freelancer.Services
                 {
                     if (VerifyMd5Hash(md5Hash, password, user.Password))
                     {
-                        // System.Console.WriteLine(user.UserName);
                         return user;
                     }
                     else
@@ -186,22 +178,20 @@ namespace Vtc_Freelancer.Services
 
             try
             {
-                // skills.SellerId = seller.SellerId;
-                // skills.UserId = users.UserId;
-                // dbContext.Add(skills);
-                // dbContext.SaveChanges();
-                Console.WriteLine(skills.SkillName);
-                string[] ListSkills = skills.SkillName.Split(',');
-                foreach (var item in ListSkills)
+                if (skills.SkillName != null)
                 {
-                    if (item != "")
+                    string[] ListSkills = skills.SkillName.Split(',');
+                    foreach (var item in ListSkills)
                     {
-                        Skills skills1 = new Skills();
-                        skills1.SellerId = seller.SellerId;
-                        skills1.UserId = users.UserId;
-                        skills1.SkillName = item;
-                        dbContext.Add(skills1);
-                        dbContext.SaveChanges();
+                        if (item != "")
+                        {
+                            Skills skills1 = new Skills();
+                            skills1.SellerId = seller.SellerId;
+                            skills1.UserId = users.UserId;
+                            skills1.SkillName = item;
+                            dbContext.Add(skills1);
+                            dbContext.SaveChanges();
+                        }
                     }
                 }
                 return true;
@@ -232,6 +222,10 @@ namespace Vtc_Freelancer.Services
         public Seller GetSellerByUserID(int? userID)
         {
             return dbContext.Seller.FirstOrDefault(s => s.UserId == userID);
+        }
+        public Seller GetSellerBySellerID(int? sellerId)
+        {
+            return dbContext.Seller.FirstOrDefault(s => s.SellerId == sellerId);
         }
         public Users GetUserByUsername(string username)
         {

@@ -59,51 +59,64 @@ namespace Vtc_Freelancer.Controllers
         [HttpPost("/create_request")]
         public IActionResult CreateRequest(string inputRequest, string category, string SubCategory, string inputDeliveredTime, double inputBudget, string name)
         {
-            string urlFile = "";
-            var UserId = HttpContext.Session.GetInt32("UserId");
-            var newFileName = string.Empty;
-            if (HttpContext.Request.Form.Files != null)
+
+            Users user = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (user != null)
             {
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-                var files = HttpContext.Request.Form.Files;
-                foreach (var file in files)
+                string urlFile = "";
+                var newFileName = string.Empty;
+                if (HttpContext.Request.Form.Files != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
                     {
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "FileRequest/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        urlFile = "FileRequest/" + newFileName;
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, $@"FileRequest/{user.UserName}") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            urlFile = $@"FileRequest/{user.UserName}/" + newFileName;
+
+                            if (Directory.Exists($@"FileRequest/{user.UserName}"))
+                            {
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+                            else
+                            {
+                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/FileRequest/{user.UserName}");
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
                         }
                     }
                 }
+                if (requestService.CreateRequest(user.UserId, inputRequest, category, SubCategory, inputDeliveredTime, inputBudget, urlFile))
+                {
+                    return Redirect("/");
+                }
             }
-            if (requestService.CreateRequest(UserId, inputRequest, category, SubCategory, inputDeliveredTime, inputBudget, urlFile))
-            {
-                return Redirect("/");
-            }
-            else
-            {
-                return Redirect("/manager_request");
-            }
+            return Redirect("/manager_request");
         }
 
         [HttpGet("/manager_request")]
@@ -249,8 +262,6 @@ namespace Vtc_Freelancer.Controllers
                     item.users = new Users();
                     item.Service.ListImage = new List<ImageService>();
                     item.users = userService.GetUserByUserId(item.SellerId);
-                    System.Console.WriteLine(item.Service.Title + "ppp");
-                    System.Console.WriteLine(item.users.UserName + "UserName");
                     item.Service.ListImage = gigService.GetListImagesByServiceId(item.ServiceId);
                 }
                 ViewBag.listOffers = offers;

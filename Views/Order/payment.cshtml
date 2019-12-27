@@ -1,4 +1,4 @@
-@model Package;
+@model Orders;
 @{
 ViewData["Title"] = "Payment";
 Layout = "~/Views/Shared/_Order.cshtml";
@@ -33,7 +33,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
         </ul>
     </nav>
 </div>
-<form action="Payment?PackageId=@Model.PackageId" method="post">
+<form action="Payment?OrderId=@Model.OrderId" method="post">
     <div class="payment-detail container-inner">
         <div class="right-content info-card-detail">
             <div class="cash-option">
@@ -103,7 +103,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
                             break;
                             }
                             <div class="title-summary">
-                                @Model.Title
+                                @Model.Package.Title
                             </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
                 <div class="brand-mini">
                     <h3 class="back-content"><b>Brand Mini</b></h3>
                     <span>x @ViewBag.Quantity</span>
-                    <span>@(Model.Price * ViewBag.Quantity) $</span>
+                    <span>@(Model.Package.Price * ViewBag.Quantity) $</span>
                 </div>
                 <br>
                 <br>
@@ -119,7 +119,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
                     <div>
                         <div>
                             <span>Service Fee</span>
-                            <span class="float-right" id="sub-price">@(Model.Price * ViewBag.Quantity * 20 / 100)
+                            <span class="float-right" id="sub-price">@(Model.Package.Price * ViewBag.Quantity * 20 / 100)
                                 $</span>
                         </div>
                         <br>
@@ -128,17 +128,16 @@ Layout = "~/Views/Shared/_Order.cshtml";
                 <br>
                 <div>
                     <span><b>Total</b></span>
-                    <span id="totle-price" class="float-right"><b>@(Model.Price * ViewBag.Quantity + (@Model.Price *
+                    <span id="totle-price" class="float-right"><b>@(Model.Package.Price * ViewBag.Quantity + (@Model.Package.Price *
                             ViewBag.Quantity * 20/100)) $</b></span>
                 </div>
                 <br>
 
                 <div>
                     <span>Delivery Time</span>
-                    <span class="float-right">@Model.DeliveryTime Days</span>
+                    <span class="float-right">@Model.Package.DeliveryTime Days</span>
                 </div>
                 <div>
-                    <br>
                     <button class="btn-continue btn-prc-detail">Confirm & Pay</button>
                 </div>
             </div>

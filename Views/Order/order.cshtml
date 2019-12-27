@@ -32,7 +32,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
     </ul>
   </nav>
 </div>
-<form action="CreateOrder?PackageId=@Model.PackageId" method="POST">
+<form action="Order?PackageId=@Model.PackageId" method="POST">
   <div class="container-inner body-order font-size-14">
   <div class="right-content">
     <h1 class="back-content cutomemize-your-package">Customize Your Package</h1>
@@ -45,7 +45,7 @@ Layout = "~/Views/Shared/_Order.cshtml";
         }
           <div>
             <a href="/Gig/ServiceDetail?serviceId=@Model.ServiceId" style="font-weight: bold;">
-              <h2 class="back-content">@Model.Title</h2>
+              <h2 class="back-content">@Model.Service.Title</h2>
             </a>
             <br>
             <p>Dồng chí nào để rating vào đây</p>

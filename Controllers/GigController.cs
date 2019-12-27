@@ -17,12 +17,14 @@ namespace Vtc_Freelancer.Controllers
         private readonly IHostingEnvironment _environment;
         private GigService gigService;
         private UserService userService;
+        private OrderService orderService;
         private AdminService adminService;
-        public GigController(GigService gigService, UserService userService, AdminService adminService, IHostingEnvironment IHostingEnvironment)
+        public GigController(GigService gigService, UserService userService, AdminService adminService, OrderService orderService, IHostingEnvironment IHostingEnvironment)
         {
             _environment = IHostingEnvironment;
             this.gigService = gigService;
             this.userService = userService;
+            this.orderService = orderService;
             this.adminService = adminService;
         }
 
@@ -32,7 +34,7 @@ namespace Vtc_Freelancer.Controllers
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             if (listcategory != null)
             {
@@ -54,7 +56,7 @@ namespace Vtc_Freelancer.Controllers
             sr.Close();
             ViewBag.json = json;
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -64,7 +66,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult Step3()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -74,7 +76,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult Step4()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -84,7 +86,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tag)
         {
 
-           
+
             int? userID = HttpContext.Session.GetInt32("UserId");
             int SellerID = userService.GetSellerByUserID(userID).SellerId;
             int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tag, SellerID);
@@ -160,38 +162,54 @@ namespace Vtc_Freelancer.Controllers
 
             if (HttpContext.Request.Form.Files != null)
             {
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-
-                var files = HttpContext.Request.Form.Files;
-
-                foreach (var file in files)
+                Users user = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+                if (user != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
                     {
-                        //Getting FileName
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "Images/Gigs/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        PathDB = "Images/Gigs/" + newFileName;
-                        urlImages.Add(PathDB);
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            //Getting FileName
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, $@"Images/Gigs/{user.UserName}") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = $@"Images/Gigs/{user.UserName}/" + newFileName;
+                            urlImages.Add(PathDB);
+
+                            if (Directory.Exists($@"Images/Gigs/{user.UserName}"))
+                            {
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+                            else
+                            {
+                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/Images/Gigs/{user.UserName}");
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
                         }
                     }
                 }
@@ -241,10 +259,10 @@ namespace Vtc_Freelancer.Controllers
                 if (HttpContext.Session.GetInt32("UserId") != null)
                 {
                     int? userId = HttpContext.Session.GetInt32("UserId");
-                    Users userads = userService.GetUsersByID(userId);
+                    Users userads = userService.GetUserByUserId(userId);
                     ViewBag.UserName = userads.UserName;
                     ViewBag.userAvatar = userads.Avatar;
-
+                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(userId);
                     ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                     ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
                 }

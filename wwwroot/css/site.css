@@ -1412,7 +1412,7 @@ h3 {
 }
 
 .mg-top-delivery {
-  margin-top: 10px;
+  margin-top: 10px !important;
 }
 
 .noteContent {

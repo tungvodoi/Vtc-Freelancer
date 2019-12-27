@@ -32,50 +32,56 @@ namespace Vtc_Freelancer.Services
             return seller;
         }
 
-        public bool CreateOrder(int UserId, int ServiceId, int PackageId, int Quantity)
+        public Orders CreateOrder(int UserId, int ServiceId, int PackageId, int Quantity)
         {
-            Orders order = dbContext.Orders.FirstOrDefault(x => x.UserId == UserId && x.ServiceId == ServiceId && x.PackageId == PackageId);
-            if (order != null)
+            Service service = GetServiceByServiceId(ServiceId);
+            Seller seller = userService.GetSellerBySellerID(service.SellerId);
+            if (service != null && seller != null && seller.UserId != UserId)
             {
-                try
+                Orders order = dbContext.Orders.FirstOrDefault(x => x.UserId == UserId && x.ServiceId == ServiceId && x.PackageId == PackageId);
+                if (order != null)
                 {
-                    order.WorkStatus = 0;
-                    order.Quantity = Quantity;
-                    order.OrderCreateTime = DateTime.Now;
-                    order.PackageId = PackageId;
-                    order.UserId = UserId;
-                    order.ServiceId = ServiceId;
-                    dbContext.Update(order);
-                    dbContext.SaveChanges();
-                    return true;
+                    try
+                    {
+                        order.WorkStatus = 0;
+                        order.Quantity = Quantity;
+                        order.OrderCreateTime = DateTime.Now;
+                        order.PackageId = PackageId;
+                        order.UserId = UserId;
+                        order.ServiceId = ServiceId;
+                        dbContext.Update(order);
+                        dbContext.SaveChanges();
+                        return order;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Console.WriteLine("Error : " + ex.Message);
+                        return null;
+                    }
                 }
-                catch (System.Exception ex)
+                else
                 {
-                    Console.WriteLine("Error : " + ex.Message);
-                    return false;
+                    try
+                    {
+                        Orders newOrder = new Orders();
+                        newOrder.WorkStatus = 0;
+                        newOrder.Quantity = Quantity;
+                        newOrder.OrderCreateTime = DateTime.Now;
+                        newOrder.PackageId = PackageId;
+                        newOrder.UserId = UserId;
+                        newOrder.ServiceId = ServiceId;
+                        dbContext.Add(newOrder);
+                        dbContext.SaveChanges();
+                        return newOrder;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Console.WriteLine("Error : " + ex.Message);
+                        return null;
+                    }
                 }
             }
-            else
-            {
-                try
-                {
-                    Orders newOrder = new Orders();
-                    newOrder.WorkStatus = 0;
-                    newOrder.Quantity = Quantity;
-                    newOrder.OrderCreateTime = DateTime.Now;
-                    newOrder.PackageId = PackageId;
-                    newOrder.UserId = UserId;
-                    newOrder.ServiceId = ServiceId;
-                    dbContext.Add(newOrder);
-                    dbContext.SaveChanges();
-                    return true;
-                }
-                catch (System.Exception ex)
-                {
-                    Console.WriteLine("Error : " + ex.Message);
-                    return false;
-                }
-            }
+            return null;
         }
 
         public Orders GetOrderByPackageId(int PackageId)
@@ -127,7 +133,6 @@ namespace Vtc_Freelancer.Services
                 Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
-            return false;
         }
         public bool Addnote(int orderId, string noteContent)
         {
@@ -217,18 +222,6 @@ namespace Vtc_Freelancer.Services
             List<Orders> listOrder = dbContext.Orders.Where(x => x.UserId == userId).ToList();
             foreach (var item in listOrder)
             {
-                item.Service = GetServiceByServiceId(item.ServiceId);
-                item.Package = GetPackageByPackageId(item.PackageId);
-                item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
-            }
-            return listOrder;
-        }
-        public List<Orders> GetListOrderbyUserId(int userId)
-        {
-            List<Orders> listOrder = dbContext.Orders.Include(x => x.Service).ThenInclude(x => x.Seller).ThenInclude(x => x.User).Where(x => x.Service.Seller.UserId == userId).ToList();
-            foreach (var item in listOrder)
-            {
-                item.Users = userService.GetUserByUserId(item.UserId);
                 item.Service = GetServiceByServiceId(item.ServiceId);
                 item.Package = GetPackageByPackageId(item.PackageId);
                 item.Service.ListImage = adminService.GetListImageService(item.ServiceId);
