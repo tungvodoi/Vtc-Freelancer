@@ -121,6 +121,7 @@
 }
 
 .wrapper-table-request table td {
+  text-align: initial;
   padding: 15px 15px 15px 0;
   font-size: 14px;
   line-height: 20px;

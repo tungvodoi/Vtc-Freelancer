@@ -167,6 +167,52 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
         }
+
+
+
+
+
+        [HttpGet("/manager_your_request")]
+        public IActionResult ManagerRequest()
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+
+            if (users != null)
+            {
+                // Seller seller = userService.GetSellerByUserID(users.UserId);
+                // ViewBag.UserName = users.UserName;
+                // ViewBag.userAvatar = users.Avatar;
+                // ViewBag.IsSeller = users.IsSeller;
+                // List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+
+                List<Request> listRequest = requestService.GetRequestByUserId(users.UserId);
+
+
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View(listRequest);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+
+
+
+
+
+
+
+
         [HttpPost("/sendOffer")]
         public IActionResult SendOffer(int RequestId, int ServiceId, string description)
         {
@@ -180,5 +226,61 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/");
         }
+
+        [HttpGet("/Offer")]
+        public IActionResult ListOffer(int? requestId)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+
+            if (users != null)
+            {
+                // Seller seller = userService.GetSellerByUserID(users.UserId);
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                // List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                List<Offer> offers = new List<Offer>();
+                offers = requestService.GetOffersByRequestId(requestId);
+                foreach (var item in offers)
+                {
+                    item.Service = new Service();
+                    item.Service = gigService.GetServiceByID(item.ServiceId);
+                    item.users = new Users();
+                    item.Service.ListImage = new List<ImageService>();
+                    item.users = userService.GetUserByUserId(item.SellerId);
+                    System.Console.WriteLine(item.Service.Title + "ppp");
+                    System.Console.WriteLine(item.users.UserName + "UserName");
+                    item.Service.ListImage = gigService.GetListImagesByServiceId(item.ServiceId);
+                }
+                ViewBag.listOffers = offers;
+                Request request = new Request();
+                request = requestService.getRequestByRequestId(requestId);
+                ViewBag.request = request;
+                // List<Service> services = new List<Service>();
+                // services = gigService.GetServiceByID();
+                // foreach (var item in services)
+                // {
+                //     item.ListImage = adminService.GetListImageService(item.ServiceId);
+                // }
+                // ViewBag.myService = services;
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View();
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+
+
     }
 }

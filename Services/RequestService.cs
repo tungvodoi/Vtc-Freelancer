@@ -38,7 +38,10 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
         }
-
+        public Request getRequestByRequestId(int? requestId)
+        {
+            return dbContext.Request.FirstOrDefault(x => x.RequestId == requestId);
+        }
         public List<Request> getListRequestByUserId(int userId)
         {
             return dbContext.Request.Where(x => x.UserId == userId).ToList();
@@ -59,6 +62,24 @@ namespace Vtc_Freelancer.Services
                 return listRequest;
             }
             return null;
+        }
+        public List<Offer> GetOffersByRequestId(int? requestId)
+        {
+            List<Offer> offers = new List<Offer>();
+            offers = dbContext.Offer.Where(x => x.RequestId == requestId).ToList();
+            return offers;
+        }
+        // public  List<Service> GetServiceByRequestId(int? requestId)
+        // {
+
+        //     List<Service> services = new List<Service>();
+        //     services = dbContext.
+        // }
+        public List<Request> GetRequestByUserId(int? userId)
+        {
+            List<Request> requests = new List<Request>();
+            requests = dbContext.Request.Where(x => x.UserId == userId).ToList();
+            return requests;
         }
     }
 }

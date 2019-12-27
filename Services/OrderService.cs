@@ -266,10 +266,12 @@ namespace Vtc_Freelancer.Services
                     offer.SellerId = seller.SellerId;
                     offer.RequestId = RequestId;
                     offer.ServiceId = serviceId;
+                    request.QuantityOffers = request.QuantityOffers += 1;
                     dbContext.Add(offer);
                     dbContext.SaveChanges();
                     return true;
                 }
+
                 return false;
             }
             catch (System.Exception ex)
