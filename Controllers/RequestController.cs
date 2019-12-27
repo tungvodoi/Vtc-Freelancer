@@ -180,5 +180,52 @@ namespace Vtc_Freelancer.Controllers
             }
             return Redirect("/");
         }
+
+        [HttpGet("/Offer")]
+        public IActionResult ListOffer(int? requestId)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+
+            if (users != null)
+            {
+                Seller seller = userService.GetSellerByUserID(users.UserId);
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.IsSeller = users.IsSeller;
+                List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                List<Category> listcategory = new List<Category>();
+                List<Offer> offers = new List<Offer>();
+                offers = requestService.GetOffersByRequestId(requestId);
+                foreach (var item in offers)
+                {
+                    item.Service = new Service();
+                    item.Service = gigService.GetServiceByID(item.ServiceId);
+                    System.Console.WriteLine(item.Service.Title + "ppp");
+                }
+                // List<Service> services = new List<Service>();
+                // services = gigService.GetServiceByID();
+                // foreach (var item in services)
+                // {
+                //     item.ListImage = adminService.GetListImageService(item.ServiceId);
+                // }
+                // ViewBag.myService = services;
+                listcategory = adminService.GetListCategoryBy();
+                foreach (var item in listcategory)
+                {
+                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
+                }
+                if (listcategory != null)
+                {
+                    ViewBag.listcategory = listcategory;
+                }
+                return View();
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+
+
     }
 }

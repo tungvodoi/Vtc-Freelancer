@@ -52,5 +52,17 @@ namespace Vtc_Freelancer.Services
             }
             return listRequest;
         }
+        public List<Offer> GetOffersByRequestId(int? requestId)
+        {
+            List<Offer> offers = new List<Offer>();
+            offers = dbContext.Offer.Where(x => x.RequestId == requestId).ToList();
+            return offers;
+        }
+        // public  List<Service> GetServiceByRequestId(int? requestId)
+        // {
+
+        //     List<Service> services = new List<Service>();
+        //     services = dbContext.
+        // }
     }
 }
