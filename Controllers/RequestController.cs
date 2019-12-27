@@ -234,11 +234,11 @@ namespace Vtc_Freelancer.Controllers
 
             if (users != null)
             {
-                Seller seller = userService.GetSellerByUserID(users.UserId);
+                // Seller seller = userService.GetSellerByUserID(users.UserId);
                 ViewBag.UserName = users.UserName;
                 ViewBag.userAvatar = users.Avatar;
                 ViewBag.IsSeller = users.IsSeller;
-                List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                // List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
                 List<Category> listcategory = new List<Category>();
                 List<Offer> offers = new List<Offer>();
                 offers = requestService.GetOffersByRequestId(requestId);
