@@ -16,13 +16,6 @@ namespace Vtc_Freelancer.Services
             this.dbContext = dbContext;
             this.hashPassword = hashPassword;
         }
-        public Users GetUsersByID(int? ID)
-        {
-            System.Console.WriteLine(ID);
-            Users user = new Users();
-            user = dbContext.Users.FirstOrDefault(u => u.UserId == ID);
-            return user;
-        }
         public bool Register(string username, string email, string password)
         {
             var user = dbContext.Users.FirstOrDefault(x => x.UserName == username);
@@ -232,6 +225,10 @@ namespace Vtc_Freelancer.Services
         public Seller GetSellerByUserID(int? userID)
         {
             return dbContext.Seller.FirstOrDefault(s => s.UserId == userID);
+        }
+        public Seller GetSellerBySellerID(int? sellerId)
+        {
+            return dbContext.Seller.FirstOrDefault(s => s.SellerId == sellerId);
         }
         public Users GetUserByUsername(string username)
         {

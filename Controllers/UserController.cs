@@ -130,7 +130,7 @@ namespace Vtc_Freelancer.Controllers
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             var userId = HttpContext.Session.GetInt32("UserId");
-            Users user = userService.GetUsersByID(userId);
+            Users user = userService.GetUserByUserId(userId);
             if (userId != null)
             {
                 if (user.Status == 1)

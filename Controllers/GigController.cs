@@ -17,12 +17,14 @@ namespace Vtc_Freelancer.Controllers
         private readonly IHostingEnvironment _environment;
         private GigService gigService;
         private UserService userService;
+        private OrderService orderService;
         private AdminService adminService;
-        public GigController(GigService gigService, UserService userService, AdminService adminService, IHostingEnvironment IHostingEnvironment)
+        public GigController(GigService gigService, UserService userService, AdminService adminService, OrderService orderService, IHostingEnvironment IHostingEnvironment)
         {
             _environment = IHostingEnvironment;
             this.gigService = gigService;
             this.userService = userService;
+            this.orderService = orderService;
             this.adminService = adminService;
         }
 
@@ -32,7 +34,7 @@ namespace Vtc_Freelancer.Controllers
             List<Category> listcategory = new List<Category>();
             listcategory = adminService.GetListCategoryBy();
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             if (listcategory != null)
             {
@@ -54,7 +56,7 @@ namespace Vtc_Freelancer.Controllers
             sr.Close();
             ViewBag.json = json;
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -64,7 +66,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult Step3()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -74,7 +76,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult Step4()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-            Users userads = userService.GetUsersByID(userId);
+            Users userads = userService.GetUserByUserId(userId);
             ViewBag.userAvatar = userads.Avatar;
             return View();
         }
@@ -84,7 +86,7 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult CreateServiceStep1(string title, string category, string subcategory, string tag)
         {
 
-           
+
             int? userID = HttpContext.Session.GetInt32("UserId");
             int SellerID = userService.GetSellerByUserID(userID).SellerId;
             int ServiceId = gigService.CreateServiceStepOne(title, category, subcategory, tag, SellerID);
@@ -241,10 +243,10 @@ namespace Vtc_Freelancer.Controllers
                 if (HttpContext.Session.GetInt32("UserId") != null)
                 {
                     int? userId = HttpContext.Session.GetInt32("UserId");
-                    Users userads = userService.GetUsersByID(userId);
+                    Users userads = userService.GetUserByUserId(userId);
                     ViewBag.UserName = userads.UserName;
                     ViewBag.userAvatar = userads.Avatar;
-
+                    ViewBag.ListOrder = orderService.GetListOrderbyUserId(userId);
                     ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
                     ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
                 }

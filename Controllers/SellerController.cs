@@ -34,7 +34,7 @@ namespace Vtc_Freelancer.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId != null)
             {
-                Users userads = userService.GetUsersByID(userId);
+                Users userads = userService.GetUserByUserId(userId);
                 ViewBag.UserName = userads.UserName;
                 ViewBag.userAvatar = userads.Avatar;
                 //Lay Session lan 2

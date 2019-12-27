@@ -55,79 +55,76 @@ namespace Vtc_Freelancer.Controllers
             }
         }
         [Authentication]
-        [HttpPost("/Customize/CreateOrder")]
+        [HttpPost("/Customize/Order")]
         public IActionResult CreateOrder(int PackageId, int selectQuantity)
         {
             Package package = orderService.GetPackageByPackageId(PackageId);
             int? UserId = HttpContext.Session.GetInt32("UserId");
-            Users user = userService.GetUsersByID(UserId);
+            Users user = userService.GetUserByUserId(UserId);
             if (package != null)
             {
                 if (user != null)
                 {
-                    if (orderService.CreateOrder(user.UserId, package.ServiceId, PackageId, selectQuantity))
+                    Orders order = orderService.CreateOrder(user.UserId, package.ServiceId, PackageId, selectQuantity);
+                    if (order != null)
                     {
-                        return Redirect("/Order/Payment?PackageId=" + PackageId + "&Quantity=" + selectQuantity);
+                        return Redirect("/Order/Payment?OrderId=" + order.OrderId + "&Quantity=" + selectQuantity);
                     }
                 }
             }
             return Redirect("/");
         }
         [HttpGet("/Order/Payment")]
-        public IActionResult Payment(int PackageId, int Quantity)
+        public IActionResult Payment(int OrderId, int Quantity)
         {
-            Package package = orderService.GetPackageByPackageId(PackageId);
-            HttpContext.Session.SetInt32("Quantity", Quantity);
-            if (package != null)
+            Orders order = orderService.GetOrderByOrderId(OrderId);
+            if (order != null)
             {
-                package.Service = orderService.GetServiceByServiceId(package.ServiceId);
-                package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
-                int? Qty = HttpContext.Session.GetInt32("Quantity");
-                if (Qty != null)
+                order.Package = orderService.GetPackageByPackageId(order.PackageId);
+                HttpContext.Session.SetInt32("Quantity", Quantity);
+                if (order.Package != null)
                 {
-                    ViewBag.Quantity = Qty;
-                }
-                else
-                {
-                    ViewBag.Quantity = 1;
-                }
-                return View(package);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
-
-        [HttpPost("/Order/Payment")]
-        public IActionResult Payment(int PackageId, string save)
-        {
-            Package package = orderService.GetPackageByPackageId(PackageId);
-            if (package != null)
-            {
-                if (save == "on")
-                {
-                    // package.Service = orderService.GetServiceByServiceId(package.ServiceId);
-                    // package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
-                    // int? Qty = HttpContext.Session.GetInt32("Quantity");
-                    // if (Qty != null)
-                    // {
-                    //     ViewBag.Quantity = Qty;
-                    // }
-                    // else
-                    // {
-                    //     ViewBag.Quantity = 1;
-                    // }
-                }
-                Orders order = orderService.GetOrderByPackageId(package.PackageId);
-                if (order != null)
-                {
-                    return Redirect("/Order/Requirement?OrderId=" + order.OrderId);
+                    order.Package.Service = orderService.GetServiceByServiceId(order.Package.ServiceId);
+                    order.Package.Service.ListImage = adminService.GetListImageService(order.Package.ServiceId);
+                    int? Qty = HttpContext.Session.GetInt32("Quantity");
+                    if (Qty != null)
+                    {
+                        ViewBag.Quantity = Qty;
+                    }
+                    else
+                    {
+                        ViewBag.Quantity = 1;
+                    }
+                    return View(order);
                 }
             }
             return Redirect("/");
         }
-        // [Authentication]
+
+        [HttpPost("/Order/Payment")]
+        public IActionResult Payment(int OrderId, string save)
+        {
+            Orders order = orderService.GetOrderByOrderId(OrderId);
+            if (order != null)
+            {
+                // if (save == "on")
+                // {
+                // package.Service = orderService.GetServiceByServiceId(package.ServiceId);
+                // package.Service.ListImage = adminService.GetListImageService(package.ServiceId);
+                // int? Qty = HttpContext.Session.GetInt32("Quantity");
+                // if (Qty != null)
+                // {
+                //     ViewBag.Quantity = Qty;
+                // }
+                // else
+                // {
+                //     ViewBag.Quantity = 1;
+                // }
+                // }
+                return Redirect("/Order/Requirement?OrderId=" + order.OrderId);
+            }
+            return Redirect("/");
+        }
         [HttpGet("/Order/Requirement")]
         public IActionResult Requirement(int OrderId)
         {
@@ -218,7 +215,7 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.listcategory = listcategory;
                 }
                 int? UserId = HttpContext.Session.GetInt32("UserId");
-                Users userads = userService.GetUsersByID(UserId);
+                Users userads = userService.GetUserByUserId(UserId);
                 if (userads != null)
                 {
                     order.Service = orderService.GetServiceByServiceId(order.ServiceId);
