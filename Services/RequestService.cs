@@ -46,18 +46,15 @@ namespace Vtc_Freelancer.Services
         {
             return dbContext.Request.Where(x => x.UserId == userId).ToList();
         }
-        public List<Request> getListRequestByCategoryOfSeller(List<Category> listCategory)
+        public List<Request> getListRequestByCategory(List<Category> listCategory)
         {
             if (listCategory.Count > 0)
             {
                 List<Request> listRequest = new List<Request>();
                 foreach (var item in listCategory)
                 {
-                    Request request = dbContext.Request.FirstOrDefault(x => x.Category == item.CategoryName);
-                    if (request != null)
-                    {
-                        listRequest.Add(request);
-                    }
+                    List<Request> SubListRequest = dbContext.Request.Where(x => x.Category == item.CategoryName).ToList();
+                    listRequest.AddRange(SubListRequest);
                 }
                 return listRequest;
             }

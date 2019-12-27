@@ -119,30 +119,6 @@ namespace Vtc_Freelancer.Controllers
             return Redirect("/manager_request");
         }
 
-        [HttpGet("/manager_request")]
-        public IActionResult ViewRequests()
-        {
-            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
-            if (users != null)
-            {
-                ViewBag.UserName = users.UserName;
-                ViewBag.userAvatar = users.Avatar;
-                ViewBag.IsSeller = users.IsSeller;
-                List<Request> listRequest = requestService.getListRequestByUserId(users.UserId);
-                List<Category> listcategory = new List<Category>();
-                listcategory = adminService.GetListCategoryBy();
-                foreach (var item in listcategory)
-                {
-                    item.subsCategory = adminService.GetListSubCategoryByParentId(item.CategoryId);
-                }
-                if (listcategory != null)
-                {
-                    ViewBag.listcategory = listcategory;
-                }
-                return View(listRequest);
-            }
-            return Redirect("/");
-        }
         [HttpGet("/Request")]
         public IActionResult ListRequest()
         {
@@ -155,7 +131,7 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.userAvatar = users.Avatar;
                 ViewBag.IsSeller = users.IsSeller;
                 List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
-                List<Request> listRequest = requestService.getListRequestByCategoryOfSeller(category);
+                List<Request> listRequest = requestService.getListRequestByCategory(category);
                 List<Category> listcategory = new List<Category>();
                 List<Service> services = new List<Service>();
                 services = gigService.GetServicesBySellerId(seller.SellerId);
@@ -181,22 +157,20 @@ namespace Vtc_Freelancer.Controllers
             }
         }
 
-
-
-
-
-        [HttpGet("/manager_your_request")]
+        [HttpGet("/manager_request")]
         public IActionResult ManagerRequest()
         {
             Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
 
             if (users != null)
             {
-                // Seller seller = userService.GetSellerByUserID(users.UserId);
-                // ViewBag.UserName = users.UserName;
-                // ViewBag.userAvatar = users.Avatar;
-                // ViewBag.IsSeller = users.IsSeller;
-                // List<Category> category = userService.getCategoryOfSellerByUserId(users.UserId);
+                ViewBag.UserName = users.UserName;
+                ViewBag.userAvatar = users.Avatar;
+                ViewBag.ListOrder = orderService.GetListOrderbyUserId(users.UserId);
+
+                ViewBag.IsSeller = HttpContext.Session.GetInt32("IsSeller");
+                // HttpContext.Session.Remove("IsSeller");
+                ViewBag.SellerId = HttpContext.Session.GetInt32("SellerId");
                 List<Category> listcategory = new List<Category>();
 
                 List<Request> listRequest = requestService.GetRequestByUserId(users.UserId);
@@ -218,13 +192,6 @@ namespace Vtc_Freelancer.Controllers
                 return Redirect("/");
             }
         }
-
-
-
-
-
-
-
 
         [HttpPost("/sendOffer")]
         public IActionResult SendOffer(int RequestId, int ServiceId, string description)
@@ -266,6 +233,7 @@ namespace Vtc_Freelancer.Controllers
                 }
                 ViewBag.listOffers = offers;
                 Request request = new Request();
+                ViewBag.ListOrder = orderService.GetListOrderbyUserId(users.UserId);
                 request = requestService.getRequestByRequestId(requestId);
                 ViewBag.request = request;
                 // List<Service> services = new List<Service>();

@@ -228,6 +228,16 @@ namespace Vtc_Freelancer.Services
             }
             return listOrder;
         }
+        public List<Orders> GetListOrderOfSellerByUserId(int? userId)
+        {
+            Seller seller = userService.GetSellerByUserID(userId);
+            if (seller != null)
+            {
+                List<Orders> listOrder = dbContext.Orders.Include(x => x.Service).ThenInclude(x => x.ListImage).Include(x => x.Users).Include(x => x.Package).Where(x => x.Service.SellerId == seller.SellerId).ToList();
+                return listOrder;
+            }
+            return null;
+        }
 
         public bool ApproveFinalDelivery(int orderId, int userId)
         {

@@ -178,20 +178,17 @@ namespace Vtc_Freelancer.Services
 
             try
             {
-                if (skills.SkillName != null)
+                string[] ListSkills = skills.SkillName.Split(',');
+                foreach (var item in ListSkills)
                 {
-                    string[] ListSkills = skills.SkillName.Split(',');
-                    foreach (var item in ListSkills)
+                    if (item != "")
                     {
-                        if (item != "")
-                        {
-                            Skills skills1 = new Skills();
-                            skills1.SellerId = seller.SellerId;
-                            skills1.UserId = users.UserId;
-                            skills1.SkillName = item;
-                            dbContext.Add(skills1);
-                            dbContext.SaveChanges();
-                        }
+                        Skills skills1 = new Skills();
+                        skills1.SellerId = seller.SellerId;
+                        skills1.UserId = users.UserId;
+                        skills1.SkillName = item;
+                        dbContext.Add(skills1);
+                        dbContext.SaveChanges();
                     }
                 }
                 return true;

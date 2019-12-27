@@ -225,7 +225,6 @@ namespace Vtc_Freelancer.Controllers
                     Service se = orderService.GetServiceByServiceId(order.ServiceId);
                     order.Service.Seller = orderService.GetUserIdOfSellerBySellerId(se.SellerId);
                     List<Conversation> ListConversation = chatService.GetListConversationByUserId(order.Service.Seller.UserId, order.UserId);
-
                     if (UserId == order.UserId || UserId == order.Service.Seller.User.UserId)
                     {
                         ViewBag.Chat = ListConversation;
@@ -346,7 +345,7 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.UserName = users.UserName;
                 ViewBag.userAvatar = users.Avatar;
                 ViewBag.IsSeller = users.IsSeller;
-                List<Orders> listOrders = orderService.GetListOrderbyUserId(users.UserId);
+                List<Orders> listOrders = orderService.GetListOrderOfSellerByUserId(users.UserId);
                 List<Category> listcategory = new List<Category>();
                 listcategory = adminService.GetListCategoryBy();
                 foreach (var item in listcategory)

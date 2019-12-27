@@ -1,6 +1,6 @@
 @{
 ViewData["Title"] = "List Offers";
-Layout = "~/Views/Shared/_SellerLayout.cshtml";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container offer__container">
     <div class="wrap">
@@ -8,7 +8,7 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
             <div class="title__view-offer">
                 <h1>View offers</h1><span>( @ViewBag.request.QuantityOffers Offers )</span>
             </div>
-            <a href="" class="title__backto-request">Back to Manage Requests</a>
+            <a href="/manager_request" class="title__backto-request">Back to Manage Requests</a>
         </header>
         <div class="wrap__my-request">
             <div class="request__avatar">
@@ -53,23 +53,22 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
                     {
                     <img src="~/@imageService.Image" alt="" class="slider__gig-image">
                     }
-                    
                 </a>
                 <div class="offer_detail">
                     <div class="seller__info">
                         <div class="seller__info-wrap">
-                            @if(offer.users.Avatar == null)
-                            {
-                               
+                            <a href="/@offer.users.UserName">
+                                @if(offer.users.Avatar == null)
+                                {
                                     <img src="~/Images/avatardefault.png" alt="">
-                            }
-                            else
-                            {
-                                <img src="@offer.users.Avatar" alt="">
-                            }
-                            
+                                }
+                                else
+                                {
+                                    <img src="@offer.users.Avatar" alt="">
+                                }
+                            </a>
                             <div class="seller__info-detail">
-                                <div class="seller__name">@offer.users.UserName</div>
+                                <div class="seller__name"><a href="/@offer.users.UserName">@offer.users.UserName</a></div>
                                 <i class="fa fa-envelope"></i>
                                 <a href="">Contact me</a>
                             </div>

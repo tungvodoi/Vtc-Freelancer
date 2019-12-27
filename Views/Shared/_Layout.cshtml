@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/Request.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/step.css">
+    <link rel="stylesheet" href="~/css/offer.css">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Linh css request -->
     <link rel="stylesheet" type="text/css" href="~/css/linh_request.css">
@@ -47,7 +48,7 @@
                         }
                     </label>
                     <br>
-                    <p class="username">Username</p>
+                    <p class="username">@ViewBag.UserName</p>
                     <br>
                 </div>
                 <ul class="ul-sidebars">
@@ -58,7 +59,7 @@
                     <div class="content-sidebars-wrapper">
                         <li class="li-sidebars"><b>Buying</b></li>
                         <hr>
-                        <li class="li-sidebars"><a href="/manager_your_request">Manage Requests</a></li>
+                        <li class="li-sidebars"><a href="/manager_request">Manage Requests</a></li>
                         <li class="li-sidebars"><a href="/create_request"> Post a Request</a></li>
                         <br>
                         @if(ViewBag.IsSeller == 1)
@@ -240,7 +241,7 @@
                                 <div class="dropdown-profile">
                                     <ul class="ul-dropdown-profile">
                                         <li><a href="/@ViewBag.UserName">Profile</a></li>
-                                        <li><a href="/manager_your_request">Manage Request</a></li>
+                                        <li><a href="/manager_request">Manage Request</a></li>
                                         <li><a href="/create_request">Post a Request</a></li>
                                         <li><a href="#">Setting</a></li>
                                         <li><a href="/Logout"><b>Logout</b></a></li>

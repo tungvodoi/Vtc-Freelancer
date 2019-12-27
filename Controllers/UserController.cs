@@ -252,7 +252,7 @@ namespace Vtc_Freelancer.Controllers
                             }
                             else
                             {
-                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/User/{user.UserName}");
+                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/Images/User/{user.UserName}");
                                 using (FileStream fs = System.IO.File.Create(fileName))
                                 {
                                     file.CopyTo(fs);

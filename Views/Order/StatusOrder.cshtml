@@ -209,20 +209,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             }
           </div>
       </div>
-      @if(Model.WorkStatus > 0 && Model.WorkStatus < 3) 
-      { 
-        <div class="status-order-start">
-            <div class="title-delivered">
-              <img src="~/Images/icon-rocket.png" alt="icon-rocket" width="50px">
-              <h3>ORDER STARTED</h3>
-              <p>The order countdown is now ticking ...</p>
-              <p>Don't waste your time reading this message ...</p>
-            </div>
+      @if(Model.WorkStatus > 0 && Model.WorkStatus < 3) { <div class="status-order-start">
+        <div class="title-delivered">
+          <img src="~/Images/icon-rocket.png" alt="icon-rocket" width="50px">
+          <h3>ORDER STARTED</h3>
+          <p>The order countdown is now ticking ...</p>
+          <p>Don't waste your time reading this message ...</p>
         </div>
-      }
-    @if(Model.WorkStatus == 2 || Model.WorkStatus == 3)
+    </div>
+    }
+    @if(Model.WorkStatus > 0)
     {
-    @if (ViewBag.Chat != null)
+    @if (ViewBag.Chat.Count > 0)
     {
     <div class="conversation bd-top">
       <div class="title-delivered">
@@ -355,12 +353,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
         <div class="select-approve-order">
           <button class="select-finalize" onclick="AcceptOrder()">Yes</button>
-          <button class="select-finalize" onclick="NoAcceptOrder()">No</button>
+          <button class="select-finalize" id="NoAcceptOrder">No</button>
         </div>
       </div>
       <div class="reason-cancel-final-order" id="reason-cancel-final-order">
         <div class="title-approve-order">
-          <p>We're here to make sure you get the best possible experience. What is your reason for not approving this delivery?</p>
+          <p>We're here to make sure you get the best possible experience. What is your reason for not approving this
+            delivery?</p>
         </div>
         <div class="select-approve-order">
           <button class="select-finalize">I still need revisions</button>
@@ -445,12 +444,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="content-note">
       <pre>@Model.Note</pre>
     </div>
-    @if(Model.WorkStatus != 3 && Model.WorkStatus != 4)
-    {
     <div class="add-note">
       <p onclick="openHiddenFormNote()">Add note</p>
     </div>
-    }
     <div class="hidden-form" id="hidden-form-note">
       <div class="top-form-deliver">
         <h3>Note</h3>
@@ -597,6 +593,20 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       flag1 = true;
     }
   }
+  $("#NoAcceptOrder").click(() => {
+    if (flag1 == true) {
+      document.getElementById("select-final-order").style.display = "none";
+      document.getElementById("reason-cancel-final-order").style.display = "block";
+      document.getElementById("next-or-previous").style.display = "block";
+      flag1 = false;
+    }
+    else {
+      document.getElementById("select-final-order").style.display = "block";
+      document.getElementById("reason-cancel-final-order").style.display = "none";
+      document.getElementById("next-or-previous").style.display = "none";
+      flag1 = true;
+    }
+  })
   function NoAcceptOrder() {
     if (flag1 == true) {
       document.getElementById("select-final-order").style.display = "none";
