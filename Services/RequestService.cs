@@ -38,7 +38,10 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
         }
-
+        public Request getRequestByRequestId(int? requestId)
+        {
+            return dbContext.Request.FirstOrDefault(x => x.RequestId == requestId);
+        }
         public List<Request> getListRequestByUserId(int userId)
         {
             return dbContext.Request.Where(x => x.UserId == userId).ToList();
