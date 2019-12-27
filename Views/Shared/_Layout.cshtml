@@ -58,7 +58,7 @@
                     <div class="content-sidebars-wrapper">
                         <li class="li-sidebars"><b>Buying</b></li>
                         <hr>
-                        <li class="li-sidebars">Manage Requests</li>
+                        <li class="li-sidebars"><a href="/manager_your_request">Manage Requests</a></li>
                         <li class="li-sidebars"><a href="/create_request"> Post a Request</a></li>
                         <br>
                         @if(ViewBag.IsSeller == 1)
@@ -240,13 +240,13 @@
                                 <div class="dropdown-profile">
                                     <ul class="ul-dropdown-profile">
                                         <li><a href="/@ViewBag.UserName">Profile</a></li>
-                                        <li><a href="#">Manager Request</a></li>
+                                        <li><a href="/manager_your_request">Manage Request</a></li>
                                         <li><a href="/create_request">Post a Request</a></li>
                                         <li><a href="#">Setting</a></li>
                                         <li><a href="/Logout"><b>Logout</b></a></li>
                                     </ul>
                                 </div>
-                                   </div>
+                            </div>
                     </li>
                     }
                     else
@@ -267,7 +267,7 @@
                                   <div class="dropdown-profile">
                                     <ul class="ul-dropdown-profile">
                                         <li><a href="/@ViewBag.UserName">Profile</a></li>
-                                        <li><a href="#">Manager Request</a></li>
+                                        <li><a href="/manager_your_request">Manager Request</a></li>
                                         <li><a href="/create_request">Post a Request</a></li>
                                         <li><a href="#">Setting</a></li>
                                         <li><a href="/Logout" ><b>Logout</b></a></li>
@@ -276,8 +276,6 @@
                             </div>
                         </a>
                     </li>
-                    
-                  
                     }
                 </ul>
                 <div id="tip" class="tip-orders">
