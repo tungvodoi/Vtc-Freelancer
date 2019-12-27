@@ -148,7 +148,6 @@ namespace Vtc_Freelancer.Controllers
             {
                 ViewBag.returnUrl = returnUrl;
                 var myEncodedString = System.Net.WebUtility.UrlDecode(returnUrl);
-                Console.WriteLine(myEncodedString);
             }
 
             return View();
@@ -165,7 +164,7 @@ namespace Vtc_Freelancer.Controllers
             listcategory = adminService.GetListCategoryBy();
             if (seller != null)
             {
-                seller = dbContext.Seller.FirstOrDefault(seller => seller.SellerId == seller1.SellerId);
+                seller = userService.GetSellerBySellerID(seller1.SellerId);
                 // Set Session lan 2
                 HttpContext.Session.SetInt32("IsSeller", users.IsSeller);
                 return Redirect("/");
@@ -210,56 +209,70 @@ namespace Vtc_Freelancer.Controllers
         [HttpPost("User/UploadImage")]
         public bool UploadImage()
         {
-            var newFileName = string.Empty;
-            if (HttpContext.Request.Form.Files != null)
+            Users user = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (user != null)
             {
-                Console.WriteLine("tung dep trai");
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-
-                var files = HttpContext.Request.Form.Files;
-
-                foreach (var file in files)
+                var newFileName = string.Empty;
+                if (HttpContext.Request.Form.Files != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
                     {
-                        //Getting FileName
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "Images/User/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        PathDB = "Images/User/" + newFileName;
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
-                        }
+                            //Getting FileName
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
 
-                        int? UserId = HttpContext.Session.GetInt32("UserId");
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
 
-                        bool check = userService.UploadAvater(UserId, PathDB);
-                        if (check)
-                        {
-                            return true;
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, $@"Images/User/{user.UserName}") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = $@"Images/User/{user.UserName}/" + newFileName;
+
+                            if (Directory.Exists($@"User/{user.UserName}"))
+                            {
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+                            else
+                            {
+                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/User/{user.UserName}");
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+
+
+                            bool check = userService.UploadAvater(user.UserId, PathDB);
+                            if (check)
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
             }
             return false;
-
         }
+
         [HttpGet("/ChangePassword")]
         public IActionResult ChangePassword()
         {
@@ -269,11 +282,8 @@ namespace Vtc_Freelancer.Controllers
         public IActionResult ChangePassword(string currentpassword, string newpassword, string repassword)
         {
             MD5 md5Hash = MD5.Create();
-            Console.WriteLine("current:" + currentpassword);
             var userId = HttpContext.Session.GetInt32("UserId");
             var user = userService.GetUserByUserId(userId);
-
-            Console.WriteLine(user.Password);
             if (userService.VerifyMd5Hash(md5Hash, currentpassword, user.Password) != true)
             {
                 ViewBag.Error = "Current password invalid";

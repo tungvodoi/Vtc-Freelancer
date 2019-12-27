@@ -162,38 +162,54 @@ namespace Vtc_Freelancer.Controllers
 
             if (HttpContext.Request.Form.Files != null)
             {
-                var fileName = string.Empty;
-                string PathDB = string.Empty;
-
-                var files = HttpContext.Request.Form.Files;
-
-                foreach (var file in files)
+                Users user = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+                if (user != null)
                 {
-                    if (file.Length > 0)
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+
+                    var files = HttpContext.Request.Form.Files;
+
+                    foreach (var file in files)
                     {
-                        //Getting FileName
-                        fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                        //Assigning Unique Filename (Guid)
-                        var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                        //Getting file Extension
-                        var FileExtension = Path.GetExtension(fileName);
-
-                        // concating  FileName + FileExtension
-                        newFileName = myUniqueFileName + FileExtension;
-
-                        // Combines two strings into a path.
-                        fileName = Path.Combine(_environment.WebRootPath, "Images/Gigs/") + $@"\{newFileName}";
-
-                        // if you want to store path of folder in database
-                        PathDB = "Images/Gigs/" + newFileName;
-                        urlImages.Add(PathDB);
-
-                        using (FileStream fs = System.IO.File.Create(fileName))
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(fs);
-                            fs.Flush();
+                            //Getting FileName
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, $@"Images/Gigs/{user.UserName}") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = $@"Images/Gigs/{user.UserName}/" + newFileName;
+                            urlImages.Add(PathDB);
+
+                            if (Directory.Exists($@"Images/Gigs/{user.UserName}"))
+                            {
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
+                            else
+                            {
+                                DirectoryInfo di = Directory.CreateDirectory($@"wwwroot/Images/Gigs/{user.UserName}");
+                                using (FileStream fs = System.IO.File.Create(fileName))
+                                {
+                                    file.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                            }
                         }
                     }
                 }
