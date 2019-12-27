@@ -246,8 +246,17 @@ namespace Vtc_Freelancer.Controllers
                 {
                     item.Service = new Service();
                     item.Service = gigService.GetServiceByID(item.ServiceId);
+                    item.users = new Users();
+                    item.Service.ListImage = new List<ImageService>();
+                    item.users = userService.GetUserByUserId(item.SellerId);
                     System.Console.WriteLine(item.Service.Title + "ppp");
+                    System.Console.WriteLine(item.users.UserName + "UserName");
+                    item.Service.ListImage = gigService.GetListImagesByServiceId(item.ServiceId);
                 }
+                ViewBag.listOffers = offers;
+                Request request = new Request();
+                request = requestService.getRequestByRequestId(requestId);
+                ViewBag.request = request;
                 // List<Service> services = new List<Service>();
                 // services = gigService.GetServiceByID();
                 // foreach (var item in services)

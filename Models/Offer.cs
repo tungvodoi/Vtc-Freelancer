@@ -21,5 +21,6 @@ namespace Vtc_Freelancer.Models
         [ForeignKey("ServiceId")]
         public virtual Service Service { get; set; }
         public Offer() { }
+        public Users users = null;
     }
 }
