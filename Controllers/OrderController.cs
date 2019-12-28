@@ -301,7 +301,7 @@ namespace Vtc_Freelancer.Controllers
                             }
                         }
                     }
-                    if (orderService.DeliverWord(users.UserId, OrderId, contentResult, listFile))
+                    if (orderService.DeliverWork(users.UserId, OrderId, contentResult, listFile))
                     {
                         return Redirect("/order?orderId=" + OrderId);
                     }
@@ -357,6 +357,117 @@ namespace Vtc_Freelancer.Controllers
                     ViewBag.listcategory = listcategory;
                 }
                 return View(listOrders);
+            }
+            return Redirect("/");
+        }
+
+        [HttpPost("/Revision")]
+        public IActionResult SendRevision(int OrderId, string contentRevision, string name)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                List<Attachments> listFile = new List<Attachments>();
+                var newFileName = string.Empty;
+
+                if (HttpContext.Request.Form.Files != null)
+                {
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "Attachments/") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = "Attachments/" + newFileName;
+
+                            Attachments fileProduct = new Attachments();
+                            fileProduct.LinkFile = PathDB;
+                            fileProduct.FileName = newFileName;
+                            listFile.Add(fileProduct);
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                    }
+                    if (orderService.Revision(users.UserId, OrderId, contentRevision, listFile))
+                    {
+                        return Redirect("/order?orderId=" + OrderId);
+                    }
+                }
+            }
+            return Redirect("/");
+        }
+        [HttpPost("/Chat")]
+        public IActionResult Chat(int OrderId, string ContentChat, string name)
+        {
+            Users users = userService.GetUserByUserId(HttpContext.Session.GetInt32("UserId"));
+            if (users != null)
+            {
+                List<Attachments> listFile = new List<Attachments>();
+                var newFileName = string.Empty;
+
+                if (HttpContext.Request.Form.Files != null)
+                {
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                            //Assigning Unique Filename (Guid)
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                            //Getting file Extension
+                            var FileExtension = Path.GetExtension(fileName);
+
+                            // concating  FileName + FileExtension
+                            newFileName = myUniqueFileName + FileExtension;
+
+                            // Combines two strings into a path.
+                            fileName = Path.Combine(_environment.WebRootPath, "Attachments/") + $@"\{newFileName}";
+
+                            // if you want to store path of folder in database
+                            PathDB = "Attachments/" + newFileName;
+
+                            Attachments fileProduct = new Attachments();
+                            fileProduct.LinkFile = PathDB;
+                            fileProduct.FileName = newFileName;
+                            listFile.Add(fileProduct);
+
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                    }
+                    if (chatService.Chat(users.UserId, OrderId, ContentChat, listFile))
+                    {
+                        return Redirect("/order?orderId=" + OrderId);
+                    }
+                }
             }
             return Redirect("/");
         }

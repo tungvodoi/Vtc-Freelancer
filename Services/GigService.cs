@@ -15,7 +15,7 @@ namespace Vtc_Freelancer.Services
         }
         public int CreateServiceStepOne(string title, string category, string subcategory, string tags, int sellerId)
         {
-            
+
             Service service = new Service();
             try
             {
@@ -146,13 +146,8 @@ namespace Vtc_Freelancer.Services
         }
         public List<Service> GetListService()
         {
-            List<Service> listSerVice = dbContext.Service.ToList();
-            foreach (var item in listSerVice)
-            {
-                item.Seller = dbContext.Seller.FirstOrDefault(s => s.SellerId == item.SellerId);
-                //   item.Seller.User = dbContext.Users.FirstOrDefault(s => s.);
-            }
-            return listSerVice;
+            List<Service> listService = dbContext.Service.Include(x => x.Seller).ToList();
+            return listService;
         }
 
         public Users GetUserByServiceId(int? serviceId)
@@ -173,10 +168,6 @@ namespace Vtc_Freelancer.Services
             List<Service> services = dbContext.Service.Include(x => x.Seller).ThenInclude(x => x.User)
             .Where(x => x.SellerId == sellerId)
             .OrderByDescending(x => x.TimeCreateService).ToList();
-            // foreach (var item in services)
-            // {
-            //     item.Status
-            // }
             return services;
         }
     }
