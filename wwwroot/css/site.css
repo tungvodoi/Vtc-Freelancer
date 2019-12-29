@@ -13,7 +13,7 @@ input {
   resize: none;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .select-become-seller {
@@ -50,7 +50,7 @@ input {
 .wrapper-seller-become {
   /* margin: 2rem 0px 2rem 0px; */
   margin: 0px !important;
-  padding: 35px 0 96px;
+  padding: 35px 0 3rem;
 }
 
 @font-face {
@@ -502,6 +502,7 @@ ul {
 }
 
 .footer {
+  margin-top: 7rem;
   border-top: 1px solid #e5e5e5;
   padding-top: 2rem;
   background: #f0fbe6;
@@ -1242,6 +1243,17 @@ h3 {
 
 /* order */
 
+.order-completed {
+  text-align: center;
+  background-color: #1dbf73;
+  padding: 10px 0px;
+  margin-top: 20px;
+}
+.order-completed h3 {
+  font-weight: 600;
+  font-size: 24px;
+}
+
 .li-step-order {
   margin: 1rem;
   font-weight: bold;
@@ -1361,6 +1373,7 @@ h3 {
   margin-top: 20px;
   padding-top: 20px;
 }
+
 .bd-top {
   border-top: 1px solid;
 }
@@ -1406,6 +1419,7 @@ h3 {
 }
 
 /* Note */
+
 .title-note h3 {
   color: black;
   font-weight: 600;
@@ -1416,6 +1430,7 @@ h3 {
   margin: 10px 0px;
   padding: 10px 0px;
 }
+
 .content-note {
   border-top: 1px solid #7a7d85;
   border-bottom: 1px solid #7a7d85;
@@ -1428,7 +1443,7 @@ h3 {
 }
 
 .mg-top-delivery {
-  margin-top: 10px;
+  margin-top: 10px !important;
 }
 
 .noteContent {
@@ -1437,9 +1452,11 @@ h3 {
 }
 
 /* cancel order */
+
 .title-visit {
   text-align: center;
 }
+
 .button-cancel-order {
   width: 100%;
   border-radius: 4px;
@@ -1465,6 +1482,7 @@ h3 {
   padding-top: 20px;
   text-align: center;
 }
+
 .select-finalize {
   border: 1px solid green;
   border-radius: 4px;

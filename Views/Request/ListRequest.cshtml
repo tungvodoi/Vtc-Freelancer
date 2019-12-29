@@ -39,18 +39,17 @@
                         <tr>
                             <td>Date</td>
                             <td>Request</td>
-                            <td>Offers</td>
                             <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(Model != null)
+                        {
+                        @foreach (var item in Model)
+                        {
+                        @if (item.Status == 0)
+                        {
                         <tr>
-                            @if(@Model != null)
-                            {
-                            @foreach (var item in Model)
-                            {
-                            @if (item.Status == 0)
-                            {
                             <td class="date  height95">
                                 @item.TimeCreate.ToString("MMMM dd, yyyy")
                             </td>
@@ -68,17 +67,14 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="" class="review-offers">@item.QuantityOffers Review Offers</a>
-                            </td>
-                            <td>
                                 <button onclick="onClickHandle('@item.RequestId')" id="btn-send-offer"
                                     class="review-offers">Send
                                     Offer</button>
                             </td>
-                            }
-                            }
-                            }
                         </tr>
+                        }
+                        }
+                        }
                     </tbody>
                 </table>
             </div>

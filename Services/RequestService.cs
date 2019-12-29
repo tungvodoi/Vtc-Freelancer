@@ -38,19 +38,45 @@ namespace Vtc_Freelancer.Services
                 return false;
             }
         }
-
+        public Request getRequestByRequestId(int? requestId)
+        {
+            return dbContext.Request.FirstOrDefault(x => x.RequestId == requestId);
+        }
         public List<Request> getListRequestByUserId(int userId)
         {
             return dbContext.Request.Where(x => x.UserId == userId).ToList();
         }
-        public List<Request> getListRequestByCategoryOfSeller(List<Category> listCategory)
+        public List<Request> getListRequestByCategory(List<Category> listCategory)
         {
-            List<Request> listRequest = new List<Request>();
-            foreach (var item in listCategory)
+            if (listCategory.Count > 0)
             {
-                listRequest.Add(dbContext.Request.FirstOrDefault(x => x.Category == item.CategoryName));
+                List<Request> listRequest = new List<Request>();
+                foreach (var item in listCategory)
+                {
+                    List<Request> SubListRequest = dbContext.Request.Where(x => x.Category == item.CategoryName).ToList();
+                    listRequest.AddRange(SubListRequest);
+                }
+                return listRequest;
             }
-            return listRequest;
+            return null;
+        }
+        public List<Offer> GetOffersByRequestId(int? requestId)
+        {
+            List<Offer> offers = new List<Offer>();
+            offers = dbContext.Offer.Where(x => x.RequestId == requestId).ToList();
+            return offers;
+        }
+        // public  List<Service> GetServiceByRequestId(int? requestId)
+        // {
+
+        //     List<Service> services = new List<Service>();
+        //     services = dbContext.
+        // }
+        public List<Request> GetRequestByUserId(int? userId)
+        {
+            List<Request> requests = new List<Request>();
+            requests = dbContext.Request.Where(x => x.UserId == userId).ToList();
+            return requests;
         }
     }
 }

@@ -2,6 +2,10 @@
   border: 1px solid #e5e5e5;
 }
 
+.li-step:first-child {
+  margin-left: 0px !important;
+}
+
 .li-step {
   margin: 1rem;
   font-weight: bold;
@@ -534,6 +538,7 @@ Textarea, {
 .li-content-order p {
   color: #1dbf73;
 }
+
 .li-content-delivered p,
 .li-content-delivered span {
   font-size: 24px;
@@ -689,7 +694,7 @@ Textarea, {
   position: fixed;
   transform: translate(-50%, -50%);
   border-radius: 4px;
-  top: 50%;
+  top: 40%;
   left: 50%;
   max-width: 400px;
   width: 400px;
@@ -698,9 +703,11 @@ Textarea, {
   z-index: 99;
   background-color: white;
 }
+
 .click-approve-final-delivery {
   margin: 10px;
 }
+
 .btn-sub-approve {
   padding: 10px;
   color: white;
@@ -711,6 +718,7 @@ Textarea, {
   border: none;
   border-radius: 4px;
 }
+
 .btn-sub-approve-cancel {
   padding: 10px;
   font-size: 16px;
@@ -791,4 +799,49 @@ Textarea, {
 .order-body {
   min-height: 500px;
   margin: 3rem auto;
+}
+
+/* Revision */
+
+.contentRevision {
+  width: 100%;
+  height: 100px;
+}
+
+#form-revision {
+  border-top: 1px solid;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.select-request-revision {
+  float: right;
+  margin-top: 20px;
+}
+
+.select-request-revision a {
+  margin-right: 5px;
+}
+
+.inputfile-revision {
+  display: block;
+}
+
+/* Chat */
+.btn-sub-sendMessage {
+  display: block;
+  margin-left: auto;
+  margin-top: 10px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  background-color: #1dbf73;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+}
+
+.content-chat {
+  width: 100%;
 }

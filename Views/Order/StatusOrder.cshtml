@@ -104,7 +104,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     }
     @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
     {
-    @if(Model.WorkStatus == 1 || Model.WorkStatus == 2)
+    @if(Model.WorkStatus == 1)
     {
     <ul class="ul-step-order">
       <div class="order-status left-top">
@@ -119,25 +119,34 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
       <div class="order-status right-top">
         <li class="wrapper-li-step flex-end">
-          <button class="btn-sub" id="btn-sub-right" onclick="openHidden()">Deliver Your Order</button>
+          <button class="btn-sub" onclick="openHidden()">Deliver Your Order</button>
         </li>
       </div>
-      <div class="hidden-form" id="hidden-form">
-        <div class="top-form-deliver">
-          <h3>Deliver Completed Your Work</h3>
-          <button class="ignore" onclick="openHidden()">✖</button>
-        </div>
-        <form action="/DeleverWork?OrderId=@Model.OrderId" method="post" class="form-hidden-form"
-          enctype="multipart/form-data">
-          <div class="flex">
-
-            <input type="file" name="files" id="file" class="inputfile" multiple />
-
+    </ul>
+    }
+    else if (Model.WorkStatus == 2)
+    {
+    <ul class="ul-step-order">
+      <div class="order-status left-top">
+        <li class="wrapper-li-step">
+          <div class="li-step-order" style="Background-color: #1dbf73;"><i class="fa fa-check" style="color: white;"></i>
           </div>
-          <textarea name="contentResult" id="textarea-delever"
-            placeholder="Describe your delevery in detail..."></textarea>
-          <button class="btn-sub right-bo">Deliver Work</button>
-        </form>
+          <div class="li-content-order">
+            <p style="color: #1dbf73;">WORK DELIVERED</p>
+          </div>
+        </li>
+        <li class="wrapper-li-step">
+          <div class="li-step-order-border-large"><i class="fa fa-check" style="color: #1dbf73;"></i>
+          </div>
+          <div class="li-content-order1">
+            <p style="color: #1dbf73;">THIS ORDER WILL BE MARKED AS COMPLETED IN 3 DAYS</p>
+          </div>
+        </li>
+      </div>
+      <div class="order-status right-top">
+        <li class="wrapper-li-step flex-end">
+          <button class="btn-sub" onclick="openHidden()">Deliver Again</button>
+        </li>
       </div>
     </ul>
     }
@@ -177,6 +186,23 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
     </ul>
     }
+    <div class="hidden-form" id="hidden-form">
+      <div class="top-form-deliver">
+        <h3>Deliver Completed Your Work</h3>
+        <button class="ignore" onclick="openHidden()">✖</button>
+      </div>
+      <form action="/DeleverWork?OrderId=@Model.OrderId" method="post" class="form-hidden-form"
+        enctype="multipart/form-data">
+        <div class="flex">
+
+          <input type="file" name="files" id="file" class="inputfile" multiple />
+
+        </div>
+        <textarea name="contentResult" id="textarea-delever"
+          placeholder="Describe your delevery in detail..."></textarea>
+        <button class="btn-sub right-bo">Deliver Work</button>
+      </form>
+    </div>
     }
   </nav>
 </div>
@@ -209,20 +235,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             }
           </div>
       </div>
-      @if(Model.WorkStatus > 0 && Model.WorkStatus < 3) 
-      { 
-        <div class="status-order-start">
-            <div class="title-delivered">
-              <img src="~/Images/icon-rocket.png" alt="icon-rocket" width="50px">
-              <h3>ORDER STARTED</h3>
-              <p>The order countdown is now ticking ...</p>
-              <p>Don't waste your time reading this message ...</p>
-            </div>
+      @if(Model.WorkStatus > 0 && Model.WorkStatus < 3) { <div class="status-order-start">
+        <div class="title-delivered">
+          <img src="~/Images/icon-rocket.png" alt="icon-rocket" width="50px">
+          <h3>ORDER STARTED</h3>
+          <p>The order countdown is now ticking ...</p>
+          <p>Don't waste your time reading this message ...</p>
         </div>
-      }
-    @if(Model.WorkStatus == 2 || Model.WorkStatus == 3)
+    </div>
+    }
+    @if(Model.WorkStatus > 0)
     {
-    @if (ViewBag.Chat != null)
+    @if (ViewBag.Chat.Count > 0)
     {
     <div class="conversation bd-top">
       <div class="title-delivered">
@@ -232,13 +256,23 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     </div>
     @foreach (var item in ViewBag.Chat)
     {
-    @if (item.IsDeliveredOrIsRevisions == 1)
-    {<div class="conversation bd-top">
+    <div class="conversation bd-top">
+      @if (item.IsDeliveredOrIsRevisions == 1)
+      {
       <div class="title-delivered">
         <img src="~/Images/icon-unbox.png" alt="icon-unbox" width="50px">
         <h3>HERE'S YOUR DELIVERY!</h3>
-        <p>This order will be marked as completed in 3days</p>
+        <p>This order will be marked as completed in 3days.</p>
       </div>
+      }
+      else if (item.IsDeliveredOrIsRevisions == 2 && Model.Service.Seller.User.UserId == ViewBag.UserId)
+      {
+      <div class="title-delivered">
+        <img src="~/Images/icon-revision.png" alt="icon-unbox" width="50px">
+        <h3>REVISION REQUESTED!</h3>
+        <p>Revise your delivery to avoid cancellation.</p>
+      </div>
+      }
       <div class="body-delivered">
         <div class="avt-conversation">
           @if(@item.Sender.Avatar != null)
@@ -257,48 +291,20 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
           <pre>@item.Content</pre>
           <div class="file-result">
-            @if(item.ListAttachments != null)
+            @if(item.ListAttachments.Count > 0)
             {
-            <p style="margin: 10px 0px">DELIVERED FILES</p>
-            @foreach (var item1 in item.ListAttachments)
-            {
-            <a href="~/@item1.LinkFile" download>@item1.FileName</a>
-            }
-            }
-          </div>
-          <div class="time-send-message">
-            <p>@item.TimeSend.ToString("HH:mm MMMM dd, yyyy")</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    }
-    else if(item.IsDeliveredOrIsRevisions == 2)
-    {<div class="conversation bd-top">
-      <div class="body-delivered">
-        <div class="avt-conversation">
-          @if(@item.Sender.Avatar != null)
-          {
-          <img src="~/@item.Sender.Avatar" alt="avatar-seller" width="40px" class="avt-sender-delivered">
-          }
-          else
-          {
-          <img src="~/Images/avatardefault.png" alt="avatar-seller" width="40px" class="avt-seller-delivered">
-          }
-        </div>
-        <div class="content-delivered">
-          <div class="name-seller">
-            <p>@item.Sender.UserName</p>
-          </div>
-
-          <pre>@item.Content</pre>
-          <div class="file-result">
-            @if(item.ListAttachments != null)
-            {
-            @foreach (var item1 in item.ListAttachments)
-            {
-            <a href="~/@item1.LinkFile" download>@item1.FileName</a>
-            }
+              @if (item.IsDeliveredOrIsRevisions == 1)
+              {
+                <p style="margin: 10px 0px">DELIVERED FILES</p>
+              }
+              else
+              {
+                <p style="margin: 10px 0px">ATTACHMENTS</p>
+              }
+              @foreach (var item1 in item.ListAttachments)
+              {
+                <a href="~/@item1.LinkFile" download>@item1.FileName</a>
+              }
             }
           </div>
           <div class="time-send-message">
@@ -307,43 +313,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
       </div>
     </div>
-    }
-    else
-    {
-    <div class="conversation">
-      <div class="body-delivered">
-        <div class="avt-conversation">
-          @if(@item.Sender.Avatar != null)
-          {
-          <img src="~/@item.Sender.Avatar" alt="avatar-seller" width="40px" class="avt-sender-delivered">
-          }
-          else
-          {
-          <img src="~/Images/avatardefault.png" alt="avatar-seller" width="40px" class="avt-seller-delivered">
-          }
-        </div>
-        <div class="content-delivered">
-          <div class="name-seller">
-            <p>@item.Sender.UserName</p>
-          </div>
-
-          <pre>@item.Content</pre>
-          <div class="file-result">
-            @if(item.ListAttachments != null)
-            {
-            @foreach (var item1 in item.ListAttachments)
-            {
-            <a href="~/@item1.LinkFile" download>@item1.FileName</a>
-            }
-            }
-          </div>
-          <div class="time-send-message">
-            <p>@item.TimeSend.ToString("HH:mm MMMM dd, yyyy")</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    }
     }
     }
     @if (ViewBag.UserId == Model.UserId && Model.WorkStatus == 2)
@@ -354,16 +323,24 @@ Layout = "~/Views/Shared/_Layout.cshtml";
           <p>Are you ready to approve and finalize you order?</p>
         </div>
         <div class="select-approve-order">
-          <button class="select-finalize" onclick="AcceptOrder()">Yes</button>
-          <button class="select-finalize" onclick="NoAcceptOrder()">No</button>
+          <button class="select-finalize AcceptOrder">Yes</button>
+          <button class="select-finalize NoAcceptOrder">No</button>
         </div>
       </div>
       <div class="reason-cancel-final-order" id="reason-cancel-final-order">
         <div class="title-approve-order">
-          <p>We're here to make sure you get the best possible experience. What is your reason for not approving this delivery?</p>
+          <p>We're here to make sure you get the best possible experience. What is your reason for not approving this
+            delivery?</p>
         </div>
         <div class="select-approve-order">
-          <button class="select-finalize">I still need revisions</button>
+          @if (Model.Package.NumberRevision > Model.NumberRevision)
+          {
+            <button class="select-finalize click-form-revision" id="opacity-revision">I still need revisions</button>
+          }
+          else
+          {
+            <button class="select-finalize click-form-revision" style="Opacity: 0.5" disabled>I still need revisions</button>
+          }
           <button class="select-finalize">I received a partial delivery</button>
           <button class="select-finalize">I'm dissatisfied with the quality</button>
           <button class="select-finalize">I don't receive anything</button>
@@ -372,7 +349,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       <div class="hidden-form-final-delivery" id="hidden-form-accept-order">
         <div class="top-form-deliver">
           <h3>Approve Final Delivery</h3>
-          <button class="ignore" onclick="AcceptOrder()">✖</button>
+          <button class="ignore AcceptOrder">✖</button>
         </div>
         <div class="click-approve-final-delivery">
           <p>Got everything you need? Great! Once you approve this delivery, your order will be marked as completed.
@@ -380,14 +357,25 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             revisions after this step may be subject to extra costs.</p>
           <a class="btn-sub-approve" href="/ApproveFinal?orderId=@Model.OrderId&userId=@ViewBag.UserId">Approve Final
             Delivery</a>
-          <button class="btn-sub-approve-cancel" onclick="AcceptOrder()">Cancel</button>
+          <button class="btn-sub-approve-cancel AcceptOrder">Cancel</button>
         </div>
       </div>
       <div class="note-approve-order">
         <p><b>Please note: </b>respond in the next three days or the order will be automatically approved and
           completed.</p>
-        <p id="next-or-previous"><button onclick="NoAcceptOrder()">Back</button> Or <button>Skip</button></p>
+        <p id="next-or-previous"><button class="NoAcceptOrder">Back</button> Or <button>Skip</button></p>
       </div>
+    </div>
+    <div id="form-revision" style="display: none">
+      <form action="/Revision?OrderId=@Model.OrderId" method="post" class="form-hidden-form"
+        enctype="multipart/form-data">
+        <textarea name="contentRevision" class="contentRevision" placeholder="Type your message here..."></textarea>
+        <input type="file" name="files" class="inputfile-revision" multiple />
+        <div class="select-request-revision">
+          <a href="" class="click-form-revision">Cancel</a>
+          <input type="submit" class="btn-sub-approve" value="Submit Request">
+        </div>
+      </form>
     </div>
     }
     }
@@ -433,6 +421,23 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     </div>
   </div>
   }
+  @if(Model.WorkStatus == 3)
+  {
+  <div class="border-content order-completed" style="margin-top: 20px">
+    <img src="~/Images/icon-unbox.png" alt="icon-unbox" width="50px">
+    <h3>ORDER COMPLETED!</h3>
+  </div>
+  }
+  @if ((ViewBag.UserId == Model.UserId && Model.WorkStatus != 2 && Model.WorkStatus != 4) || (ViewBag.UserId == Model.Service.Seller.UserId && Model.WorkStatus < 4))
+  {
+  <div class="border-content container-order" style="margin-top: 20px">
+    <form method="POST" action="Chat?OrderId=@Model.OrderId" enctype="multipart/form-data">
+        <textarea rows="5" class="content-chat" maxlength="2500" name="ContentChat"></textarea>
+        <input type="file" name="files" class="inputfile" multiple>
+        <button class="btn-sub-sendMessage">Send Message</button>
+    </form>
+  </div>
+  }
 </div>
 <div class="left-content">
   @if(Model.Service.Seller.User.UserId == ViewBag.UserId)
@@ -445,12 +450,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="content-note">
       <pre>@Model.Note</pre>
     </div>
-    @if(Model.WorkStatus != 3 && Model.WorkStatus != 4)
-    {
     <div class="add-note">
       <p onclick="openHiddenFormNote()">Add note</p>
     </div>
-    }
     <div class="hidden-form" id="hidden-form-note">
       <div class="top-form-deliver">
         <h3>Note</h3>
@@ -462,9 +464,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </form>
     </div>
   </div>
-  @if(Model.WorkStatus != 3 && Model.WorkStatus != 4)
-  {
-  <div class="wrapper-process-order-content mg-top-delivery">
+  @if(Model.WorkStatus < 3) { <div class="wrapper-process-order-content mg-top-delivery">
     <div class="title-visit">
       <p>Need to change or cancel your order?</p>
     </div>
@@ -480,135 +480,150 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <button class="btn-sub right-bo">Cancel</button>
       </form>
     </div>
+</div>
+}
+}
+else
+{
+@if(Model.WorkStatus < 4) { <div class="wrapper-process-order-content">
+  <div class="process-order">
+    <div class="content-order">
+      <h4 class="process-success">Placed Order</h4>
+    </div>
+    <div class="content-order">
+      <h4 class="process-success">Provide Requirements</h4>
+    </div>
+    @if (ViewBag.UserId == Model.UserId)
+    {
+    @if(Model.WorkStatus == 1)
+    {
+    <div class="content-order">
+      <h4 class="processing">Order in Progress</h4>
+      <p>Exiting stuff! The Seller is now working on your delivery. The order is due:
+        <b>@ViewBag.Delivery.ToString("MMMM dd, yyyy")</b></p>
+    </div>
+
+    <div class="content-order await">
+      <h4 class="await-process">Review the Delivery</h4>
+    </div>
+    <div class="content-order await">
+      <h4 class="await-process">Order Complete</h4>
+    </div>
+    }
+    @if(Model.WorkStatus == 2)
+    {
+    <div class="content-order">
+      <h4 class="process-success">Order in Progress</h4>
+    </div>
+    <div class="content-order">
+      <h4 class="processing">Review the Delivery</h4>
+      <p>Your delivery is here! Review and accept it or request a revision. Please respond by
+        <b>@Model.OrderDeliveredTime.ToString("MMMM dd, yyyy")</b> or the order will be automatically accepted</p>
+    </div>
+    <div class="content-order">
+      <h4 class="await-process">Order Complete</h4>
+    </div>
+    }
+    @if(Model.WorkStatus == 3)
+    {
+    <div class="content-order">
+      <h4 class="process-success">Order in Progress</h4>
+    </div>
+    <div class="content-order">
+      <h4 class="process-success">Review the Delivery</h4>
+    </div>
+    <div class="content-order">
+      <h4 class="process-success">Order Complete</h4>
+    </div>
+    }
+    }
+  </div>
+  <div class="FAQs-order">
+    <p>Something unclear?</p>
+    <a href="#">Check out our FAQs</a>
+  </div>
   </div>
   }
   }
-  else
-  {
-  <div class="wrapper-process-order-content">
-    <div class="process-order">
-      <div class="content-order">
-        <h4 class="process-success">Placed Order</h4>
-      </div>
-      <div class="content-order">
-        <h4 class="process-success">Provide Requirements</h4>
-      </div>
-      @if (ViewBag.UserId == Model.UserId)
-      {
-      @if(Model.WorkStatus == 1)
-      {
-      <div class="content-order">
-        <h4 class="processing">Order in Progress</h4>
-        <p>Exiting stuff! The Seller is now working on your delivery. The order is due:
-          <b>@ViewBag.Delivery.ToString("MMMM dd, yyyy")</b></p>
-      </div>
-
-      <div class="content-order await">
-        <h4 class="await-process">Review the Delivery</h4>
-      </div>
-      <div class="content-order await">
-        <h4 class="await-process">Order Complete</h4>
-      </div>
-      }
-      @if(Model.WorkStatus == 2)
-      {
-      <div class="content-order">
-        <h4 class="process-success">Order in Progress</h4>
-      </div>
-      <div class="content-order">
-        <h4 class="processing">Review the Delivery</h4>
-        <p>Your delivery is here! Review and accept it or request a revision. Please respond by
-          <b>@Model.OrderDeliveredTime.ToString("MMMM dd, yyyy")</b> or the order will be automatically accepted</p>
-      </div>
-      <div class="content-order">
-        <h4 class="await-process">Order Complete</h4>
-      </div>
-      }
-      @if(Model.WorkStatus == 3)
-      {
-      <div class="content-order">
-        <h4 class="process-success">Order in Progress</h4>
-      </div>
-      <div class="content-order">
-        <h4 class="process-success">Review the Delivery</h4>
-      </div>
-      <div class="content-order">
-        <h4 class="process-success">Order Complete</h4>
-      </div>
-      }
-      }
-    </div>
-    <div class="FAQs-order">
-      <p>Something unclear?</p>
-      <a href="#">Check out our FAQs</a>
-    </div>
   </div>
-  }
-</div>
-</div>
+  </div>
 
-<script>
-  var hidden1 = document.getElementById('hidden-form');
-  var hidden2 = document.getElementById('hidden-form-note');
-  var hidden3 = document.getElementById('hidden-form-cancel-order');
-  var hidden4 = document.getElementById('hidden-form-accept-order');
-  var flag1 = true;
-  function openHidden() {
+  <script>
+    var hidden1 = document.getElementById('hidden-form');
+    var hidden2 = document.getElementById('hidden-form-note');
+    var hidden3 = document.getElementById('hidden-form-cancel-order');
+    var flag1 = true;
+    function openHidden() {
 
-    if (flag1 == true) {
-      hidden1.style.display = "block";
-      flag1 = false;
+      if (flag1 == true) {
+        hidden1.style.display = "block";
+        flag1 = false;
+      }
+      else {
+        hidden1.style.display = "none";
+        flag1 = true;
+      }
     }
-    else {
-      hidden1.style.display = "none";
-      flag1 = true;
-    }
-  }
-  function openHiddenFormNote() {
+    function openHiddenFormNote() {
 
-    if (flag1 == true) {
-      hidden2.style.display = "block";
-      flag1 = false;
+      if (flag1 == true) {
+        hidden2.style.display = "block";
+        flag1 = false;
+      }
+      else {
+        hidden2.style.display = "none";
+        flag1 = true;
+      }
     }
-    else {
-      hidden2.style.display = "none";
-      flag1 = true;
-    }
-  }
-  function openHiddenFormCancelOrder() {
+    function openHiddenFormCancelOrder() {
 
-    if (flag1 == true) {
-      hidden3.style.display = "block";
-      flag1 = false;
+      if (flag1 == true) {
+        hidden3.style.display = "block";
+        flag1 = false;
+      }
+      else {
+        hidden3.style.display = "none";
+        flag1 = true;
+      }
     }
-    else {
-      hidden3.style.display = "none";
-      flag1 = true;
-    }
-  }
-  function AcceptOrder() {
+    $(".AcceptOrder").click(() => {
+      if (flag1 == true) {
+        document.getElementById('hidden-form-accept-order').style.display = "block";
+        flag1 = false;
+      }
+      else {
+        document.getElementById('hidden-form-accept-order').style.display = "none";
+        flag1 = true;
+      }
+    })
 
-    if (flag1 == true) {
-      hidden4.style.display = "block";
-      flag1 = false;
-    }
-    else {
-      hidden4.style.display = "none";
-      flag1 = true;
-    }
-  }
-  function NoAcceptOrder() {
-    if (flag1 == true) {
-      document.getElementById("select-final-order").style.display = "none";
-      document.getElementById("reason-cancel-final-order").style.display = "block";
-      document.getElementById("next-or-previous").style.display = "block";
-      flag1 = false;
-    }
-    else {
-      document.getElementById("select-final-order").style.display = "block";
-      document.getElementById("reason-cancel-final-order").style.display = "none";
-      document.getElementById("next-or-previous").style.display = "none";
-      flag1 = true;
-    }
-  }
-</script>
+    $(".NoAcceptOrder").click(() => {
+      if (flag1 == true) {
+        document.getElementById("select-final-order").style.display = "none";
+        document.getElementById("reason-cancel-final-order").style.display = "block";
+        document.getElementById("next-or-previous").style.display = "block";
+        flag1 = false;
+      }
+      else {
+        document.getElementById("select-final-order").style.display = "block";
+        document.getElementById("reason-cancel-final-order").style.display = "none";
+        document.getElementById("next-or-previous").style.display = "none";
+        document.getElementById('form-revision').style.display = "none";
+        document.getElementById('opacity-revision').style.opacity = 1;
+        flag1 = true;
+      }
+    })
+
+    $(".click-form-revision").click(() => {
+      if (flag1 == true) {
+        document.getElementById('form-revision').style.display = "block";
+        document.getElementById('opacity-revision').style.opacity = 0.5;
+        flag1 = false;
+      }
+      else {
+        document.getElementById('form-revision').style.display = "none";
+        document.getElementById('opacity-revision').style.opacity = 1;
+        flag1 = true;
+      }
+    })
+  </script>

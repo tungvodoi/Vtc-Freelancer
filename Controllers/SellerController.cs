@@ -34,7 +34,7 @@ namespace Vtc_Freelancer.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId != null)
             {
-                Users userads = userService.GetUsersByID(userId);
+                Users userads = userService.GetUserByUserId(userId);
                 ViewBag.UserName = userads.UserName;
                 ViewBag.userAvatar = userads.Avatar;
                 //Lay Session lan 2
@@ -76,7 +76,6 @@ namespace Vtc_Freelancer.Controllers
             int? u = HttpContext.Session.GetInt32("UserId");
             if (u != null)
             {
-                System.Console.WriteLine(u + "dcmm");
                 Users user = userService.GetUserByUserId(u);
                 ViewBag.userAvatar = user.Avatar;
                 // ViewBag.userProfile = user;
@@ -99,7 +98,6 @@ namespace Vtc_Freelancer.Controllers
                 ViewBag.sellerprofile = seller;
                 ViewBag.listlanguage = listlanguage;
                 ViewBag.listskill = listskill;
-                Console.WriteLine(ViewBag.listlanguage);
                 ViewBag.sellerprofile = seller;
                 List<Service> services = new List<Service>();
                 services = gigService.GetServicesBySellerId(seller.SellerId);
@@ -147,8 +145,6 @@ namespace Vtc_Freelancer.Controllers
         {
             Skills skills = new Skills();
             skills.SkillName = skill;
-            Console.WriteLine(8888888888);
-            Console.WriteLine(skill);
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userService.UpdateSkills(userId, skill))
             {
