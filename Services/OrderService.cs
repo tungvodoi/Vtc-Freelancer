@@ -127,7 +127,6 @@ namespace Vtc_Freelancer.Services
                 Console.WriteLine("Error : " + ex.Message);
                 return false;
             }
-            return false;
         }
         public bool Addnote(int orderId, string noteContent)
         {
