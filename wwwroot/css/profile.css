@@ -74,6 +74,7 @@
   margin: 10px;
   font-size: 14px;
   background-color: transparent;
+  padding-bottom: 10px;
 }
 
 /* Change background color of buttons on hover */
@@ -90,9 +91,11 @@
 }
 
 /* Style the tab content */
+
 #Drafts {
-  display: none;
+  visibility: hidden;
 }
+
 .list-gigs {
   padding: 1rem;
   border: none;
