@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Vtc_Freelancer.Controllers
 {
+    [Authentication]
     public class OrderController : Controller
     {
         private readonly IHostingEnvironment _environment;

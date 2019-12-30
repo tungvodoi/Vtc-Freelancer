@@ -47,10 +47,7 @@
   box-sizing: border-box;
 }
 
-.select-category,
-.input-description,
-.input-budget,
-.select-time {
+.select-category, .input-description, .input-budget, .select-time {
   min-height: 40px;
   padding-left: 45px;
   position: relative;
@@ -58,9 +55,7 @@
 
 .input-description::before {
   content: "";
-  background: transparent
-    url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
-    no-repeat 0 0;
+  background: transparent url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg) no-repeat 0 0;
   background-size: 210px 35px;
   background-position: -0 0;
   width: 35px;
@@ -74,9 +69,7 @@
 
 .select-category::before {
   content: "";
-  background: transparent
-    url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
-    no-repeat 0 0;
+  background: transparent url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg) no-repeat 0 0;
   background-size: 210px 35px;
   background-position: -70px 0;
   width: 35px;
@@ -90,9 +83,7 @@
 
 .select-time::before {
   content: "";
-  background: transparent
-    url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
-    no-repeat 0 0;
+  background: transparent url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg) no-repeat 0 0;
   background-size: 210px 35px;
   background-position: -35px 0;
   width: 35px;
@@ -106,9 +97,7 @@
 
 .input-budget::before {
   content: "";
-  background: transparent
-    url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg)
-    no-repeat 0 0;
+  background: transparent url(../Images/icn-dashboard-request-1ada57304b64bf215dc8242e566bd154.svg) no-repeat 0 0;
   background-size: 210px 35px;
   background-position: -105px 0;
   width: 35px;
@@ -140,8 +129,7 @@ hr {
   border: 1px #ccc solid;
   padding: 10px 20px;
   cursor: pointer;
-  -webkit-transition: color 0.2s, background-color 0.2s, box-shadow 0.2s,
-    border 0.2s;
+  -webkit-transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
   transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
   border-radius: 3px;
 }

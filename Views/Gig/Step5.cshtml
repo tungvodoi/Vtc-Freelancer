@@ -1,0 +1,48 @@
+@{
+ViewData["Title"] = "Create new Service";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="nav-step container">
+  <nav>
+    <ul class="ul-step">
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">✔</div>
+        <div class="li-content" style="margin-right: 10px;">Overview ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">✔</div>
+        <div class="li-content" style="margin-right: 10px;">Pricing ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">✔</div>
+        <div class="li-content" style="margin-right: 10px;">Description ></div>
+      </li>
+      <li class="wrapper-li-step">
+        <div class="li-step" style="background-color: #1dbf73;">✔</div>
+        <div class="li-content" style="margin-right: 10px;">Gallery</div>
+    </li>
+     <li class="wrapper-li-step">
+        <div class="li-step">5</div>
+        <div class="li-content" style="margin-right: 10px;">Publish</div>
+    </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="content-crt-src content">
+  <div class="container-step1">
+    <form action="CreateServiceStep5" method="post" class="form-step3">
+      <div class="gig-edit-publish">
+        <h1 class="gig-edit-sec-ttl ">Almost there...
+        </h1>
+        <h3 class="gig-edit-sec-sttl">
+          Let's publish your Gig and get<br>
+          some buyers rolling in.
+        </h3>
+      </div>
+      <button type="submit" class="btn-continue">Publish Gig</button>
+      <a href="/manage_gig/active" class="but-cancel">Cancel</a>
+    </form>
+  </div>
+</div>

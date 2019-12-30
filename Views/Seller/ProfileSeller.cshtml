@@ -1,24 +1,24 @@
 @{
-    ViewData["Title"] = "EditProfile";
-    @if(ViewBag.UserLoged == null)
-    {
-    Layout = "~/Views/Shared/_login.cshtml";
-    }
-    else
-    {
+ViewData["Title"] = "EditProfile";
+@if(ViewBag.UserLoged == null)
+{
+Layout = "~/Views/Shared/_login.cshtml";
+}
+else
+{
 
-        @if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
-        {
-        Layout = "~/Views/Shared/_SellerLayout.cshtml";
-        }
-        else{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        }
-        @if(ViewBag.IsSeller == 0)
-        {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        }
-    }
+@if(ViewBag.userProfile.UserName == ViewBag.UserLoged)
+{
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+else{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if(ViewBag.IsSeller == 0)
+{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
 
 }
 
@@ -91,10 +91,10 @@
             @if (@ViewBag.sellerprofile != null )
             {
             <div class="content-detail-user" id="language">
-               @if (ViewBag.listlanguage != null) { @foreach (var item in
-                 ViewBag.listlanguage) {
-                 <p>@item.Language</p>
-             } }
+                @if (ViewBag.listlanguage != null) { @foreach (var item in
+                ViewBag.listlanguage) {
+                <p>@item.Language</p>
+                } }
             </div>
             }
             <div class="content-detail-user">
@@ -109,12 +109,12 @@
             @if (@ViewBag.sellerprofile != null )
             {
             <div class="content-detail-user" id="skill">
-              @if (ViewBag.listskill != null)
-              {
-               @foreach (var item in ViewBag.listskill) {
-  <p>@item.SkillName</p>
-  }
-              }
+                @if (ViewBag.listskill != null)
+                {
+                @foreach (var item in ViewBag.listskill) {
+                <p>@item.SkillName</p>
+                }
+                }
             </div>
             }
         </div>
@@ -124,7 +124,7 @@
         @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
         <div class="content-wrapper content">
             <div class="tab">
-                <button class="tab-gig back-content" onclick="OpenGigs(event, 'Active-Gig')">Active-Gigs</button>
+                <button class="tab-gig back-content active" onclick="OpenGigs(event, 'Active-Gig')">Active-Gigs</button>
                 <button class="tab-gig back-content" onclick="OpenGigs(event, 'Drafts')">Drafts</button>
             </div>
         </div>
@@ -133,17 +133,14 @@
             {
             @foreach (var service in ViewBag.listServiceProfile)
             {
-            @if(service.Status == 2)
+            @if(service.Status == 1)
             {
 
             <div class="slider__gig">
                 <a href="/Gig/ServiceDetail?serviceId=@service.ServiceId" class="slide-gig-css slide-gig-js">
-                    @if(service.ListImage != null)
-                    {
                     @foreach (var imageService in service.ListImage)
                     {
                     <img src="~/@imageService.Image" alt="" class="slider__gig-image">
-                    }
                     }
                 </a>
                 <div class="gig__content">
@@ -199,18 +196,14 @@
             {
             @foreach (var service in ViewBag.listServiceProfile)
             {
-            @if(service.Status == 1)
+            @if(service.Status == 0)
             {
 
             <div class="slider__gig">
                 <a href="/Gig/ServiceDetail?serviceId=@service.ServiceId" class="slide-gig-css slide-gig-js">
-                    @if(service.ListImage != null)
-                    {
-
                     @foreach (var imageService in service.ListImage)
                     {
-                    <img src="~/@imageService.Image" alt="" class="slider__gig-image" width="230">
-                    }
+                    <img src="~/@imageService.Image" alt="" class="slider__gig-image">
                     }
                 </a>
                 <div class="gig__content">
@@ -391,75 +384,75 @@
     }
     function openFormLanguage() {
 
-    if (flag == true) {
-      document.getElementById('language').innerHTML = "<textarea name=" + 'Language' + " id='text-description' cols='100' rows='10' >@if(@ViewBag.sellerprofile != null)
-      @foreach(var item in ViewBag.listlanguage)
-      {
-        @item.Language;
-      }
+        if (flag == true) {
+            document.getElementById('language').innerHTML = "<textarea name=" + 'Language' + " id='text-description' cols='100' rows='10' >@if(@ViewBag.sellerprofile != null)
+            @foreach(var item in ViewBag.listlanguage)
+            {
+                @item.Language;
+            }
              </textarea > "
-        + "<input class=" + 'btn-edit' + " onclick=" + 'openFormLanguage()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
-      flag = false;
+                + "<input class=" + 'btn-edit' + " onclick=" + 'openFormLanguage()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
+            flag = false;
+        }
+        else {
+            document.getElementById('language').innerHTML = " <p>@if(@ViewBag.sellerprofile != null){ @foreach (var item in ViewBag.listlanguage)
+            {
+                @item.Language;
+            }
+        } </p > ";
+        flag = true;
     }
-    else {
-      document.getElementById('language').innerHTML = " <p>@if(@ViewBag.sellerprofile != null){ @foreach (var item in ViewBag.listlanguage)
-      {
-        @item.Language;
-      }
-    } </p > ";
-    flag = true;
-  }
-  $('#bgc-key').click(() => {
-    let description = $('#text-description')[0].value;
-    document.getElementById('language').innerHTML = description;
-    flag = true;
-    $.ajax({
-      type: "POST",
-      data: {
-        Language: description
-      },
-      url: "/seller/UpdateLanguage",
-      success: function (result) {
-        console.log(result);
-      }
+    $('#bgc-key').click(() => {
+        let description = $('#text-description')[0].value;
+        document.getElementById('language').innerHTML = description;
+        flag = true;
+        $.ajax({
+            type: "POST",
+            data: {
+                Language: description
+            },
+            url: "/seller/UpdateLanguage",
+            success: function (result) {
+                console.log(result);
+            }
+        });
     });
-  });
   }
-  function openFormSkill() {
+    function openFormSkill() {
 
-    if (flag == true) {
-      document.getElementById('skill').innerHTML = "<textarea name=" + 'skill' + " id='text-description' cols='100' rows='10' >@if(@ViewBag.sellerprofile != null)
-      @foreach(var item in ViewBag.listskill)
-      {
-        @item.SkillName;
-      }
+        if (flag == true) {
+            document.getElementById('skill').innerHTML = "<textarea name=" + 'skill' + " id='text-description' cols='100' rows='10' >@if(@ViewBag.sellerprofile != null)
+            @foreach(var item in ViewBag.listskill)
+            {
+                @item.SkillName;
+            }
              </textarea > "
-        + "<input class=" + 'btn-edit' + " onclick=" + 'openFormSkill()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
-      flag = false;
+                + "<input class=" + 'btn-edit' + " onclick=" + 'openFormSkill()' + " type='button' value='Cancel'/>" + "<input id=" + 'bgc-key' + " class=" + 'btn-edit' + " type='submit' value='Update'/>";
+            flag = false;
+        }
+        else {
+            document.getElementById('skill').innerHTML = " <p>@if(@ViewBag.sellerprofile != null){ @foreach (var item in ViewBag.listskill)
+            {
+                @item.SkillName;
+            }
+        } </p > ";
+        flag = true;
     }
-    else {
-      document.getElementById('skill').innerHTML = " <p>@if(@ViewBag.sellerprofile != null){ @foreach (var item in ViewBag.listskill)
-      {
-        @item.SkillName;
-      }
-    } </p > ";
-    flag = true;
-  }
-  $('#bgc-key').click(() => {
-    let description = $('#text-description')[0].value;
-    document.getElementById('skill').innerHTML = description;
-    flag = true;
-    $.ajax({
-      type: "POST",
-      data: {
-        Skill: description
-      },
-      url: "/seller/UpdateSkill",
-      success: function (result) {
-        console.log(result);
-      }
+    $('#bgc-key').click(() => {
+        let description = $('#text-description')[0].value;
+        document.getElementById('skill').innerHTML = description;
+        flag = true;
+        $.ajax({
+            type: "POST",
+            data: {
+                Skill: description
+            },
+            url: "/seller/UpdateSkill",
+            success: function (result) {
+                console.log(result);
+            }
+        });
     });
-  });
   }
 </script>
 }

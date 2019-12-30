@@ -9,14 +9,14 @@
 .li-step {
   margin: 1rem;
   font-weight: bold;
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 19px;
   background-color: #7a7d85;
   color: white;
-  border-radius: 50%;
+  border-radius: 100%;
   font-size: 14px;
   text-align: center;
-  padding: 2px;
+  padding: 1px 3px;
 }
 
 .ul-step {
@@ -94,6 +94,20 @@ Textarea, {
   color: white;
   padding: 10px;
   font-weight: bold;
+}
+
+.but-cancel {
+  background: linear-gradient(#fff, #f5f5f5);
+  border: 1px solid #ccc;
+  font-size: 18px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #303030;
+  padding: 14px;
+  font-weight: bold;
+  text-shadow: none;
+  float: left;
 }
 
 .table-step2 th {
@@ -395,8 +409,7 @@ Textarea, {
   padding-top: 20px;
 }
 
-.Notification-content-sent-mail h3 b,
-.Notification-content-sent-mail p {
+.Notification-content-sent-mail h3 b, .Notification-content-sent-mail p {
   color: black;
 }
 
@@ -453,11 +466,7 @@ Textarea, {
   margin-top: 20px;
 }
 
-.incomp,
-.comp,
-.progress,
-.deli,
-.cancel {
+.incomp, .comp, .progress, .deli, .cancel {
   border: 1px solid;
   border-radius: 4px;
   padding: 10px;
@@ -539,8 +548,7 @@ Textarea, {
   color: #1dbf73;
 }
 
-.li-content-delivered p,
-.li-content-delivered span {
+.li-content-delivered p, .li-content-delivered span {
   font-size: 24px;
   color: #1dbf73;
 }
@@ -708,6 +716,16 @@ Textarea, {
   margin: 10px;
 }
 
+margin: 1rem;
+font-weight: bold;
+width: 20px;
+height: 19px;
+background-color: #7a7d85;
+color: white;
+border-radius: 100%;
+font-size: 14px;
+text-align: center;
+padding: 1px 3px;
 .btn-sub-approve {
   padding: 10px;
   color: white;
@@ -727,8 +745,7 @@ Textarea, {
   border-radius: 4px;
 }
 
-.click-approve-final-delivery button,
-.click-approve-final-delivery a {
+.click-approve-final-delivery button, .click-approve-final-delivery a {
   float: right;
   cursor: pointer;
   margin: 20px 10px;
@@ -828,6 +845,7 @@ Textarea, {
 }
 
 /* Chat */
+
 .btn-sub-sendMessage {
   display: block;
   margin-left: auto;
@@ -842,6 +860,34 @@ Textarea, {
   border-radius: 4px;
 }
 
+
 .content-chat {
   width: 100%;
+}
+
+.gig-edit-sec-ttl {
+  margin-top: -8px;
+  font-size: 40px;
+  line-height: 43px;
+  text-align: center;
+  color: #00668c;
+  padding-bottom: 10px;
+}
+
+.gig-edit-sec-sttl {
+  font-size: 24px;
+  line-height: 31px;
+  text-align: center;
+  color: #222325;
+}
+
+.gig-edit-publish {
+  position: relative;
+  -webkit-transition: height 2s ease-in-out;
+  transition: height 2s ease-in-out;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 5px 5px 0 0;
 }

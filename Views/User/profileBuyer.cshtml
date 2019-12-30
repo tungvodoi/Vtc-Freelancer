@@ -1,14 +1,10 @@
 @{
-ViewData["Title"] = "EditProfile";
+ViewData["Title"] = "Profile";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <div class="container body-content">
-    <!-- @foreach(var item in ViewBag.listServiceProfile)
-    {
-      <p>@item.ListImage</p>
-    } -->
     <div class="left-content ">
         <div class="content-wrapper content">
             <div class="container-profile">
@@ -59,18 +55,15 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div id="Active-Gig" class="list-gigs">
                 @if(@ViewBag.listServiceProfile != null)
                 {
-                @foreach (var service in ViewBag.listServiceProfile)
+                @foreach (var service in @ViewBag.listServiceProfile)
                 {
-                @if(service.Status == 2)
+                @if(service.Status != 0)
                 {
                 <div class="slider__gig">
                     <a href="" class="slide-gig-css slide-gig-js">
-                        @if(service.ListImage != null)
-                        {
                         @foreach (var imageService in service.ListImage)
                         {
                         <img src="~/@imageService.Image" alt="" class="slider__gig-image">
-                        }
                         }
                     </a>
                     <div class="gig__content">
@@ -110,9 +103,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div id="Drafts" class="list-gigs" style="flex-wrap:wrap;padding:0;">
                 @if(@ViewBag.listServiceProfile != null)
                 {
-                @foreach (var service in ViewBag.listServiceProfile)
+                @foreach (var service in @ViewBag.listServiceProfile)
                 {
-                @if(service.Status == 1)
+                @if(service.Status == 0)
                 {
                 <div class="slider__gig">
                     <a href="" class="slide-gig-css slide-gig-js">
@@ -152,7 +145,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         </div>
                         <div class="gig-price">
                             <small>Starting At</small>
-                            $25
+                            $5
                         </div>
                     </div>
                 </div>

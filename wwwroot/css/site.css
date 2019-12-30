@@ -1057,18 +1057,17 @@ h3 {
 /* sign in FORM */
 
 #logreg-forms {
-  width: 412px;
-  /* margin-left: auto;
-  margin-right: auto; */
-  margin: 2rem auto 2rem auto;
+  width: 420px;
+  margin: auto;
+  margin-top: 5rem;
   background-color: #f3f3f3;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+  transition: all 10.3s cubic-bezier(0.25, 0.8, 0.25, 1)
 }
 
 #logreg-forms form {
   width: 100%;
-  max-width: 410px;
+  max-width: 399px;
   padding: 15px;
   margin: auto;
 }
@@ -1097,9 +1096,8 @@ h3 {
 }
 
 #logreg-forms .social-login {
-  width: 390px;
-  margin: 0 auto;
-  margin-bottom: 14px;
+  margin: auto;
+  margin-bottom: 15px;
 }
 
 #logreg-forms .social-btn {
@@ -1233,6 +1231,21 @@ h3 {
 
 /* order */
 
+<<<<<<< HEAD
+.order-completed {
+  text-align: center;
+  background-color: #1dbf73;
+  padding: 10px 0px;
+  margin-top: 20px;
+}
+
+.order-completed h3 {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+=======
+>>>>>>> 70ea22327c710d6067baed0103b489f460d48846
 .li-step-order {
   margin: 1rem;
   font-weight: bold;

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Vtc_Freelancer.Models.Service>;
 
 	@{
-	ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "VTC-Freelancer";
 	}
 
 	<body>
@@ -62,7 +62,7 @@
 						@* <a href="">See All <i class="fa fa-chevron-right"></i></a> *@
 					</div>
 					<div class="wrapper-product">
-						@if(@Model != null)
+						@if(Model != null)
 						{
 						@foreach (var service in Model)
 						{
