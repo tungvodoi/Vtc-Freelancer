@@ -97,6 +97,7 @@
 }
 
 .list-gigs {
+  display: grid;
   padding: 1rem;
   border: none;
   flex-wrap: wrap;
