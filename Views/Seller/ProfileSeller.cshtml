@@ -338,6 +338,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             tabGig[i].className = tabGig[i].className.replace(" active", "");
         }
         document.getElementById(typeGig).style.display = "grid";
+        document.getElementById(typeGig).style.visibility = "visible";
         event.currentTarget.className += " active";
         
     }
