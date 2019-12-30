@@ -1231,7 +1231,6 @@ h3 {
 
 /* order */
 
-<<<<<<< HEAD
 .order-completed {
   text-align: center;
   background-color: #1dbf73;
@@ -1244,8 +1243,6 @@ h3 {
   font-size: 24px;
 }
 
-=======
->>>>>>> 70ea22327c710d6067baed0103b489f460d48846
 .li-step-order {
   margin: 1rem;
   font-weight: bold;
