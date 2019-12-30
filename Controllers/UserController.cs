@@ -131,18 +131,18 @@ namespace Vtc_Freelancer.Controllers
             listcategory = adminService.GetListCategoryBy();
             var userId = HttpContext.Session.GetInt32("UserId");
             Users user = userService.GetUserByUserId(userId);
-            if (userId != null)
-            {
-                if (user.Status == 1)
-                {
-                    // ViewBag.Accountlocked = "Account locked";
-                }
-            }
-            else
-            {
-                // ViewBag.Error = "Wrong Username/email";
-                // ViewBag.Error1 = "Wrong Passwowrd";
-            }
+            // if (userId != null)
+            // {
+            //     if (user.Status == 1)
+            //     {
+            //         // ViewBag.Accountlocked = "Account locked";
+            //     }
+            // }
+            // else
+            // {
+            //     // ViewBag.Error = "Wrong Username/email";
+            //     // ViewBag.Error1 = "Wrong Passwowrd";
+            // }
 
             if (returnUrl != null)
             {
