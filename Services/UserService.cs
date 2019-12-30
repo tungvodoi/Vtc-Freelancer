@@ -108,7 +108,6 @@ namespace Vtc_Freelancer.Services
         bool userlevel = UpdateIsSeller(users);
         bool lang = AddLanguage(seller, languages, users);
         bool skill = AddSkills(seller, skills, users);
-        seller = dbContext.Seller.FirstOrDefault(s=> s.UserId == users.UserId);
         bool addcateseller = AddSellerCategory(seller, category);
         if (userlevel && lang && skill && addcateseller)
         {
@@ -178,11 +177,6 @@ namespace Vtc_Freelancer.Services
 
       try
       {
-        // skills.SellerId = seller.SellerId;
-        // skills.UserId = users.UserId;
-        // dbContext.Add(skills);
-        // dbContext.SaveChanges();
-        Console.WriteLine(skills.SkillName);
         string[] ListSkills = skills.SkillName.Split(',');
         foreach (var item in ListSkills)
         {
@@ -206,7 +200,6 @@ namespace Vtc_Freelancer.Services
       }
 
     }
-
     public Users GetUserByUserId(int? Id)
     {
       Users users = new Users();
