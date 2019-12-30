@@ -69,6 +69,7 @@ namespace Vtc_Freelancer.Controllers
             {
                 if (userService.Register(username, email, password))
                 {
+                    HttpContext.Session.SetString("regSuccess", "Register Successfully");
                     ViewBag.Noti = "Register Successfully :)";
                 }
                 return Redirect("/Login");
@@ -143,7 +144,8 @@ namespace Vtc_Freelancer.Controllers
             //     // ViewBag.Error = "Wrong Username/email";
             //     // ViewBag.Error1 = "Wrong Passwowrd";
             // }
-
+            ViewBag.regSuccess = HttpContext.Session.GetString("regSuccess");
+            HttpContext.Session.Remove("regSuccess");
             if (returnUrl != null)
             {
                 ViewBag.returnUrl = returnUrl;
