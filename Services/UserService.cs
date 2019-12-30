@@ -44,7 +44,6 @@ namespace Vtc_Freelancer.Services
           dbContext.SaveChanges();
           return true;
         }
-<<<<<<< HEAD
         catch (System.Exception ex)
         {
           Console.WriteLine(ex.Message);
@@ -69,52 +68,13 @@ namespace Vtc_Freelancer.Services
       if (user != null)
       {
         if (VerifyMd5Hash(md5Hash, password, user.Password))
-=======
-        public bool Register(string username, string email, string password)
->>>>>>> ee167c01b239daebbbe906e71de118afb00b83f2
         {
           // System.Console.WriteLine(user.UserName);
           return user;
         }
         else
         {
-<<<<<<< HEAD
           return null;
-=======
-            var character = "@";
-            var user = new Users();
-            MD5 md5Hash = MD5.Create();
-            if (email.Contains(character))
-            {
-                user = dbContext.Users.FirstOrDefault(u => u.Email == email);
-                if (user != null)
-                {
-                    if (VerifyMd5Hash(md5Hash, password, user.Password))
-                    {
-                        return user;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-                }
-                return null;
-            }
-            else
-            {
-                user = dbContext.Users.FirstOrDefault(u => u.UserName == email);
-                if (user != null)
-                {
-                    if (user.Password == password)
-                    {
-                        return user;
-                    }
-                }
-                return null;
-            }
-
->>>>>>> ee167c01b239daebbbe906e71de118afb00b83f2
         }
       }
       return null;
@@ -148,6 +108,7 @@ namespace Vtc_Freelancer.Services
         bool userlevel = UpdateIsSeller(users);
         bool lang = AddLanguage(seller, languages, users);
         bool skill = AddSkills(seller, skills, users);
+        seller = dbContext.Seller.FirstOrDefault(s=> s.UserId == users.UserId);
         bool addcateseller = AddSellerCategory(seller, category);
         if (userlevel && lang && skill && addcateseller)
         {
@@ -235,7 +196,6 @@ namespace Vtc_Freelancer.Services
             dbContext.SaveChanges();
           }
         }
-<<<<<<< HEAD
         return true;
       }
       catch (System.Exception e)
@@ -244,34 +204,6 @@ namespace Vtc_Freelancer.Services
         return false;
         throw;
       }
-=======
-        public bool AddSkills(Seller seller, Skills skills, Users users)
-        {
-
-            try
-            {
-                string[] ListSkills = skills.SkillName.Split(',');
-                foreach (var item in ListSkills)
-                {
-                    if (item != "")
-                    {
-                        Skills skills1 = new Skills();
-                        skills1.SellerId = seller.SellerId;
-                        skills1.UserId = users.UserId;
-                        skills1.SkillName = item;
-                        dbContext.Add(skills1);
-                        dbContext.SaveChanges();
-                    }
-                }
-                return true;
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-                throw;
-            }
->>>>>>> ee167c01b239daebbbe906e71de118afb00b83f2
 
     }
 
@@ -289,10 +221,13 @@ namespace Vtc_Freelancer.Services
       }
     }
 
-<<<<<<< HEAD
     public Seller GetSellerByUserID(int? userID)
     {
       return dbContext.Seller.FirstOrDefault(s => s.UserId == userID);
+    }
+    public Seller GetSellerBySellerID(int? sellerId)
+    {
+      return dbContext.Seller.FirstOrDefault(s => s.SellerId == sellerId);
     }
     public Users GetUserByUsername(string username)
     {
@@ -302,24 +237,6 @@ namespace Vtc_Freelancer.Services
     public Users GetUserByEmail(string email)
     {
       Users users = dbContext.Users.FirstOrDefault(s => s.Email == email);
-=======
-        public Seller GetSellerByUserID(int? userID)
-        {
-            return dbContext.Seller.FirstOrDefault(s => s.UserId == userID);
-        }
-        public Seller GetSellerBySellerID(int? sellerId)
-        {
-            return dbContext.Seller.FirstOrDefault(s => s.SellerId == sellerId);
-        }
-        public Users GetUserByUsername(string username)
-        {
-            Users user = dbContext.Users.FirstOrDefault(s => s.UserName == username);
-            return user;
-        }
-        public Users GetUserByEmail(string email)
-        {
-            Users users = dbContext.Users.FirstOrDefault(s => s.Email == email);
->>>>>>> ee167c01b239daebbbe906e71de118afb00b83f2
 
       return users;
     }
@@ -385,8 +302,6 @@ namespace Vtc_Freelancer.Services
       return false;
 
     }
-
-
 
     public bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
     {

@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Vtc_Freelancer.Models;
 using Vtc_Freelancer.Services;
 using System.Linq;
+using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
-    // [Authentication]
+    [Authentication]
     public class AdminController : Controller
     {
         private MyDbContext dbContext;

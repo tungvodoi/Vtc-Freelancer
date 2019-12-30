@@ -10,7 +10,7 @@ using System;
 
 namespace Vtc_Freelancer.Controllers
 {
-    // [Authentication]
+    [Authentication]
     public class SellerController : Controller
     {
         private UserService userService;
@@ -108,7 +108,6 @@ namespace Vtc_Freelancer.Controllers
                     item.listPackage = ListPackage;
                 }
                 ViewBag.listServiceProfile = services;
-                return View(services);
             }
 
             return View();

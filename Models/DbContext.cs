@@ -27,11 +27,7 @@ namespace Vtc_Freelancer.Models
         public DbSet<FAQ> FAQ { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-<<<<<<< HEAD
             optionsBuilder.UseMySQL("server=127.0.0.1;uid=root;pwd=2412;database=vtc_freelancer");
-=======
-            optionsBuilder.UseMySQL("server=127.0.0.1;uid=admin;pwd=123456;database=vtc_freelancer");
->>>>>>> ee167c01b239daebbbe906e71de118afb00b83f2
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

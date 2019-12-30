@@ -14,6 +14,7 @@ using Vtc_Freelancer.ActionFilter;
 
 namespace Vtc_Freelancer.Controllers
 {
+    [Authentication]
     public class RequestController : Controller
     {
         private readonly IHostingEnvironment _environment;

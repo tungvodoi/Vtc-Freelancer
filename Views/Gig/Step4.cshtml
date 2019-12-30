@@ -10,19 +10,23 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
         <ul class="ul-step">
             <li class="wrapper-li-step">
                 <div class="li-step" style="background-color: #1dbf73;">✔</div>
-                <div class="li-content">Overview ></div>
+                <div class="li-content" style="margin-right: 10px;">Overview ></div>
             </li>
             <li class="wrapper-li-step">
                 <div class="li-step" style="background-color: #1dbf73;">✔</div>
-                <div class="li-content">Pricing ></div>
+                <div class="li-content" style="margin-right: 10px;">Pricing ></div>
             </li>
             <li class="wrapper-li-step">
                 <div class="li-step" style="background-color: #1dbf73;">✔</div>
-                <div class="li-content">Description ></div>
+                <div class="li-content" style="margin-right: 10px;">Description ></div>
             </li>
             <li class="wrapper-li-step">
                 <div class="li-step" style="background-color: #1dbf73;">4</div>
-                <div class="li-content">Publish</div>
+                <div class="li-content" style="margin-right: 10px;">Gallery</div>
+            </li>
+             <li class="wrapper-li-step">
+                <div class="li-step">5</div>
+                <div class="li-content" style="margin-right: 10px;">Publish</div>
             </li>
         </ul>
     </nav>
@@ -32,7 +36,7 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
 
 <div class="content-crt-src content">
     <div class="container-step1">
-<form method="post" enctype="multipart/form-data" action="Step4" class="form-step4">
+<form method="post" enctype="multipart/form-data" action="CreateServiceStep4" class="form-step4">
             <h2>Build Your Gig Gallery</h2>
             <br>
             <p>Add memorable content to your gallery to set yourself apart from competitors.
@@ -52,7 +56,8 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
     <br>
   <input type="file" name="files" class="file" multiple />
   <img class="myImg" src="https://www.lemark.co.uk/wp-content/uploads/Your-Image-Here-1.jpg" alt="your image" height="200px" width="200px">
-            <input class="btn-continue" type="submit">
+     <input class="btn-continue" type="submit" value="Save and continue" style="margin-top: 200px;">
+              <a href="/manage_gig/active"  class="but-cancel"style="margin-top: 200px;">Cancel</a>
         </form>
     </div>
 </div>

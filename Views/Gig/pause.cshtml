@@ -1,0 +1,111 @@
+@{
+ViewData["Title"] = "Management gigs";
+Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<div class="container">
+
+  <div class="order-body">
+    <h1 class="mngr-request">Manage gigs</h1>
+    <div class="tab">
+       <button class="tab-requests"><a href="/manage_gig/active">ACTIVE</a>@if(@ViewBag.CountActive != 0){<span
+          class="db-new-filters">@ViewBag.CountActive</span>}</button>
+      <button class="tab-requests"><a href="/manage_gig/pending">PENDING APPROVAL</a>@if(@ViewBag.CountPending !=
+        0){<span class="db-new-filters">@ViewBag.CountPending</span>}</button>
+      <button class="tab-requests"><a href="/manage_gig/requires_mod">REQUIRES MODIFICATION</a>@if(@ViewBag.CountRequire
+        != 0){<span class="db-new-filters">@ViewBag.CountRequire</span>}</button>
+      <button class="tab-requests"><a href="/manage_gig/draft">DRAFT</a>@if(@ViewBag.CountDraft != 0){<span } }
+          class="db-new-filters">@ViewBag.CountDraft </span>}</button>
+      <button class="tab-requests"><a href="/manage_gig/denied">DENIED</a>@if(@ViewBag.CountDenied != 0){<span
+          class="db-new-filters" >@ViewBag.CountDenied</span>}</button>
+      <button class="tab-requests active"><a href="/manage_gig/pause">PAUSED</a>@if(@ViewBag.CountPause != 0){<span
+          class="db-new-filters" style="background-color: #1dbf73;">@ViewBag.CountPause</span>}</button>
+   <div style="margin-left: auto;"> <a href="/CreateService/Step1" class="button-new-gig">CREATE A NEW GIG</a></div>
+    </div>
+    <div class="wrapper-table-request" style="display: block;">
+      <table>
+        <thead>
+          <tr>
+            <td style="text-align:left; width: 45%;">GIG</td>
+            <td style="text-align:left;">IMPRESSIONS</td>
+            <td style="text-align:left;">CLICKS</td>
+            <td style="text-align:left;">VIEWS</td>
+            <td style="text-align:left;">ORDERS</td>
+            <td style="text-align:left;">CANCELLATIONS</td>
+            <td style="text-align:left;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          @if(@ViewBag.listServiceProfile != null)
+          {
+          @foreach (var item in ViewBag.listServiceProfile)
+          {
+          @if(item.Status == 2)
+          {
+          <tr class="height95">
+            <td class="text-wide" style="text-align: left; width: 45%;">
+              <div>
+                 @if(@item.ListImage != null)
+                {
+                  <span> <img src="~/@item.ListImage[0].Image" alt="" width="50px" height="40px"></span>
+                }
+                <span style="margin-left: 30px;"> @item.Title </span>
+              </div>
+            </td>
+            <td class="text-wide" style="text-align: left;">
+              0
+            </td>
+            <td class="text-wide" style="text-align: left;">
+             0
+            </td>
+            <td class="text-wide" style="text-align: left;">
+              0
+            </td>
+            <td class="text-wide" style="text-align: left;">
+              0
+            </td>
+            <td class="text-wide" style="text-align: left;">
+              0 %
+            </td>
+            <td class="text-wide" style="text-align: left;">
+              <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn"><img src="~/Images/drop-down-arrow.png" alt=""
+                    width="10px"></button>
+                <div id="myDropdown" class="dropdown-content">
+               <a href="/Gig/ServiceDetail?serviceId=@item.ServiceId">Preview</a>
+                  <a href="#about">Edit</a>
+                  <a href="/manage_gig/activeservice?serviceId=@item.ServiceId">Active</a>
+                  <a href="/manage_gig/deleteservice?serviceId=@item.ServiceId">Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          }
+          }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+</script>
