@@ -36,7 +36,7 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
           </tr>
         </thead>
         <tbody>
-          @if(@ViewBag.listServiceProfile != null)
+          @if(@ViewBag.listServiceProfile.Count > 0)
           {
           @foreach (var item in ViewBag.listServiceProfile)
           {
@@ -45,7 +45,7 @@ Layout = "~/Views/Shared/_SellerLayout.cshtml";
           <tr class="height95">
             <td class="text-wide" style="text-align: left; width: 45%;">
               <div>
-                 @if(@item.ListImage != null)
+                 @if(@item.ListImage.Count > 0)
                 {
                   <span> <img src="~/@item.ListImage[0].Image" alt="" width="50px" height="40px"></span>
                 }

@@ -16,12 +16,15 @@
         <div class="your-offer" id="your-offer">
             @foreach (var item in ViewBag.myService)
             {
-            <div class="myservice-wrapper"
-                onclick='sendOffer("@item.ListImage[0].Image","@item.Title","@item.ServiceId")'>
-                <img src="@item.ListImage[0].Image" alt="">
-                <span class="back-content">@item.Title</span>
-            </div>
-            <hr>
+                @if (item.Status == 1 && item.ListImage.Count > 0)
+                {
+                    <div class="myservice-wrapper"
+                        onclick='sendOffer("@item.ListImage[0].Image","@item.Title","@item.ServiceId")'>
+                        <img src="@item.ListImage[0].Image" alt="">
+                        <span class="back-content">@item.Title</span>
+                    </div>
+                    <hr>
+                }
             }
         </div>
         <div class="detail-offer" id="detail-offer">

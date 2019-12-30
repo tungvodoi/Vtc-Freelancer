@@ -106,7 +106,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         <td class="td-package">
                             @if(ViewBag.PackagePremium != null)
                             {
-                            <p class="price">@ViewBag.PackagePremium.Price</p>
+                            <p class="price">$@ViewBag.PackagePremium.Price</p>
                             <h3 class="type"><b>Premium</b></h3>
                             <br>
                             <b class="title">@ViewBag.PackagePremium.Title</b>
@@ -115,7 +115,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         <td class="td-package">
                             @if(ViewBag.PackageStandard != null)
                             {
-                            <p class="price">@ViewBag.PackageStandard.Price</p>
+                            <p class="price">$@ViewBag.PackageStandard.Price</p>
                             <h3 class="type"><b>Standard</b></h3>
                             <br>
                             <b class="title">@ViewBag.PackageStandard.Title</b>
@@ -124,7 +124,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         <td class="td-package">
                             @if(ViewBag.PackageBasic != null)
                             {
-                            <p class="price">@ViewBag.PackageBasic.Price</p>
+                            <p class="price">$@ViewBag.PackageBasic.Price</p>
                             <h3 class="type"><b>Basic</b></h3>
                             <br>
                             <b class="title">@ViewBag.PackageBasic.Title</b>
