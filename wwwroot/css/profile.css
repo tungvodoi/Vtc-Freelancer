@@ -90,9 +90,10 @@
 }
 
 /* Style the tab content */
-
-.list-gigs {
+#Drafts {
   display: none;
+}
+.list-gigs {
   padding: 1rem;
   border: none;
   flex-wrap: wrap;

@@ -327,10 +327,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
 @if (ViewBag.userProfile.UserName == ViewBag.UserLoged) {
 <script>
-    $('.arrowSlide').click((e) => {
-        e.preventDefault();
-    })
-
     function OpenGigs(event, typeGig) {
 
         var listGigs = document.getElementsByClassName('list-gigs');
@@ -343,16 +339,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         }
         document.getElementById(typeGig).style.display = "grid";
         event.currentTarget.className += " active";
-        $('.slide-gig-js').slick({
-            infinite: true,
-            prevArrow: `<i class="fa fa-chevron-left arrowSlide arrowSlide-left"></i>`,
-            nextArrow: `<i class="fa fa-chevron-right arrowSlide arrowSlide-right"></i>`,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        });
-         $('.arrowSlide').click((e) => {
-            e.preventDefault();
-        })
+        
     }
     var flag = true;
     function openFormDescription() {
@@ -532,7 +519,16 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             ]
         });
        
-
-    });
+        $('.slide-gig-js').slick({
+                infinite: true,
+                prevArrow: `<i class="fa fa-chevron-left arrowSlide arrowSlide-left"></i>`,
+                nextArrow: `<i class="fa fa-chevron-right arrowSlide arrowSlide-right"></i>`,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+                $('.arrowSlide').click((e) => {
+                e.preventDefault();
+            })
+        });
 
 </script>
