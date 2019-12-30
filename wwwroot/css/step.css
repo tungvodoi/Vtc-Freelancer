@@ -2,7 +2,7 @@
   border: 1px solid #e5e5e5;
 }
 
-.li-step:first-child {
+.wrapper-li-step:first-child .li-step {
   margin-left: 0px !important;
 }
 

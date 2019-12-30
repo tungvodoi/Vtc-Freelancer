@@ -170,12 +170,11 @@ namespace Vtc_Freelancer.Controllers
       if (seller != null)
       {
         seller = userService.GetSellerBySellerID(seller1.SellerId);
-        
         // Set Session lan 2
-        HttpContext.Session.SetInt32("IsSeller", 1);
+        HttpContext.Session.SetInt32("IsSeller", users.IsSeller);
         return Redirect("/");
       }
-      return Redirect("/Seller");
+      return Redirect("/BecomeSeller");
     }
     [Authentication]
     [HttpGet("/BecomeSeller")]
@@ -188,7 +187,6 @@ namespace Vtc_Freelancer.Controllers
       {
         List<Category> listSubCategory = new List<Category>();
         listSubCategory = adminService.GetListSubCategoryByCategoryParentId(1);
-
         ViewBag.subcategory = listSubCategory;
         ViewBag.listcategory = listcategory;
       }

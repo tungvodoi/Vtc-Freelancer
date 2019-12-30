@@ -12,7 +12,7 @@ textarea, input {
   resize: none;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .select-become-seller {
@@ -836,12 +836,20 @@ h3 {
   padding: 1rem;
 }
 
+#prf-div-seller {
+  flex: auto;
+}
+
+#right-slide-update {
+  height: 350px !important;
+}
+
 .bderbtm {
   border-bottom: 1px solid #d5d4d2;
 }
 
 .update-bussiness {
-  margin: 1rem;
+  margin: 1rem 0rem 0rem 1rem;
 }
 
 .slide-container {
@@ -1223,6 +1231,7 @@ h3 {
 
 /* order */
 
+<<<<<<< HEAD
 .order-completed {
   text-align: center;
   background-color: #1dbf73;
@@ -1235,6 +1244,8 @@ h3 {
   font-size: 24px;
 }
 
+=======
+>>>>>>> 70ea22327c710d6067baed0103b489f460d48846
 .li-step-order {
   margin: 1rem;
   font-weight: bold;

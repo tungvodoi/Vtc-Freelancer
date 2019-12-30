@@ -6,6 +6,9 @@ Layout = "~/Views/Shared/_Login.cshtml";
 <div id="logreg-forms">
   <form class="form-signin" method="POST" action="/Login">
     <h5 class="h3 mb-3 font-weight-normal">Login to VTC Freelancer</h5>
+    @if(ViewBag.regSuccess != null){
+      <p style="color: #1dbf73;margin-top: 1rem;">Register Successfully</p>
+    }
     <br />
     <div class="social-login">
       <!-- <p>Continue With Facebook</p> -->
