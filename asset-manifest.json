@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/vaicalon/static/css/main.669c821e.chunk.css",
+    "main.js": "/vaicalon/static/js/main.fc5c340c.chunk.js",
+    "main.js.map": "/vaicalon/static/js/main.fc5c340c.chunk.js.map",
+    "runtime-main.js": "/vaicalon/static/js/runtime-main.44548b68.js",
+    "runtime-main.js.map": "/vaicalon/static/js/runtime-main.44548b68.js.map",
+    "static/js/2.64626e8e.chunk.js": "/vaicalon/static/js/2.64626e8e.chunk.js",
+    "static/js/2.64626e8e.chunk.js.map": "/vaicalon/static/js/2.64626e8e.chunk.js.map",
+    "index.html": "/vaicalon/index.html",
+    "precache-manifest.1c3f9e11b4ce87e7b21ca5d9cda3326a.js": "/vaicalon/precache-manifest.1c3f9e11b4ce87e7b21ca5d9cda3326a.js",
+    "service-worker.js": "/vaicalon/service-worker.js",
+    "static/css/main.669c821e.chunk.css.map": "/vaicalon/static/css/main.669c821e.chunk.css.map",
+    "static/js/2.64626e8e.chunk.js.LICENSE.txt": "/vaicalon/static/js/2.64626e8e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44548b68.js",
+    "static/js/2.64626e8e.chunk.js",
+    "static/css/main.669c821e.chunk.css",
+    "static/js/main.fc5c340c.chunk.js"
+  ]
+}
